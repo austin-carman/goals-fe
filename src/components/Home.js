@@ -10,10 +10,22 @@ const Home = () => {
   };
 
   return (
-    <section className="callToAction">
-      <h1>Goal Tracker</h1>
-      <button onClick={handleClick}>Start New Goal</button>
-    </section>
+    <main>
+      <section className="callToAction">
+        <h1>Goal Tracker</h1>
+        <button onClick={handleClick}>Track Your Goals</button>
+      </section>
+      <section className="info-section">
+        <div className="section1">
+          <h2>Section heading</h2>
+          <p>Info about section</p>
+        </div>
+        <div className="section2">
+          <h2>Section heading</h2>
+          <p>Info about section</p>
+        </div>
+      </section>
+    </main>
   );
 };
 
