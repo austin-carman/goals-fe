@@ -17,10 +17,12 @@ const Home = () => {
       </section>
       <section className="info-section">
         <div className="section1">
+          <img src="#" alt="#" />
           <h2>Section heading</h2>
           <p>Info about section</p>
         </div>
         <div className="section2">
+          <img src="#" alt="#" />
           <h2>Section heading</h2>
           <p>Info about section</p>
         </div>
