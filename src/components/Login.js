@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
-// import axios from "axios";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const initialState = {
@@ -10,7 +10,7 @@ const Login = () => {
 
   const [loginForm, setLoginForm] = useState(initialState);
 
-  // const { push } = useHistory();
+  const { push } = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +22,17 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit reached");
+    axios
+      .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
+        push("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setLoginForm(initialState);
   };
 
   return (
