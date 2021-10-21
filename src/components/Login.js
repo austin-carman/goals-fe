@@ -9,6 +9,7 @@ const Login = () => {
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
+  const [errMessage, setErrMessage] = useState();
 
   const { push } = useHistory();
 
@@ -25,9 +26,14 @@ const Login = () => {
     axios
       .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userId", res.data.userId);
-        push("/profile");
+        if (!res.data.token) {
+          setErrMessage("Invalid username or password");
+        } else {
+          setErrMessage();
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userId", res.data.userId);
+          push("/profile");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -54,6 +60,7 @@ const Login = () => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Sign-In</button>
+      {errMessage ? <p>{errMessage}</p> : null}
     </div>
   );
 };
