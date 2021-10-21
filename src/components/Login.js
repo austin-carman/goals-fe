@@ -31,8 +31,7 @@ const Login = () => {
         } else {
           setErrMessage();
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("userId", res.data.userId);
-          push("/profile");
+          push(`/profile/${res.data.userId}`);
         }
       })
       .catch((err) => {
