@@ -10,7 +10,6 @@ const Login = () => {
 
   const [loginForm, setLoginForm] = useState(initialState);
   const [errMessage, setErrMessage] = useState();
-
   const { push } = useHistory();
 
   const handleChange = (e) => {
@@ -31,7 +30,10 @@ const Login = () => {
         } else {
           setErrMessage();
           localStorage.setItem("token", res.data.token);
-          push(`/profile/${res.data.userId}`);
+          push({
+            pathname: `/profile/${res.data.userId}`,
+            state: { userId: res.data.userId },
+          });
         }
       })
       .catch((err) => {
