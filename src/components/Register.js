@@ -10,8 +10,12 @@ const Register = () => {
   // eslint-disable-next-line no-unused-vars
   const [registerForm, setRegisterForm] = useState(initialState);
 
-  const handleChange = () => {
-    console.log("handleChange");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterForm({
+      ...registerForm,
+      [name]: value,
+    });
   };
 
   const handleSubmit = () => {
