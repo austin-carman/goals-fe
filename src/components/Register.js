@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
+import axios from "axios";
 
 const Register = () => {
   const initialState = {
@@ -7,8 +9,10 @@ const Register = () => {
     username: "",
     password: "",
   };
+  const { push } = useHistory();
   // eslint-disable-next-line no-unused-vars
   const [registerForm, setRegisterForm] = useState(initialState);
+  const [errMessage, setErrMessage] = useState();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,8 +22,21 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log("handleSubmit");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("https://goalmanager.herokuapp.com/api/user/register", registerForm)
+      .then((res) => {
+        if (res.data.user_id) {
+          push("/login");
+        } else {
+          setErrMessage(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setRegisterForm(initialState);
   };
 
   return (
@@ -53,7 +70,8 @@ const Register = () => {
         onChange={handleChange}
         placeholder="password"
       />
-      <button onClick={handleSubmit}>Sign-In</button>
+      <button onClick={handleSubmit}>Register</button>
+      {errMessage && <p>{errMessage}</p>}
     </div>
   );
 };
