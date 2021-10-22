@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 
 const GoalCard = (props) => {
   const { goal } = props;
+
   return (
     <div>
-      <h2>{goal.goal_id}</h2>
+      <h2>{goal.goal_title}</h2>
+      {goal.steps.map((step) => {
+        return <p key={step.step_id}>{step.step_title}</p>;
+      })}
     </div>
   );
 };
