@@ -10,6 +10,7 @@ const Login = () => {
 
   const [loginForm, setLoginForm] = useState(initialState);
   const [errMessage, setErrMessage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { push } = useHistory();
 
   const handleChange = (e) => {
@@ -22,6 +23,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     axios
       .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
       .then((res) => {
@@ -30,6 +32,7 @@ const Login = () => {
         } else {
           setErrMessage();
           localStorage.setItem("token", res.data.token);
+          setIsLoading(false);
           push({
             pathname: `/profile/${res.data.userId}`,
             state: { userId: res.data.userId },
@@ -62,6 +65,7 @@ const Login = () => {
       />
       <button onClick={handleSubmit}>Sign-In</button>
       {errMessage ? <p>{errMessage}</p> : null}
+      {isLoading ? <h3>Loading...</h3> : null}
     </div>
   );
 };
