@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
 const NewGoal = () => {
@@ -7,19 +6,20 @@ const NewGoal = () => {
   };
   const [newGoal, setNewGoal] = useState(initialState);
 
-  const handleChange = (e) => {
-    console.log("change");
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setNewGoal({ ...newGoal, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(newGoal);
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    console.log("submitted");
   };
 
   return (
     <div>
       <h2>New Goal</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>
           Goal Title:
           <input
@@ -30,7 +30,7 @@ const NewGoal = () => {
           />
         </label>
       </form>
-      <button>Create Goal</button>
+      <button onClick={handleSubmit}>Create Goal</button>
     </div>
   );
 };
