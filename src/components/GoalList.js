@@ -27,10 +27,7 @@ const GoalList = () => {
         <h2>Loading...</h2>
       ) : (
         goals.map((goal) => {
-          if (goal.goal_completed === false) {
-            return <GoalCard key={goal.goal_id} goal={goal} />;
-          }
-          return;
+          return <GoalCard key={goal.goal_id} goal={goal} />;
         })
       )}
     </div>
