@@ -9,7 +9,7 @@ const GoalCard = (props) => {
 
   return (
     <div className={goalStatus}>
-      <h2>{goal.goal_title}</h2>
+      <h2 className="goal-title">{goal.goal_title}</h2>
 
       {goal.steps.map((step) => {
         const stepStatus =
@@ -19,11 +19,13 @@ const GoalCard = (props) => {
         return (
           <div key={step.step_id} className={stepStatus}>
             {step.step_title ? (
-              <h3>
+              <h3 className="step-title">
                 Step {stepNumber}: {step.step_title}
               </h3>
             ) : null}
-            {step.step_notes ? <p>Notes: {step.step_notes}</p> : null}
+            {step.step_notes ? (
+              <p className="step_notes">Notes: {step.step_notes}</p>
+            ) : null}
           </div>
         );
       })}
