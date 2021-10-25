@@ -23,11 +23,13 @@ const GoalList = () => {
 
   return (
     <div>
-      {isLoading && <h2>Loading...</h2>}
-      {goals.length > 0 &&
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
         goals.map((goal) => {
           return <GoalCard key={goal.goal_id} goal={goal} />;
-        })}
+        })
+      )}
     </div>
   );
 };
