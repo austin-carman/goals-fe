@@ -4,16 +4,17 @@ const NewGoal = () => {
   const initialState = {
     goal_title: "",
   };
-  const [newGoal, setNewGoal] = useState(initialState);
+  const [goal, setGoal] = useState(initialState);
+  const [steps, setSteps] = useState([{ step_title: "" }]);
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setNewGoal({ ...newGoal, [name]: value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setGoal({ ...goal, [name]: value });
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    console.log("submitted");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(goal);
   };
 
   return (
@@ -25,11 +26,28 @@ const NewGoal = () => {
           <input
             type="text"
             name="goal_title"
-            value={newGoal.goal_title}
+            value={goal.goal_title}
             onChange={handleChange}
           />
         </label>
+        {steps.map((step, i) => {
+          return (
+            <div key={`${step}-${i}`}>
+              <label>
+                New Step:
+                <input
+                  type="text"
+                  name="step_title"
+                  value={step.step_title}
+                  onChange={(e) => handleStepChange(i, e)}
+                  placeholder="Step Title"
+                />
+              </label>
+            </div>
+          );
+        })}
       </form>
+      <button onClick={handleAddStep}>Add Step</button>
       <button onClick={handleSubmit}>Create Goal</button>
     </div>
   );
