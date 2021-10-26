@@ -25,8 +25,14 @@ const NewGoal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(goal);
+    let newGoal = {};
+    steps.length > 0
+      ? (newGoal = { ...goal, steps: steps })
+      : (newGoal = { ...goal });
+    console.log(newGoal);
   };
+
+  // need to be able to remove step input field
 
   return (
     <div>
