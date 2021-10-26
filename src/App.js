@@ -17,10 +17,10 @@ function App() {
       <Route path="/register">
         <Register />
       </Route>
-      <Route path="/profile/:user_id">
+      <Route path="/profile/:userId">
         <Profile />
       </Route>
-      <Route path="/new-goal/:user_id">
+      <Route path="/new-goal/:userId">
         <NewGoal />
       </Route>
       <Route exact path="/">

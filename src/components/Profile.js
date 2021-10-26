@@ -1,15 +1,14 @@
 import React from "react";
 import GoalList from "./GoalList";
-import { useHistory } from "react-router";
-import { useLocation } from "react-router";
+import { useHistory, useParams } from "react-router-dom";
 
 const Profile = () => {
   const { push } = useHistory();
-  const location = useLocation();
+  const params = useParams();
 
   const handleClick = (e) => {
     e.preventDefault();
-    push(`/new-goal/${location.state.userId}`);
+    push(`/new-goal/${params.userId}`);
   };
 
   return (

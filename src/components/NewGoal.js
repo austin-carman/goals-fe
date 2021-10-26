@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useParams } from "react-router-dom";
 
 const NewGoal = () => {
   const initialState = {
@@ -7,6 +9,8 @@ const NewGoal = () => {
   };
   const [goal, setGoal] = useState(initialState);
   const [steps, setSteps] = useState([]);
+
+  const params = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +41,10 @@ const NewGoal = () => {
       ? (newGoal = { ...goal, steps: steps })
       : (newGoal = { ...goal });
     axiosWithAuth()
-      .post("", newGoal)
+      .post(
+        `https:/goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
+        newGoal
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
