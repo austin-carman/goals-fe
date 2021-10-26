@@ -12,6 +12,17 @@ const NewGoal = () => {
     setGoal({ ...goal, [name]: value });
   };
 
+  const handleStepChange = (i, e) => {
+    const { name, value } = e.target;
+    let newSteps = [...steps];
+    newSteps[i][name] = value;
+    setSteps(newSteps);
+  };
+
+  const handleAddStep = () => {
+    setSteps([...steps, { step_title: "" }]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(goal);
