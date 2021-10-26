@@ -15,6 +15,18 @@ const EditGoal = () => {
     setGoal({ ...goal, [name]: value });
   };
 
+  const handleCancel = () => {
+    console.log("cancel");
+  };
+
+  const handleSave = () => {
+    console.log("Save");
+  };
+
+  const handleDelete = () => {
+    console.log("delete");
+  };
+
   return (
     <div>
       <form>
@@ -28,9 +40,9 @@ const EditGoal = () => {
           />
         </label>
       </form>
-      <button>Save</button>
-      <button>Cancel</button>
-      <button>Delete</button>
+      <button onClick={handleCancel}>Cancel</button>
+      <button onClick={handleSave}>Save</button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 };
