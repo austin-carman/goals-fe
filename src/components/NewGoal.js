@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const NewGoal = () => {
-  const initialState = {
-    goal_title: "",
-  };
+  const initialState = { goal_title: "" };
   const [goal, setGoal] = useState(initialState);
   const [steps, setSteps] = useState([]);
+  const [errMessage, setErrMessage] = useState(null);
 
+  const { push } = useHistory();
   const params = useParams();
 
   const handleChange = (e) => {
@@ -44,13 +44,23 @@ const NewGoal = () => {
         `https:/goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
         newGoal
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        if (res.data.goal_id) {
+          setErrMessage(null);
+          push(`/profile/${params.userId}`);
+        } else {
+          setErrMessage(
+            "Please fill out all required fields (Goal title, step title (if step exists)."
+          );
+        }
+      })
       .catch((err) => console.log(err));
   };
 
   return (
     <div>
       <h2>New Goal</h2>
+      {errMessage ? <p>{errMessage}</p> : null}
       <form>
         <label>
           Goal Title:
