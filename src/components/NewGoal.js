@@ -5,7 +5,7 @@ const NewGoal = () => {
     goal_title: "",
   };
   const [goal, setGoal] = useState(initialState);
-  const [steps, setSteps] = useState([{ step_title: "" }]);
+  const [steps, setSteps] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +20,7 @@ const NewGoal = () => {
   };
 
   const handleAddStep = () => {
-    setSteps([...steps, { step_title: "" }]);
+    setSteps([...steps, { step_title: "", step_notes: "" }]);
   };
 
   const handleSubmit = (e) => {
@@ -45,13 +45,22 @@ const NewGoal = () => {
           return (
             <div key={`${step}-${i}`}>
               <label>
-                New Step:
+                Step {i + 1}:
                 <input
                   type="text"
                   name="step_title"
                   value={step.step_title}
                   onChange={(e) => handleStepChange(i, e)}
                   placeholder="Step Title"
+                />
+              </label>
+              <label>
+                <input
+                  type="text"
+                  name="step_notes"
+                  value={step.step_notes}
+                  onChange={(e) => handleStepChange(i, e)}
+                  placeholder="Step Notes"
                 />
               </label>
             </div>
