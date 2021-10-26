@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const EditGoal = () => {
   const location = useLocation();
+  const history = useHistory();
   const { goal_title, steps } = location.state.goal;
   const initialState = {
     goal_title: goal_title,
@@ -16,7 +17,7 @@ const EditGoal = () => {
   };
 
   const handleCancel = () => {
-    console.log("cancel");
+    history.goBack();
   };
 
   const handleSave = () => {
