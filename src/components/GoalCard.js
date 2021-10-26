@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 
 const GoalCard = (props) => {
   const { goal } = props;
@@ -7,8 +8,12 @@ const GoalCard = (props) => {
   const goalStatus =
     goal.goal_completed === true ? "completed-goal" : "active-goal";
 
+  const { push } = useHistory();
   const handleEdit = () => {
-    console.log("edit");
+    push({
+      pathname: `/edit-goal/${goal.goal_id}`,
+      state: { goal: goal },
+    });
   };
 
   return (
