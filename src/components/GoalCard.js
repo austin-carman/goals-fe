@@ -7,9 +7,14 @@ const GoalCard = (props) => {
   const goalStatus =
     goal.goal_completed === true ? "completed-goal" : "active-goal";
 
+  const handleEdit = () => {
+    console.log("edit");
+  };
+
   return (
     <div className={goalStatus}>
       <h2 className="goal-title">{goal.goal_title}</h2>
+      <button onClick={handleEdit}>Edit</button>
 
       {goal.steps.map((step) => {
         const stepStatus =
