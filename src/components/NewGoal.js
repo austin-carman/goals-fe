@@ -32,7 +32,10 @@ const NewGoal = () => {
     console.log(newGoal);
   };
 
-  // need to be able to remove step input field
+  const handleRemoveStep = (e) => {
+    e.preventDefault();
+    console.log("wired");
+  };
 
   return (
     <div>
@@ -69,6 +72,7 @@ const NewGoal = () => {
                   placeholder="Step Notes"
                 />
               </label>
+              <button onClick={handleRemoveStep}>Remove Step</button>
             </div>
           );
         })}
