@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
+import NewGoal from "./components/NewGoal";
 
 function App() {
   return (
@@ -16,8 +17,11 @@ function App() {
       <Route path="/register">
         <Register />
       </Route>
-      <Route path="/profile/:user_id">
+      <Route path="/profile/:userId">
         <Profile />
+      </Route>
+      <Route path="/new-goal/:userId">
+        <NewGoal />
       </Route>
       <Route exact path="/">
         <Home />

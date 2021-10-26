@@ -33,10 +33,7 @@ const Login = () => {
           setErrMessage();
           localStorage.setItem("token", res.data.token);
           setIsLoading(false);
-          push({
-            pathname: `/profile/${res.data.userId}`,
-            state: { userId: res.data.userId },
-          });
+          push(`/profile/${res.data.userId}`);
         }
       })
       .catch((err) => {
