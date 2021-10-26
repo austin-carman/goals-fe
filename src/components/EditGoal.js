@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const EditGoal = () => {
   const location = useLocation();
@@ -22,6 +23,14 @@ const EditGoal = () => {
 
   const handleSave = () => {
     console.log("Save");
+    axiosWithAuth()
+      .put(``, goal)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDelete = () => {
