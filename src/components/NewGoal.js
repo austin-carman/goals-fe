@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const NewGoal = () => {
   const initialState = {
@@ -35,7 +36,10 @@ const NewGoal = () => {
     steps.length > 0
       ? (newGoal = { ...goal, steps: steps })
       : (newGoal = { ...goal });
-    console.log(newGoal);
+    axiosWithAuth()
+      .post("", newGoal)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -77,11 +81,11 @@ const NewGoal = () => {
           );
         })}
       </form>
+      <button onClick={handleAddStep}>Add Step</button>
       <button onClick={() => handleRemoveStep(steps.length - 1)}>
         Remove Step
       </button>
-      <button onClick={handleAddStep}>Add Step</button>
-      <button onClick={handleSubmit}>Create Goal</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 };
