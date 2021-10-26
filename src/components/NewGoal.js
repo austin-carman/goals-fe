@@ -41,7 +41,7 @@ const NewGoal = () => {
       : (newGoal = { ...goal });
     axiosWithAuth()
       .post(
-        `https:/goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
+        `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
         newGoal
       )
       .then((res) => {

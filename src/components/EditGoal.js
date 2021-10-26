@@ -5,16 +5,16 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 const EditGoal = () => {
   const location = useLocation();
   const history = useHistory();
-  const { goal_title, steps } = location.state.goal;
+  const { goal } = location.state;
   const initialState = {
-    goal_title: goal_title,
-    steps: steps,
+    goal_title: goal.goal_title,
+    goal_id: goal.goal_id,
   };
-  const [goal, setGoal] = useState(initialState);
+  const [goalEdit, setGoalEdit] = useState(initialState);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
-    setGoal({ ...goal, [name]: value });
+    setGoalEdit({ ...goal, [name]: value });
   };
 
   const handleCancel = () => {
@@ -22,9 +22,11 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
-    console.log("Save");
     axiosWithAuth()
-      .put(``, goal)
+      .put(
+        `https://goalmanager.herokuapp.com/api/goals/edit/${goalEdit.goal_id}`,
+        goalEdit
+      )
       .then((res) => {
         console.log(res);
       })
@@ -45,7 +47,7 @@ const EditGoal = () => {
           <input
             type="text"
             name="goal_title"
-            value={goal.goal_title}
+            value={goalEdit.goal_title}
             onChange={handleChange}
           />
         </label>
