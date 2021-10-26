@@ -7,8 +7,9 @@ const EditGoal = () => {
   const history = useHistory();
   const { goal } = location.state;
   const initialState = {
-    goal_title: goal.goal_title,
     goal_id: goal.goal_id,
+    goal_title: goal.goal_title,
+    goal_completed: goal.goal_completed,
   };
   const [goalEdit, setGoalEdit] = useState(initialState);
 
@@ -28,7 +29,10 @@ const EditGoal = () => {
         goalEdit
       )
       .then((res) => {
-        console.log(res);
+        if (res.data.goal_id) {
+          setGoalEdit(res.data);
+          history.goBack();
+        }
       })
       .catch((err) => {
         console.log(err);
