@@ -14,6 +14,7 @@ const EditGoal = () => {
   };
   const [goalEdits, setGoalEdits] = useState(initialState);
   const [stepEdits, setStepEdits] = useState(goal.steps);
+  const [errMessage, setErrMessage] = useState(null);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -40,8 +41,11 @@ const EditGoal = () => {
       )
       .then((res) => {
         if (res.data.goal_id) {
+          setErrMessage(null);
           setGoalEdits(res.data);
           history.goBack();
+        } else {
+          setErrMessage("Please complete all required fields");
         }
       })
       .catch((err) => {
@@ -56,6 +60,7 @@ const EditGoal = () => {
   return (
     <div>
       <form>
+        {errMessage ? <p>{errMessage}</p> : null}
         <label>
           Goal Title
           <input
