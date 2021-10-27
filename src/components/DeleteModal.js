@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const customStyles = {
   content: {
@@ -21,7 +22,14 @@ const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   const handleDelete = () => {
-    console.log("delete");
+    axiosWithAuth()
+      .post()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     closeModal();
   };
 
