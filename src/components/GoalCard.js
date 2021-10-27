@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 
 const GoalCard = (props) => {
   const { goal } = props;
@@ -7,9 +8,18 @@ const GoalCard = (props) => {
   const goalStatus =
     goal.goal_completed === true ? "completed-goal" : "active-goal";
 
+  const { push } = useHistory();
+  const handleEdit = () => {
+    push({
+      pathname: `/edit-goal/${goal.goal_id}`,
+      state: { goal: goal },
+    });
+  };
+
   return (
     <div className={goalStatus}>
       <h2 className="goal-title">{goal.goal_title}</h2>
+      <button onClick={handleEdit}>Edit</button>
 
       {goal.steps.map((step) => {
         const stepStatus =
