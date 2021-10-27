@@ -4,10 +4,23 @@ import PropTypes from "prop-types";
 
 Modal.setAppElement("#root");
 
-const DeleteModal = () => {
+const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDelete = () => {
+    console.log("delete");
+    closeModal();
+  };
+
   return (
     <div>
-      <p>Testing</p>
+      <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <h2>Are you sure you want to delete your goal?</h2>
+        <button onClick={closeModal}>Cancel</button>
+        <button onClick={handleDelete}>Delete</button>
+      </Modal>
     </div>
   );
 };
