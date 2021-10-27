@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import DeleteModal from "./DeleteModal";
 
 const EditGoal = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const EditGoal = () => {
   const [goalEdits, setGoalEdits] = useState(initialState);
   const [stepEdits, setStepEdits] = useState(goal.steps);
   const [errMessage, setErrMessage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -53,8 +55,8 @@ const EditGoal = () => {
       });
   };
 
-  const handleDelete = () => {
-    console.log("delete");
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
   return (
@@ -89,7 +91,14 @@ const EditGoal = () => {
       </form>
       <button onClick={handleCancel}>Cancel</button>
       <button onClick={handleSave}>Save</button>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={openModal}>Delete</button>
+      {isModalOpen ? (
+        <DeleteModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          setErrMessage={setErrMessage}
+        />
+      ) : null}
     </div>
   );
 };
