@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory, useParams } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -16,21 +17,31 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
+const DeleteModal = ({ isModalOpen, setIsModalOpen, setErrMessage }) => {
+  const history = useHistory();
+  const params = useParams();
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   const handleDelete = () => {
     axiosWithAuth()
-      .post()
+      .delete(
+        `https://goalmanager.herokuapp.com/api/goals/delete-goal/${params.goalId}`
+      )
       .then((res) => {
-        console.log(res);
+        if (res.data === 1) {
+          closeModal();
+          history.goBack();
+        } else {
+          closeModal();
+          setErrMessage("Goal could not be deleted");
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-    closeModal();
   };
 
   return (
@@ -51,6 +62,7 @@ const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
 DeleteModal.propTypes = {
   isModalOpen: PropTypes.boolean,
   setIsModalOpen: PropTypes.any,
+  setErrMessage: PropTypes.any,
 };
 
 export default DeleteModal;

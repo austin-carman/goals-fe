@@ -96,6 +96,7 @@ const EditGoal = () => {
         <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setErrMessage={setErrMessage}
         />
       ) : null}
     </div>
