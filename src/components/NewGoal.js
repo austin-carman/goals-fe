@@ -9,13 +9,11 @@ const NewGoal = () => {
     steps: [],
   };
   const [goal, setGoal] = useState(initialState);
-
   const { push } = useHistory();
   const params = useParams();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
-
     if (name === "goal_title") {
       setGoal({ ...goal, [name]: value });
     }
