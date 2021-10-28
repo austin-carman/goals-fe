@@ -21,17 +21,25 @@ const EditGoal = () => {
 
   console.log("goal: ", goal);
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setGoal({ ...goal, [name]: value });
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    if (name === "goal_title") {
+      setGoal({ ...goal, [name]: value });
+    }
+    if (name === "step_title") {
+      const { name, value } = e.target;
+      let newSteps = [...stepEdits];
+      newSteps[index][name] = value;
+      setStepEdits(newSteps);
+    }
   };
 
-  const handleStepChange = (index, e) => {
-    const { name, value } = e.target;
-    let newSteps = [...stepEdits];
-    newSteps[index][name] = value;
-    setStepEdits(newSteps);
-  };
+  // const handleStepChange = (index, e) => {
+  //   const { name, value } = e.target;
+  //   let newSteps = [...stepEdits];
+  //   newSteps[index][name] = value;
+  //   setStepEdits(newSteps);
+  // };
 
   const handleCancel = () => {
     history.goBack();
@@ -84,7 +92,7 @@ const EditGoal = () => {
                   type="text"
                   name="step_title"
                   value={step.step_title}
-                  onChange={(e) => handleStepChange(index, e)}
+                  onChange={(e) => handleChange(index, e)}
                   placeholder="Step Title"
                 />
               </label>
