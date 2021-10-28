@@ -3,7 +3,10 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
 
 const NewGoal = () => {
-  const initialState = { goal_title: "" };
+  const initialState = {
+    goal_title: "",
+    steps: [],
+  };
   const [goal, setGoal] = useState(initialState);
   const [steps, setSteps] = useState([]);
   const [errMessage, setErrMessage] = useState(null);
