@@ -7,23 +7,23 @@ const EditGoal = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const { goal } = location.state;
+  const { userGoal } = location.state;
   const initialState = {
-    goal_id: goal.goal_id,
-    goal_title: goal.goal_title,
-    goal_completed: goal.goal_completed,
-    steps: goal.steps,
+    goal_id: userGoal.goal_id,
+    goal_title: userGoal.goal_title,
+    goal_completed: userGoal.goal_completed,
+    steps: userGoal.steps,
   };
-  const [goalEdits, setGoalEdits] = useState(initialState);
-  const [stepEdits, setStepEdits] = useState(goal.steps);
+  const [goal, setGoal] = useState(initialState);
+  // const [stepEdits, setStepEdits] = useState(goal.steps);
   const [errMessage, setErrMessage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log("goalEdits: ", goalEdits);
+  console.log("goal: ", goal);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
-    setGoalEdits({ ...goal, [name]: value });
+    setGoal({ ...goal, [name]: value });
   };
 
   const handleStepChange = (index, e) => {
@@ -38,16 +38,16 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
-    const updatedGoal = { ...goalEdits, steps: stepEdits };
+    const updatedGoal = { ...goal, steps: stepEdits };
     axiosWithAuth()
       .put(
-        `https://goalmanager.herokuapp.com/api/goals/edit/${goalEdits.goal_id}`,
+        `https://goalmanager.herokuapp.com/api/goal/edit/${goal.goal_id}`,
         updatedGoal
       )
       .then((res) => {
         if (res.data.goal_id) {
           setErrMessage(null);
-          setGoalEdits(res.data);
+          setGoal(res.data);
           history.goBack();
         } else {
           setErrMessage("Please complete all required fields");
@@ -71,7 +71,7 @@ const EditGoal = () => {
           <input
             type="text"
             name="goal_title"
-            value={goalEdits.goal_title}
+            value={goal.goal_title}
             onChange={handleChange}
           />
         </label>
