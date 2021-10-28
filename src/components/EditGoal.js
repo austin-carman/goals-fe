@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
 import DeleteModal from "./DeleteModal";
 
 const EditGoal = () => {
@@ -38,18 +38,19 @@ const EditGoal = () => {
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    axiosWithAuth()
-      .put(
-        `https://goalmanager.herokuapp.com/api/goal/edit/${goal.goal_id}`,
-        editedGoal
-      )
-      .then((res) => {
-        setGoal(res.data);
-        history.goBack();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log("editedGoal: ", editedGoal);
+    // axiosWithAuth()
+    //   .put(
+    //     `https://goalmanager.herokuapp.com/api/goals/edit/${goal.goal_id}`,
+    //     editedGoal
+    //   )
+    //   .then((res) => {
+    //     setGoal(res.data);
+    //     history.goBack();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const openModal = () => {
@@ -65,7 +66,7 @@ const EditGoal = () => {
             type="text"
             name="goal_title"
             value={goal.goal_title}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           />
         </label>
         {goal.steps.map((step, index) => {
@@ -77,7 +78,7 @@ const EditGoal = () => {
                   type="text"
                   name="step_title"
                   value={step.step_title}
-                  onChange={(e) => handleChange(index, e)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
               </label>
