@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 // import { axiosWithAuth } from "../utils/axiosWithAuth";
 import DeleteModal from "./DeleteModal";
 
 const EditGoal = () => {
   const location = useLocation();
   const history = useHistory();
+  const params = useParams();
 
   const { userGoal } = location.state;
   const initialState = {
-    goal_id: userGoal.goal_id,
     goal_title: userGoal.goal_title,
     goal_completed: userGoal.goal_completed,
     steps: userGoal.steps,
