@@ -39,11 +39,12 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
-    const updatedGoal = { ...goal, steps: stepEdits };
+    const editedGoal = { ...goal };
+    editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     axiosWithAuth()
       .put(
         `https://goalmanager.herokuapp.com/api/goal/edit/${goal.goal_id}`,
-        updatedGoal
+        editedGoal
       )
       .then((res) => {
         if (res.data.goal_id) {
