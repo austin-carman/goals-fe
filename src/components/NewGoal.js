@@ -1,58 +1,56 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
 
 const NewGoal = () => {
-  const initialState = { goal_title: "" };
+  const initialState = {
+    goal_title: "",
+    steps: [],
+  };
   const [goal, setGoal] = useState(initialState);
-  const [steps, setSteps] = useState([]);
-  const [errMessage, setErrMessage] = useState(null);
-
   const { push } = useHistory();
   const params = useParams();
 
-  const handleChange = (e) => {
+  const handleChange = (e, index) => {
     const { name, value } = e.target;
-    setGoal({ ...goal, [name]: value });
-  };
-
-  const handleStepChange = (index, e) => {
-    const { name, value } = e.target;
-    let newSteps = [...steps];
-    newSteps[index][name] = value;
-    setSteps(newSteps);
+    if (name === "goal_title") {
+      setGoal({ ...goal, [name]: value });
+    }
+    if (name === "step_title" || name === "step_notes") {
+      let newGoal = { ...goal };
+      let newSteps = [...goal.steps];
+      newSteps[index][name] = value;
+      newGoal.steps = newSteps;
+      setGoal(newGoal);
+    }
   };
 
   const handleAddStep = () => {
-    setSteps([...steps, { step_title: "", step_notes: "" }]);
+    let newGoal = { ...goal };
+    newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
+    setGoal(newGoal);
   };
 
   const handleRemoveStep = (index) => {
-    let newSteps = [...steps];
-    newSteps.splice(index, 1);
-    setSteps(newSteps);
+    let newGoal = { ...goal };
+    newGoal.steps.splice(index, 1);
+    setGoal(newGoal);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newGoal = {};
-    steps.length > 0
-      ? (newGoal = { ...goal, steps: steps })
-      : (newGoal = { ...goal });
+    let newGoal = { ...goal };
+    newGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
+    console.log("newGoal: ", newGoal);
     axiosWithAuth()
       .post(
         `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
         newGoal
       )
+      // eslint-disable-next-line no-unused-vars
       .then((res) => {
-        if (res.data.goal_id) {
-          setErrMessage(null);
-          push(`/profile/${params.userId}`);
-        } else {
-          setErrMessage(
-            "Please fill out all required fields (Goal title, step title (if step exists)."
-          );
-        }
+        push(`/profile/${params.userId}`);
       })
       .catch((err) => console.log(err));
   };
@@ -60,7 +58,6 @@ const NewGoal = () => {
   return (
     <div>
       <h2>New Goal</h2>
-      {errMessage ? <p>{errMessage}</p> : null}
       <form>
         <label>
           Goal Title:
@@ -71,7 +68,7 @@ const NewGoal = () => {
             onChange={handleChange}
           />
         </label>
-        {steps.map((step, index) => {
+        {goal.steps.map((step, index) => {
           return (
             <div key={`${step}-${index}`}>
               <label>
@@ -80,7 +77,7 @@ const NewGoal = () => {
                   type="text"
                   name="step_title"
                   value={step.step_title}
-                  onChange={(e) => handleStepChange(index, e)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
               </label>
@@ -89,7 +86,7 @@ const NewGoal = () => {
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
-                  onChange={(e) => handleStepChange(index, e)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
               </label>
@@ -98,7 +95,7 @@ const NewGoal = () => {
         })}
       </form>
       <button onClick={handleAddStep}>Add Step</button>
-      <button onClick={() => handleRemoveStep(steps.length - 1)}>
+      <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
         Remove Step
       </button>
       <button onClick={handleSubmit}>Submit</button>
