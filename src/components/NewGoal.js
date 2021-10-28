@@ -8,7 +8,6 @@ const NewGoal = () => {
     steps: [],
   };
   const [goal, setGoal] = useState(initialState);
-  const [errMessage, setErrMessage] = useState(null);
 
   const { push } = useHistory();
   const params = useParams();
@@ -44,23 +43,18 @@ const NewGoal = () => {
     let newGoal = { ...goal };
     let newSteps = [...goal.steps.filter((step) => step.step_title !== "")];
     newGoal.steps = [newSteps];
+
     axiosWithAuth()
       .post(
         `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
         newGoal
       )
+      // eslint-disable-next-line no-unused-vars
       .then((res) => {
-        if (res.data.goal_id) {
-          setErrMessage(null);
-          push({
-            pathname: `/profile/${params.userId}`,
-            state: { goal: newGoal },
-          });
-        } else {
-          setErrMessage(
-            "Please fill out all required fields (Goal title, step title (if step exists)."
-          );
-        }
+        push({
+          pathname: `/profile/${params.userId}`,
+          state: { goal: newGoal },
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -68,7 +62,6 @@ const NewGoal = () => {
   return (
     <div>
       <h2>New Goal</h2>
-      {errMessage ? <p>{errMessage}</p> : null}
       <form>
         <label>
           Goal Title:
