@@ -15,7 +15,6 @@ const EditGoal = () => {
     steps: userGoal.steps,
   };
   const [goal, setGoal] = useState(initialState);
-  // const [stepEdits, setStepEdits] = useState(goal.steps);
   const [errMessage, setErrMessage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,13 +33,6 @@ const EditGoal = () => {
       setGoal(goalEdits);
     }
   };
-
-  // const handleStepChange = (index, e) => {
-  //   const { name, value } = e.target;
-  //   let newSteps = [...stepEdits];
-  //   newSteps[index][name] = value;
-  //   setStepEdits(newSteps);
-  // };
 
   const handleCancel = () => {
     history.goBack();
