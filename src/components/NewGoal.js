@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
@@ -12,18 +13,19 @@ const NewGoal = () => {
   const { push } = useHistory();
   const params = useParams();
 
-  const handleChange = (e) => {
+  const handleChange = (e, index) => {
     const { name, value } = e.target;
-    setGoal({ ...goal, [name]: value });
-  };
 
-  const handleStepChange = (index, e) => {
-    const { name, value } = e.target;
-    let newGoal = { ...goal };
-    let newSteps = [...goal.steps];
-    newSteps[index][name] = value;
-    newGoal.steps = newSteps;
-    setGoal(newGoal);
+    if (name === "goal_title") {
+      setGoal({ ...goal, [name]: value });
+    }
+    if (name === "step_title" || name === "step_notes") {
+      let newGoal = { ...goal };
+      let newSteps = [...goal.steps];
+      newSteps[index][name] = value;
+      newGoal.steps = newSteps;
+      setGoal(newGoal);
+    }
   };
 
   const handleAddStep = () => {
@@ -77,7 +79,7 @@ const NewGoal = () => {
                   type="text"
                   name="step_title"
                   value={step.step_title}
-                  onChange={(e) => handleStepChange(index, e)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
               </label>
@@ -86,7 +88,7 @@ const NewGoal = () => {
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
-                  onChange={(e) => handleStepChange(index, e)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
               </label>
