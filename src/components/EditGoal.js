@@ -11,7 +11,6 @@ const EditGoal = () => {
   const { userGoal } = location.state;
   const initialState = {
     goal_title: userGoal.goal_title,
-    goal_completed: userGoal.goal_completed,
     steps: userGoal.steps,
   };
   const [goal, setGoal] = useState(initialState);
@@ -39,6 +38,7 @@ const EditGoal = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     console.log("editedGoal: ", editedGoal);
+    console.log("params: ", params);
     // axiosWithAuth()
     //   .put(
     //     `https://goalmanager.herokuapp.com/api/goals/edit/${goal.goal_id}`,
