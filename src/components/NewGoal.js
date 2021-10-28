@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
@@ -24,7 +25,9 @@ const NewGoal = () => {
     const { name, value } = e.target;
     let newSteps = [...goal.steps];
     newSteps[index][name] = value;
-    setGoal(newSteps);
+    let newGoal = { ...goal };
+    newGoal.steps = newSteps;
+    setGoal(newGoal);
   };
 
   const handleAddStep = () => {
@@ -44,33 +47,31 @@ const NewGoal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newGoal = {};
+    let newGoal = { ...goal };
     let newSteps = [
       ...goal.steps.filter((step) => step.step_title !== undefined),
     ];
-    goal.steps.length > 0
-      ? (newGoal = { ...goal, steps: newSteps })
-      : (newGoal = { ...goal });
+    newGoal.steps = [newSteps];
     console.log("newGoal: ", newGoal);
-    axiosWithAuth()
-      .post(
-        `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
-        newGoal
-      )
-      .then((res) => {
-        if (res.data.goal_id) {
-          setErrMessage(null);
-          push({
-            pathname: `/profile/${params.userId}`,
-            state: { goal: newGoal },
-          });
-        } else {
-          setErrMessage(
-            "Please fill out all required fields (Goal title, step title (if step exists)."
-          );
-        }
-      })
-      .catch((err) => console.log(err));
+    // axiosWithAuth()
+    //   .post(
+    //     `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
+    //     newGoal
+    //   )
+    //   .then((res) => {
+    //     if (res.data.goal_id) {
+    //       setErrMessage(null);
+    //       push({
+    //         pathname: `/profile/${params.userId}`,
+    //         state: { goal: newGoal },
+    //       });
+    //     } else {
+    //       setErrMessage(
+    //         "Please fill out all required fields (Goal title, step title (if step exists)."
+    //       );
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   return (
