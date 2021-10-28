@@ -75,7 +75,7 @@ const NewGoal = () => {
             onChange={handleChange}
           />
         </label>
-        {steps.map((step, index) => {
+        {goal.steps.map((step, index) => {
           return (
             <div key={`${step}-${index}`}>
               <label>
@@ -102,7 +102,7 @@ const NewGoal = () => {
         })}
       </form>
       <button onClick={handleAddStep}>Add Step</button>
-      <button onClick={() => handleRemoveStep(steps.length - 1)}>
+      <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
         Remove Step
       </button>
       <button onClick={handleSubmit}>Submit</button>
