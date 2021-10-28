@@ -12,7 +12,7 @@ const GoalCard = (props) => {
   const handleEdit = () => {
     push({
       pathname: `/edit-goal/${goal.goal_id}`,
-      state: { goal: goal },
+      state: { userGoal: goal },
     });
   };
 
