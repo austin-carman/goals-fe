@@ -17,7 +17,7 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const DeleteModal = ({ isModalOpen, setIsModalOpen, setErrMessage }) => {
+const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
   const history = useHistory();
   const params = useParams();
 
@@ -36,7 +36,6 @@ const DeleteModal = ({ isModalOpen, setIsModalOpen, setErrMessage }) => {
           history.goBack();
         } else {
           closeModal();
-          setErrMessage("Goal could not be deleted");
         }
       })
       .catch((err) => {

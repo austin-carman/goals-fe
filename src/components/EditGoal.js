@@ -15,10 +15,7 @@ const EditGoal = () => {
     steps: userGoal.steps,
   };
   const [goal, setGoal] = useState(initialState);
-  const [errMessage, setErrMessage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  console.log("goal: ", goal);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -47,13 +44,8 @@ const EditGoal = () => {
         editedGoal
       )
       .then((res) => {
-        if (res.data.goal_id) {
-          setErrMessage(null);
-          setGoal(res.data);
-          history.goBack();
-        } else {
-          setErrMessage("Please complete all required fields");
-        }
+        setGoal(res.data);
+        history.goBack();
       })
       .catch((err) => {
         console.log(err);
@@ -67,7 +59,6 @@ const EditGoal = () => {
   return (
     <div>
       <form>
-        {errMessage ? <p>{errMessage}</p> : null}
         <label>
           Goal Title
           <input
@@ -101,7 +92,6 @@ const EditGoal = () => {
         <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          setErrMessage={setErrMessage}
         />
       ) : null}
     </div>
