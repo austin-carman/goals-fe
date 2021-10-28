@@ -32,9 +32,9 @@ const NewGoal = () => {
   };
 
   const handleRemoveStep = (index) => {
-    let newSteps = [...steps];
-    newSteps.splice(index, 1);
-    setSteps(newSteps);
+    let newGoal = { ...goal };
+    newGoal.steps.splice(index, 1);
+    setGoal(newGoal);
   };
 
   const handleSubmit = (e) => {
