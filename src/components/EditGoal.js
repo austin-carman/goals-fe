@@ -27,10 +27,11 @@ const EditGoal = () => {
       setGoal({ ...goal, [name]: value });
     }
     if (name === "step_title") {
-      const { name, value } = e.target;
-      let newSteps = [...stepEdits];
-      newSteps[index][name] = value;
-      setStepEdits(newSteps);
+      let goalEdits = { ...goal };
+      let stepEdits = [...goal.steps];
+      stepEdits[index][name] = value;
+      goalEdits.steps = stepEdits;
+      setGoal(goalEdits);
     }
   };
 
