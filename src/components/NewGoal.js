@@ -10,7 +10,7 @@ const NewGoal = () => {
   const [goal, setGoal] = useState(initialState);
   const [errMessage, setErrMessage] = useState(null);
 
-  // console.log("goal: ", goal);
+  console.log("goal: ", goal);
 
   const { push } = useHistory();
   const params = useParams();
@@ -34,11 +34,12 @@ const NewGoal = () => {
   };
 
   const handleRemoveStep = (index) => {
-    let newSteps = [
+    let removedStep = { ...goal };
+    removedStep.steps = [
       ...goal.steps.filter((step) => step.step_title !== undefined),
     ];
-    newSteps.splice(index, 1);
-    setGoal(newSteps);
+    removedStep.steps.splice(index, 1);
+    setGoal(removedStep);
   };
 
   const handleSubmit = (e) => {
