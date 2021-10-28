@@ -38,9 +38,6 @@ const NewGoal = () => {
 
   const handleRemoveStep = (index) => {
     let removedStep = { ...goal };
-    removedStep.steps = [
-      ...goal.steps.filter((step) => step.step_title !== undefined),
-    ];
     removedStep.steps.splice(index, 1);
     setGoal(removedStep);
   };
@@ -48,9 +45,7 @@ const NewGoal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    let newSteps = [
-      ...goal.steps.filter((step) => step.step_title !== undefined),
-    ];
+    let newSteps = [...goal.steps.filter((step) => step.step_title !== "")];
     newGoal.steps = [newSteps];
     console.log("newGoal: ", newGoal);
     // axiosWithAuth()
