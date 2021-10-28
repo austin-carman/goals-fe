@@ -12,11 +12,14 @@ const EditGoal = () => {
     goal_id: goal.goal_id,
     goal_title: goal.goal_title,
     goal_completed: goal.goal_completed,
+    steps: goal.steps,
   };
   const [goalEdits, setGoalEdits] = useState(initialState);
   const [stepEdits, setStepEdits] = useState(goal.steps);
   const [errMessage, setErrMessage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  console.log("goalEdits: ", goalEdits);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
