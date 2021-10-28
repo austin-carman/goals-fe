@@ -3,10 +3,14 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
 
 const NewGoal = () => {
-  const initialState = { goal_title: "" };
+  const initialState = {
+    goal_title: "",
+    steps: [],
+  };
   const [goal, setGoal] = useState(initialState);
-  const [steps, setSteps] = useState([]);
   const [errMessage, setErrMessage] = useState(null);
+
+  // console.log("goal: ", goal);
 
   const { push } = useHistory();
   const params = useParams();
@@ -18,27 +22,35 @@ const NewGoal = () => {
 
   const handleStepChange = (index, e) => {
     const { name, value } = e.target;
-    let newSteps = [...steps];
+    let newSteps = [...goal.steps];
     newSteps[index][name] = value;
-    setSteps(newSteps);
+    setGoal(newSteps);
   };
 
   const handleAddStep = () => {
-    setSteps([...steps, { step_title: "", step_notes: "" }]);
+    let addedStep = { ...goal };
+    addedStep.steps = [...goal.steps, { step_title: "", step_notes: "" }];
+    setGoal(addedStep);
   };
 
   const handleRemoveStep = (index) => {
-    let newSteps = [...steps];
+    let newSteps = [
+      ...goal.steps.filter((step) => step.step_title !== undefined),
+    ];
     newSteps.splice(index, 1);
-    setSteps(newSteps);
+    setGoal(newSteps);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = {};
-    steps.length > 0
-      ? (newGoal = { ...goal, steps: steps })
+    let newSteps = [
+      ...goal.steps.filter((step) => step.step_title !== undefined),
+    ];
+    goal.steps.length > 0
+      ? (newGoal = { ...goal, steps: newSteps })
       : (newGoal = { ...goal });
+    console.log("newGoal: ", newGoal);
     axiosWithAuth()
       .post(
         `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
@@ -47,7 +59,10 @@ const NewGoal = () => {
       .then((res) => {
         if (res.data.goal_id) {
           setErrMessage(null);
-          push(`/profile/${params.userId}`);
+          push({
+            pathname: `/profile/${params.userId}`,
+            state: { goal: newGoal },
+          });
         } else {
           setErrMessage(
             "Please fill out all required fields (Goal title, step title (if step exists)."
@@ -71,7 +86,7 @@ const NewGoal = () => {
             onChange={handleChange}
           />
         </label>
-        {steps.map((step, index) => {
+        {goal.steps.map((step, index) => {
           return (
             <div key={`${step}-${index}`}>
               <label>
@@ -98,7 +113,7 @@ const NewGoal = () => {
         })}
       </form>
       <button onClick={handleAddStep}>Add Step</button>
-      <button onClick={() => handleRemoveStep(steps.length - 1)}>
+      <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
         Remove Step
       </button>
       <button onClick={handleSubmit}>Submit</button>
