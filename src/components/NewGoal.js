@@ -8,7 +8,6 @@ const NewGoal = () => {
     steps: [],
   };
   const [goal, setGoal] = useState(initialState);
-  const [steps, setSteps] = useState([]);
   const [errMessage, setErrMessage] = useState(null);
 
   const { push } = useHistory();
@@ -27,7 +26,9 @@ const NewGoal = () => {
   };
 
   const handleAddStep = () => {
-    setSteps([...steps, { step_title: "", step_notes: "" }]);
+    let newGoal = { ...goal };
+    newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
+    setGoal(newGoal);
   };
 
   const handleRemoveStep = (index) => {
