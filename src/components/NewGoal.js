@@ -20,9 +20,11 @@ const NewGoal = () => {
 
   const handleStepChange = (index, e) => {
     const { name, value } = e.target;
-    let newSteps = [...steps];
+    let newGoal = { ...goal };
+    let newSteps = [...goal.steps];
     newSteps[index][name] = value;
-    setSteps(newSteps);
+    newGoal.steps = newSteps;
+    setGoal(newGoal);
   };
 
   const handleAddStep = () => {
