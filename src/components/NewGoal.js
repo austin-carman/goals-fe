@@ -8,7 +8,6 @@ const NewGoal = () => {
     steps: [],
   };
   const [goal, setGoal] = useState(initialState);
-  const [errMessage, setErrMessage] = useState(null);
 
   const { push } = useHistory();
   const params = useParams();
@@ -49,15 +48,9 @@ const NewGoal = () => {
         `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
         newGoal
       )
+      // eslint-disable-next-line no-unused-vars
       .then((res) => {
-        if (res.data.goal_id) {
-          setErrMessage(null);
-          push(`/profile/${params.userId}`);
-        } else {
-          setErrMessage(
-            "Please fill out all required fields (Goal title, step title (if step exists)."
-          );
-        }
+        push(`/profile/${params.userId}`);
       })
       .catch((err) => console.log(err));
   };
@@ -65,7 +58,6 @@ const NewGoal = () => {
   return (
     <div>
       <h2>New Goal</h2>
-      {errMessage ? <p>{errMessage}</p> : null}
       <form>
         <label>
           Goal Title:
