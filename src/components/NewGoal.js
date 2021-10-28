@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,8 +9,6 @@ const NewGoal = () => {
   };
   const [goal, setGoal] = useState(initialState);
   const [errMessage, setErrMessage] = useState(null);
-
-  console.log("goal: ", goal);
 
   const { push } = useHistory();
   const params = useParams();
@@ -47,26 +44,25 @@ const NewGoal = () => {
     let newGoal = { ...goal };
     let newSteps = [...goal.steps.filter((step) => step.step_title !== "")];
     newGoal.steps = [newSteps];
-    console.log("newGoal: ", newGoal);
-    // axiosWithAuth()
-    //   .post(
-    //     `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
-    //     newGoal
-    //   )
-    //   .then((res) => {
-    //     if (res.data.goal_id) {
-    //       setErrMessage(null);
-    //       push({
-    //         pathname: `/profile/${params.userId}`,
-    //         state: { goal: newGoal },
-    //       });
-    //     } else {
-    //       setErrMessage(
-    //         "Please fill out all required fields (Goal title, step title (if step exists)."
-    //       );
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    axiosWithAuth()
+      .post(
+        `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
+        newGoal
+      )
+      .then((res) => {
+        if (res.data.goal_id) {
+          setErrMessage(null);
+          push({
+            pathname: `/profile/${params.userId}`,
+            state: { goal: newGoal },
+          });
+        } else {
+          setErrMessage(
+            "Please fill out all required fields (Goal title, step title (if step exists)."
+          );
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
