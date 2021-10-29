@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory, useLocation, useParams } from "react-router-dom"; // add useParams
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import DeleteModal from "./DeleteModal";
 
 const EditGoal = () => {
@@ -37,20 +37,18 @@ const EditGoal = () => {
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    console.log("editedGoal: ", editedGoal);
-    console.log("params: ", params);
-    // axiosWithAuth()
-    //   .put(
-    //     `https://goalmanager.herokuapp.com/api/goals/edit/${goal.goal_id}`,
-    //     editedGoal
-    //   )
-    //   .then((res) => {
-    //     setGoal(res.data);
-    //     history.goBack();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axiosWithAuth()
+      .put(
+        `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
+        editedGoal
+      )
+      // eslint-disable-next-line no-unused-vars
+      .then((res) => {
+        history.goBack();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const openModal = () => {
