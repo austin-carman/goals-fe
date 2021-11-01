@@ -11,6 +11,7 @@ const EditGoal = () => {
   const { userGoal } = location.state;
   const initialState = {
     goal_title: userGoal.goal_title,
+    goal_completed: userGoal.goal_completed,
     steps: userGoal.steps,
   };
   const [goal, setGoal] = useState(initialState);
@@ -20,6 +21,9 @@ const EditGoal = () => {
     const { name, value } = e.target;
     if (name === "goal_title") {
       setGoal({ ...goal, [name]: value });
+    }
+    if (name === "goal_completed") {
+      setGoal({ ...goal, goal_completed: !goal.goal_completed });
     }
     if (name === "step_title" || name === "step_notes") {
       let goalEdits = { ...goal };
@@ -76,6 +80,16 @@ const EditGoal = () => {
             type="text"
             name="goal_title"
             value={goal.goal_title}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
+        <label>
+          Goal Completed
+          <input
+            type="checkbox"
+            name="goal_completed"
+            value={goal.goal_completed}
+            checked={goal.goal_completed}
             onChange={(e) => handleChange(e)}
           />
         </label>
