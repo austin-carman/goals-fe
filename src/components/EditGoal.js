@@ -18,26 +18,21 @@ const EditGoal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    if (name === "goal_title") {
-      setGoal({ ...goal, [name]: value });
+    const { name, value, type, checked } = e.target;
+    const valueToUse = type === "checkbox" ? checked : value;
+
+    if (name === "goal_title" || name === "goal_completed") {
+      setGoal({ ...goal, [name]: valueToUse });
     }
-    if (name === "goal_completed") {
-      setGoal({ ...goal, [name]: !goal.goal_completed });
-    }
-    if (name === "step_title" || name === "step_notes") {
-      let goalEdits = { ...goal };
+
+    if (
+      name === "step_title" ||
+      name === "step_notes" ||
+      name === "step_completed"
+    ) {
       let stepEdits = [...goal.steps];
-      stepEdits[index][name] = value;
-      goalEdits.steps = stepEdits;
-      setGoal(goalEdits);
-    }
-    if (name === "step_completed") {
-      let goalEdits = { ...goal };
-      let stepEdits = [...goal.steps];
-      stepEdits[index][name] = !goal.steps[index].step_completed;
-      goalEdits.steps = stepEdits;
-      setGoal(goalEdits);
+      stepEdits[index][name] = valueToUse;
+      setGoal({ ...goal, steps: stepEdits });
     }
   };
 
