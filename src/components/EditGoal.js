@@ -23,12 +23,19 @@ const EditGoal = () => {
       setGoal({ ...goal, [name]: value });
     }
     if (name === "goal_completed") {
-      setGoal({ ...goal, goal_completed: !goal.goal_completed });
+      setGoal({ ...goal, [name]: !goal.goal_completed });
     }
     if (name === "step_title" || name === "step_notes") {
       let goalEdits = { ...goal };
       let stepEdits = [...goal.steps];
       stepEdits[index][name] = value;
+      goalEdits.steps = stepEdits;
+      setGoal(goalEdits);
+    }
+    if (name === "step_completed") {
+      let goalEdits = { ...goal };
+      let stepEdits = [...goal.steps];
+      stepEdits[index][name] = !goal.steps[index].step_completed;
       goalEdits.steps = stepEdits;
       setGoal(goalEdits);
     }
@@ -114,6 +121,16 @@ const EditGoal = () => {
                   value={step.step_notes}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
+                />
+              </label>
+              <label>
+                Step Completed
+                <input
+                  type="checkbox"
+                  name="step_completed"
+                  value={step.step_completed}
+                  checked={step.step_completed}
+                  onChange={(e) => handleChange(e, index)}
                 />
               </label>
             </div>
