@@ -17,18 +17,16 @@ const EditGoal = () => {
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleChangeGoal = (e) => {
+  const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
     const valueToUse = type === "checkbox" ? checked : value;
-    setGoal({ ...goal, [name]: valueToUse });
-  };
-
-  const handleChangeStep = (e, index) => {
-    const { name, value, type, checked } = e.target;
-    const valueToUse = type === "checkbox" ? checked : value;
-    let stepEdits = [...goal.steps];
-    stepEdits[index][name] = valueToUse;
-    setGoal({ ...goal, steps: stepEdits });
+    if (index === undefined) {
+      setGoal({ ...goal, [name]: valueToUse });
+    } else {
+      let stepEdits = [...goal.steps];
+      stepEdits[index][name] = valueToUse;
+      setGoal({ ...goal, steps: stepEdits });
+    }
   };
 
   const handleCancel = () => {
@@ -77,7 +75,7 @@ const EditGoal = () => {
             type="text"
             name="goal_title"
             value={goal.goal_title}
-            onChange={(e) => handleChangeGoal(e)}
+            onChange={(e) => handleChange(e)}
           />
         </label>
         <label>
@@ -87,7 +85,7 @@ const EditGoal = () => {
             name="goal_completed"
             value={goal.goal_completed}
             checked={goal.goal_completed}
-            onChange={(e) => handleChangeGoal(e)}
+            onChange={(e) => handleChange(e)}
           />
         </label>
         {goal.steps.map((step, index) => {
@@ -99,7 +97,7 @@ const EditGoal = () => {
                   type="text"
                   name="step_title"
                   value={step.step_title}
-                  onChange={(e) => handleChangeStep(e, index)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
               </label>
@@ -109,7 +107,7 @@ const EditGoal = () => {
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
-                  onChange={(e) => handleChangeStep(e, index)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
               </label>
@@ -120,7 +118,7 @@ const EditGoal = () => {
                   name="step_completed"
                   value={step.step_completed}
                   checked={step.step_completed}
-                  onChange={(e) => handleChangeStep(e, index)}
+                  onChange={(e) => handleChange(e, index)}
                 />
               </label>
             </div>
