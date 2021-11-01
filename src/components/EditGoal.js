@@ -114,7 +114,7 @@ const EditGoal = () => {
                 />
               </label>
               <label>
-                Step {index + 1}:
+                Notes:
                 <input
                   type="text"
                   name="step_notes"
