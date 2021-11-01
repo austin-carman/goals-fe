@@ -16,14 +16,12 @@ const EditGoal = () => {
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log("goal: ", goal);
-
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     if (name === "goal_title") {
       setGoal({ ...goal, [name]: value });
     }
-    if (name === "step_title") {
+    if (name === "step_title" || name === "step_notes") {
       let goalEdits = { ...goal };
       let stepEdits = [...goal.steps];
       stepEdits[index][name] = value;
@@ -39,7 +37,6 @@ const EditGoal = () => {
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    console.log("editedGoal: ", editedGoal);
     axiosWithAuth()
       .put(
         `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
@@ -93,6 +90,16 @@ const EditGoal = () => {
                   value={step.step_title}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
+                />
+              </label>
+              <label>
+                Step {index + 1}:
+                <input
+                  type="text"
+                  name="step_notes"
+                  value={step.step_notes}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Step Notes"
                 />
               </label>
             </div>
