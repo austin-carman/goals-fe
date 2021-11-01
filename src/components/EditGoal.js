@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom"; // add useParams
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import DeleteModal from "./DeleteModal";
 
@@ -15,6 +15,8 @@ const EditGoal = () => {
   };
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  console.log("goal: ", goal);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -37,6 +39,7 @@ const EditGoal = () => {
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
+    console.log("editedGoal: ", editedGoal);
     axiosWithAuth()
       .put(
         `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
@@ -53,6 +56,18 @@ const EditGoal = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  const handleAddStep = () => {
+    let newGoal = { ...goal };
+    newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
+    setGoal(newGoal);
+  };
+
+  const handleRemoveStep = (index) => {
+    let newGoal = { ...goal };
+    newGoal.steps.splice(index, 1);
+    setGoal(newGoal);
   };
 
   return (
@@ -87,6 +102,10 @@ const EditGoal = () => {
       <button onClick={handleCancel}>Cancel</button>
       <button onClick={handleSave}>Save</button>
       <button onClick={openModal}>Delete</button>
+      <button onClick={handleAddStep}>Add Step</button>
+      <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
+        Remove Step
+      </button>
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
