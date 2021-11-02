@@ -42,7 +42,6 @@ const NewGoal = () => {
     e.preventDefault();
     let newGoal = { ...goal };
     newGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    console.log("newGoal: ", newGoal);
     axiosWithAuth()
       .post(
         `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,

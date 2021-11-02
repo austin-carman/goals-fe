@@ -1,33 +1,33 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import DeleteModal from "./DeleteModal";
 
 const EditGoal = () => {
   const location = useLocation();
   const history = useHistory();
+  const params = useParams();
 
-  const { goal } = location.state;
+  const { userGoal } = location.state;
   const initialState = {
-    goal_id: goal.goal_id,
-    goal_title: goal.goal_title,
-    goal_completed: goal.goal_completed,
+    goal_title: userGoal.goal_title,
+    goal_completed: userGoal.goal_completed,
+    steps: userGoal.steps,
   };
-  const [goalEdits, setGoalEdits] = useState(initialState);
-  const [stepEdits, setStepEdits] = useState(goal.steps);
-  const [errMessage, setErrMessage] = useState(null);
+  const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setGoalEdits({ ...goal, [name]: value });
-  };
-
-  const handleStepChange = (index, e) => {
-    const { name, value } = e.target;
-    let newSteps = [...stepEdits];
-    newSteps[index][name] = value;
-    setStepEdits(newSteps);
+  const handleChange = (e, index) => {
+    const { name, value, type, checked } = e.target;
+    const valueToUse = type === "checkbox" ? checked : value;
+    if (index === undefined) {
+      setGoal({ ...goal, [name]: valueToUse });
+    } else {
+      let stepEdits = [...goal.steps];
+      stepEdits[index][name] = valueToUse;
+      setGoal({ ...goal, steps: stepEdits });
+    }
   };
 
   const handleCancel = () => {
@@ -35,20 +35,18 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
-    const updatedGoal = { ...goalEdits, steps: stepEdits };
+    setIsLoading(true);
+    const editedGoal = { ...goal };
+    editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     axiosWithAuth()
       .put(
-        `https://goalmanager.herokuapp.com/api/goals/edit/${goalEdits.goal_id}`,
-        updatedGoal
+        `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
+        editedGoal
       )
+      // eslint-disable-next-line no-unused-vars
       .then((res) => {
-        if (res.data.goal_id) {
-          setErrMessage(null);
-          setGoalEdits(res.data);
-          history.goBack();
-        } else {
-          setErrMessage("Please complete all required fields");
-        }
+        setIsLoading(false);
+        history.goBack();
       })
       .catch((err) => {
         console.log(err);
@@ -62,14 +60,23 @@ const EditGoal = () => {
   return (
     <div>
       <form>
-        {errMessage ? <p>{errMessage}</p> : null}
         <label>
           Goal Title
           <input
             type="text"
             name="goal_title"
-            value={goalEdits.goal_title}
-            onChange={handleChange}
+            value={goal.goal_title}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
+        <label>
+          Goal Completed
+          <input
+            type="checkbox"
+            name="goal_completed"
+            value={goal.goal_completed}
+            checked={goal.goal_completed}
+            onChange={(e) => handleChange(e)}
           />
         </label>
         {goal.steps.map((step, index) => {
@@ -81,22 +88,47 @@ const EditGoal = () => {
                   type="text"
                   name="step_title"
                   value={step.step_title}
-                  onChange={(e) => handleStepChange(index, e)}
+                  onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
+                />
+              </label>
+              <label>
+                Notes:
+                <input
+                  type="text"
+                  name="step_notes"
+                  value={step.step_notes}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Step Notes"
+                />
+              </label>
+              <label>
+                Step Completed
+                <input
+                  type="checkbox"
+                  name="step_completed"
+                  value={step.step_completed}
+                  checked={step.step_completed}
+                  onChange={(e) => handleChange(e, index)}
                 />
               </label>
             </div>
           );
         })}
       </form>
-      <button onClick={handleCancel}>Cancel</button>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={openModal}>Delete</button>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleSave}>Save</button>
+          <button onClick={openModal}>Delete</button>
+        </div>
+      )}
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          setErrMessage={setErrMessage}
         />
       ) : null}
     </div>
