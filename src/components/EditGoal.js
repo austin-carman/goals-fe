@@ -34,6 +34,14 @@ const EditGoal = () => {
     history.goBack();
   };
 
+  const handleAddStep = () => {
+    console.log("add step");
+  };
+
+  const handleRemoveStep = () => {
+    console.log("remove step");
+  };
+
   const handleSave = () => {
     setIsLoading(true);
     const editedGoal = { ...goal };
@@ -121,6 +129,8 @@ const EditGoal = () => {
       ) : (
         <div>
           <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleAddStep}>Add Step</button>
+          <button onClick={handleRemoveStep}>Remove Step</button>
           <button onClick={handleSave}>Save</button>
           <button onClick={openModal}>Delete</button>
         </div>
