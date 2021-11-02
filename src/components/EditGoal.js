@@ -35,11 +35,15 @@ const EditGoal = () => {
   };
 
   const handleAddStep = () => {
-    console.log("add step");
+    let addedStep = { ...goal };
+    addedStep.steps = [...goal.steps, { step_title: "", step_notes: "" }];
+    setGoal(addedStep);
   };
 
-  const handleRemoveStep = () => {
-    console.log("remove step");
+  const handleRemoveStep = (index) => {
+    let newGoal = { ...goal };
+    newGoal.steps.splice(index, 1);
+    setGoal(newGoal);
   };
 
   const handleSave = () => {
@@ -130,7 +134,9 @@ const EditGoal = () => {
         <div>
           <button onClick={handleCancel}>Cancel</button>
           <button onClick={handleAddStep}>Add Step</button>
-          <button onClick={handleRemoveStep}>Remove Step</button>
+          <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
+            Remove Step
+          </button>
           <button onClick={handleSave}>Save</button>
           <button onClick={openModal}>Delete</button>
         </div>
