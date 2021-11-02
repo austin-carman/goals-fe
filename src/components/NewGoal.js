@@ -9,7 +9,7 @@ const NewGoal = () => {
     steps: [],
   };
   const [goal, setGoal] = useState(initialState);
-  const { push } = useHistory();
+  const history = useHistory();
   const params = useParams();
 
   const handleChange = (e, index) => {
@@ -24,6 +24,10 @@ const NewGoal = () => {
       newGoal.steps = newSteps;
       setGoal(newGoal);
     }
+  };
+
+  const handleCancel = () => {
+    history.goBack();
   };
 
   const handleAddStep = () => {
@@ -49,7 +53,7 @@ const NewGoal = () => {
       )
       // eslint-disable-next-line no-unused-vars
       .then((res) => {
-        push(`/profile/${params.userId}`);
+        history.push(`/profile/${params.userId}`);
       })
       .catch((err) => console.log(err));
   };
@@ -93,6 +97,7 @@ const NewGoal = () => {
           );
         })}
       </form>
+      <button onClick={handleCancel}>Cancel</button>
       <button onClick={handleAddStep}>Add Step</button>
       <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
         Remove Step
