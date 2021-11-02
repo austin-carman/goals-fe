@@ -16,6 +16,7 @@ const EditGoal = () => {
   };
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -34,6 +35,7 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
+    setIsLoading(true);
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     axiosWithAuth()
@@ -43,6 +45,7 @@ const EditGoal = () => {
       )
       // eslint-disable-next-line no-unused-vars
       .then((res) => {
+        setIsLoading(false);
         history.goBack();
       })
       .catch((err) => {
@@ -52,18 +55,6 @@ const EditGoal = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleAddStep = () => {
-    let newGoal = { ...goal };
-    newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
-    setGoal(newGoal);
-  };
-
-  const handleRemoveStep = (index) => {
-    let newGoal = { ...goal };
-    newGoal.steps.splice(index, 1);
-    setGoal(newGoal);
   };
 
   return (
@@ -125,13 +116,15 @@ const EditGoal = () => {
           );
         })}
       </form>
-      <button onClick={handleCancel}>Cancel</button>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={openModal}>Delete</button>
-      <button onClick={handleAddStep}>Add Step</button>
-      <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
-        Remove Step
-      </button>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleSave}>Save</button>
+          <button onClick={openModal}>Delete</button>
+        </div>
+      )}
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
