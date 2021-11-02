@@ -36,7 +36,10 @@ const EditGoal = () => {
 
   const handleAddStep = () => {
     let addedStep = { ...goal };
-    addedStep.steps = [...goal.steps, { step_title: "", step_notes: "" }];
+    addedStep.steps = [
+      ...goal.steps,
+      { step_title: "", step_notes: "", goal_id: params.goalId },
+    ];
     setGoal(addedStep);
   };
 
