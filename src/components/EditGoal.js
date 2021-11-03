@@ -12,6 +12,7 @@ const EditGoal = () => {
   const initialState = {
     goal_title: userGoal.goal_title,
     goal_completed: userGoal.goal_completed,
+    user_id: userGoal.user_id,
     steps: userGoal.steps,
   };
   const [goal, setGoal] = useState(initialState);
@@ -38,7 +39,7 @@ const EditGoal = () => {
     let addedStep = { ...goal };
     addedStep.steps = [
       ...goal.steps,
-      { step_title: "", step_notes: "", goal_id: params.goalId, new: true },
+      { step_title: "", step_notes: "", step_completed: false },
     ];
     setGoal(addedStep);
   };
@@ -53,7 +54,6 @@ const EditGoal = () => {
     setIsLoading(true);
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    console.log("editedGoal: ", editedGoal);
     axiosWithAuth()
       .put(
         `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
@@ -62,10 +62,11 @@ const EditGoal = () => {
       // eslint-disable-next-line no-unused-vars
       .then((res) => {
         setIsLoading(false);
+        console.log("res: ", res);
         history.goBack();
       })
       .catch((err) => {
-        console.log(err);
+        console.log("error: ", err);
       });
   };
 
