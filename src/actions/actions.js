@@ -11,7 +11,6 @@ export const fetchUserGoals = () => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
       })
       .catch((err) => {
-        console.log(err);
         dispatch({ type: "FETCH_FAIL", payload: err });
       });
   };

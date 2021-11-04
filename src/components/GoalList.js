@@ -9,9 +9,12 @@ const GoalList = (props) => {
     props.fetchUserGoals();
   }, []);
 
+  if (props.error) {
+    return <h2>Error: {props.error}</h2>;
+  }
+
   return (
     <div>
-      <h2>Testing</h2>
       {props.isFetching ? (
         <h2>Loading...</h2>
       ) : (
@@ -26,13 +29,15 @@ const GoalList = (props) => {
 const mapStateToProps = (state) => {
   return {
     goals: state.goalsReducer.goals,
-    isFetching: state.isFetching,
+    isFetching: state.goalsReducer.isFetching,
+    error: state.goalsReducer.error,
   };
 };
 
 GoalList.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.boolean,
+  error: PropTypes.any,
   fetchUserGoals: PropTypes.any,
 };
 
