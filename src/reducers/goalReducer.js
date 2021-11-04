@@ -1,25 +1,31 @@
-const initialState = [
-  {
-    goal_id: null,
-    user_id: null,
-    goal_title: "",
-    goal_completed: null,
-    steps: [
-      {
-        step_id: null,
-        goal_id: null,
-        step_title: "",
-        step_notes: "",
-        step_completed: null,
-      },
-    ],
-  },
-];
-const goalReducer = (state = initialState, action) => {
+const initialState = {
+  goals: [],
+  isFetching: false,
+  error: "",
+};
+
+const goalsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH_START":
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        goals: action.payload,
+        isFetching: false,
+      };
+    case "FETCH_FAIL":
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default goalReducer;
+export default goalsReducer;

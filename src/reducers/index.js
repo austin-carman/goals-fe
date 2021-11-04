@@ -1,8 +1,8 @@
-import goalReducer from "./goalReducer";
+import goalsReducer from "./goalReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  goal: goalReducer,
+  goalsReducer: goalsReducer,
 });
 
 export default rootReducer;
