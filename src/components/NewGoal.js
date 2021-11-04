@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { sendNewGoal } from "../actions/actions";
 
 const NewGoal = () => {
   const initialState = {
@@ -107,4 +108,4 @@ const NewGoal = () => {
   );
 };
 
-export default NewGoal;
+export default connect({ sendNewGoal })(NewGoal);
