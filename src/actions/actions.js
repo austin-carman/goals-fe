@@ -1,12 +1,10 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-// import { useParams } from "react-router";
 
-export const fetchUserGoals = () => {
-  // const params = useParams();
+export const fetchUserGoals = (userId) => {
   return (dispatch) => {
     dispatch({ type: "FETCH_START" });
     axiosWithAuth()
-      .get(`https://goalmanager.herokuapp.com/api/goals/1`)
+      .get(`https://goalmanager.herokuapp.com/api/goals/${userId}`)
       .then((res) => {
         dispatch({ type: "FETCH_SUCCESS", payload: res.data });
       })

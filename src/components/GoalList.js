@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router";
 import GoalCard from "./GoalCard";
 import { connect } from "react-redux";
 import { fetchUserGoals } from "../actions/actions";
 import PropTypes from "prop-types";
 
 const GoalList = (props) => {
+  const params = useParams();
+  const user = params.userId;
+
   useEffect(() => {
-    props.fetchUserGoals();
+    props.fetchUserGoals(user);
   }, []);
 
   if (props.error) {
