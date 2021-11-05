@@ -48,6 +48,7 @@ const NewGoal = (props) => {
     let newGoal = { ...goal };
     newGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     props.sendNewGoal(params.userId, newGoal);
+    !props.isFetching && history.push(`/profile/${params.userId}`);
   };
 
   return (
@@ -99,8 +100,15 @@ const NewGoal = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.goalsReducer.isFetching,
+  };
+};
+
 NewGoal.propTypes = {
+  isFetching: PropTypes.any,
   sendNewGoal: PropTypes.any,
 };
 
-export default connect(null, { sendNewGoal })(NewGoal);
+export default connect(mapStateToProps, { sendNewGoal })(NewGoal);

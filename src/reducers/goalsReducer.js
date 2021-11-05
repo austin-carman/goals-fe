@@ -4,6 +4,7 @@ import {
   FETCH_GOALS_FAIL,
   SEND_GOAL_START,
   SEND_GOAL_SUCCESS,
+  SEND_GOAL_FAIL,
 } from "../actions/actions";
 
 const initialState = {
@@ -41,6 +42,12 @@ const goalsReducer = (state = initialState, action) => {
         ...state,
         goals: [...state.goals, action.payload],
         isFetching: false,
+      };
+    case SEND_GOAL_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
       };
     default:
       return state;
