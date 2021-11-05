@@ -1,8 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/actions";
 
@@ -19,8 +18,9 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
-  const history = useHistory();
+const DeleteModal = (props) => {
+  const { isModalOpen, setIsModalOpen, deleteGoal } = props;
+  // const history = useHistory();
   const params = useParams();
 
   const closeModal = () => {
@@ -28,21 +28,7 @@ const DeleteModal = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   const handleDelete = () => {
-    axiosWithAuth()
-      .delete(
-        `https://goalmanager.herokuapp.com/api/goals/delete-goal/${params.goalId}`
-      )
-      .then((res) => {
-        if (res.data === 1) {
-          closeModal();
-          history.goBack();
-        } else {
-          closeModal();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    deleteGoal(params.goalId);
   };
 
   return (
@@ -64,6 +50,7 @@ DeleteModal.propTypes = {
   isModalOpen: PropTypes.boolean,
   setIsModalOpen: PropTypes.any,
   setErrMessage: PropTypes.any,
+  deleteGoal: PropTypes.any,
 };
 
 export default connect(null, { deleteGoal })(DeleteModal);
