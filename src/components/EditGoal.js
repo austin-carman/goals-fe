@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/actions";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const EditGoal = () => {
+const EditGoal = (props) => {
   const location = useLocation();
   const history = useHistory();
-  // const params = useParams();
+  const params = useParams();
 
   const { userGoal } = location.state;
   const initialState = {
@@ -17,7 +18,6 @@ const EditGoal = () => {
   };
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -36,9 +36,9 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
-    setIsLoading(true);
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
+    props.editUserGoal(params.goalId, editedGoal);
   };
 
   const openModal = () => {
@@ -104,15 +104,11 @@ const EditGoal = () => {
           );
         })}
       </form>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleSave}>Save</button>
-          <button onClick={openModal}>Delete</button>
-        </div>
-      )}
+      <div>
+        <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={openModal}>Delete</button>
+      </div>
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
@@ -121,6 +117,10 @@ const EditGoal = () => {
       ) : null}
     </div>
   );
+};
+
+EditGoal.propTypes = {
+  editUserGoal: PropTypes.any,
 };
 
 export default connect(null, { editUserGoal })(EditGoal);

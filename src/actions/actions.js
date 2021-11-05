@@ -10,6 +10,8 @@ export const DELETE_GOAL_SUCCESS = "DELETE_GOAL_SUCCESS";
 export const DELETE_GOAL_FAIL = "DELETE_GOAL_FAIL";
 export const DELETE_GOAL_ERR = "DELETE_GOAL_ERR";
 export const EDIT_GOAL_START = "EDIT_GOAL_START";
+export const EDIT_GOAL_SUCCESS = "EDIT_GOAL_SUCCESS";
+export const EDIT_GOAL_FAIL = "EDIT_GOAL_FAIL";
 
 export const fetchUserGoals = (userId) => {
   return (dispatch) => {
@@ -62,21 +64,21 @@ export const deleteGoal = (goalId) => {
   };
 };
 
-export const editUserGoal = () => {
+// eslint-disable-next-line no-unused-vars
+export const editUserGoal = (goalId, editedGoal) => {
   return (dispatch) => {
     dispatch({ type: EDIT_GOAL_START });
-    // axiosWithAuth()
-    //   .put(
-    //     `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
-    //     editedGoal
-    //   )
-    //   // eslint-disable-next-line no-unused-vars
-    //   .then((res) => {
-    //     setIsLoading(false);
-    //     history.goBack();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axiosWithAuth()
+      .put(
+        `https://goalmanager.herokuapp.com/api/goals/edit/${goalId}`,
+        editedGoal
+      )
+      .then((res) => {
+        dispatch({ type: EDIT_GOAL_SUCCESS, payload: res.data });
+        // history.goBack();
+      })
+      .catch((err) => {
+        dispatch({ type: EDIT_GOAL_FAIL, payload: err });
+      });
   };
 };
