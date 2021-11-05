@@ -5,6 +5,7 @@ export const FETCH_GOALS_FAIL = "FETCH_GOALS_FAIL";
 export const SEND_GOAL_START = "SEND_GOAL_START";
 export const SEND_GOAL_SUCCESS = "SEND_GOAL_SUCCESS";
 export const SEND_GOAL_FAIL = "SEND_GOAL_FAIL";
+export const DELETE_GOAL_START = "DELETE_GOAL_START";
 
 export const fetchUserGoals = (userId) => {
   return (dispatch) => {
@@ -38,5 +39,7 @@ export const sendNewGoal = (userId, newGoal) => {
 };
 
 export const deleteGoal = () => {
-  return "hello";
+  return (dispatch) => {
+    dispatch({ type: DELETE_GOAL_START });
+  };
 };
