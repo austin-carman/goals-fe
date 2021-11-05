@@ -64,7 +64,6 @@ export const deleteGoal = (goalId) => {
   };
 };
 
-// eslint-disable-next-line no-unused-vars
 export const editUserGoal = (goalId, editedGoal) => {
   return (dispatch) => {
     dispatch({ type: EDIT_GOAL_START });
@@ -75,7 +74,6 @@ export const editUserGoal = (goalId, editedGoal) => {
       )
       .then((res) => {
         dispatch({ type: EDIT_GOAL_SUCCESS, payload: res.data });
-        // history.goBack();
       })
       .catch((err) => {
         dispatch({ type: EDIT_GOAL_FAIL, payload: err });
