@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import PropTypes from "prop-types";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { deleteGoal } from "../actions/actions";
 
 const customStyles = {
   content: {
@@ -64,4 +66,4 @@ DeleteModal.propTypes = {
   setErrMessage: PropTypes.any,
 };
 
-export default DeleteModal;
+export default connect(null, { deleteGoal })(DeleteModal);

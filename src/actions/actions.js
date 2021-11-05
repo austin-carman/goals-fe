@@ -36,3 +36,7 @@ export const sendNewGoal = (userId, newGoal) => {
       });
   };
 };
+
+export const deleteGoal = () => {
+  return "hello";
+};
