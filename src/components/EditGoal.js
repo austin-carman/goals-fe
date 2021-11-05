@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
-import { editUserGoal } from "../actions/actions";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import { editUserGoal } from "../actions/actions";
+// import { connect } from "react-redux";
+// import PropTypes from "prop-types";
 
-const EditGoal = (props) => {
+const EditGoal = () => {
   const location = useLocation();
   const history = useHistory();
   const params = useParams();
@@ -14,6 +15,8 @@ const EditGoal = (props) => {
   const initialState = {
     goal_title: userGoal.goal_title,
     goal_completed: userGoal.goal_completed,
+    user_id: userGoal.user_id,
+    goal_id: userGoal.goal_id,
     steps: userGoal.steps,
   };
   const [goal, setGoal] = useState(initialState);
@@ -38,7 +41,19 @@ const EditGoal = (props) => {
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    props.editUserGoal(params.goalId, editedGoal);
+    // props.editUserGoal(params.goalId, editedGoal);
+    axiosWithAuth()
+      .put(
+        `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
+        editedGoal
+      )
+      .then((res) => {
+        console.log(res.data);
+        history.goBack();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const openModal = () => {
@@ -119,8 +134,9 @@ const EditGoal = (props) => {
   );
 };
 
-EditGoal.propTypes = {
-  editUserGoal: PropTypes.any,
-};
+// EditGoal.propTypes = {
+//   editUserGoal: PropTypes.any,
+// };
 
-export default connect(null, { editUserGoal })(EditGoal);
+// export default connect(null, { editUserGoal })(EditGoal);
+export default EditGoal;
