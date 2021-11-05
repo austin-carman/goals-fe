@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/actions";
 
@@ -21,6 +21,7 @@ Modal.setAppElement("#root");
 const DeleteModal = (props) => {
   const { isModalOpen, setIsModalOpen, deleteGoal } = props;
   const params = useParams();
+  const history = useHistory();
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -28,6 +29,7 @@ const DeleteModal = (props) => {
 
   const handleDelete = () => {
     deleteGoal(params.goalId);
+    history.goBack();
   };
 
   return (

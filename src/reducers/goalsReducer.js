@@ -2,9 +2,9 @@ import {
   FETCH_GOALS_START,
   FETCH_GOALS_SUCCESS,
   FETCH_GOALS_FAIL,
-  SEND_GOAL_START,
-  SEND_GOAL_SUCCESS,
-  SEND_GOAL_FAIL,
+  NEW_GOAL_START,
+  NEW_GOAL_SUCCESS,
+  NEW_GOAL_FAIL,
   DELETE_GOAL_START,
   DELETE_GOAL_SUCCESS,
   DELETE_GOAL_FAIL,
@@ -40,19 +40,19 @@ const goalsReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload,
       };
-    case SEND_GOAL_START:
+    case NEW_GOAL_START:
       return {
         ...state,
         isFetching: true,
       };
-    case SEND_GOAL_SUCCESS:
+    case NEW_GOAL_SUCCESS:
       return {
         ...state,
         goals: [...state.goals, action.payload],
         isFetching: false,
         error: "",
       };
-    case SEND_GOAL_FAIL:
+    case NEW_GOAL_FAIL:
       return {
         ...state,
         isFetching: false,
