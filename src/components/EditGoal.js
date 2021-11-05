@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory, useLocation } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
+import { editUserGoal } from "../actions/actions";
+import { connect } from "react-redux";
 
 const EditGoal = () => {
   const location = useLocation();
   const history = useHistory();
-  const params = useParams();
+  // const params = useParams();
 
   const { userGoal } = location.state;
   const initialState = {
@@ -38,19 +39,6 @@ const EditGoal = () => {
     setIsLoading(true);
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    axiosWithAuth()
-      .put(
-        `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
-        editedGoal
-      )
-      // eslint-disable-next-line no-unused-vars
-      .then((res) => {
-        setIsLoading(false);
-        history.goBack();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const openModal = () => {
@@ -135,4 +123,4 @@ const EditGoal = () => {
   );
 };
 
-export default EditGoal;
+export default connect(null, { editUserGoal })(EditGoal);

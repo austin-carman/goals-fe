@@ -9,6 +9,7 @@ export const DELETE_GOAL_START = "DELETE_GOAL_START";
 export const DELETE_GOAL_SUCCESS = "DELETE_GOAL_SUCCESS";
 export const DELETE_GOAL_FAIL = "DELETE_GOAL_FAIL";
 export const DELETE_GOAL_ERR = "DELETE_GOAL_ERR";
+export const EDIT_GOAL_START = "EDIT_GOAL_START";
 
 export const fetchUserGoals = (userId) => {
   return (dispatch) => {
@@ -58,5 +59,24 @@ export const deleteGoal = (goalId) => {
       .catch((err) => {
         dispatch({ type: DELETE_GOAL_ERR, payload: err });
       });
+  };
+};
+
+export const editUserGoal = () => {
+  return (dispatch) => {
+    dispatch({ type: EDIT_GOAL_START });
+    // axiosWithAuth()
+    //   .put(
+    //     `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
+    //     editedGoal
+    //   )
+    //   // eslint-disable-next-line no-unused-vars
+    //   .then((res) => {
+    //     setIsLoading(false);
+    //     history.goBack();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 };

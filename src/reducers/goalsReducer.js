@@ -9,6 +9,7 @@ import {
   DELETE_GOAL_SUCCESS,
   DELETE_GOAL_FAIL,
   DELETE_GOAL_ERR,
+  EDIT_GOAL_START,
 } from "../actions/actions";
 
 const initialState = {
@@ -77,6 +78,11 @@ const goalsReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload,
+      };
+    case EDIT_GOAL_START:
+      return {
+        ...state,
+        isFetching: false,
       };
     default:
       return state;

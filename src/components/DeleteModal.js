@@ -20,7 +20,6 @@ Modal.setAppElement("#root");
 
 const DeleteModal = (props) => {
   const { isModalOpen, setIsModalOpen, deleteGoal } = props;
-  // const history = useHistory();
   const params = useParams();
 
   const closeModal = () => {
