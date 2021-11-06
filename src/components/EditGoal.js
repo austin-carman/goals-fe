@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { editUserGoal } from "../actions/actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
