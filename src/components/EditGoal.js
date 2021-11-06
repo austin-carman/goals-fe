@@ -2,23 +2,24 @@ import React, { useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-// import { editUserGoal } from "../actions/actions";
-// import { connect } from "react-redux";
-// import PropTypes from "prop-types";
+import { editUserGoal } from "../actions/actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const EditGoal = () => {
+const EditGoal = (props) => {
   const location = useLocation();
   const history = useHistory();
   const params = useParams();
 
-  const { userGoal } = location.state;
+  const { index } = location.state;
   const initialState = {
-    goal_title: userGoal.goal_title,
-    goal_completed: userGoal.goal_completed,
-    user_id: userGoal.user_id,
-    goal_id: userGoal.goal_id,
-    steps: userGoal.steps,
+    goal_title: props.goals[index].goal_title,
+    goal_completed: props.goals[index].goal_completed,
+    user_id: props.goals[index].user_id,
+    goal_id: props.goals[index].goal_id,
+    steps: props.goals[index].steps,
   };
+
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -134,9 +135,15 @@ const EditGoal = () => {
   );
 };
 
-// EditGoal.propTypes = {
-//   editUserGoal: PropTypes.any,
-// };
+const mapStateToProps = (state) => {
+  return {
+    goals: state.goalsReducer.goals,
+  };
+};
 
-// export default connect(null, { editUserGoal })(EditGoal);
-export default EditGoal;
+EditGoal.propTypes = {
+  editUserGoal: PropTypes.any,
+  goals: PropTypes.array,
+};
+
+export default connect(mapStateToProps, { editUserGoal })(EditGoal);

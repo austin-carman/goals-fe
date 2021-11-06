@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 
 const GoalCard = (props) => {
-  const { goal } = props;
+  const { goal, index } = props;
   let stepNumber = 0;
   const goalStatus =
     goal.goal_completed === true ? "completed-goal" : "active-goal";
@@ -12,7 +12,10 @@ const GoalCard = (props) => {
   const handleEdit = () => {
     push({
       pathname: `/edit-goal/${goal.goal_id}`,
-      state: { userGoal: goal },
+      state: {
+        // userGoal: goal,
+        index: index,
+      },
     });
   };
 
@@ -45,6 +48,7 @@ const GoalCard = (props) => {
 
 GoalCard.propTypes = {
   goal: PropTypes.object,
+  index: PropTypes.any,
 };
 
 export default GoalCard;
