@@ -86,11 +86,18 @@ const goalsReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
       };
-    case EDIT_GOAL_SUCCESS:
+    case EDIT_GOAL_SUCCESS: {
+      const newGoals = [...state.goals];
+      const x = (element) => element.goal_id === action.payload.goal_id;
+      const indexToEdit = newGoals.findIndex(x);
+      newGoals.splice(indexToEdit, 1);
+      newGoals.push(action.payload);
       return {
         ...state,
+        goals: newGoals,
         isFetching: false,
       };
+    }
     case EDIT_GOAL_FAIL:
       return {
         ...state,
