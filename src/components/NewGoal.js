@@ -1,9 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory, useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { sendNewGoal } from "../actions/actions";
+import PropTypes from "prop-types";
 
-const NewGoal = () => {
+const NewGoal = (props) => {
   const initialState = {
     goal_title: "",
     steps: [],
@@ -46,16 +47,8 @@ const NewGoal = () => {
     e.preventDefault();
     let newGoal = { ...goal };
     newGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    axiosWithAuth()
-      .post(
-        `https://goalmanager.herokuapp.com/api/goals/new-goal/${params.userId}`,
-        newGoal
-      )
-      // eslint-disable-next-line no-unused-vars
-      .then((res) => {
-        history.push(`/profile/${params.userId}`);
-      })
-      .catch((err) => console.log(err));
+    props.sendNewGoal(params.userId, newGoal);
+    !props.isFetching && history.push(`/profile/${params.userId}`);
   };
 
   return (
@@ -107,4 +100,15 @@ const NewGoal = () => {
   );
 };
 
-export default NewGoal;
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.goalsReducer.isFetching,
+  };
+};
+
+NewGoal.propTypes = {
+  isFetching: PropTypes.any,
+  sendNewGoal: PropTypes.any,
+};
+
+export default connect(mapStateToProps, { sendNewGoal })(NewGoal);

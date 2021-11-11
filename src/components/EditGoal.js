@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import DeleteModal from "./DeleteModal";
+import { editUserGoal } from "../actions/actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const EditGoal = () => {
+const EditGoal = (props) => {
   const location = useLocation();
   const history = useHistory();
   const params = useParams();
 
-  const { userGoal } = location.state;
+  const { index } = location.state;
+
   const initialState = {
-    goal_title: userGoal.goal_title,
-    goal_completed: userGoal.goal_completed,
-    steps: userGoal.steps,
+    goal_title: props.goals[index].goal_title,
+    goal_completed: props.goals[index].goal_completed,
+    user_id: props.goals[index].user_id,
+    goal_id: props.goals[index].goal_id,
+    steps: props.goals[index].steps,
   };
+
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -35,22 +40,10 @@ const EditGoal = () => {
   };
 
   const handleSave = () => {
-    setIsLoading(true);
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    axiosWithAuth()
-      .put(
-        `https://goalmanager.herokuapp.com/api/goals/edit/${params.goalId}`,
-        editedGoal
-      )
-      // eslint-disable-next-line no-unused-vars
-      .then((res) => {
-        setIsLoading(false);
-        history.goBack();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    props.editUserGoal(params.goalId, editedGoal);
+    history.goBack();
   };
 
   const openModal = () => {
@@ -116,15 +109,11 @@ const EditGoal = () => {
           );
         })}
       </form>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleSave}>Save</button>
-          <button onClick={openModal}>Delete</button>
-        </div>
-      )}
+      <div>
+        <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={openModal}>Delete</button>
+      </div>
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
@@ -135,4 +124,15 @@ const EditGoal = () => {
   );
 };
 
-export default EditGoal;
+const mapStateToProps = (state) => {
+  return {
+    goals: state.goalsReducer.goals,
+  };
+};
+
+EditGoal.propTypes = {
+  editUserGoal: PropTypes.any,
+  goals: PropTypes.array,
+};
+
+export default connect(mapStateToProps, { editUserGoal })(EditGoal);

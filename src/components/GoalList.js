@@ -1,38 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import GoalCard from "./GoalCard";
+import { connect } from "react-redux";
+import { fetchUserGoals } from "../actions/actions";
+import PropTypes from "prop-types";
 
-const GoalList = () => {
-  const [goals, setGoals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  // const location = useLocation();
-  // const { userId } = location.state;
+const GoalList = (props) => {
   const params = useParams();
+  const user = params.userId;
 
   useEffect(() => {
-    axiosWithAuth()
-      .get(`https://goalmanager.herokuapp.com/api/goals/${params.userId}`)
-      .then((res) => {
-        setGoals(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    props.fetchUserGoals(user);
+  }, [user]);
+
+  if (props.error) {
+    return <h2>Error: {props.error}</h2>;
+  }
 
   return (
     <div>
-      {isLoading ? (
+      {props.isFetching ? (
         <h2>Loading...</h2>
       ) : (
-        goals.map((goal) => {
-          return <GoalCard key={goal.goal_id} goal={goal} />;
+        props.goals.map((goal, index) => {
+          return <GoalCard key={goal.goal_id} goal={goal} index={index} />;
         })
       )}
     </div>
   );
 };
 
-export default GoalList;
+const mapStateToProps = (state) => {
+  return {
+    goals: state.goalsReducer.goals,
+    isFetching: state.goalsReducer.isFetching,
+    error: state.goalsReducer.error,
+  };
+};
+
+GoalList.propTypes = {
+  goals: PropTypes.array,
+  isFetching: PropTypes.any,
+  error: PropTypes.any,
+  fetchUserGoals: PropTypes.any,
+};
+
+export default connect(mapStateToProps, { fetchUserGoals })(GoalList);
