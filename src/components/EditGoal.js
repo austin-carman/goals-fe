@@ -131,7 +131,7 @@ const mapStateToProps = (state) => {
 };
 
 EditGoal.propTypes = {
-  editUserGoal: PropTypes.any,
+  editUserGoal: PropTypes.func,
   goals: PropTypes.array,
 };
 

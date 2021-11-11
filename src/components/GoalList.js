@@ -40,9 +40,9 @@ const mapStateToProps = (state) => {
 
 GoalList.propTypes = {
   goals: PropTypes.array,
-  isFetching: PropTypes.any,
-  error: PropTypes.any,
-  fetchUserGoals: PropTypes.any,
+  isFetching: PropTypes.bool,
+  error: PropTypes.string,
+  fetchUserGoals: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { fetchUserGoals })(GoalList);

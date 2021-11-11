@@ -107,8 +107,8 @@ const mapStateToProps = (state) => {
 };
 
 NewGoal.propTypes = {
-  isFetching: PropTypes.any,
-  sendNewGoal: PropTypes.any,
+  isFetching: PropTypes.bool,
+  sendNewGoal: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);
