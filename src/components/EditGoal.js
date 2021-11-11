@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/actions";
+import { deleteStep } from "../actions/actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -49,9 +50,8 @@ const EditGoal = (props) => {
     const editedSteps = [...goal.steps];
     if (editedSteps[editedSteps.length - 1].step_id) {
       const stepId = editedSteps[editedSteps.length - 1].step_id;
-      // modal, are you sure?
-      // action to remove step
-      console.log(stepId);
+      // modal confirmation
+      props.deleteStep(stepId);
     }
     editedSteps.pop();
     userGoal.steps = editedSteps;
@@ -153,7 +153,8 @@ const mapStateToProps = (state) => {
 
 EditGoal.propTypes = {
   editUserGoal: PropTypes.func,
+  deleteStep: PropTypes.func,
   goals: PropTypes.array,
 };
 
-export default connect(mapStateToProps, { editUserGoal })(EditGoal);
+export default connect(mapStateToProps, { editUserGoal, deleteStep })(EditGoal);
