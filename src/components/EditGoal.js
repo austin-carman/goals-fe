@@ -39,6 +39,14 @@ const EditGoal = (props) => {
     history.goBack();
   };
 
+  const handleAddStep = () => {
+    const newStep = { step_title: "", step_notes: "", step_completed: false };
+    let userGoal = { ...goal };
+    const steps = [...goal.steps, newStep];
+    userGoal.steps = steps;
+    setGoal(userGoal);
+  };
+
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
@@ -111,6 +119,7 @@ const EditGoal = (props) => {
       </form>
       <div>
         <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleAddStep}>Add Step</button>
         <button onClick={handleSave}>Save</button>
         <button onClick={openModal}>Delete</button>
       </div>
