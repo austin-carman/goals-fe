@@ -4,32 +4,23 @@ import { useHistory } from "react-router";
 
 const GoalCard = (props) => {
   const { goal, index } = props;
-  let stepNumber = 0;
-  const goalStatus =
-    goal.goal_completed === true ? "completed-goal" : "active-goal";
-
   const { push } = useHistory();
-  const handleEdit = () => {
-    push({
-      pathname: `/edit-goal/${goal.goal_id}`,
-      state: {
-        index: index,
-      },
-    });
+  let stepNumber = 0;
+
+  const handleEdit = (index) => {
+    push(`/edit-goal/${goal.goal_id}/${index}`);
   };
 
   return (
-    <div className={goalStatus}>
+    <div>
       <h2 className="goal-title">{goal.goal_title}</h2>
-      <button onClick={handleEdit}>Edit</button>
+      <button onClick={() => handleEdit(index)}>Edit</button>
 
       {goal.steps.map((step) => {
-        const stepStatus =
-          step.step_completed === true ? "completed-step" : "active-step";
         stepNumber += 1;
 
         return (
-          <div key={step.step_id} className={stepStatus}>
+          <div key={step.step_id}>
             {step.step_title ? (
               <h3 className="step-title">
                 Step {stepNumber}: {step.step_title}
