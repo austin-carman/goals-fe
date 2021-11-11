@@ -85,12 +85,19 @@ export const editUserGoal = (goalId, editedGoal) => {
 };
 
 export const deleteStep = (stepId) => {
-  console.log(stepId);
   return (dispatch) => {
     dispatch({ type: DELETE_STEP_START });
     axiosWithAuth()
-      .delete()
-      .then({ type: DELETE_STEP_SUCCESS, payload: null })
-      .catch({ DELETE_STEP_FAIL, payload: null });
+      .delete(
+        `https://goalmanager.herokuapp.com/api/goals/delete-step/${stepId}`
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: DELETE_STEP_SUCCESS, payload: null });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ DELETE_STEP_FAIL, payload: null });
+      });
   };
 };
