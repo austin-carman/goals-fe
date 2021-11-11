@@ -92,12 +92,10 @@ export const deleteStep = (stepId) => {
         `https://goalmanager.herokuapp.com/api/goals/delete-step/${stepId}`
       )
       .then((res) => {
-        console.log(res);
-        dispatch({ type: DELETE_STEP_SUCCESS, payload: null });
+        dispatch({ type: DELETE_STEP_SUCCESS, payload: res.data });
       })
       .catch((err) => {
-        console.log(err);
-        dispatch({ DELETE_STEP_FAIL, payload: null });
+        dispatch({ DELETE_STEP_FAIL, payload: err });
       });
   };
 };
