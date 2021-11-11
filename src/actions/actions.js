@@ -12,6 +12,9 @@ export const DELETE_GOAL_ERR = "DELETE_GOAL_ERR";
 export const EDIT_GOAL_START = "EDIT_GOAL_START";
 export const EDIT_GOAL_SUCCESS = "EDIT_GOAL_SUCCESS";
 export const EDIT_GOAL_FAIL = "EDIT_GOAL_FAIL";
+export const DELETE_STEP_START = "DELETE_STEP_START";
+export const DELETE_STEP_SUCCESS = "DELETE_STEP_SUCCESS";
+export const DELETE_STEP_FAIL = "DELETE_STEP_FAIL";
 
 export const fetchUserGoals = (userId) => {
   return (dispatch) => {
@@ -78,5 +81,16 @@ export const editUserGoal = (goalId, editedGoal) => {
       .catch((err) => {
         dispatch({ type: EDIT_GOAL_FAIL, payload: err });
       });
+  };
+};
+
+export const deleteStep = (stepId) => {
+  console.log(stepId);
+  return (dispatch) => {
+    dispatch({ type: DELETE_STEP_START });
+    axiosWithAuth()
+      .delete()
+      .then({ type: DELETE_STEP_SUCCESS, payload: null })
+      .catch({ DELETE_STEP_FAIL, payload: null });
   };
 };
