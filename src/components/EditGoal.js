@@ -48,9 +48,9 @@ const EditGoal = (props) => {
   const handleRemoveStep = () => {
     const userGoal = { ...goal };
     const editedSteps = [...goal.steps];
-    if (editedSteps[editedSteps.length - 1].step_id) {
-      const stepId = editedSteps[editedSteps.length - 1].step_id;
-      // modal confirmation
+    const index = editedSteps.length - 1;
+    if (editedSteps[index].step_id) {
+      const stepId = editedSteps[index].step_id;
       props.deleteStep(stepId);
     }
     editedSteps.pop();
