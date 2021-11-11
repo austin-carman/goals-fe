@@ -48,10 +48,10 @@ const DeleteModal = (props) => {
 };
 
 DeleteModal.propTypes = {
-  isModalOpen: PropTypes.boolean,
-  setIsModalOpen: PropTypes.any,
-  setErrMessage: PropTypes.any,
-  deleteGoal: PropTypes.any,
+  isModalOpen: PropTypes.bool,
+  setIsModalOpen: PropTypes.func,
+  setErrMessage: PropTypes.func,
+  deleteGoal: PropTypes.func,
 };
 
 export default connect(null, { deleteGoal })(DeleteModal);

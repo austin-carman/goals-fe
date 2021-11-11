@@ -13,7 +13,6 @@ const GoalCard = (props) => {
     push({
       pathname: `/edit-goal/${goal.goal_id}`,
       state: {
-        // userGoal: goal,
         index: index,
       },
     });
@@ -48,7 +47,7 @@ const GoalCard = (props) => {
 
 GoalCard.propTypes = {
   goal: PropTypes.object,
-  index: PropTypes.any,
+  index: PropTypes.number,
 };
 
 export default GoalCard;
