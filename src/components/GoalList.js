@@ -11,7 +11,7 @@ const GoalList = (props) => {
 
   useEffect(() => {
     props.fetchUserGoals(user);
-  }, []);
+  }, [user]);
 
   if (props.error) {
     return <h2>Error: {props.error}</h2>;
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 
 GoalList.propTypes = {
   goals: PropTypes.array,
-  isFetching: PropTypes.boolean,
+  isFetching: PropTypes.any,
   error: PropTypes.any,
   fetchUserGoals: PropTypes.any,
 };

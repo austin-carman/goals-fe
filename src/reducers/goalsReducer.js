@@ -87,14 +87,15 @@ const goalsReducer = (state = initialState, action) => {
         isFetching: true,
       };
     case EDIT_GOAL_SUCCESS: {
-      const newGoals = [...state.goals];
-      const x = (element) => element.goal_id === action.payload.goal_id;
-      const indexToEdit = newGoals.findIndex(x);
-      newGoals.splice(indexToEdit, 1);
-      newGoals.push(action.payload);
+      const userGoals = [...state.goals];
+      userGoals.map((goal, index) => {
+        if (goal.goal_id === action.payload.goal_id) {
+          userGoals.splice(index, 1, action.payload);
+        }
+      });
       return {
         ...state,
-        goals: newGoals,
+        goals: userGoals,
         isFetching: false,
       };
     }
