@@ -43,6 +43,7 @@ const EditGoal = (props) => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     props.editUserGoal(params.goalId, editedGoal);
+    history.goBack();
   };
 
   const openModal = () => {
