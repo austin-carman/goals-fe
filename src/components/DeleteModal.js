@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/actions";
 import { deleteStep } from "../actions/actions";
+import { removeStep } from "../utils/removeStep";
 
 const customStyles = {
   content: {
@@ -25,22 +26,29 @@ const DeleteModal = (props) => {
     setIsModalOpen,
     deleteGoal,
     deleteStep,
-    stepToDelete,
-    setStepToDelete,
+    goal,
+    setGoal,
+    toDelete,
+    setToDelete,
   } = props;
   const params = useParams();
   const history = useHistory();
 
   const closeModal = () => {
-    setStepToDelete("cancel");
     setIsModalOpen(false);
   };
 
   const handleDelete = () => {
-    typeof stepToDelete === "number"
-      ? deleteStep(stepToDelete)
-      : deleteGoal(params.goalId);
-    history.goBack();
+    if (toDelete === "deleteGoal") {
+      deleteGoal(params.goalId);
+      history.goBack();
+    } else if (toDelete === "removeStep") {
+      const stepToDelete = removeStep(goal);
+      deleteStep(stepToDelete.stepId);
+      setToDelete(null);
+      setGoal(stepToDelete.userGoal);
+      history.goBack();
+    }
   };
 
   return (
@@ -50,13 +58,11 @@ const DeleteModal = (props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        {typeof stepToDelete === "number" ? (
-          <h2>Are you sure you want to delete your step?</h2>
-        ) : (
-          <h2>Are you sure you want to delete your goal?</h2>
-        )}
+        <h2>Are you sure you want to delete?</h2>
         <button onClick={closeModal}>Cancel</button>
-        <button onClick={handleDelete}>Delete</button>
+        <button id={toDelete} onClick={handleDelete}>
+          {`Delete ${toDelete === "removeStep" ? "step" : "goal"}`}
+        </button>
       </Modal>
     </div>
   );
@@ -68,8 +74,10 @@ DeleteModal.propTypes = {
   setErrMessage: PropTypes.func,
   deleteGoal: PropTypes.func,
   deleteStep: PropTypes.func,
-  stepToDelete: PropTypes.any,
-  setStepToDelete: PropTypes.any,
+  goal: PropTypes.object,
+  setGoal: PropTypes.any,
+  toDelete: PropTypes.any,
+  setToDelete: PropTypes.any,
 };
 
 export default connect(null, { deleteGoal, deleteStep })(DeleteModal);

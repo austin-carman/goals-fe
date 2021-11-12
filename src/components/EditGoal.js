@@ -4,6 +4,7 @@ import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { removeStep } from "../utils/removeStep";
 
 const EditGoal = (props) => {
   const history = useHistory();
@@ -19,7 +20,7 @@ const EditGoal = (props) => {
 
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [stepToDelete, setStepToDelete] = useState(null);
+  const [toDelete, setToDelete] = useState(null);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -45,20 +46,6 @@ const EditGoal = (props) => {
     setGoal(userGoal);
   };
 
-  const handleRemoveStep = () => {
-    const userGoal = { ...goal };
-    const editedSteps = [...goal.steps];
-    const index = editedSteps.length - 1;
-    if (editedSteps[index].step_id) {
-      const stepId = editedSteps[index].step_id;
-      setStepToDelete(stepId);
-      setIsModalOpen(true);
-    }
-    editedSteps.pop();
-    userGoal.steps = editedSteps;
-    setGoal(userGoal);
-  };
-
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
@@ -66,8 +53,15 @@ const EditGoal = (props) => {
     history.goBack();
   };
 
-  const handleDelete = () => {
-    setIsModalOpen(true);
+  const handleDelete = (e) => {
+    console.log(e.target.id);
+    setToDelete(e.target.id);
+    if (e.target.id === "removeStep") {
+      const updatedGoal = removeStep(goal);
+      updatedGoal.stepId ? setIsModalOpen(true) : setGoal(updatedGoal);
+    } else if (e.target.id === "deleteGoal") {
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -133,17 +127,23 @@ const EditGoal = (props) => {
         <button onClick={handleCancel}>Cancel</button>
         <button onClick={handleAddStep}>Add Step</button>
         {goal.steps.length > 0 && (
-          <button onClick={handleRemoveStep}>Remove Step</button>
+          <button id="removeStep" onClick={(e) => handleDelete(e)}>
+            Remove Step
+          </button>
         )}
         <button onClick={handleSave}>Save</button>
-        <button onClick={handleDelete}>Delete</button>
+        <button id="deleteGoal" onClick={(e) => handleDelete(e)}>
+          Delete
+        </button>
       </div>
       {isModalOpen ? (
-        <DeleteModal // pass in a prop for stepId/goalId???
+        <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          stepToDelete={stepToDelete}
-          setStepToDelete={setStepToDelete}
+          goal={goal}
+          setGoal={setGoal}
+          toDelete={toDelete}
+          setToDelete={setToDelete}
         />
       ) : null}
     </div>
