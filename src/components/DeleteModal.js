@@ -58,7 +58,13 @@ const DeleteModal = (props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <h2>Are you sure you want to delete?</h2>
+        {toDelete === "removeStep" ? (
+          <h2>Are you sure you want to delete your last step?</h2>
+        ) : (
+          <h2>
+            Are you sure you want to delete your goal and all associated steps?
+          </h2>
+        )}
         <button onClick={closeModal}>Cancel</button>
         <button id={toDelete} onClick={handleDelete}>
           {`Delete ${toDelete === "removeStep" ? "step" : "goal"}`}
