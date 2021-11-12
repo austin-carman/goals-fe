@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/actions";
-import { deleteStep } from "../actions/actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -20,6 +19,7 @@ const EditGoal = (props) => {
 
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [stepToDelete, setStepToDelete] = useState(null);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -51,7 +51,8 @@ const EditGoal = (props) => {
     const index = editedSteps.length - 1;
     if (editedSteps[index].step_id) {
       const stepId = editedSteps[index].step_id;
-      props.deleteStep(stepId);
+      setStepToDelete(stepId);
+      setIsModalOpen(true);
     }
     editedSteps.pop();
     userGoal.steps = editedSteps;
@@ -65,7 +66,7 @@ const EditGoal = (props) => {
     history.goBack();
   };
 
-  const openDeleteModal = () => {
+  const handleDelete = () => {
     setIsModalOpen(true);
   };
 
@@ -131,14 +132,18 @@ const EditGoal = (props) => {
       <div>
         <button onClick={handleCancel}>Cancel</button>
         <button onClick={handleAddStep}>Add Step</button>
-        <button onClick={handleRemoveStep}>Remove Step</button>
+        {goal.steps.length > 0 && (
+          <button onClick={handleRemoveStep}>Remove Step</button>
+        )}
         <button onClick={handleSave}>Save</button>
-        <button onClick={openDeleteModal}>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
       {isModalOpen ? (
-        <DeleteModal
+        <DeleteModal // pass in a prop for stepId/goalId???
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          stepToDelete={stepToDelete}
+          setStepToDelete={setStepToDelete}
         />
       ) : null}
     </div>
@@ -157,4 +162,4 @@ EditGoal.propTypes = {
   goals: PropTypes.array,
 };
 
-export default connect(mapStateToProps, { editUserGoal, deleteStep })(EditGoal);
+export default connect(mapStateToProps, { editUserGoal })(EditGoal);

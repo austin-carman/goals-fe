@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/actions";
+import { deleteStep } from "../actions/actions";
 
 const customStyles = {
   content: {
@@ -19,16 +20,26 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const DeleteModal = (props) => {
-  const { isModalOpen, setIsModalOpen, deleteGoal } = props;
+  const {
+    isModalOpen,
+    setIsModalOpen,
+    deleteGoal,
+    deleteStep,
+    stepToDelete,
+    setStepToDelete,
+  } = props;
   const params = useParams();
   const history = useHistory();
 
   const closeModal = () => {
+    setStepToDelete("cancel");
     setIsModalOpen(false);
   };
 
   const handleDelete = () => {
-    deleteGoal(params.goalId);
+    typeof stepToDelete === "number"
+      ? deleteStep(stepToDelete)
+      : deleteGoal(params.goalId);
     history.goBack();
   };
 
@@ -39,7 +50,11 @@ const DeleteModal = (props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <h2>Are you sure you want to delete your goal?</h2>
+        {typeof stepToDelete === "number" ? (
+          <h2>Are you sure you want to delete your step?</h2>
+        ) : (
+          <h2>Are you sure you want to delete your goal?</h2>
+        )}
         <button onClick={closeModal}>Cancel</button>
         <button onClick={handleDelete}>Delete</button>
       </Modal>
@@ -52,6 +67,9 @@ DeleteModal.propTypes = {
   setIsModalOpen: PropTypes.func,
   setErrMessage: PropTypes.func,
   deleteGoal: PropTypes.func,
+  deleteStep: PropTypes.func,
+  stepToDelete: PropTypes.any,
+  setStepToDelete: PropTypes.any,
 };
 
-export default connect(null, { deleteGoal })(DeleteModal);
+export default connect(null, { deleteGoal, deleteStep })(DeleteModal);
