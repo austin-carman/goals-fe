@@ -92,9 +92,11 @@ const NewGoal = (props) => {
       </form>
       <button onClick={handleCancel}>Cancel</button>
       <button onClick={handleAddStep}>Add Step</button>
-      <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
-        Remove Step
-      </button>
+      {goal.steps.length > 0 && (
+        <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
+          Remove Step
+        </button>
+      )}
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );
