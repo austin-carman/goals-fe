@@ -24,7 +24,7 @@ function App() {
       <Route path="/new-goal/:userId">
         <NewGoal />
       </Route>
-      <Route path="/edit-goal/:goalId">
+      <Route path="/edit-goal/:goalId/:index">
         <EditGoal />
       </Route>
       <Route exact path="/">

@@ -1,27 +1,26 @@
 import React, { useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { removeStep } from "../utils/removeStep";
 
 const EditGoal = (props) => {
-  const location = useLocation();
   const history = useHistory();
   const params = useParams();
 
-  const { index } = location.state;
-
   const initialState = {
-    goal_title: props.goals[index].goal_title,
-    goal_completed: props.goals[index].goal_completed,
-    user_id: props.goals[index].user_id,
-    goal_id: props.goals[index].goal_id,
-    steps: props.goals[index].steps,
+    goal_title: props.goals[params.index].goal_title,
+    goal_completed: props.goals[params.index].goal_completed,
+    user_id: props.goals[params.index].user_id,
+    goal_id: props.goals[params.index].goal_id,
+    steps: props.goals[params.index].steps,
   };
 
   const [goal, setGoal] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toDelete, setToDelete] = useState(null);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -39,6 +38,14 @@ const EditGoal = (props) => {
     history.goBack();
   };
 
+  const handleAddStep = () => {
+    const newStep = { step_title: "", step_notes: "", step_completed: false };
+    let userGoal = { ...goal };
+    const steps = [...goal.steps, newStep];
+    userGoal.steps = steps;
+    setGoal(userGoal);
+  };
+
   const handleSave = () => {
     const editedGoal = { ...goal };
     editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
@@ -46,8 +53,15 @@ const EditGoal = (props) => {
     history.goBack();
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const handleDelete = (e) => {
+    console.log(e.target.id);
+    setToDelete(e.target.id);
+    if (e.target.id === "removeStep") {
+      const updatedGoal = removeStep(goal);
+      updatedGoal.stepId ? setIsModalOpen(true) : setGoal(updatedGoal);
+    } else if (e.target.id === "deleteGoal") {
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -111,13 +125,25 @@ const EditGoal = (props) => {
       </form>
       <div>
         <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleAddStep}>Add Step</button>
+        {goal.steps.length > 0 && (
+          <button id="removeStep" onClick={(e) => handleDelete(e)}>
+            Remove Step
+          </button>
+        )}
         <button onClick={handleSave}>Save</button>
-        <button onClick={openModal}>Delete</button>
+        <button id="deleteGoal" onClick={(e) => handleDelete(e)}>
+          Delete
+        </button>
       </div>
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          goal={goal}
+          setGoal={setGoal}
+          toDelete={toDelete}
+          setToDelete={setToDelete}
         />
       ) : null}
     </div>
@@ -132,6 +158,7 @@ const mapStateToProps = (state) => {
 
 EditGoal.propTypes = {
   editUserGoal: PropTypes.func,
+  deleteStep: PropTypes.func,
   goals: PropTypes.array,
 };
 

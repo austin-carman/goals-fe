@@ -8,10 +8,12 @@ import {
   DELETE_GOAL_START,
   DELETE_GOAL_SUCCESS,
   DELETE_GOAL_FAIL,
-  DELETE_GOAL_ERR,
   EDIT_GOAL_START,
   EDIT_GOAL_SUCCESS,
   EDIT_GOAL_FAIL,
+  DELETE_STEP_START,
+  DELETE_STEP_SUCCESS,
+  DELETE_STEP_FAIL,
 } from "../actions/actions";
 
 const initialState = {
@@ -75,12 +77,6 @@ const goalsReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload,
       };
-    case DELETE_GOAL_ERR:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload,
-      };
     case EDIT_GOAL_START:
       return {
         ...state,
@@ -97,9 +93,27 @@ const goalsReducer = (state = initialState, action) => {
         ...state,
         goals: userGoals,
         isFetching: false,
+        error: "",
       };
     }
     case EDIT_GOAL_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
+    case DELETE_STEP_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case DELETE_STEP_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: "",
+      };
+    case DELETE_STEP_FAIL:
       return {
         ...state,
         isFetching: false,
