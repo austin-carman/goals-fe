@@ -38,7 +38,11 @@ export const sendNewGoal = (userId, newGoal) => {
         newGoal
       )
       .then((res) => {
-        dispatch({ type: NEW_GOAL_SUCCESS, payload: res.data });
+        if (res.data.goal_id) {
+          dispatch({ type: NEW_GOAL_SUCCESS, payload: res.data });
+        } else {
+          dispatch({ type: NEW_GOAL_FAIL, payload: res.data.message });
+        }
       })
       .catch((err) => {
         dispatch({ type: NEW_GOAL_FAIL, payload: err });

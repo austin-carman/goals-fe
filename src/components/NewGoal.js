@@ -46,7 +46,6 @@ const NewGoal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    newGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
     props.sendNewGoal(params.userId, newGoal);
     !props.isFetching && history.push(`/profile/${params.userId}`);
   };
