@@ -4,7 +4,7 @@ import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { removeStep } from "../utils/removeStep";
+import { removeStep } from "../utils/helperFunctions";
 
 const EditGoal = (props) => {
   const history = useHistory();

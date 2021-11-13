@@ -5,7 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/actions";
 import { deleteStep } from "../actions/actions";
-import { removeStep } from "../utils/removeStep";
+import { removeStep } from "../utils/helperFunctions";
 
 const customStyles = {
   content: {
@@ -41,13 +41,14 @@ const DeleteModal = (props) => {
   const handleDelete = () => {
     if (toDelete === "deleteGoal") {
       deleteGoal(params.goalId);
+      setIsModalOpen(false);
       history.goBack();
     } else if (toDelete === "removeStep") {
       const stepToDelete = removeStep(goal);
       deleteStep(stepToDelete.stepId);
       setToDelete(null);
       setGoal(stepToDelete.userGoal);
-      history.goBack();
+      setIsModalOpen(false);
     }
   };
 
