@@ -15,3 +15,13 @@ export const removeStep = (goal) => {
   userGoal.steps = editedSteps;
   return userGoal;
 };
+
+export const sortGoals = (goalsArr) => {
+  const sortedGoals = goalsArr.sort((a, b) => (a.goal_id > b.goal_id ? 1 : -1));
+  return sortedGoals;
+};
+
+export const sortSteps = (stepsArr) => {
+  const sortedSteps = stepsArr.sort((a, b) => (a.step_id > b.step_id ? 1 : -1));
+  return sortedSteps;
+};

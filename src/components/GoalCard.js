@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
+import { sortSteps } from "../utils/helperFunctions";
 
 const GoalCard = (props) => {
   const { goal, index } = props;
@@ -10,6 +11,9 @@ const GoalCard = (props) => {
   const handleEdit = (index) => {
     push(`/edit-goal/${goal.goal_id}/${index}`);
   };
+
+  const sortedSteps = sortSteps([...goal.steps]);
+  goal.steps = sortedSteps;
 
   return (
     <div>
