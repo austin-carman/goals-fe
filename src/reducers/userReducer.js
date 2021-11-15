@@ -1,4 +1,5 @@
 import {
+  SEND_REGISTRATION_START,
   VERIFY_USER_START,
   VERIFY_USER_SUCCESS,
   VERIFY_USER_FAIL,
@@ -15,6 +16,11 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SEND_REGISTRATION_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
     case VERIFY_USER_START:
       return {
         ...state,
