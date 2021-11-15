@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isFetching: false,
-  userIsVerified: true,
+  userIsVerified: false,
   error: "",
 };
 
@@ -18,9 +18,11 @@ const userReducer = (state = initialState, action) => {
         isFetching: true,
       };
     case VERIFY_USER_SUCCESS:
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         isFetching: false,
+        userIsVerified: true,
       };
     case VERIFY_USER_FAIL:
       return {

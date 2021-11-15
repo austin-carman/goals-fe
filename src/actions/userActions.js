@@ -11,7 +11,7 @@ export const userLogin = (login) => {
       .then((res) => {
         if (!res.data.token) {
           console.log("testing", res.data);
-          dispatch({ type: VERIFY_USER_FAIL, payload: res });
+          dispatch({ type: VERIFY_USER_FAIL, payload: res.data });
         } else {
           dispatch({ type: VERIFY_USER_SUCCESS, payload: res.data });
         }
