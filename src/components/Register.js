@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
-import axios from "axios";
+// import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
+import PropTypes from "prop-types";
 
-const Register = () => {
+const Register = (props) => {
   const initialState = {
     first_name: "",
     last_name: "",
     username: "",
     password: "",
   };
-  const { push } = useHistory();
+  // const { push } = useHistory();
   // eslint-disable-next-line no-unused-vars
   const [registerForm, setRegisterForm] = useState(initialState);
-  const [errMessage, setErrMessage] = useState();
+  // const [errMessage, setErrMessage] = useState();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,19 +26,20 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://goalmanager.herokuapp.com/api/user/register", registerForm)
-      .then((res) => {
-        if (res.data.user_id) {
-          push("/login");
-        } else {
-          setErrMessage(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setRegisterForm(initialState);
+    props.userRegister(registerForm);
+    // axios
+    //   .post("https://goalmanager.herokuapp.com/api/user/register", registerForm)
+    //   .then((res) => {
+    //     if (res.data.user_id) {
+    //       push("/login");
+    //     } else {
+    //       setErrMessage(res.data.message);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // setRegisterForm(initialState);
   };
 
   return (
@@ -73,9 +74,13 @@ const Register = () => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Register</button>
-      {errMessage && <p>{errMessage}</p>}
+      {/* {errMessage && <p>{errMessage}</p>} */}
     </div>
   );
+};
+
+Register.propTypes = {
+  userRegister: PropTypes.func,
 };
 
 export default connect(null, { userRegister })(Register);
