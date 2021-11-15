@@ -22,6 +22,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
       };
+    case VERIFY_USER_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+      };
   }
 };
 
