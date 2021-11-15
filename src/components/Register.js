@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { connect } from "react-redux";
+import { userRegister } from "../actions/userActions";
 
 const Register = () => {
   const initialState = {
@@ -76,4 +78,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default connect(null, { userRegister })(Register);
