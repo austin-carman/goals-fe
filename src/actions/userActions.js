@@ -4,6 +4,7 @@ export const VERIFY_USER_START = "VERIFY_USER_START";
 export const VERIFY_USER_SUCCESS = "VERIFY_USER_SUCCESS";
 export const VERIFY_USER_FAIL = "VERIFY_USER_FAIL";
 export const VERIFY_USER_ERR = "VERIFY_USER_ERR";
+export const USER_LOGOUT = "USER_LOGOUT";
 
 export const userLogin = (login) => {
   return (dispatch) => {
@@ -20,5 +21,11 @@ export const userLogin = (login) => {
       .catch((err) => {
         dispatch({ type: VERIFY_USER_ERR, payload: err });
       });
+  };
+};
+
+export const userLogout = () => {
+  return (dispatch) => {
+    dispatch({ type: USER_LOGOUT });
   };
 };

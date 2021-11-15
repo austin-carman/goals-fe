@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { userLogout } from "../actions/userActions";
 
 const Navbar = () => {
   const handleSignOut = () => {
@@ -32,4 +34,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default connect(null, { userLogout })(Navbar);
