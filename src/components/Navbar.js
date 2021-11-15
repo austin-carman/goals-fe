@@ -15,29 +15,43 @@ const Navbar = (props) => {
       <nav className="navbar">
         <h2>Goal Tracker</h2>
         <div className="links-container">
-          <Link to="/register" className="navlink">
-            Create Account
-          </Link>
-          <Link to="/login" className="navlink">
-            Sign In
-          </Link>
-          <Link to="/profile" className="navlink">
-            Profile
-          </Link>
-          <Link to="/" className="navlink">
-            Home
-          </Link>
-          <Link onClick={handleSignOut} to="/login">
-            Logout
-          </Link>
+          {!props.userId ? (
+            <div>
+              <Link to="/" className="navlink">
+                Home
+              </Link>
+              <Link to="/register" className="navlink">
+                Create Account
+              </Link>
+              <Link to="/login" className="navlink">
+                Sign In
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link to={`/profile/${props.userId}`} className="navlink">
+                Profile
+              </Link>
+              <Link onClick={handleSignOut} to="/login">
+                Logout
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
     </header>
   );
 };
 
-Navbar.propTypes = {
-  userLogout: PropTypes.func,
+const mapStateToProps = (state) => {
+  return {
+    userId: state.userReducer.userId,
+  };
 };
 
-export default connect(null, { userLogout })(Navbar);
+Navbar.propTypes = {
+  userLogout: PropTypes.func,
+  userId: PropTypes.number,
+};
+
+export default connect(mapStateToProps, { userLogout })(Navbar);
