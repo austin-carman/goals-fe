@@ -20,11 +20,11 @@ const Navbar = (props) => {
               <Link to="/" className="navlink">
                 Home
               </Link>
-              <Link to="/register" className="navlink">
-                Create Account
-              </Link>
               <Link to="/login" className="navlink">
                 Sign In
+              </Link>
+              <Link to="/register" className="navlink">
+                Create Account
               </Link>
             </div>
           ) : (
