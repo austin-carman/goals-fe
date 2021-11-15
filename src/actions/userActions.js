@@ -18,7 +18,7 @@ export const userRegister = (registerForm) => {
       .post("https://goalmanager.herokuapp.com/api/user/register", registerForm)
       .then((res) => {
         if (res.data.user_id) {
-          dispatch({ type: SEND_REGISTRATION_SUCCESSFUL });
+          dispatch({ type: SEND_REGISTRATION_SUCCESSFUL, payload: res.data });
         } else {
           dispatch({ type: SEND_REGISTRATION_ERR, payload: res.data });
         }

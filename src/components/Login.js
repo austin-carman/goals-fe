@@ -5,9 +5,10 @@ import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
 
 const Login = (props) => {
+  const history = useHistory();
   useEffect(() => {
-    props.userId && history.push(`/profile/${props.userId}`);
-  }, [props.userId]);
+    props.token && history.push(`/profile/${props.userId}`);
+  }, [props.token]);
 
   const initialState = {
     username: "",
@@ -15,7 +16,6 @@ const Login = (props) => {
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
-  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,12 +58,14 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state.userReducer.isFetching,
     userId: state.userReducer.userId,
+    token: state.userReducer.token,
   };
 };
 
 Login.propTypes = {
   isFetching: PropTypes.any,
   userId: PropTypes.any,
+  token: PropTypes.any,
   userLogin: PropTypes.func,
 };
 

@@ -15,7 +15,7 @@ const Navbar = (props) => {
       <nav className="navbar">
         <h2>Goal Tracker</h2>
         <div className="links-container">
-          {!props.userId ? (
+          {!props.token ? (
             <div>
               <Link to="/" className="navlink">
                 Home
@@ -46,12 +46,14 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     userId: state.userReducer.userId,
+    token: state.userReducer.token,
   };
 };
 
 Navbar.propTypes = {
   userLogout: PropTypes.func,
   userId: PropTypes.number,
+  token: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { userLogout })(Navbar);
