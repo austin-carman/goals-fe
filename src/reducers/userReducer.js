@@ -1,5 +1,8 @@
 import {
   SEND_REGISTRATION_START,
+  SEND_REGISTRATION_SUCCESSFUL,
+  SEND_REGISTRATION_ERR,
+  SEND_REGISTRATION_FAIL,
   VERIFY_USER_START,
   VERIFY_USER_SUCCESS,
   VERIFY_USER_FAIL,
@@ -20,6 +23,21 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+      };
+    case SEND_REGISTRATION_SUCCESSFUL:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case SEND_REGISTRATION_ERR:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case SEND_REGISTRATION_FAIL:
+      return {
+        ...state,
+        isFetching: false,
       };
     case VERIFY_USER_START:
       return {
