@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userLogout } from "../actions/userActions";
+import PropTypes from "prop-types";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const handleSignOut = () => {
+    props.userLogout();
     localStorage.removeItem("token");
   };
 
@@ -32,6 +34,10 @@ const Navbar = () => {
       </nav>
     </header>
   );
+};
+
+Navbar.propTypes = {
+  userLogout: PropTypes.func,
 };
 
 export default connect(null, { userLogout })(Navbar);

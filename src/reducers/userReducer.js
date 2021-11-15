@@ -3,6 +3,7 @@ import {
   VERIFY_USER_SUCCESS,
   VERIFY_USER_FAIL,
   VERIFY_USER_ERR,
+  USER_LOGOUT,
 } from "../actions/userActions";
 
 const initialState = {
@@ -35,6 +36,14 @@ const userReducer = (state = initialState, action) => {
     case VERIFY_USER_ERR:
       return {
         ...state,
+        isFetching: false,
+      };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        userId: null,
+        error: "",
+        message: "",
         isFetching: false,
       };
     default:
