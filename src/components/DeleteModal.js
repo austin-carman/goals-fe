@@ -3,8 +3,8 @@ import Modal from "react-modal";
 import PropTypes from "prop-types";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteGoal } from "../actions/actions";
-import { deleteStep } from "../actions/actions";
+import { deleteGoal } from "../actions/goalsActions";
+import { deleteStep } from "../actions/goalsActions";
 import { removeStep } from "../utils/helperFunctions";
 
 const customStyles = {

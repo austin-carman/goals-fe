@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+// import { useHistory } from "react-router-dom";
+// import axios from "axios";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { userLogin } from "../actions/userActions";
 
-const Login = () => {
+const Login = (props) => {
   const initialState = {
     username: "",
     password: "",
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
-  const [errMessage, setErrMessage] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const { push } = useHistory();
+  // const [errMessage, setErrMessage] = useState();
+  // const [isLoading, setIsLoading] = useState(false); // change to isFetching from app state
+  // const { push } = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,22 +26,24 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    axios
-      .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
-      .then((res) => {
-        if (!res.data.token) {
-          setErrMessage("Invalid username or password");
-        } else {
-          setErrMessage();
-          localStorage.setItem("token", res.data.token);
-          setIsLoading(false);
-          push(`/profile/${res.data.userId}`);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // setIsLoading(true); // isFetching
+    props.userLogin();
+    // axios
+    //   .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
+    //   .then((res) => {
+    //     if (!res.data.token) {
+    //       setErrMessage("Invalid username or password");
+    //       // setIsFetching(false);
+    //     } else {
+    //       setErrMessage();
+    //       localStorage.setItem("token", res.data.token);
+    //       setIsLoading(false); // setIsFetching(false);
+    //       push(`/profile/${res.data.userId}`);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     setLoginForm(initialState);
   };
 
@@ -52,7 +57,6 @@ const Login = () => {
         onChange={handleChange}
         placeholder="username"
       />
-
       <input
         type="text"
         name="password"
@@ -61,10 +65,21 @@ const Login = () => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Sign-In</button>
-      {errMessage ? <p>{errMessage}</p> : null}
-      {isLoading ? <h3>Loading...</h3> : null}
+      {/* {errMessage ? <p>{errMessage}</p> : null} */}
+      {/* {isLoading ? <h3>Loading...</h3> : null} isFetching */}
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.goalsReducer.isFetching,
+  };
+};
+
+Login.propTypes = {
+  isFetching: PropTypes.any,
+  userLogin: PropTypes.func,
+};
+
+export default connect(mapStateToProps, { userLogin })(Login);

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import GoalCard from "./GoalCard";
 import { connect } from "react-redux";
-import { fetchUserGoals } from "../actions/actions";
+import { fetchUserGoals } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { sortGoals } from "../utils/helperFunctions";
 

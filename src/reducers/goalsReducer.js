@@ -14,12 +14,20 @@ import {
   DELETE_STEP_START,
   DELETE_STEP_SUCCESS,
   DELETE_STEP_FAIL,
-} from "../actions/actions";
+} from "../actions/goalsActions";
 
 const initialState = {
   goals: [],
   isFetching: false,
-  error: "",
+  error: {
+    username: "",
+    password: "",
+    goal_title: "",
+    goal_completed: "",
+    step_title: "",
+    step_notes: "",
+    step_completed: "",
+  },
 };
 
 const goalsReducer = (state = initialState, action) => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
-import { editUserGoal } from "../actions/actions";
+import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { removeStep } from "../utils/helperFunctions";

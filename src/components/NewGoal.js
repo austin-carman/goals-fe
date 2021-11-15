@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { sendNewGoal } from "../actions/actions";
+import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 
 const NewGoal = (props) => {
