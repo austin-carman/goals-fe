@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import axios from "axios";
+import { connect } from "react-redux";
+import { userRegister } from "../actions/userActions";
+import PropTypes from "prop-types";
 
-const Register = () => {
+const Register = (props) => {
+  const history = useHistory();
+  useEffect(() => {
+    props.userId && history.push(`/login`);
+  }, [props.userId]);
+
   const initialState = {
     first_name: "",
     last_name: "",
     username: "",
     password: "",
   };
-  const { push } = useHistory();
-  // eslint-disable-next-line no-unused-vars
+
   const [registerForm, setRegisterForm] = useState(initialState);
-  const [errMessage, setErrMessage] = useState();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,18 +29,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://goalmanager.herokuapp.com/api/user/register", registerForm)
-      .then((res) => {
-        if (res.data.user_id) {
-          push("/login");
-        } else {
-          setErrMessage(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    props.userRegister(registerForm);
     setRegisterForm(initialState);
   };
 
@@ -71,9 +65,19 @@ const Register = () => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Register</button>
-      {errMessage && <p>{errMessage}</p>}
     </div>
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    userId: state.userReducer.userId,
+  };
+};
+
+Register.propTypes = {
+  userRegister: PropTypes.func,
+  userId: PropTypes.any,
+};
+
+export default connect(mapStateToProps, { userRegister })(Register);

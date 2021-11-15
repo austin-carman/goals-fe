@@ -1,4 +1,8 @@
 import {
+  SEND_REGISTRATION_START,
+  SEND_REGISTRATION_SUCCESSFUL,
+  SEND_REGISTRATION_ERR,
+  SEND_REGISTRATION_FAIL,
   VERIFY_USER_START,
   VERIFY_USER_SUCCESS,
   VERIFY_USER_FAIL,
@@ -8,13 +12,36 @@ import {
 
 const initialState = {
   isFetching: false,
+  token: null,
   userId: null,
-  message: "",
   error: "",
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SEND_REGISTRATION_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case SEND_REGISTRATION_SUCCESSFUL:
+      return {
+        ...state,
+        isFetching: false,
+        userId: action.payload.user_id,
+      };
+    case SEND_REGISTRATION_ERR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
+    case SEND_REGISTRATION_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
     case VERIFY_USER_START:
       return {
         ...state,
@@ -25,8 +52,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
+        token: action.payload.token,
         userId: action.payload.userId,
-        message: action.payload.message,
       };
     case VERIFY_USER_FAIL:
       return {
@@ -41,10 +68,10 @@ const userReducer = (state = initialState, action) => {
     case USER_LOGOUT:
       return {
         ...state,
+        isFetching: false,
+        token: null,
         userId: null,
         error: "",
-        message: "",
-        isFetching: false,
       };
     default:
       return state;
