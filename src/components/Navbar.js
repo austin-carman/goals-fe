@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+  };
+
   return (
     <header className="navbar-header">
       <nav className="navbar">
@@ -18,6 +22,9 @@ const Navbar = () => {
           </Link>
           <Link to="/" className="navlink">
             Home
+          </Link>
+          <Link onClick={handleSignOut} to="/login">
+            Logout
           </Link>
         </div>
       </nav>
