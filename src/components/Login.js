@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
@@ -27,8 +26,8 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // setIsLoading(true); // isFetching
-    props.userLogin();
-    props.userId && history.push(`/profile/${props.userId}`);
+    props.userLogin(loginForm);
+    localStorage.getItem("token") && history.push(`/profile/${props.userId}`);
 
     // axios
     //   .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)

@@ -2,6 +2,7 @@ import {
   VERIFY_USER_START,
   VERIFY_USER_SUCCESS,
   VERIFY_USER_FAIL,
+  VERIFY_USER_ERR,
 } from "../actions/userActions";
 
 const initialState = {
@@ -30,8 +31,14 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        userIsVerified: false,
       };
+    case VERIFY_USER_ERR:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    default:
+      return state;
   }
 };
 
