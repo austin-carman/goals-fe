@@ -8,6 +8,11 @@ const signUpSchema = yup.object().shape({
     .trim()
     .required("username is a required field")
     .min("username must be at least 3 characters in length"),
+  password: yup
+    .string()
+    .trim()
+    .required("password is a required field")
+    .min("password must be at least 3 characters in length"),
 });
 
 export default signUpSchema;
