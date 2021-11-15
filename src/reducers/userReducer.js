@@ -17,6 +17,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
       };
+    case VERIFY_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+      };
   }
 };
 
