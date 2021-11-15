@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
 
 const Login = (props) => {
+  useEffect(() => {
+    props.userId && history.push(`/profile/${props.userId}`);
+  }, [props.userId]);
+
   const initialState = {
     username: "",
     password: "",
@@ -12,8 +16,6 @@ const Login = (props) => {
 
   const [loginForm, setLoginForm] = useState(initialState);
   const history = useHistory();
-
-  console.log("props:", props);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +28,6 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.userLogin(loginForm);
-    localStorage.getItem("token") && history.push(`/profile/${props.userId}`);
     setLoginForm(initialState);
   };
 
@@ -48,6 +49,7 @@ const Login = (props) => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Sign In</button>
+      {props.isFetching && <h3>Loading...</h3>}
     </div>
   );
 };
