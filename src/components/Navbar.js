@@ -32,7 +32,7 @@ const Navbar = (props) => {
               <Link to={`/profile/${props.userId}`} className="navlink">
                 Profile
               </Link>
-              <Link onClick={handleSignOut} to="/login">
+              <Link onClick={handleSignOut} to="/">
                 Logout
               </Link>
             </div>
