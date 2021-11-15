@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { userLogin } from "../actions/userActions";
 
-const Login = () => {
+const Login = (props) => {
+  useEffect(() => {
+    props.userId && history.push(`/profile/${props.userId}`);
+  }, [props.userId]);
+
   const initialState = {
     username: "",
     password: "",
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
-  const [errMessage, setErrMessage] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const { push } = useHistory();
+  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,28 +27,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    axios
-      .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
-      .then((res) => {
-        if (!res.data.token) {
-          setErrMessage("Invalid username or password");
-        } else {
-          setErrMessage();
-          localStorage.setItem("token", res.data.token);
-          setIsLoading(false);
-          push(`/profile/${res.data.userId}`);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    props.userLogin(loginForm);
     setLoginForm(initialState);
   };
 
   return (
     <div>
-      <h2>Sign-In</h2>
+      <h2>Sign In</h2>
       <input
         type="text"
         name="username"
@@ -52,7 +41,6 @@ const Login = () => {
         onChange={handleChange}
         placeholder="username"
       />
-
       <input
         type="text"
         name="password"
@@ -60,11 +48,23 @@ const Login = () => {
         onChange={handleChange}
         placeholder="password"
       />
-      <button onClick={handleSubmit}>Sign-In</button>
-      {errMessage ? <p>{errMessage}</p> : null}
-      {isLoading ? <h3>Loading...</h3> : null}
+      <button onClick={handleSubmit}>Sign In</button>
+      {props.isFetching && <h3>Loading...</h3>}
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.userReducer.isFetching,
+    userId: state.userReducer.userId,
+  };
+};
+
+Login.propTypes = {
+  isFetching: PropTypes.any,
+  userId: PropTypes.any,
+  userLogin: PropTypes.func,
+};
+
+export default connect(mapStateToProps, { userLogin })(Login);
