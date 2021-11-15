@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   isFetching: false,
-  userIsVerified: false,
+  userId: null,
+  message: "",
   error: "",
 };
 
@@ -22,12 +23,14 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        userIsVerified: true,
+        userId: action.payload.userId,
+        message: action.payload.message,
       };
     case VERIFY_USER_FAIL:
       return {
         ...state,
         isFetching: false,
+        userIsVerified: false,
       };
   }
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -14,7 +14,7 @@ const Login = (props) => {
   const [loginForm, setLoginForm] = useState(initialState);
   // const [errMessage, setErrMessage] = useState();
   // const [isLoading, setIsLoading] = useState(false); // change to isFetching from app state
-  // const { push } = useHistory();
+  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +28,8 @@ const Login = (props) => {
     e.preventDefault();
     // setIsLoading(true); // isFetching
     props.userLogin();
+    props.userId && history.push(`/profile/${props.userId}`);
+
     // axios
     //   .post("https://goalmanager.herokuapp.com/api/user/login", loginForm)
     //   .then((res) => {
@@ -38,7 +40,7 @@ const Login = (props) => {
     //       setErrMessage();
     //       localStorage.setItem("token", res.data.token);
     //       setIsLoading(false); // setIsFetching(false);
-    //       push(`/profile/${res.data.userId}`);
+    // push(`/profile/${res.data.userId}`);
     //     }
     //   })
     //   .catch((err) => {
@@ -73,12 +75,14 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.goalsReducer.isFetching,
+    isFetching: state.userReducer.isFetching,
+    userId: state.userReducer.userId,
   };
 };
 
 Login.propTypes = {
   isFetching: PropTypes.any,
+  userId: PropTypes.any,
   userLogin: PropTypes.func,
 };
 
