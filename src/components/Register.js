@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
+import signUpSchema from "../schema/signUpSchema";
+import * as yup from "yup";
 
 const Register = () => {
   const initialState = {
@@ -14,8 +16,22 @@ const Register = () => {
   const [registerForm, setRegisterForm] = useState(initialState);
   const [errMessage, setErrMessage] = useState();
 
+  const formValidation = (name, value) => {
+    yup
+      .reach(signUpSchema, name)
+      .validate(value)
+      .then(() => {
+        // set form errors to empty
+      })
+      .catch((err) => {
+        // set form errors to err
+        console.log(err);
+      });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    formValidation(name, value);
     setRegisterForm({
       ...registerForm,
       [name]: value,
