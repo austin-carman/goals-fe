@@ -65,7 +65,7 @@ const Login = (props) => {
       <div>
         <p>{formErrors}</p>
       </div>
-      {props.isFetching && <h3>Loading...</h3>}
+      {props.isFetching && formErrors === "" && <h3> Loading...</h3>}
     </div>
   );
 };

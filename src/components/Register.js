@@ -81,6 +81,7 @@ const Register = (props) => {
       <div>
         <p>{formErrors}</p>
       </div>
+      {props.isFetching && formErrors === "" && <h3> Loading...</h3>}
     </div>
   );
 };
