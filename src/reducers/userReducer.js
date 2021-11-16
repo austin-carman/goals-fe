@@ -82,7 +82,7 @@ const userReducer = (state = initialState, action) => {
     case SET_FORM_ERRS:
       return {
         ...state,
-        error: "",
+        error: action.payload,
       };
     default:
       return state;
