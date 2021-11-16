@@ -14,3 +14,8 @@ export const signUpSchema = yup.object().shape({
     .required("password is a required field")
     .min(3, "password must be at least 3 characters in length"),
 });
+
+export const loginSchema = yup.object().shape({
+  username: yup.string().trim().required("username is a required field"),
+  password: yup.string().trim().required("password is a required field"),
+});
