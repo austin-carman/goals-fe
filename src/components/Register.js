@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import axios from "axios";
 import signUpSchema from "../schema/signUpSchema";
 import * as yup from "yup";
 import { connect } from "react-redux";
+import { userRegister } from "../actions/userActions";
+import PropTypes from "prop-types";
 
-const Register = () => {
+const Register = (props) => {
+  const history = useHistory();
+  useEffect(() => {
+    props.userId && history.push(`/login`);
+  }, [props.userId]);
+
   const initialState = {
     first_name: "",
     last_name: "",
     username: "",
     password: "",
   };
-  const { push } = useHistory();
+
   const [registerForm, setRegisterForm] = useState(initialState);
-  const [errMessage, setErrMessage] = useState();
 
   const formValidation = (name, value) => {
     yup
@@ -40,18 +45,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://goalmanager.herokuapp.com/api/user/register", registerForm)
-      .then((res) => {
-        if (res.data.user_id) {
-          push("/login");
-        } else {
-          setErrMessage(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    props.userRegister(registerForm);
     setRegisterForm(initialState);
   };
 
@@ -87,16 +81,23 @@ const Register = () => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Register</button>
-      {errMessage && <p>{errMessage}</p>}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
     error: state.userReducer.error,
   };
 };
 
 export default connect(mapStateToProps)(Register);
+
+Register.propTypes = {
+  userRegister: PropTypes.func,
+  userId: PropTypes.any,
+};
+
+export default connect(mapStateToProps, { userRegister })(Register);

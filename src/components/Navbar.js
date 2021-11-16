@@ -15,16 +15,16 @@ const Navbar = (props) => {
       <nav className="navbar">
         <h2>Goal Tracker</h2>
         <div className="links-container">
-          {!props.userId ? (
+          {!props.token ? (
             <div>
               <Link to="/" className="navlink">
                 Home
               </Link>
-              <Link to="/register" className="navlink">
-                Create Account
-              </Link>
               <Link to="/login" className="navlink">
                 Sign In
+              </Link>
+              <Link to="/register" className="navlink">
+                Create Account
               </Link>
             </div>
           ) : (
@@ -32,7 +32,7 @@ const Navbar = (props) => {
               <Link to={`/profile/${props.userId}`} className="navlink">
                 Profile
               </Link>
-              <Link onClick={handleSignOut} to="/login">
+              <Link onClick={handleSignOut} to="/">
                 Logout
               </Link>
             </div>
@@ -46,12 +46,14 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     userId: state.userReducer.userId,
+    token: state.userReducer.token,
   };
 };
 
 Navbar.propTypes = {
   userLogout: PropTypes.func,
   userId: PropTypes.number,
+  token: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { userLogout })(Navbar);
