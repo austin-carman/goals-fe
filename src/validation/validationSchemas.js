@@ -16,6 +16,6 @@ export const signUpSchema = yup.object().shape({
 });
 
 export const loginSchema = yup.object().shape({
-  username: yup.string().trim().required("username is a required field"),
-  password: yup.string().trim().required("password is a required field"),
+  username: yup.string().trim().required("username is required"),
+  password: yup.string().trim().required("password is required"),
 });
