@@ -13,7 +13,6 @@ const Register = () => {
     password: "",
   };
   const { push } = useHistory();
-  // eslint-disable-next-line no-unused-vars
   const [registerForm, setRegisterForm] = useState(initialState);
   const [errMessage, setErrMessage] = useState();
 
@@ -21,7 +20,9 @@ const Register = () => {
     yup
       .reach(signUpSchema, name)
       .validate(value)
-      .then(() => { })
+      .then(() => {
+        // set errors
+      })
       .catch((err) => {
         // set form errors to err
         console.log(err);
