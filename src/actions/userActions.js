@@ -9,9 +9,8 @@ export const VERIFY_USER_SUCCESS = "VERIFY_USER_SUCCESS";
 export const VERIFY_USER_FAIL = "VERIFY_USER_FAIL";
 export const VERIFY_USER_ERR = "VERIFY_USER_ERR";
 export const USER_LOGOUT = "USER_LOGOUT";
-export const CLEAR_FORM_ERRS = "CLEAR_FORM_ERRS";
+export const SET_FORM_ERRS = "SET_FORM_ERRS";
 
-// eslint-disable-next-line no-unused-vars
 export const userRegister = (registerForm) => {
   return (dispatch) => {
     dispatch({ type: SEND_REGISTRATION_START });
@@ -56,6 +55,6 @@ export const userLogout = () => {
 
 export const formErrors = (errors) => {
   return (dispatch) => {
-    dispatch({ type: CLEAR_FORM_ERRS, payload: errors });
+    dispatch({ type: SET_FORM_ERRS, payload: errors });
   };
 };

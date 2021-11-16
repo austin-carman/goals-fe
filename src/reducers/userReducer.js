@@ -8,14 +8,19 @@ import {
   VERIFY_USER_FAIL,
   VERIFY_USER_ERR,
   USER_LOGOUT,
-  CLEAR_FORM_ERRS,
+  SET_FORM_ERRS,
 } from "../actions/userActions";
 
 const initialState = {
   isFetching: false,
   token: null,
   userId: null,
-  error: "",
+  error: {
+    first_name: "",
+    last_name: "",
+    username: "",
+    password: "",
+  },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -74,7 +79,7 @@ const userReducer = (state = initialState, action) => {
         userId: null,
         error: "",
       };
-    case CLEAR_FORM_ERRS:
+    case SET_FORM_ERRS:
       return {
         ...state,
         error: "",
