@@ -30,7 +30,7 @@ const Register = (props) => {
         formErrors({ ...props.error, [name]: "" });
       })
       .catch((err) => {
-        // set form errors to err
+        formErrors({ ...props.error, [name]: err.errors[0] });
         console.log(err);
       });
   };
