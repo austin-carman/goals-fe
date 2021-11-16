@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
+import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
   const history = useHistory();
@@ -18,6 +19,18 @@ const Register = (props) => {
   };
 
   const [registerForm, setRegisterForm] = useState(initialState);
+  const [formErrors, setFormErrors] = useState("");
+
+  const formValidation = (obj) => {
+    signUpSchema
+      .validate(obj)
+      .then(() => {
+        setFormErrors("");
+      })
+      .catch((err) => {
+        setFormErrors(err.errors[0]);
+      });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,10 +40,10 @@ const Register = (props) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    formValidation(registerForm);
     props.userRegister(registerForm);
-    setRegisterForm(initialState);
   };
 
   return (
@@ -65,6 +78,10 @@ const Register = (props) => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Register</button>
+      <div>
+        <p>{formErrors}</p>
+      </div>
+      {props.isFetching && formErrors === "" && <h3> Loading...</h3>}
     </div>
   );
 };
@@ -72,12 +89,14 @@ const Register = (props) => {
 const mapStateToProps = (state) => {
   return {
     userId: state.userReducer.userId,
+    isFetching: state.userReducer.isFetching,
   };
 };
 
 Register.propTypes = {
   userRegister: PropTypes.func,
   userId: PropTypes.any,
+  isFetching: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);
