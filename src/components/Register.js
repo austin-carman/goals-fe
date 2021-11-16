@@ -5,6 +5,7 @@ import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
 import signUpSchema from "../schema/signUpSchema";
 import * as yup from "yup";
+import { connect } from "react-redux";
 
 const Register = (props) => {
   const history = useHistory();
@@ -25,9 +26,7 @@ const Register = (props) => {
     yup
       .reach(signUpSchema, name)
       .validate(value)
-      .then(() => {
-        // set form errors to empty
-      })
+      .then(() => { })
       .catch((err) => {
         // set form errors to err
         console.log(err);
@@ -87,6 +86,7 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+<<<<<<< HEAD
     userId: state.userReducer.userId,
   };
 };
@@ -97,3 +97,11 @@ Register.propTypes = {
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);
+=======
+    isFetching: state.userReducer.isFetching,
+    error: state.userReducer.error,
+  };
+};
+
+export default connect(mapStateToProps)(Register);
+>>>>>>> 4b854cd (connect userReducer state to Register)
