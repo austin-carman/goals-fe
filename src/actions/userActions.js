@@ -9,7 +9,6 @@ export const VERIFY_USER_SUCCESS = "VERIFY_USER_SUCCESS";
 export const VERIFY_USER_FAIL = "VERIFY_USER_FAIL";
 export const VERIFY_USER_ERR = "VERIFY_USER_ERR";
 export const USER_LOGOUT = "USER_LOGOUT";
-export const SET_FORM_ERRS = "SET_FORM_ERRS";
 
 export const userRegister = (registerForm) => {
   return (dispatch) => {
@@ -50,11 +49,5 @@ export const userLogin = (login) => {
 export const userLogout = () => {
   return (dispatch) => {
     dispatch({ type: USER_LOGOUT });
-  };
-};
-
-export const formErrors = (errors) => {
-  return (dispatch) => {
-    dispatch({ type: SET_FORM_ERRS, payload: errors });
   };
 };

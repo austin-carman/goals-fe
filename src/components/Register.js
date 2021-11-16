@@ -5,7 +5,6 @@ import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
 import signUpSchema from "../schema/signUpSchema";
 import * as yup from "yup";
-import { formErrors } from "../actions/userActions";
 
 const Register = (props) => {
   const history = useHistory();
@@ -20,18 +19,25 @@ const Register = (props) => {
     password: "",
   };
 
+  const initialErrors = {
+    first_name: "",
+    last_name: "",
+    username: "",
+    password: "",
+  };
+
   const [registerForm, setRegisterForm] = useState(initialState);
+  const [formErrors, setFormErrors] = useState(initialErrors);
 
   const formValidation = (name, value) => {
     yup
       .reach(signUpSchema, name)
       .validate(value)
       .then(() => {
-        formErrors({ ...props.error, [name]: "" });
+        setFormErrors({ ...formErrors, [name]: "" });
       })
       .catch((err) => {
-        formErrors({ ...props.error, [name]: err.errors[0] });
-        console.log(err);
+        setFormErrors({ ...formErrors, [name]: err.errors[0] });
       });
   };
 
@@ -82,6 +88,12 @@ const Register = (props) => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Register</button>
+      <div>
+        <p>{formErrors.first_name}</p>
+        <p>{formErrors.last_name}</p>
+        <p>{formErrors.username}</p>
+        <p>{formErrors.password}</p>
+      </div>
     </div>
   );
 };
@@ -90,7 +102,7 @@ const mapStateToProps = (state) => {
   return {
     userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
-    error: state.userReducer.error,
+    errors: state.userReducer.errors,
   };
 };
 
@@ -98,7 +110,8 @@ Register.propTypes = {
   userRegister: PropTypes.func,
   userId: PropTypes.any,
   isFetching: PropTypes.any,
-  error: PropTypes.any,
+  errors: PropTypes.any,
+  formErrors: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);

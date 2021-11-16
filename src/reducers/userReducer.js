@@ -8,14 +8,13 @@ import {
   VERIFY_USER_FAIL,
   VERIFY_USER_ERR,
   USER_LOGOUT,
-  SET_FORM_ERRS,
 } from "../actions/userActions";
 
 const initialState = {
   isFetching: false,
   token: null,
   userId: null,
-  error: {
+  errors: {
     first_name: "",
     last_name: "",
     username: "",
@@ -40,13 +39,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        errors: action.payload,
       };
     case SEND_REGISTRATION_FAIL:
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        errors: action.payload,
       };
     case VERIFY_USER_START:
       return {
@@ -77,12 +76,7 @@ const userReducer = (state = initialState, action) => {
         isFetching: false,
         token: null,
         userId: null,
-        error: "",
-      };
-    case SET_FORM_ERRS:
-      return {
-        ...state,
-        error: action.payload,
+        errors: initialState.errors,
       };
     default:
       return state;
