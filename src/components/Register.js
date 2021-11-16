@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import axios from "axios";
 import signUpSchema from "../schema/signUpSchema";
 import * as yup from "yup";
+import { connect } from "react-redux";
 
 const Register = () => {
   const initialState = {
@@ -20,9 +21,7 @@ const Register = () => {
     yup
       .reach(signUpSchema, name)
       .validate(value)
-      .then(() => {
-        // set form errors to empty
-      })
+      .then(() => { })
       .catch((err) => {
         // set form errors to err
         console.log(err);
@@ -92,4 +91,11 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.userReducer.isFetching,
+    error: state.userReducer.error,
+  };
+};
+
+export default connect(mapStateToProps)(Register);
