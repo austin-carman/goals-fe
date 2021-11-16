@@ -29,6 +29,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         userId: action.payload.user_id,
+        errors: "",
       };
     case SEND_REGISTRATION_ERR:
       return {
@@ -60,7 +61,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        errors: action.payload.message,
+        errors: action.payload,
       };
     case VERIFY_USER_ERR:
       return {

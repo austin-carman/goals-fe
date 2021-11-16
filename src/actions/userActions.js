@@ -19,7 +19,7 @@ export const userRegister = (registerForm) => {
         if (res.data.user_id) {
           dispatch({ type: SEND_REGISTRATION_SUCCESSFUL, payload: res.data });
         } else {
-          dispatch({ type: SEND_REGISTRATION_ERR, payload: res.data });
+          dispatch({ type: SEND_REGISTRATION_ERR, payload: res.data.message });
         }
       })
       .catch((err) => {
@@ -35,7 +35,7 @@ export const userLogin = (login) => {
       .post("https://goalmanager.herokuapp.com/api/user/login", login)
       .then((res) => {
         if (!res.data.token) {
-          dispatch({ type: VERIFY_USER_FAIL, payload: res.data });
+          dispatch({ type: VERIFY_USER_FAIL, payload: res.data.message });
         } else {
           dispatch({ type: VERIFY_USER_SUCCESS, payload: res.data });
         }
