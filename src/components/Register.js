@@ -3,6 +3,8 @@ import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
+import signUpSchema from "../schema/signUpSchema";
+import * as yup from "yup";
 
 const Register = (props) => {
   const history = useHistory();
@@ -19,8 +21,22 @@ const Register = (props) => {
 
   const [registerForm, setRegisterForm] = useState(initialState);
 
+  const formValidation = (name, value) => {
+    yup
+      .reach(signUpSchema, name)
+      .validate(value)
+      .then(() => {
+        // set form errors to empty
+      })
+      .catch((err) => {
+        // set form errors to err
+        console.log(err);
+      });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    formValidation(name, value);
     setRegisterForm({
       ...registerForm,
       [name]: value,
