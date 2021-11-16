@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
-import signUpSchema from "../schema/signUpSchema";
+import { signUpSchema } from "../schema/validationSchemas";
 
 const Register = (props) => {
   const history = useHistory();

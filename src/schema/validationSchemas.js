@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const signUpSchema = yup.object().shape({
+export const signUpSchema = yup.object().shape({
   first_name: yup.string().trim().required("First name is required field"),
   last_name: yup.string().trim().required("Last name is required field"),
   username: yup
@@ -14,5 +14,3 @@ const signUpSchema = yup.object().shape({
     .required("password is a required field")
     .min(3, "password must be at least 3 characters in length"),
 });
-
-export default signUpSchema;
