@@ -5,6 +5,7 @@ import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
 import signUpSchema from "../schema/signUpSchema";
 import * as yup from "yup";
+import { formErrors } from "../actions/userActions";
 
 const Register = (props) => {
   const history = useHistory();
@@ -26,7 +27,7 @@ const Register = (props) => {
       .reach(signUpSchema, name)
       .validate(value)
       .then(() => {
-        // set errors
+        formErrors({ ...props.error, [name]: "" });
       })
       .catch((err) => {
         // set form errors to err
@@ -96,6 +97,8 @@ const mapStateToProps = (state) => {
 Register.propTypes = {
   userRegister: PropTypes.func,
   userId: PropTypes.any,
+  isFetching: PropTypes.any,
+  error: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);

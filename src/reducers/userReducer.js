@@ -8,6 +8,7 @@ import {
   VERIFY_USER_FAIL,
   VERIFY_USER_ERR,
   USER_LOGOUT,
+  CLEAR_FORM_ERRS,
 } from "../actions/userActions";
 
 const initialState = {
@@ -71,6 +72,11 @@ const userReducer = (state = initialState, action) => {
         isFetching: false,
         token: null,
         userId: null,
+        error: "",
+      };
+    case CLEAR_FORM_ERRS:
+      return {
+        ...state,
         error: "",
       };
     default:
