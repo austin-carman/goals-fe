@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
-import { loginSchema } from "../validation/validationSchemas";
 
 const Login = (props) => {
   const history = useHistory();
@@ -17,18 +16,6 @@ const Login = (props) => {
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
-  const [formErrors, setFormErrors] = useState("");
-
-  const formValidation = (obj) => {
-    loginSchema
-      .validate(obj)
-      .then(() => {
-        setFormErrors("");
-      })
-      .catch((err) => {
-        setFormErrors(err.errors[0]);
-      });
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +27,6 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formValidation(loginForm);
     props.userLogin(loginForm);
   };
 
@@ -63,9 +49,9 @@ const Login = (props) => {
       />
       <button onClick={handleSubmit}>Sign In</button>
       <div>
-        <p>{formErrors}</p>
+        <p>{props.errors}</p>
       </div>
-      {props.isFetching && formErrors === "" && <h3> Loading...</h3>}
+      {props.isFetching && props.errors === "" && <h3> Loading...</h3>}
     </div>
   );
 };
@@ -75,6 +61,7 @@ const mapStateToProps = (state) => {
     isFetching: state.userReducer.isFetching,
     userId: state.userReducer.userId,
     token: state.userReducer.token,
+    errors: state.userReducer.errors,
   };
 };
 
@@ -83,6 +70,7 @@ Login.propTypes = {
   userId: PropTypes.any,
   token: PropTypes.any,
   userLogin: PropTypes.func,
+  errors: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userLogin })(Login);

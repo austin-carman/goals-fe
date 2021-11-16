@@ -14,12 +14,7 @@ const initialState = {
   isFetching: false,
   token: null,
   userId: null,
-  errors: {
-    first_name: "",
-    last_name: "",
-    username: "",
-    password: "",
-  },
+  errors: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -34,6 +29,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         userId: action.payload.user_id,
+        errors: "",
       };
     case SEND_REGISTRATION_ERR:
       return {
@@ -59,11 +55,13 @@ const userReducer = (state = initialState, action) => {
         isFetching: false,
         token: action.payload.token,
         userId: action.payload.userId,
+        errors: "",
       };
     case VERIFY_USER_FAIL:
       return {
         ...state,
         isFetching: false,
+        errors: action.payload,
       };
     case VERIFY_USER_ERR:
       return {

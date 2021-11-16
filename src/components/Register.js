@@ -80,6 +80,7 @@ const Register = (props) => {
       <button onClick={handleSubmit}>Register</button>
       <div>
         <p>{formErrors}</p>
+        <p>{props.errors}</p>
       </div>
       {props.isFetching && formErrors === "" && <h3> Loading...</h3>}
     </div>
@@ -90,6 +91,7 @@ const mapStateToProps = (state) => {
   return {
     userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
+    errors: state.userReducer.errors,
   };
 };
 
@@ -97,6 +99,7 @@ Register.propTypes = {
   userRegister: PropTypes.func,
   userId: PropTypes.any,
   isFetching: PropTypes.any,
+  errors: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);
