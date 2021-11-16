@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
 import signUpSchema from "../schema/signUpSchema";
-// import * as yup from "yup";
 
 const Register = (props) => {
   const history = useHistory();
@@ -80,7 +79,7 @@ const Register = (props) => {
       />
       <button onClick={handleSubmit}>Register</button>
       <div>
-        <p>* {formErrors}</p>
+        <p>{formErrors}</p>
       </div>
     </div>
   );
@@ -90,7 +89,6 @@ const mapStateToProps = (state) => {
   return {
     userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
-    errors: state.userReducer.errors,
   };
 };
 
@@ -98,8 +96,6 @@ Register.propTypes = {
   userRegister: PropTypes.func,
   userId: PropTypes.any,
   isFetching: PropTypes.any,
-  errors: PropTypes.any,
-  formErrors: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);
