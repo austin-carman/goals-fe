@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
 import signUpSchema from "../schema/signUpSchema";
-import * as yup from "yup";
+// import * as yup from "yup";
 
 const Register = (props) => {
   const history = useHistory();
@@ -19,41 +19,32 @@ const Register = (props) => {
     password: "",
   };
 
-  const initialErrors = {
-    first_name: "",
-    last_name: "",
-    username: "",
-    password: "",
-  };
-
   const [registerForm, setRegisterForm] = useState(initialState);
-  const [formErrors, setFormErrors] = useState(initialErrors);
+  const [formErrors, setFormErrors] = useState("");
 
-  const formValidation = (name, value) => {
-    yup
-      .reach(signUpSchema, name)
-      .validate(value)
+  const formValidation = (obj) => {
+    signUpSchema
+      .validate(obj)
       .then(() => {
-        setFormErrors({ ...formErrors, [name]: "" });
+        setFormErrors("");
       })
       .catch((err) => {
-        setFormErrors({ ...formErrors, [name]: err.errors[0] });
+        setFormErrors(err.errors[0]);
       });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    formValidation(name, value);
     setRegisterForm({
       ...registerForm,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    formValidation(registerForm);
     props.userRegister(registerForm);
-    setRegisterForm(initialState);
   };
 
   return (
@@ -89,10 +80,7 @@ const Register = (props) => {
       />
       <button onClick={handleSubmit}>Register</button>
       <div>
-        <p>{formErrors.first_name}</p>
-        <p>{formErrors.last_name}</p>
-        <p>{formErrors.username}</p>
-        <p>{formErrors.password}</p>
+        <p>* {formErrors}</p>
       </div>
     </div>
   );
