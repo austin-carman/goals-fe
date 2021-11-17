@@ -29,11 +29,7 @@ export const userLogin = (login) => {
     axiosWithAuth()
       .post("https://goalmanager.herokuapp.com/api/user/login", login)
       .then((res) => {
-        if (!res.data.token) {
-          dispatch({ type: VERIFY_USER_FAIL, payload: res.data.message });
-        } else {
-          dispatch({ type: VERIFY_USER_SUCCESS, payload: res.data });
-        }
+        dispatch({ type: VERIFY_USER_SUCCESS, payload: res.data });
       })
       .catch((err) => {
         dispatch({ type: VERIFY_USER_ERR, payload: err });

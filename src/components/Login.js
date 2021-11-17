@@ -5,10 +5,7 @@ import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
 
 const Login = (props) => {
-  const history = useHistory();
-  useEffect(() => {
-    props.token && history.push(`/profile/${props.userId}`);
-  }, [props.token]);
+  const { isFetching, userId, token, errors, userLogin } = props;
 
   const initialState = {
     username: "",
@@ -17,17 +14,20 @@ const Login = (props) => {
 
   const [loginForm, setLoginForm] = useState(initialState);
 
+  const history = useHistory();
+
+  useEffect(() => {
+    token && history.push(`/profile/${userId}`);
+  }, [token]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLoginForm({
-      ...loginForm,
-      [name]: value,
-    });
+    setLoginForm({ ...loginForm, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.userLogin(loginForm);
+    userLogin(loginForm);
   };
 
   return (
@@ -49,9 +49,9 @@ const Login = (props) => {
       />
       <button onClick={handleSubmit}>Sign In</button>
       <div>
-        <p>{props.errors}</p>
+        <p>{errors}</p>
       </div>
-      {props.isFetching && props.errors === "" && <h3> Loading...</h3>}
+      {isFetching && errors === "" && <h3> Loading...</h3>}
     </div>
   );
 };
@@ -62,6 +62,7 @@ const mapStateToProps = (state) => {
     userId: state.userReducer.userId,
     token: state.userReducer.token,
     errors: state.userReducer.errors,
+    serverValidationMessage: state.userReducer.serverValidationMessage,
   };
 };
 
@@ -71,6 +72,7 @@ Login.propTypes = {
   token: PropTypes.any,
   userLogin: PropTypes.func,
   errors: PropTypes.string,
+  serverValidationMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userLogin })(Login);

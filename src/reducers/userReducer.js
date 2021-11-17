@@ -4,7 +4,6 @@ import {
   SEND_REGISTRATION_ERR,
   VERIFY_USER_START,
   VERIFY_USER_SUCCESS,
-  VERIFY_USER_FAIL,
   VERIFY_USER_ERR,
   USER_LOGOUT,
 } from "../actions/userActions";
@@ -52,25 +51,30 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
       };
-    case VERIFY_USER_SUCCESS:
-      localStorage.setItem("token", action.payload.token);
-      return {
-        ...state,
-        isFetching: false,
-        token: action.payload.token,
-        userId: action.payload.userId,
-        errors: "",
-      };
-    case VERIFY_USER_FAIL:
-      return {
-        ...state,
-        isFetching: false,
-        errors: action.payload,
-      };
+    case VERIFY_USER_SUCCESS: {
+      if (action.payload.token) {
+        localStorage.setItem("token", action.payload.token);
+        return {
+          ...state,
+          isFetching: false,
+          token: true,
+          userId: action.payload.userId,
+          errors: "",
+        };
+      } else {
+        return {
+          ...state,
+          isFetching: false,
+          errors: "",
+          serverValidationMessage: action.payload.message,
+        };
+      }
+    }
     case VERIFY_USER_ERR:
       return {
         ...state,
         isFetching: false,
+        errors: action.payload,
       };
     case USER_LOGOUT:
       return {
