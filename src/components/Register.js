@@ -109,7 +109,7 @@ const mapStateToProps = (state) => {
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  userId: PropTypes.any,
+  userId: PropTypes.number,
   isFetching: PropTypes.bool,
   errors: PropTypes.string,
   serverValidationMessage: PropTypes.string,
