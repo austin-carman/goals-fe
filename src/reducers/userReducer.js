@@ -25,7 +25,7 @@ const userReducer = (state = initialState, action) => {
         isFetching: true,
       };
     case SEND_REGISTRATION_SUCCESSFUL: {
-      if (action.payload.userId) {
+      if (action.payload.user_id) {
         return {
           ...state,
           isFetching: false,

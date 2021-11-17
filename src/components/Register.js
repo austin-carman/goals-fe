@@ -91,9 +91,9 @@ const Register = (props) => {
       />
       <button onClick={handleSubmit}>Register</button>
       <div>
-        <p>{formErrors}</p>
+        <p>{formErrors ? formErrors : serverValidationMessage}</p>
       </div>
-      {isFetching && formErrors === "" && <h3> Loading...</h3>}
+      {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );
 };
@@ -109,7 +109,7 @@ const mapStateToProps = (state) => {
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  userId: PropTypes.number,
+  userId: PropTypes.any,
   isFetching: PropTypes.bool,
   errors: PropTypes.string,
   serverValidationMessage: PropTypes.string,
