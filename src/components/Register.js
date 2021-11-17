@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
-  const { userRegister, userId, isFetching, errors } = props;
+  const { userRegister, userId, isFetching } = props;
 
   const initialState = {
     first_name: "",
@@ -83,7 +83,6 @@ const Register = (props) => {
       <button onClick={handleSubmit}>Register</button>
       <div>
         <p>{formErrors}</p>
-        <p>{errors}</p>
       </div>
       {isFetching && formErrors === "" && <h3> Loading...</h3>}
     </div>
