@@ -5,7 +5,14 @@ import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
 
 const Login = (props) => {
-  const { isFetching, userId, token, errors, userLogin } = props;
+  const {
+    isFetching,
+    userId,
+    token,
+    errors,
+    userLogin,
+    serverValidationMessage,
+  } = props;
 
   const initialState = {
     username: "",
@@ -30,6 +37,14 @@ const Login = (props) => {
     userLogin(loginForm);
   };
 
+  if (errors) {
+    return (
+      <h2>
+        We&apos;re currently experiencing an error. Sorry for the inconvenience.
+      </h2>
+    );
+  }
+
   return (
     <div>
       <h2>Sign In</h2>
@@ -49,9 +64,9 @@ const Login = (props) => {
       />
       <button onClick={handleSubmit}>Sign In</button>
       <div>
-        <p>{errors}</p>
+        <p>{serverValidationMessage}</p>
       </div>
-      {isFetching && errors === "" && <h3> Loading...</h3>}
+      {isFetching && <h3> Loading...</h3>}
     </div>
   );
 };
