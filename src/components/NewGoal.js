@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
@@ -11,7 +11,7 @@ const NewGoal = (props) => {
   };
   const [goal, setGoal] = useState(initialState);
   const history = useHistory();
-  const params = useParams();
+  const { userId } = useParams();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -25,10 +25,6 @@ const NewGoal = (props) => {
       newGoal.steps = newSteps;
       setGoal(newGoal);
     }
-  };
-
-  const handleCancel = () => {
-    history.goBack();
   };
 
   const handleAddStep = () => {
@@ -46,8 +42,8 @@ const NewGoal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    props.sendNewGoal(params.userId, newGoal);
-    !props.isFetching && history.push(`/profile/${params.userId}`);
+    props.sendNewGoal(userId, newGoal);
+    !props.isFetching && history.push(`/profile/${userId}`);
   };
 
   return (
@@ -89,7 +85,9 @@ const NewGoal = (props) => {
           );
         })}
       </form>
-      <button onClick={handleCancel}>Cancel</button>
+      <Link to={`/profile/${userId}`}>
+        <button>Cancel</button>
+      </Link>
       <button onClick={handleAddStep}>Add Step</button>
       {goal.steps.length > 0 && (
         <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
