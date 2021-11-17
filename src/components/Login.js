@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
+import { loginSchema } from "../schema/validationSchemas";
 
 const Login = (props) => {
   const {
@@ -20,6 +21,7 @@ const Login = (props) => {
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
+  const [formErrors, setFormErrors] = useState("");
 
   const history = useHistory();
 
@@ -32,8 +34,20 @@ const Login = (props) => {
     setLoginForm({ ...loginForm, [name]: value });
   };
 
+  const formValidation = (obj) => {
+    loginSchema
+      .validate(obj)
+      .then(() => {
+        setFormErrors("");
+      })
+      .catch((err) => {
+        setFormErrors(err.errors[0]);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    formValidation(loginForm);
     userLogin(loginForm);
   };
 
@@ -64,9 +78,9 @@ const Login = (props) => {
       />
       <button onClick={handleSubmit}>Sign In</button>
       <div>
-        <p>{serverValidationMessage}</p>
+        <p>{formErrors ? formErrors : serverValidationMessage}</p>
       </div>
-      {isFetching && <h3> Loading...</h3>}
+      {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );
 };

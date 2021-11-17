@@ -25,6 +25,14 @@ const Register = (props) => {
     userId && history.push(`/login`);
   }, [userId]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterForm({
+      ...registerForm,
+      [name]: value,
+    });
+  };
+
   const formValidation = (obj) => {
     signUpSchema
       .validate(obj)
@@ -34,14 +42,6 @@ const Register = (props) => {
       .catch((err) => {
         setFormErrors(err.errors[0]);
       });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegisterForm({
-      ...registerForm,
-      [name]: value,
-    });
   };
 
   const handleSubmit = async (e) => {
