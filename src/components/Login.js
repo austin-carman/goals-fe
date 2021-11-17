@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
-import { loginSchema } from "../schema/validationSchemas";
+import { loginSchema } from "../validation/validationSchemas";
 
 const Login = (props) => {
   const {
