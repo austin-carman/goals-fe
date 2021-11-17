@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
-  const { userRegister, userId, isFetching } = props;
+  const { userRegister, userId, isFetching, errors, serverValidationMessage } =
+    props;
 
   const initialState = {
     first_name: "",
@@ -48,6 +49,14 @@ const Register = (props) => {
     formValidation(registerForm);
     userRegister(registerForm);
   };
+
+  if (errors) {
+    return (
+      <h2>
+        We&apos;re currently experiencing an error. Sorry for the inconvenience.
+      </h2>
+    );
+  }
 
   return (
     <div>
@@ -94,14 +103,16 @@ const mapStateToProps = (state) => {
     userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
     errors: state.userReducer.errors,
+    serverValidationMessage: state.userReducer.serverValidationMessage,
   };
 };
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  userId: PropTypes.any,
-  isFetching: PropTypes.any,
+  userId: PropTypes.number,
+  isFetching: PropTypes.bool,
   errors: PropTypes.string,
+  serverValidationMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);
