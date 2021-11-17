@@ -30,6 +30,7 @@ const userReducer = (state = initialState, action) => {
           isFetching: false,
           userId: action.payload.user_id,
           errors: "",
+          serverValidationMessage: "",
         };
       } else {
         return {
@@ -60,6 +61,7 @@ const userReducer = (state = initialState, action) => {
           token: true,
           userId: action.payload.userId,
           errors: "",
+          serverValidationMessage: "",
         };
       } else {
         return {

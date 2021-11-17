@@ -26,7 +26,10 @@ const Login = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    token && history.push(`/profile/${userId}`);
+    if (token) {
+      setFormErrors("");
+      history.push(`/profile/${userId}`);
+    }
   }, [token]);
 
   const handleChange = (e) => {

@@ -22,7 +22,10 @@ const Register = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    userId && history.push(`/login`);
+    if (userId) {
+      formErrors("");
+      history.push(`/login`);
+    }
   }, [userId]);
 
   const handleChange = (e) => {
