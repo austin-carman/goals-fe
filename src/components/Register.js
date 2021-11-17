@@ -6,10 +6,7 @@ import PropTypes from "prop-types";
 import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
-  const history = useHistory();
-  useEffect(() => {
-    props.userId && history.push(`/login`);
-  }, [props.userId]);
+  const { userRegister, userId, isFetching, errors } = props;
 
   const initialState = {
     first_name: "",
@@ -20,6 +17,12 @@ const Register = (props) => {
 
   const [registerForm, setRegisterForm] = useState(initialState);
   const [formErrors, setFormErrors] = useState("");
+
+  const history = useHistory();
+
+  useEffect(() => {
+    userId && history.push(`/login`);
+  }, [userId]);
 
   const formValidation = (obj) => {
     signUpSchema
@@ -43,7 +46,7 @@ const Register = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formValidation(registerForm);
-    props.userRegister(registerForm);
+    userRegister(registerForm);
   };
 
   return (
@@ -80,9 +83,9 @@ const Register = (props) => {
       <button onClick={handleSubmit}>Register</button>
       <div>
         <p>{formErrors}</p>
-        <p>{props.errors}</p>
+        <p>{errors}</p>
       </div>
-      {props.isFetching && formErrors === "" && <h3> Loading...</h3>}
+      {isFetching && formErrors === "" && <h3> Loading...</h3>}
     </div>
   );
 };
