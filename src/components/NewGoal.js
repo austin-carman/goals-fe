@@ -3,15 +3,18 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
+import { newGoalSchema } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
-  const { isFetching, sendNewGoal } = props;
+  const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
 
   const initialState = {
     goal_title: "",
     steps: [],
   };
+
   const [goal, setGoal] = useState(initialState);
+  const [formErrors, setFormErrors] = useState("");
 
   const history = useHistory();
   const { userId } = useParams();
@@ -42,12 +45,33 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
+  const formValidation = (obj) => {
+    newGoalSchema
+      .validate(obj)
+      .then(() => {
+        setFormErrors("");
+        history.push(`/profile/${userId}`);
+      })
+      .catch((err) => {
+        setFormErrors(err.errors[0]);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
+    formValidation(goal);
     sendNewGoal(userId, newGoal);
-    !isFetching && history.push(`/profile/${userId}`);
+    // history.push(`/profile/${userId}`);
   };
+
+  if (error) {
+    return (
+      <h2>
+        We&apos;re currently experiencing an error. Sorry for the inconvenience.
+      </h2>
+    );
+  }
 
   return (
     <div>
@@ -98,6 +122,8 @@ const NewGoal = (props) => {
         </button>
       )}
       <button onClick={handleSubmit}>Submit</button>
+      <p>{formErrors ? formErrors : serverValidateMessage}</p>
+      {isFetching && <p>Loading...</p>}
     </div>
   );
 };
@@ -105,12 +131,16 @@ const NewGoal = (props) => {
 const mapStateToProps = (state) => {
   return {
     isFetching: state.goalsReducer.isFetching,
+    error: state.goalsReducer.error,
+    serverValidateMessage: state.goalsReducer.serverValidateMessage,
   };
 };
 
 NewGoal.propTypes = {
   isFetching: PropTypes.bool,
   sendNewGoal: PropTypes.func,
+  error: PropTypes.string,
+  serverValidateMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);
