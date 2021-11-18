@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
-// import { newGoalSchema } from "../validation/validationSchemas";
 import { newGoalSchema, newStepsSchema } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
@@ -47,7 +46,7 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
-  const goalValidation = (newGoal, newSteps) => {
+  const goalValidation = (newGoal) => {
     newGoalSchema
       .validate(newGoal)
       .then(() => {
@@ -56,25 +55,22 @@ const NewGoal = (props) => {
       .catch((err) => {
         setGoalErrors(err.errors[0]);
       });
-
-    if (newSteps.length > 0) {
+    newGoal.steps.forEach((step) => {
       newStepsSchema
-        .validate(newSteps[0])
+        .validate(step)
         .then(() => {
           setStepErrors("");
         })
         .catch((err) => {
           setStepErrors(err.errors[0]);
         });
-    }
+    });
   };
-
-  console.log("FORM: ", goalErrors, stepErrors);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    goalValidation(newGoal, newGoal.steps);
+    goalValidation(newGoal);
     sendNewGoal(userId, newGoal);
   };
 
