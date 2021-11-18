@@ -47,7 +47,7 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
-  const goalValidation = (newGoal) => {
+  const goalValidation = (newGoal, newSteps) => {
     newGoalSchema
       .validate(newGoal)
       .then(() => {
@@ -56,17 +56,17 @@ const NewGoal = (props) => {
       .catch((err) => {
         setGoalErrors(err.errors[0]);
       });
-  };
 
-  const stepValidation = (newSteps) => {
-    newStepsSchema
-      .validate(newSteps)
-      .then(() => {
-        setStepErrors("");
-      })
-      .catch((err) => {
-        setStepErrors(err.errors[0]);
-      });
+    if (newSteps.length > 0) {
+      newStepsSchema
+        .validate(newSteps[0])
+        .then(() => {
+          setStepErrors("");
+        })
+        .catch((err) => {
+          setStepErrors(err.errors[0]);
+        });
+    }
   };
 
   console.log("FORM: ", goalErrors, stepErrors);
@@ -74,8 +74,7 @@ const NewGoal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    goalValidation(goal);
-    goal.steps.length > 0 && stepValidation(goal.steps[0]);
+    goalValidation(newGoal, newGoal.steps);
     sendNewGoal(userId, newGoal);
   };
 
