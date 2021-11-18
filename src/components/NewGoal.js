@@ -5,11 +5,14 @@ import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 
 const NewGoal = (props) => {
+  const { isFetching, sendNewGoal } = props;
+
   const initialState = {
     goal_title: "",
     steps: [],
   };
   const [goal, setGoal] = useState(initialState);
+
   const history = useHistory();
   const { userId } = useParams();
 
@@ -42,8 +45,8 @@ const NewGoal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    props.sendNewGoal(userId, newGoal);
-    !props.isFetching && history.push(`/profile/${userId}`);
+    sendNewGoal(userId, newGoal);
+    !isFetching && history.push(`/profile/${userId}`);
   };
 
   return (
