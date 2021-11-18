@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
+// import { newGoalSchema } from "../validation/validationSchemas";
 import { newGoalSchema, newStepsSchema } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
@@ -12,13 +13,10 @@ const NewGoal = (props) => {
     goal_title: "",
     steps: [],
   };
-  const initialFormErrors = {
-    goalErr: "",
-    stepErr: "",
-  };
 
   const [goal, setGoal] = useState(initialState);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [goalErrors, setGoalErrors] = useState("");
+  const [stepErrors, setStepErrors] = useState("");
 
   // const history = useHistory();
   const { userId } = useParams();
@@ -49,36 +47,35 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
-  const formValidation = (newGoal) => {
+  const goalValidation = (newGoal) => {
     newGoalSchema
       .validate(newGoal)
       .then(() => {
-        setFormErrors({ ...formErrors, goalErr: "" });
+        setGoalErrors("");
       })
       .catch((err) => {
-        setFormErrors({ ...formErrors, goalErr: err.errors[0] });
+        setGoalErrors(err.errors[0]);
       });
-    if (goal.steps.length > 0) {
-      goal.steps.map((step) => {
-        newStepsSchema
-          .validate(step)
-          .then(() => {
-            setFormErrors({ ...formErrors, stepErr: "" });
-            // history.push(`/profile/${userId}`);
-          })
-          .catch((err) => {
-            setFormErrors({ ...formErrors, stepErr: err.errors[0] });
-          });
-      });
-    } else {
-      return;
-    }
   };
+
+  const stepValidation = (newSteps) => {
+    newStepsSchema
+      .validate(newSteps)
+      .then(() => {
+        setStepErrors("");
+      })
+      .catch((err) => {
+        setStepErrors(err.errors[0]);
+      });
+  };
+
+  console.log("FORM: ", goalErrors, stepErrors);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let newGoal = { ...goal };
-    formValidation(goal);
+    goalValidation(goal);
+    goal.steps.length > 0 && stepValidation(goal.steps[0]);
     sendNewGoal(userId, newGoal);
   };
 
@@ -139,8 +136,8 @@ const NewGoal = (props) => {
         </button>
       )}
       <button onClick={handleSubmit}>Submit</button>
-      <p>{formErrors.goalErr}</p>
-      <p>{formErrors.stepErr}</p>
+      <p>{goalErrors}</p>
+      <p>{stepErrors}</p>
       <p>{serverValidateMessage}</p>
       {isFetching && <p>Loading...</p>}
     </div>
