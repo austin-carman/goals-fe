@@ -62,7 +62,7 @@ const goalsReducer = (state = initialState, action) => {
           ...state,
           isFetching: false,
           error: "",
-          serverValidationMessage: action.payload,
+          serverValidationMessage: action.payload.message,
         };
       }
     }
