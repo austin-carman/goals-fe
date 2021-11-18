@@ -21,13 +21,13 @@ export const loginSchema = yup.object().shape({
 });
 
 export const newGoalSchema = yup.object().shape({
-  goal_title: yup.string().trim().required("Goal title is required"),
+  goal_title: yup.string().trim().required(),
 });
 
 export const newStepsSchema = yup.object().shape({
   step_title: yup
     .string()
     .trim()
-    .required("Step title is required for new steps"),
+    .required("Step title is required for all steps"),
   step_notes: yup.string().trim(),
 });

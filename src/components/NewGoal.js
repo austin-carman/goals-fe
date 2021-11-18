@@ -4,18 +4,25 @@ import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { newGoalSchema, newStepsSchema } from "../validation/validationSchemas";
+// import * as yup from "yup";
 
 const NewGoal = (props) => {
-  const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
+  const { isFetching, error, serverValidateMessage } = props;
 
   const initialState = {
     goal_title: "",
     steps: [],
   };
 
+  // const initialformErrors = {
+  //   goal_title: "",
+  //   step_title: "",
+  // };
+
   const [goal, setGoal] = useState(initialState);
   const [goalErrors, setGoalErrors] = useState("");
   const [stepErrors, setStepErrors] = useState("");
+  // const [formErrors, setFormErrors] = useState(initialformErrors);
 
   // const history = useHistory();
   const { userId } = useParams();
@@ -32,6 +39,24 @@ const NewGoal = (props) => {
       newGoal.steps = newSteps;
       setGoal(newGoal);
     }
+    // yup
+    //   .reach(newGoalSchema, "goal_title")
+    //   .validate(value)
+    //   .then(() => {
+    //     setFormErrors({ ...formErrors, goal_title: "" });
+    //   })
+    //   .catch((err) => {
+    //     setFormErrors({ ...formErrors, goal_title: err.errors[0] });
+    //   });
+    // yup
+    //   .reach(newStepsSchema, "step_title")
+    //   .validate(value)
+    //   .then(() => {
+    //     setFormErrors({ ...formErrors, step_title: "" });
+    //   })
+    //   .catch((err) => {
+    //     setFormErrors({ ...formErrors, step_title: err.errors[0] });
+    //   });
   };
 
   const handleAddStep = () => {
@@ -60,6 +85,9 @@ const NewGoal = (props) => {
         .validate(step)
         .then(() => {
           setStepErrors("");
+          if (!goalErrors && !stepErrors) {
+            console.log("NO ERRRRRRRS");
+          }
         })
         .catch((err) => {
           setStepErrors(err.errors[0]);
@@ -71,7 +99,7 @@ const NewGoal = (props) => {
     e.preventDefault();
     let newGoal = { ...goal };
     goalValidation(newGoal);
-    sendNewGoal(userId, newGoal);
+    // sendNewGoal(userId, newGoal);
   };
 
   if (error) {
