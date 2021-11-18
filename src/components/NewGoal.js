@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
-import { newGoalSchema } from "../validation/validationSchemas";
+import { newGoalSchema, newStepsSchema } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
   const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
@@ -12,11 +12,15 @@ const NewGoal = (props) => {
     goal_title: "",
     steps: [],
   };
+  const initialFormErrors = {
+    goalErr: "",
+    stepErr: "",
+  };
 
   const [goal, setGoal] = useState(initialState);
-  const [formErrors, setFormErrors] = useState("");
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
 
-  const history = useHistory();
+  // const history = useHistory();
   const { userId } = useParams();
 
   const handleChange = (e, index) => {
@@ -45,16 +49,30 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
-  const formValidation = (obj) => {
+  const formValidation = (newGoal) => {
     newGoalSchema
-      .validate(obj)
+      .validate(newGoal)
       .then(() => {
-        setFormErrors("");
-        history.push(`/profile/${userId}`);
+        setFormErrors({ ...formErrors, goalErr: "" });
       })
       .catch((err) => {
-        setFormErrors(err.errors[0]);
+        setFormErrors({ ...formErrors, goalErr: err.errors[0] });
       });
+    if (goal.steps.length > 0) {
+      goal.steps.map((step) => {
+        newStepsSchema
+          .validate(step)
+          .then(() => {
+            setFormErrors({ ...formErrors, stepErr: "" });
+            // history.push(`/profile/${userId}`);
+          })
+          .catch((err) => {
+            setFormErrors({ ...formErrors, stepErr: err.errors[0] });
+          });
+      });
+    } else {
+      return;
+    }
   };
 
   const handleSubmit = (e) => {
@@ -62,7 +80,6 @@ const NewGoal = (props) => {
     let newGoal = { ...goal };
     formValidation(goal);
     sendNewGoal(userId, newGoal);
-    // history.push(`/profile/${userId}`);
   };
 
   if (error) {
@@ -122,7 +139,9 @@ const NewGoal = (props) => {
         </button>
       )}
       <button onClick={handleSubmit}>Submit</button>
-      <p>{formErrors ? formErrors : serverValidateMessage}</p>
+      <p>{formErrors.goalErr}</p>
+      <p>{formErrors.stepErr}</p>
+      <p>{serverValidateMessage}</p>
       {isFetching && <p>Loading...</p>}
     </div>
   );
