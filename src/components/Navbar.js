@@ -15,7 +15,7 @@ const Navbar = (props) => {
       <nav className="navbar">
         <h2>Goal Tracker</h2>
         <div className="links-container">
-          {!props.token ? (
+          {!props.userId ? (
             <div>
               <Link to="/" className="navlink">
                 Home
