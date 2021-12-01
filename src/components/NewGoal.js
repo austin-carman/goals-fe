@@ -3,10 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
-import { newGoalSchema, newStepsSchema } from "../validation/validationSchemas";
-// import * as yup from "yup";
 
 const NewGoal = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
 
   const initialState = {
@@ -15,10 +14,7 @@ const NewGoal = (props) => {
   };
 
   const [goal, setGoal] = useState(initialState);
-  const [goalErrors, setGoalErrors] = useState("");
-  const [stepErrors, setStepErrors] = useState("");
-
-  console.log("ERRRS: ", goalErrors, stepErrors);
+  const [formErrors, setFormErrors] = useState(null);
 
   // const history = useHistory();
   const { userId } = useParams();
@@ -34,15 +30,6 @@ const NewGoal = (props) => {
       newSteps[index][name] = value;
       newGoal.steps = newSteps;
       setGoal(newGoal);
-      // yup
-      //   .reach(newStepsSchema, "step_title")
-      //   .validate(value)
-      //   .then(() => {
-      //     setStepErrors("");
-      //   })
-      //   .catch((err) => {
-      //     setStepErrors(err.errors[0]);
-      //   });
     }
   };
 
@@ -59,44 +46,32 @@ const NewGoal = (props) => {
   };
 
   const goalValidation = async (newGoal) => {
-    if (newGoal.steps.length > 0) {
-      await newGoal.steps.forEach((step) => {
-        newStepsSchema
-          .validate(step)
-          .then(() => {
-            setStepErrors("");
-          })
-          .catch((err) => {
-            setStepErrors(err.errors[0]);
-            return;
-          });
-      });
+    const newSteps = newGoal.steps;
+    const errs = {};
+    if (newGoal.goal_title.trim() === "") {
+      return "Goal Title is required";
     }
-    await newGoalSchema
-      .validate(newGoal)
-      .then(() => {
-        setGoalErrors("");
-      })
-      .catch((err) => {
-        setGoalErrors(err.errors[0]);
-      });
+    newSteps.forEach((step, index) => {
+      if (step.step_title.trim() === "") {
+        errs[index + 1] = "Step Title is required fool";
+      }
+    });
 
-    !goalErrors && !stepErrors && sendNewGoal(userId, newGoal);
+    for (const step in errs) {
+      return `Step ${step} is missing step title. Step title is required for all steps`;
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let newGoal = { ...goal };
-    goalValidation(newGoal);
-    // sendNewGoal(userId, newGoal);
+    const validationErrors = await goalValidation(goal);
+    console.log(validationErrors);
+    setFormErrors(validationErrors);
+    // !validationErrors && sendNewGoal(userId, newGoal)
   };
 
   if (error) {
-    return (
-      <h2>
-        We&apos;re currently experiencing an error. Sorry for the inconvenience.
-      </h2>
-    );
+    return <h2>We&apos;re currently experiencing an error.</h2>;
   }
 
   return (
@@ -148,8 +123,7 @@ const NewGoal = (props) => {
         </button>
       )}
       <button onClick={handleSubmit}>Submit</button>
-      <p>{goalErrors}</p>
-      <p>{stepErrors}</p>
+      <p>{formErrors}</p>
       <p>{serverValidateMessage}</p>
       {isFetching && <p>Loading...</p>}
     </div>
@@ -167,7 +141,7 @@ const mapStateToProps = (state) => {
 NewGoal.propTypes = {
   isFetching: PropTypes.bool,
   sendNewGoal: PropTypes.func,
-  error: PropTypes.string,
+  error: PropTypes.any,
   serverValidateMessage: PropTypes.string,
 };
 
