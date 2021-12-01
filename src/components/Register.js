@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
-  const { userRegister, userId, isFetching, errors } = props;
+  const { userRegister, userId, isFetching, errors, serverValidationMessage } =
+    props;
 
   const initialState = {
     first_name: "",
@@ -21,8 +22,19 @@ const Register = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    userId && history.push(`/login`);
+    if (userId) {
+      formErrors("");
+      history.push(`/login`);
+    }
   }, [userId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterForm({
+      ...registerForm,
+      [name]: value,
+    });
+  };
 
   const formValidation = (obj) => {
     signUpSchema
@@ -35,19 +47,19 @@ const Register = (props) => {
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegisterForm({
-      ...registerForm,
-      [name]: value,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     formValidation(registerForm);
     userRegister(registerForm);
   };
+
+  if (errors) {
+    return (
+      <h2>
+        We&apos;re currently experiencing an error. Sorry for the inconvenience.
+      </h2>
+    );
+  }
 
   return (
     <div>
@@ -82,10 +94,9 @@ const Register = (props) => {
       />
       <button onClick={handleSubmit}>Register</button>
       <div>
-        <p>{formErrors}</p>
-        <p>{errors}</p>
+        <p>{formErrors ? formErrors : serverValidationMessage}</p>
       </div>
-      {isFetching && formErrors === "" && <h3> Loading...</h3>}
+      {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );
 };
@@ -95,14 +106,16 @@ const mapStateToProps = (state) => {
     userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
     errors: state.userReducer.errors,
+    serverValidationMessage: state.userReducer.serverValidationMessage,
   };
 };
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  userId: PropTypes.any,
-  isFetching: PropTypes.any,
+  userId: PropTypes.number,
+  isFetching: PropTypes.bool,
   errors: PropTypes.string,
+  serverValidationMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);

@@ -4,7 +4,7 @@ import {
   FETCH_GOALS_FAIL,
   NEW_GOAL_START,
   NEW_GOAL_SUCCESS,
-  NEW_GOAL_FAIL,
+  NEW_GOAL_ERR,
   DELETE_GOAL_START,
   DELETE_GOAL_SUCCESS,
   DELETE_GOAL_FAIL,
@@ -19,15 +19,8 @@ import {
 const initialState = {
   goals: [],
   isFetching: false,
-  error: {
-    username: "",
-    password: "",
-    goal_title: "",
-    goal_completed: "",
-    step_title: "",
-    step_notes: "",
-    step_completed: "",
-  },
+  error: "",
+  serverValidationMessage: "",
 };
 
 const goalsReducer = (state = initialState, action) => {
@@ -55,14 +48,25 @@ const goalsReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
       };
-    case NEW_GOAL_SUCCESS:
-      return {
-        ...state,
-        goals: [...state.goals, action.payload],
-        isFetching: false,
-        error: "",
-      };
-    case NEW_GOAL_FAIL:
+    case NEW_GOAL_SUCCESS: {
+      if (action.payload.goal_id) {
+        return {
+          ...state,
+          goals: [...state.goals, action.payload],
+          isFetching: false,
+          error: "",
+          serverValidationMessage: "",
+        };
+      } else {
+        return {
+          ...state,
+          isFetching: false,
+          error: "",
+          serverValidationMessage: action.payload.message,
+        };
+      }
+    }
+    case NEW_GOAL_ERR:
       return {
         ...state,
         isFetching: false,

@@ -4,7 +4,7 @@ export const FETCH_GOALS_SUCCESS = "FETCH_GOALS_SUCCESS";
 export const FETCH_GOALS_FAIL = "FETCH_GOALS_FAIL";
 export const NEW_GOAL_START = "NEW_GOAL_START";
 export const NEW_GOAL_SUCCESS = "NEW_GOAL_SUCCESS";
-export const NEW_GOAL_FAIL = "NEW_GOAL_FAIL";
+export const NEW_GOAL_ERR = "NEW_GOAL_ERR";
 export const DELETE_GOAL_START = "DELETE_GOAL_START";
 export const DELETE_GOAL_SUCCESS = "DELETE_GOAL_SUCCESS";
 export const DELETE_GOAL_FAIL = "DELETE_GOAL_FAIL";
@@ -38,14 +38,10 @@ export const sendNewGoal = (userId, newGoal) => {
         newGoal
       )
       .then((res) => {
-        if (res.data.goal_id) {
-          dispatch({ type: NEW_GOAL_SUCCESS, payload: res.data });
-        } else {
-          dispatch({ type: NEW_GOAL_FAIL, payload: res.data.message });
-        }
+        dispatch({ type: NEW_GOAL_SUCCESS, payload: res.data });
       })
       .catch((err) => {
-        dispatch({ type: NEW_GOAL_FAIL, payload: err });
+        dispatch({ type: NEW_GOAL_ERR, payload: err });
       });
   };
 };

@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 
 const NewGoal = (props) => {
+  const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
+
   const initialState = {
     goal_title: "",
     steps: [],
   };
+
   const [goal, setGoal] = useState(initialState);
+  const [formErrors, setFormErrors] = useState(null);
+
   const history = useHistory();
   const { userId } = useParams();
 
@@ -39,12 +44,38 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
+  const goalValidation = async (newGoal) => {
+    const newSteps = newGoal.steps;
+    const stepTitleErrors = {};
+    if (newGoal.goal_title.trim() === "") {
+      return "Goal Title is required";
+    }
+    newSteps.forEach((step, index) => {
+      if (step.step_title.trim() === "") {
+        stepTitleErrors[index + 1] = "Step Title is required fool";
+      }
+    });
+    for (const stepNumber in stepTitleErrors) {
+      return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newGoal = { ...goal };
-    props.sendNewGoal(userId, newGoal);
-    !props.isFetching && history.push(`/profile/${userId}`);
+    goalValidation(goal)
+      .then((validationErrors) => {
+        setFormErrors(validationErrors);
+        if (!validationErrors) {
+          sendNewGoal(userId, goal);
+          history.push(`/profile/${userId}`);
+        }
+      })
+      .catch((err) => console.log(err));
   };
+
+  if (error) {
+    return <h2>We&apos;re currently experiencing an error.</h2>;
+  }
 
   return (
     <div>
@@ -95,6 +126,9 @@ const NewGoal = (props) => {
         </button>
       )}
       <button onClick={handleSubmit}>Submit</button>
+      <p>{formErrors}</p>
+      <p>{serverValidateMessage}</p>
+      {isFetching && <p>Loading...</p>}
     </div>
   );
 };
@@ -102,12 +136,16 @@ const NewGoal = (props) => {
 const mapStateToProps = (state) => {
   return {
     isFetching: state.goalsReducer.isFetching,
+    error: state.goalsReducer.error,
+    serverValidateMessage: state.goalsReducer.serverValidateMessage,
   };
 };
 
 NewGoal.propTypes = {
   isFetching: PropTypes.bool,
   sendNewGoal: PropTypes.func,
+  error: PropTypes.any,
+  serverValidateMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);
