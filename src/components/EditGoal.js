@@ -19,6 +19,7 @@ const EditGoal = (props) => {
   };
 
   const [goal, setGoal] = useState(initialState);
+  const [formErrors, setFormErrors] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toDelete, setToDelete] = useState(null);
 
@@ -46,11 +47,33 @@ const EditGoal = (props) => {
     setGoal(userGoal);
   };
 
-  const handleSave = () => {
-    const editedGoal = { ...goal };
-    editedGoal.steps = [...goal.steps.filter((step) => step.step_title !== "")];
-    props.editUserGoal(params.goalId, editedGoal);
-    history.goBack();
+  const goalValidation = async (editedGoal) => {
+    const editedSteps = editedGoal.steps;
+    const stepTitleErrors = {};
+    if (editedGoal.goal_title.trim() === "") {
+      return "Goal Title is required";
+    }
+    editedSteps.forEach((step, index) => {
+      if (step.step_title.trim() === "") {
+        stepTitleErrors[index + 1] = "Step Title is required fool";
+      }
+    });
+    for (const stepNumber in stepTitleErrors) {
+      return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
+    }
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    goalValidation(goal)
+      .then((validationErrors) => {
+        setFormErrors(validationErrors);
+        if (!validationErrors) {
+          props.editUserGoal(params.goalId, goal);
+          history.goBack();
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleDelete = (e) => {
@@ -136,6 +159,7 @@ const EditGoal = (props) => {
           Delete
         </button>
       </div>
+      <p>{formErrors}</p>
       {isModalOpen ? (
         <DeleteModal
           isModalOpen={isModalOpen}
