@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 
 const NewGoal = (props) => {
-  // eslint-disable-next-line no-unused-vars
   const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
 
   const initialState = {
@@ -16,7 +15,7 @@ const NewGoal = (props) => {
   const [goal, setGoal] = useState(initialState);
   const [formErrors, setFormErrors] = useState(null);
 
-  // const history = useHistory();
+  const history = useHistory();
   const { userId } = useParams();
 
   const handleChange = (e, index) => {
@@ -47,27 +46,31 @@ const NewGoal = (props) => {
 
   const goalValidation = async (newGoal) => {
     const newSteps = newGoal.steps;
-    const errs = {};
+    const stepTitleErrors = {};
     if (newGoal.goal_title.trim() === "") {
       return "Goal Title is required";
     }
     newSteps.forEach((step, index) => {
       if (step.step_title.trim() === "") {
-        errs[index + 1] = "Step Title is required fool";
+        stepTitleErrors[index + 1] = "Step Title is required fool";
       }
     });
-
-    for (const step in errs) {
-      return `Step ${step} is missing step title. Step title is required for all steps`;
+    for (const stepNumber in stepTitleErrors) {
+      return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = await goalValidation(goal);
-    console.log(validationErrors);
-    setFormErrors(validationErrors);
-    // !validationErrors && sendNewGoal(userId, newGoal)
+    goalValidation(goal)
+      .then((validationErrors) => {
+        setFormErrors(validationErrors);
+        if (!validationErrors) {
+          sendNewGoal(userId, goal);
+          history.push(`/profile/${userId}`);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   if (error) {
