@@ -89,6 +89,7 @@ const EditGoal = (props) => {
 
   return (
     <div>
+      <h2>Edit Goal</h2>
       <form>
         <label>
           Goal Title
