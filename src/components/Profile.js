@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <div>
       <Link to={`/new-goal/${userId}`}>
-        <button>New Goal</button>
+        <button>Create New Goal</button>
       </Link>
       <GoalList />
     </div>
