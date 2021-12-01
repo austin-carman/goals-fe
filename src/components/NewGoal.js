@@ -3,6 +3,7 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
+import { goalValidation } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
   const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
@@ -44,21 +45,21 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
-  const goalValidation = async (newGoal) => {
-    const newSteps = newGoal.steps;
-    const stepTitleErrors = {};
-    if (newGoal.goal_title.trim() === "") {
-      return "Goal Title is required";
-    }
-    newSteps.forEach((step, index) => {
-      if (step.step_title.trim() === "") {
-        stepTitleErrors[index + 1] = "Step Title is required fool";
-      }
-    });
-    for (const stepNumber in stepTitleErrors) {
-      return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
-    }
-  };
+  // const goalValidation = async (newGoal) => {
+  //   const newSteps = newGoal.steps;
+  //   const stepTitleErrors = {};
+  //   if (newGoal.goal_title.trim() === "") {
+  //     return "Goal Title is required";
+  //   }
+  //   newSteps.forEach((step, index) => {
+  //     if (step.step_title.trim() === "") {
+  //       stepTitleErrors[index + 1] = "Step Title is required fool";
+  //     }
+  //   });
+  //   for (const stepNumber in stepTitleErrors) {
+  //     return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

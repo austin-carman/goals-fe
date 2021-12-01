@@ -5,6 +5,7 @@ import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { removeStep } from "../utils/helperFunctions";
+import { goalValidation } from "../validation/validationSchemas";
 
 const EditGoal = (props) => {
   const history = useHistory();
@@ -47,21 +48,21 @@ const EditGoal = (props) => {
     setGoal(userGoal);
   };
 
-  const goalValidation = async (editedGoal) => {
-    const editedSteps = editedGoal.steps;
-    const stepTitleErrors = {};
-    if (editedGoal.goal_title.trim() === "") {
-      return "Goal Title is required";
-    }
-    editedSteps.forEach((step, index) => {
-      if (step.step_title.trim() === "") {
-        stepTitleErrors[index + 1] = "Step Title is required fool";
-      }
-    });
-    for (const stepNumber in stepTitleErrors) {
-      return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
-    }
-  };
+  // const goalValidation = async (editedGoal) => {
+  //   const editedSteps = editedGoal.steps;
+  //   const stepTitleErrors = {};
+  //   if (editedGoal.goal_title.trim() === "") {
+  //     return "Goal Title is required";
+  //   }
+  //   editedSteps.forEach((step, index) => {
+  //     if (step.step_title.trim() === "") {
+  //       stepTitleErrors[index + 1] = "Step Title is required fool";
+  //     }
+  //   });
+  //   for (const stepNumber in stepTitleErrors) {
+  //     return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
+  //   }
+  // };
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -77,7 +78,6 @@ const EditGoal = (props) => {
   };
 
   const handleDelete = (e) => {
-    console.log(e.target.id);
     setToDelete(e.target.id);
     if (e.target.id === "removeStep") {
       const updatedGoal = removeStep(goal);

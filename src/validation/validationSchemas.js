@@ -19,3 +19,19 @@ export const loginSchema = yup.object().shape({
   username: yup.string().trim().required("username is required"),
   password: yup.string().trim().required("password is required"),
 });
+
+export const goalValidation = async (goal) => {
+  const steps = goal.steps;
+  const stepTitleErrors = {};
+  if (goal.goal_title.trim() === "") {
+    return "Goal Title is required";
+  }
+  steps.forEach((step, index) => {
+    if (step.step_title.trim() === "") {
+      stepTitleErrors[index + 1] = "Step Title is required fool";
+    }
+  });
+  for (const stepNumber in stepTitleErrors) {
+    return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
+  }
+};
