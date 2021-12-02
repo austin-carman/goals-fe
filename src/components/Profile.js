@@ -7,10 +7,9 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Profile Page</h2>
-      <p>Info about user/profile</p>
+      <h2>My Goals</h2>
       <Link to={`/new-goal/${userId}`}>
-        <button>New Goal</button>
+        <button>Create New Goal</button>
       </Link>
       <GoalList />
     </div>

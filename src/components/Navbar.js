@@ -15,28 +15,15 @@ const Navbar = (props) => {
       <nav className="navbar">
         <h2>Goal Tracker</h2>
         <div className="links-container">
-          {!props.token ? (
-            <div>
-              <Link to="/" className="navlink">
-                Home
-              </Link>
-              <Link to="/login" className="navlink">
-                Sign In
-              </Link>
-              <Link to="/register" className="navlink">
-                Create Account
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <Link to={`/profile/${props.userId}`} className="navlink">
-                Profile
-              </Link>
-              <Link onClick={handleSignOut} to="/">
-                Logout
-              </Link>
-            </div>
-          )}
+          <Link to="/login" className="navlink">
+            Sign In
+          </Link>
+          <Link to="/register" className="navlink">
+            Create Account
+          </Link>
+          <Link onClick={handleSignOut} to="/" className="navlink">
+            Logout
+          </Link>
         </div>
       </nav>
     </header>

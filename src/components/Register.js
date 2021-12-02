@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
@@ -93,6 +93,8 @@ const Register = (props) => {
         placeholder="password"
       />
       <button onClick={handleSubmit}>Register</button>
+      <p>Already have an account?</p>
+      <Link to="/login">Sign In</Link>
       <div>
         <p>{formErrors ? formErrors : serverValidationMessage}</p>
       </div>

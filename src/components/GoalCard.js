@@ -19,17 +19,13 @@ const GoalCard = (props) => {
     <div>
       <h2 className="goal-title">{goal.goal_title}</h2>
       <button onClick={() => handleEdit(index)}>Edit</button>
-
       {goal.steps.map((step, index) => {
         stepNumber += 1;
-
         return (
           <div key={`${step.step_id}-${index}`}>
-            {step.step_title ? (
-              <h3 className="step-title">
-                Step {stepNumber}: {step.step_title}
-              </h3>
-            ) : null}
+            <h3 className="step-title">
+              Step {stepNumber}: {step.step_title}
+            </h3>
             {step.step_notes ? (
               <p className="step_notes">Notes: {step.step_notes}</p>
             ) : null}
