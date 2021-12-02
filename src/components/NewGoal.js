@@ -64,6 +64,10 @@ const NewGoal = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   if (error) {
     return <h2>We&apos;re currently experiencing an error.</h2>;
   }
@@ -71,65 +75,57 @@ const NewGoal = (props) => {
   return (
     <div className="new-goal-container">
       <h2>New Goal</h2>
-      <form>
-        <label>
-          Goal Title:
+      <form onSubmit={onSubmit}>
+        <label className="new-goal-title">
+          Goal:{" "}
           <input
+            className="new-goal-title input"
             type="text"
             name="goal_title"
             value={goal.goal_title}
             onChange={handleChange}
+            placeholder="Goal Title"
           />
         </label>
         {goal.steps.map((step, index) => {
           return (
-            <div key={`${step}-${index}`}>
-              <label>
-                Step {index + 1}:
+            <div className="new-steps-container" key={`${step}-${index}`}>
+              <label className="new-step-label">Step {index + 1}: </label>
+              <div className="new-step-inputs-container">
                 <input
+                  className="new-step-input"
                   type="text"
                   name="step_title"
                   value={step.step_title}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
-              </label>
-              <label>
-                <input
+                <textarea
+                  className="new-step-input"
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
-              </label>
+              </div>
+              <button
+                className="remove-step-buttons"
+                onClick={() => handleRemoveStep(index)}
+              >
+                Remove Step
+              </button>
             </div>
           );
         })}
+        <button className="add-step-button" onClick={handleAddStep}>
+          Add Step
+        </button>
       </form>
-      <p>{formErrors}</p>
-      <div className="new-goal-buttons-container">
-        <div className="new-goal-step-buttons-container">
-          <button className="new-goal-buttons" onClick={handleAddStep}>
-            Add Step
-          </button>
-          {goal.steps.length > 0 && (
-            <button
-              className="new-goal-buttons"
-              onClick={() => handleRemoveStep(goal.steps.length - 1)}
-            >
-              Remove Step
-            </button>
-          )}
-        </div>
-        <div className="new-goal-form-buttons-container">
-          <button className="new-goal-buttons" onClick={handleCancel}>
-            Cancel
-          </button>
-          <button className="new-goal-buttons" onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
+      <p className="new-goal-errors">{formErrors}</p>
+      <div className="submit-cancel-container">
+        <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleSubmit}>Submit</button>
       </div>
       {isFetching && <p>Loading...</p>}
     </div>
