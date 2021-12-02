@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import Register from "./components/Register";
 import NewGoal from "./components/NewGoal";
 import EditGoal from "./components/EditGoal";
+import "./App.css";
 
 function App() {
   return (
