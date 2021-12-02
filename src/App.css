@@ -146,6 +146,10 @@ h3{
   margin: auto;
   text-align: center;
 }
+.new-goal-container button {
+  height: 5vh;
+  padding: 1% 2%;
+}
 .new-goal-form {
   display: flex;
   flex-direction: column;
@@ -174,21 +178,7 @@ h3{
   padding: 2%;
 }
 .remove-step-buttons {
-  height: 5vh;
   align-self: flex-start;
-  padding: 1% 2%;
-}
-.add-step-button {
-  height: 5vh;
-  padding: 1% 2%;
-}
-.cancel-submit-container {
-  margin-bottom: 2%;
-}
-.cancel-submit-buttons {
-  height: 5vh;
-  padding: 1% 2%;
-  margin: 2%;
 }
 textarea {
   height: 15vh;

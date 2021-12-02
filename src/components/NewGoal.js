@@ -118,17 +118,17 @@ const NewGoal = (props) => {
             </div>
           );
         })}
-        <button className="add-step-button" onClick={handleAddStep}>
-          Add Step
-        </button>
       </form>
       <p className="new-goal-errors">{formErrors}</p>
-      <div className="cancel-submit-container">
-        <button className="cancel-submit-buttons" onClick={handleCancel}>
-          Cancel
+      <div className="new-goal-buttons-container">
+        <button className="new-goal-form-buttons" onClick={handleAddStep}>
+          Add Step
         </button>
-        <button className="cancel-submit-buttons" onClick={handleSubmit}>
+        <button className="new-goal-form-buttons" onClick={handleSubmit}>
           Save
+        </button>
+        <button className="new-goal-form-buttons" onClick={handleCancel}>
+          Cancel
         </button>
       </div>
       {isFetching && <p>Loading...</p>}
