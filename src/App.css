@@ -149,6 +149,7 @@ h3{
 .new-goal-container button {
   height: 5vh;
   padding: 1% 2%;
+  border-radius: 10px;
 }
 .new-goal-form {
   display: flex;
@@ -166,13 +167,11 @@ h3{
   justify-content: center;
   margin: 2% auto;
 }
-.new-steps-label {
-  margin-right: 1%;
-}
 .new-step-inputs-container {
   display: flex;
   flex-direction: column;
   width: 50%;
+  margin: 0 1%;
 }
 .new-step-input {
   padding: 2%;
@@ -183,4 +182,7 @@ h3{
 textarea {
   height: 15vh;
   resize: none;
+}
+.new-goal-save-button {
+  margin: 0% 1% 10%;
 }
