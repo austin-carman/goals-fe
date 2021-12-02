@@ -16,13 +16,20 @@ const GoalCard = (props) => {
   goal.steps = sortedSteps;
 
   return (
-    <div>
+    <div
+      className={goal.goal_completed ? "completed-goals" : "unfinished-goals"}
+    >
       <h2 className="goal-title">{goal.goal_title}</h2>
       <button onClick={() => handleEdit(index)}>Edit</button>
       {goal.steps.map((step, index) => {
         stepNumber += 1;
         return (
-          <div key={`${step.step_id}-${index}`}>
+          <div
+            key={`${step.step_id}-${index}`}
+            className={
+              step.step_completed ? "completed-steps" : "unfinished-steps"
+            }
+          >
             <h3 className="step-title">
               Step {stepNumber}: {step.step_title}
             </h3>
