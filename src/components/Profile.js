@@ -6,10 +6,10 @@ const Profile = () => {
   const { userId } = useParams();
 
   return (
-    <div>
+    <div className="profile-content">
       <h2>My Goals</h2>
       <Link to={`/new-goal/${userId}`}>
-        <button>Create New Goal</button>
+        <button id="new-goal-button">Create New Goal</button>
       </Link>
       <GoalList />
     </div>

@@ -38,9 +38,10 @@ const GoalCard = (props) => {
                 : "unfinished-steps goal-steps"
             }
           >
-            <h3 className="step-title">
-              Step {stepNumber}: {step.step_title}
-            </h3>
+            <div className="step-title-container">
+              <h3 className="step-number">Step {stepNumber}:</h3>
+              <h3 className="step-title">{step.step_title}</h3>
+            </div>
             {step.step_notes ? (
               <p className="step-notes">Notes: {step.step_notes}</p>
             ) : null}
