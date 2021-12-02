@@ -69,7 +69,7 @@ h3{
 
 /* Navbar */
 .navbar-header {
-  margin-bottom: 5%;
+  margin-bottom: 10%;
 }
 .navbar {
   display: flex;
@@ -138,4 +138,29 @@ h3{
 .step-notes {
   width: 90%;
   margin: auto;
+}
+
+/* New Goal */
+.new-goal-container {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+.new-goal-buttons-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 5% auto;
+  justify-content: center;
+  align-items: center;
+}
+.new-goal-step-buttons-container {
+  width: 100%;
+}
+.new-goal-form-buttons-container {
+  width: 100%;
+}
+.new-goal-buttons {
+  width: 50%;
+  padding: 2%;
 }

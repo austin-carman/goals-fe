@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
 
   const initialState = {
@@ -33,6 +34,10 @@ const NewGoal = (props) => {
     }
   };
 
+  const handleCancel = () => {
+    history.push(`/profile/${userId}`);
+  };
+
   const handleAddStep = () => {
     let newGoal = { ...goal };
     newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
@@ -42,6 +47,7 @@ const NewGoal = (props) => {
   const handleRemoveStep = (index) => {
     let newGoal = { ...goal };
     newGoal.steps.splice(index, 1);
+    setFormErrors("");
     setGoal(newGoal);
   };
 
@@ -63,7 +69,7 @@ const NewGoal = (props) => {
   }
 
   return (
-    <div>
+    <div className="new-goal-container">
       <h2>New Goal</h2>
       <form>
         <label>
@@ -101,18 +107,30 @@ const NewGoal = (props) => {
           );
         })}
       </form>
-      <Link to={`/profile/${userId}`}>
-        <button>Cancel</button>
-      </Link>
-      <button onClick={handleAddStep}>Add Step</button>
-      {goal.steps.length > 0 && (
-        <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
-          Remove Step
-        </button>
-      )}
-      <button onClick={handleSubmit}>Submit</button>
       <p>{formErrors}</p>
-      <p>{serverValidateMessage}</p>
+      <div className="new-goal-buttons-container">
+        <div className="new-goal-step-buttons-container">
+          <button className="new-goal-buttons" onClick={handleAddStep}>
+            Add Step
+          </button>
+          {goal.steps.length > 0 && (
+            <button
+              className="new-goal-buttons"
+              onClick={() => handleRemoveStep(goal.steps.length - 1)}
+            >
+              Remove Step
+            </button>
+          )}
+        </div>
+        <div className="new-goal-form-buttons-container">
+          <button className="new-goal-buttons" onClick={handleCancel}>
+            Cancel
+          </button>
+          <button className="new-goal-buttons" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+      </div>
       {isFetching && <p>Loading...</p>}
     </div>
   );
