@@ -142,25 +142,55 @@ h3{
 
 /* New Goal */
 .new-goal-container {
-  /* border: 1px solid red; */
   width: 75%;
   margin: auto;
   text-align: center;
 }
-form {
-  border: 1px solid blue;
+.new-goal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-form label {
-  border: 1px solid red;
+.new-goal-title {
+  padding: 1%;
+  width: 75%;
+  font-size: 1.8rem;
 }
 .new-steps-container {
-  border: 1px solid black;
   width: 75%;
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 2% auto;
+}
+.new-steps-label {
+  margin-right: 1%;
 }
 .new-step-inputs-container {
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+.new-step-input {
+  padding: 2%;
+}
+.remove-step-buttons {
+  height: 5vh;
+  align-self: flex-start;
+  padding: 1% 2%;
+}
+.add-step-button {
+  height: 5vh;
+  padding: 1% 2%;
+}
+.cancel-submit-container {
+  margin-bottom: 2%;
+}
+.cancel-submit-buttons {
+  height: 5vh;
+  padding: 1% 2%;
+  margin: 2%;
+}
+textarea {
+  height: 15vh;
+  resize: none;
 }

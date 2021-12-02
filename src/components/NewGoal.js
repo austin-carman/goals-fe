@@ -74,8 +74,8 @@ const NewGoal = (props) => {
 
   return (
     <div className="new-goal-container">
-      <h2>New Goal</h2>
-      <form onSubmit={onSubmit}>
+      <h2>Create Your New Goal</h2>
+      <form className="new-goal-form" onSubmit={onSubmit}>
         <label className="new-goal-title">
           Goal:{" "}
           <input
@@ -90,7 +90,7 @@ const NewGoal = (props) => {
         {goal.steps.map((step, index) => {
           return (
             <div className="new-steps-container" key={`${step}-${index}`}>
-              <label className="new-step-label">Step {index + 1}: </label>
+              <label className="new-steps-label">Step {index + 1}:</label>
               <div className="new-step-inputs-container">
                 <input
                   className="new-step-input"
@@ -123,9 +123,13 @@ const NewGoal = (props) => {
         </button>
       </form>
       <p className="new-goal-errors">{formErrors}</p>
-      <div className="submit-cancel-container">
-        <button onClick={handleCancel}>Cancel</button>
-        <button onClick={handleSubmit}>Submit</button>
+      <div className="cancel-submit-container">
+        <button className="cancel-submit-buttons" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button className="cancel-submit-buttons" onClick={handleSubmit}>
+          Save
+        </button>
       </div>
       {isFetching && <p>Loading...</p>}
     </div>
