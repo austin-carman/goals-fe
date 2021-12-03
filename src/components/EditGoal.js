@@ -78,7 +78,6 @@ const EditGoal = (props) => {
 
   const handleRemoveStep = (e, index, id) => {
     e.preventDefault();
-    console.log(index);
     setIsModalOpen({ ...isModalOpen, open: true, stepToDelete: id });
     // let newGoal = { ...goal };
     // newGoal.steps.splice(index, 1);
@@ -110,7 +109,6 @@ const EditGoal = (props) => {
           />
         </label>
         {goal.steps.map((step, index) => {
-          console.log(step);
           return (
             <div key={`${step}-${index}`}>
               <label>
@@ -144,7 +142,7 @@ const EditGoal = (props) => {
                 />
               </label>
               <button onClick={(e) => handleRemoveStep(e, index, step.step_id)}>
-                Remove Step
+                Delete Step
               </button>
             </div>
           );
