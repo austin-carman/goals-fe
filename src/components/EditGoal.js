@@ -78,9 +78,10 @@ const EditGoal = (props) => {
 
   const handleRemoveStep = (e, index, id) => {
     e.preventDefault();
-    let newGoal = { ...goal };
-    newGoal.steps.splice(index, 1);
+    console.log(index);
     setIsModalOpen({ ...isModalOpen, open: true, stepToDelete: id });
+    // let newGoal = { ...goal };
+    // newGoal.steps.splice(index, 1);
     // setFormErrors("");
     // setGoal(newGoal); // do this in delete modal???
   };
@@ -109,6 +110,7 @@ const EditGoal = (props) => {
           />
         </label>
         {goal.steps.map((step, index) => {
+          console.log(step);
           return (
             <div key={`${step}-${index}`}>
               <label>
@@ -141,7 +143,7 @@ const EditGoal = (props) => {
                   onChange={(e) => handleChange(e, index)}
                 />
               </label>
-              <button onClick={(e) => handleRemoveStep(e, index)}>
+              <button onClick={(e) => handleRemoveStep(e, index, step.step_id)}>
                 Remove Step
               </button>
             </div>
@@ -152,12 +154,12 @@ const EditGoal = (props) => {
         <button onClick={handleAddStep}>Add Step</button>
         <button onClick={handleSave}>Save</button>
         <button onClick={handleCancel}>Cancel</button>
-        <button id="deleteGoal" onClick={(e) => handleDelete(e)}>
+        <button id="deleteGoal" onClick={(e) => handleDelete(e, params.goalId)}>
           Delete
         </button>
       </div>
       <p>{formErrors}</p>
-      {isModalOpen ? (
+      {isModalOpen.open ? (
         <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
