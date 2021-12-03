@@ -75,17 +75,18 @@ const NewGoal = (props) => {
     <div className="new-goal-container">
       <h2>Create Your New Goal</h2>
       <form className="new-goal-form" onSubmit={onSubmit}>
-        <label className="new-goal-title">
-          Goal:{" "}
+        <div className="goal-title-container">
+          <label className="new-goal-title">Goal:</label>
           <input
-            className="new-goal-title input"
+            className="new-goal-title-input"
             type="text"
             name="goal_title"
             value={goal.goal_title}
             onChange={handleChange}
             placeholder="Goal Title"
           />
-        </label>
+        </div>
+
         {goal.steps.map((step, index) => {
           return (
             <div className="new-steps-container" key={`${step}-${index}`}>

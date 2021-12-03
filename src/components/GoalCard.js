@@ -19,13 +19,18 @@ const GoalCard = (props) => {
     <div
       className={
         goal.goal_completed
-          ? "completed-goals goal-card"
-          : "unfinished-goals goal-card"
+          ? "completed-goals goal-card-container"
+          : "unfinished-goals goal-card-container"
       }
     >
-      <div className="goal-header-container">
-        <h2 className="goal-title">{goal.goal_title}</h2>
-        <button onClick={() => handleEdit(index)}>Edit</button>
+      <div className="goal-card-header-container">
+        <h2 className="goal-card-title">{goal.goal_title}</h2>
+        <button
+          className="goal-card-edit-button"
+          onClick={() => handleEdit(index)}
+        >
+          Edit
+        </button>
       </div>
       {goal.steps.map((step) => {
         stepNumber += 1;
@@ -34,16 +39,16 @@ const GoalCard = (props) => {
             key={step.step_id}
             className={
               step.step_completed
-                ? "completed-steps goal-steps"
-                : "unfinished-steps goal-steps"
+                ? "goal-card-completed-steps goal-card-step-container"
+                : "goal-card-unfinished-steps goal-card-step-container"
             }
           >
-            <div className="step-title-container">
-              <h3 className="step-number">Step {stepNumber}:</h3>
-              <h3 className="step-title">{step.step_title}</h3>
+            <div className="goal-card-step-title-container">
+              <h3 className="goal-card-step-number">Step {stepNumber}:</h3>
+              <h3 className="goal-card-step-title">{step.step_title}</h3>
             </div>
             {step.step_notes ? (
-              <p className="step-notes">Notes: {step.step_notes}</p>
+              <p className="goal-card-step-notes">Notes: {step.step_notes}</p>
             ) : null}
           </div>
         );
