@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
-  const { isFetching, sendNewGoal, error } = props;
+  const { sendNewGoal, error } = props;
 
   const initialState = {
     goal_title: "",
@@ -43,7 +43,7 @@ const NewGoal = (props) => {
     setGoal(newGoal);
   };
 
-  const handleRemoveStep = (index) => {
+  const handleDeleteStep = (index) => {
     let newGoal = { ...goal };
     newGoal.steps.splice(index, 1);
     setFormErrors("");
@@ -72,13 +72,13 @@ const NewGoal = (props) => {
   }
 
   return (
-    <div className="new-goal-container">
+    <div className="goal-container">
       <h2>Create Your New Goal</h2>
-      <form className="new-goal-form" onSubmit={onSubmit}>
+      <form className="goal-form" onSubmit={onSubmit}>
         <div className="goal-title-container">
-          <label className="new-goal-title">Goal:</label>
+          <label className="goal-title">Goal:</label>
           <input
-            className="new-goal-title-input"
+            className="goal-title-input"
             type="text"
             name="goal_title"
             value={goal.goal_title}
@@ -89,11 +89,11 @@ const NewGoal = (props) => {
 
         {goal.steps.map((step, index) => {
           return (
-            <div className="new-steps-container" key={`${step}-${index}`}>
-              <label className="new-steps-label">Step {index + 1}:</label>
-              <div className="new-step-inputs-container">
+            <div className="steps-container" key={`${step}-${index}`}>
+              <label className="step-label">Step {index + 1}:</label>
+              <div className="step-inputs-container">
                 <input
-                  className="new-step-input"
+                  className="step-title-input"
                   type="text"
                   name="step_title"
                   value={step.step_title}
@@ -101,7 +101,7 @@ const NewGoal = (props) => {
                   placeholder="Step Title"
                 />
                 <textarea
-                  className="new-step-input"
+                  className="step-notes-input"
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
@@ -110,42 +110,39 @@ const NewGoal = (props) => {
                 />
               </div>
               <button
-                className="remove-step-buttons"
-                onClick={() => handleRemoveStep(index)}
+                className="delete-step-button"
+                onClick={() => handleDeleteStep(index)}
               >
-                Remove Step
+                Delete Step
               </button>
             </div>
           );
         })}
       </form>
-      <p className="new-goal-errors">{formErrors}</p>
-      <div className="new-goal-buttons-container">
-        <button className="new-goal-form-buttons" onClick={handleAddStep}>
+      <p className="goal-form-errors">{formErrors}</p>
+      <div className="goal-buttons-container">
+        <button className="goal-form-buttons" onClick={handleAddStep}>
           Add Step
         </button>
-        <button className="new-goal-save-button" onClick={handleSubmit}>
+        <button className="goal-form-buttons" onClick={handleSubmit}>
           Save
         </button>
-        <button className="new-goal-form-buttons" onClick={handleCancel}>
+        <button className="goal-form-buttons" onClick={handleCancel}>
           Cancel
         </button>
       </div>
-      {isFetching && <p>Loading...</p>}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.goalsReducer.isFetching,
     error: state.goalsReducer.error,
     serverValidateMessage: state.goalsReducer.serverValidateMessage,
   };
 };
 
 NewGoal.propTypes = {
-  isFetching: PropTypes.bool,
   sendNewGoal: PropTypes.func,
   error: PropTypes.any,
 };

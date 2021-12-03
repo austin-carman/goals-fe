@@ -141,17 +141,54 @@ h3{
 }
 
 /* New Goal */
-.new-goal-container {
+.goal-container {
   /* width: 50%; */
   /* margin: auto; */
   text-align: center;
   /* border: 1px solid blue; */
 }
-.new-goal-form {
+.goal-form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.goal-title-container {
+
+}
+.goal-title {
+
+}
+.goal-title-input {
+
+}
+.steps-container {
+
+}
+.step-label {
+
+}
+.step-inputs-container {
+
+}
+.step-title-input {
+
+}
+.step-notes-input {
+
+}
+.delete-step-button {
+
+}
+.goal-form-errors {
+
+}
+.goal-buttons-container {
+
+}
+.goal-form-buttons {
+  
+}
+/*  */
 .new-goal-container button {
   height: 5vh;
   padding: 1% 2%;
