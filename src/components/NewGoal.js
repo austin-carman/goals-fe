@@ -6,8 +6,7 @@ import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
 
 const NewGoal = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
+  const { isFetching, sendNewGoal, error } = props;
 
   const initialState = {
     goal_title: "",
@@ -148,7 +147,6 @@ NewGoal.propTypes = {
   isFetching: PropTypes.bool,
   sendNewGoal: PropTypes.func,
   error: PropTypes.any,
-  serverValidateMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);
