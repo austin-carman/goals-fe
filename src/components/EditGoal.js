@@ -73,8 +73,10 @@ const EditGoal = (props) => {
 
   const handleRemoveStep = (e, index) => {
     e.preventDefault();
-    console.log("here");
-    console.log(index);
+    let newGoal = { ...goal };
+    newGoal.steps.splice(index, 1);
+    // setFormErrors("");
+    setGoal(newGoal);
   };
 
   return (
@@ -141,14 +143,9 @@ const EditGoal = (props) => {
         })}
       </form>
       <div>
-        <button onClick={handleCancel}>Cancel</button>
         <button onClick={handleAddStep}>Add Step</button>
-        {goal.steps.length > 0 && (
-          <button id="removeStep" onClick={(e) => handleDelete(e)}>
-            Remove Step
-          </button>
-        )}
         <button onClick={handleSave}>Save</button>
+        <button onClick={handleCancel}>Cancel</button>
         <button id="deleteGoal" onClick={(e) => handleDelete(e)}>
           Delete
         </button>
