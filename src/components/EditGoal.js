@@ -89,11 +89,19 @@ const EditGoal = (props) => {
   };
 
   return (
-    <div className="goal-container" id="edit-goal-container">
+    <div className="goal-container">
       <h2>Edit Goal</h2>
       <form className="goal-form">
-        <div className="goal-title-container" id="edit-goal-title-container">
-          <label className="goal-title-label">Goal:</label>
+        <div className="goal-title-container">
+          <input
+            className="completed-checkbox"
+            type="checkbox"
+            name="goal_completed"
+            value={goal.goal_completed}
+            checked={goal.goal_completed}
+            onChange={(e) => handleChange(e)}
+          />
+          <label className="goal-label">Goal:</label>
           <input
             className="goal-title-input"
             id="edit-goal-title-input"
@@ -102,47 +110,29 @@ const EditGoal = (props) => {
             value={goal.goal_title}
             onChange={(e) => handleChange(e)}
           />
-          {/* <label className="completed-status" id="goal-completed-status">
-            Completed
-            <input
-              type="checkbox"
-              name="goal_completed"
-              value={goal.goal_completed}
-              checked={goal.goal_completed}
-              onChange={(e) => handleChange(e)}
-            />
-          </label> */}
+          <button
+            className="goal-form-buttons edit-goal-delete-goal-button"
+            onClick={(e) => handleDeleteGoal(e, params.goalId)}
+          >
+            Delete
+          </button>
         </div>
         {goal.steps.map((step, index) => {
           return (
             <div className="steps-container" key={`${step}-${index}`}>
-              {/* <label className="completed-status">
-                Completed:
-                <input
-                  className="step-completed-input"
-                  type="checkbox"
-                  name="step_completed"
-                  value={step.step_completed}
-                  checked={step.step_completed}
-                  onChange={(e) => handleChange(e, index)}
-                />
-              </label> */}
-              <label className="step-label">Step {index + 1}:</label>
+              <input
+                className="completed-checkbox"
+                type="checkbox"
+                name="step_completed"
+                value={step.step_completed}
+                checked={step.step_completed}
+                onChange={(e) => handleChange(e, index)}
+              />
+              <label className="goal-label">Step {index + 1}:</label>
               <div
                 className="step-inputs-container"
                 id="edit-goal-step-inputs-container"
               >
-                {/* <label className="completed-status">
-                  Completed:
-                  <input
-                    className="step-completed-input"
-                    type="checkbox"
-                    name="step_completed"
-                    value={step.step_completed}
-                    checked={step.step_completed}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </label> */}
                 <input
                   className="step-title-input"
                   type="text"
@@ -159,36 +149,13 @@ const EditGoal = (props) => {
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
-                {/* <label className="completed-status">
-                  {`Step ${index + 1} Completed: `}
-                  <input
-                    className="step-completed-input"
-                    type="checkbox"
-                    name="step_completed"
-                    value={step.step_completed}
-                    checked={step.step_completed}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </label> */}
               </div>
               <div className="step-status-delete-container">
-                <label className="completed-status">
-                  Completed:{" "}
-                  <input
-                    className="step-completed-input"
-                    type="checkbox"
-                    name="step_completed"
-                    value={step.step_completed}
-                    checked={step.step_completed}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </label>
                 <button
-                  className="delete-step-button"
-                  id="edit-goal-delete-step-button"
+                  className="delete-step-button edit-goal-delete-step-button"
                   onClick={(e) => handleDeleteStep(e, index, step.step_id)}
                 >
-                  Delete Step
+                  Delete
                 </button>
               </div>
             </div>
@@ -200,17 +167,11 @@ const EditGoal = (props) => {
         <button className="goal-form-buttons" onClick={handleAddStep}>
           Add Step
         </button>
-        <button className="goal-form-buttons" onClick={handleSave}>
-          Save
-        </button>
         <button className="goal-form-buttons" onClick={handleCancel}>
           Cancel
         </button>
-        <button
-          className="goal-form-buttons"
-          onClick={(e) => handleDeleteGoal(e, params.goalId)}
-        >
-          Delete
+        <button className="goal-form-buttons" onClick={handleSave}>
+          Save
         </button>
       </div>
       {isModalOpen.open ? (

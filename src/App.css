@@ -142,7 +142,7 @@ button {
   text-transform: capitalize;
 }
 
-/* ***** New Goal/Edit Goal ***** */
+/* ***** Forms: New Goal/Edit Goal ***** */
 .goal-container {
   text-align: center;
   width: 50%;
@@ -159,15 +159,17 @@ button {
   justify-content: flex-start;
   width: 100%;
   margin-top: 4%;
+  border: 1px solid blue;
 }
-.goal-title-label {
+.goal-label {
   width: 10%;
   text-align: left;
+  border: 1px solid red;
+  align-self: flex-start;
 }
 .goal-title-input {
-  width: 76%;
-  margin-left: 2%;
-  margin-bottom: 4%;
+  width: 81%;
+  margin: 0 2% 4%;
 }
 .goal-container input {
   padding: 1.5%;
@@ -177,16 +179,14 @@ button {
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 4%;
-}
-.step-label {
-  width: 10%;
-  text-align: left;
+  border: 1px solid blue;
 }
 .step-inputs-container {
   display: flex;
   flex-direction: column;
-  width: 76%;
+  width: 81%;
   margin: 0 2%;
+  border: 1px solid red;
 }
 .step-title-input {
   margin-bottom: 2%;
@@ -197,7 +197,8 @@ button {
 }
 .delete-step-button {
   align-self: flex-start;
-  width: 10%;
+  width: 5%;
+  border: 1px solid red;
 }
 .goal-form-errors {
   color: red;
@@ -211,9 +212,17 @@ button {
   margin: 1%;
 }
 
-/* ***** Edit Goal ***** */
+/* ***** Form: Edit Goal ***** */
+.completed-checkbox {
+  margin-top: 2%;
+  margin-right: 2%;
+}
 #edit-goal-title-input {
-  width: 70%;
+  width: 20%;
+}
+.edit-goal-delete-step-button {
+  width: 50%;
+  align-self: center;
 }
 #edit-goal-step-inputs-container {
   width: 70%;
@@ -225,8 +234,10 @@ button {
 }
 .completed-status {
   text-transform: capitalize;
+  text-align: left;
 }
-#edit-goal-delete-step-button {
+.edit-goal-delete-step-button {
   width: 50%;
   align-self: center;
 }
+

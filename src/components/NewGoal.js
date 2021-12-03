@@ -77,7 +77,7 @@ const NewGoal = (props) => {
       <h2>Create Your New Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
         <div className="goal-title-container">
-          <label className="goal-title-label">Goal:</label>
+          <label className="goal-label">Goal:</label>
           <input
             className="goal-title-input"
             type="text"
@@ -91,7 +91,7 @@ const NewGoal = (props) => {
         {goal.steps.map((step, index) => {
           return (
             <div className="steps-container" key={`${step}-${index}`}>
-              <label className="step-label">Step {index + 1}:</label>
+              <label className="goal-label">Step {index + 1}:</label>
               <div className="step-inputs-container">
                 <input
                   className="step-title-input"
@@ -114,7 +114,7 @@ const NewGoal = (props) => {
                 className="delete-step-button"
                 onClick={() => handleDeleteStep(index)}
               >
-                Delete Step
+                Delete
               </button>
             </div>
           );
