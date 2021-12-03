@@ -128,7 +128,10 @@ const EditGoal = (props) => {
                 />
               </label> */}
               <label className="step-label">Step {index + 1}:</label>
-              <div className="step-inputs-container">
+              <div
+                className="step-inputs-container"
+                id="edit-goal-step-inputs-container"
+              >
                 {/* <label className="completed-status">
                   Completed:
                   <input
@@ -170,7 +173,7 @@ const EditGoal = (props) => {
               </div>
               <div className="step-status-delete-container">
                 <label className="completed-status">
-                  Completed:
+                  Completed:{" "}
                   <input
                     className="step-completed-input"
                     type="checkbox"
@@ -182,6 +185,7 @@ const EditGoal = (props) => {
                 </label>
                 <button
                   className="delete-step-button"
+                  id="edit-goal-delete-step-button"
                   onClick={(e) => handleDeleteStep(e, index, step.step_id)}
                 >
                   Delete Step

@@ -163,7 +163,6 @@ button {
 .goal-title-label {
   width: 10%;
   text-align: left;
-  border: 1px solid violet;
 }
 .goal-title-input {
   width: 76%;
@@ -178,12 +177,10 @@ button {
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 4%;
-  border: 1px solid green;
 }
 .step-label {
   width: 10%;
   text-align: left;
-  border: 1px solid violet;
 }
 .step-inputs-container {
   display: flex;
@@ -200,7 +197,6 @@ button {
 }
 .delete-step-button {
   align-self: flex-start;
-  border: 1px solid red;
   width: 10%;
 }
 .goal-form-errors {
@@ -216,19 +212,24 @@ button {
 }
 
 /* ***** Edit Goal ***** */
+#edit-goal-container {
+  width: 60%;
+}
+#edit-goal-title-input {
+  width: 70%;
+}
+#edit-goal-step-inputs-container {
+  width: 70%;
+}
+.step-status-delete-container {
+  width: 16%;
+  display: flex;
+  flex-direction: column;
+}
 .completed-status {
   text-transform: capitalize;
 }
-#edit-goal-container {
-  width: 55%;
-  border: 1px solid black;
-}
-#edit-goal-title-container {
-  border: 1px solid blue;
-}
-#edit-goal-title-input {
-  border: 1px solid red;
-}
-.step-status-delete-container {
-  border: 1px solid red;
+#edit-goal-delete-step-button {
+  width: 50%;
+  align-self: center;
 }
