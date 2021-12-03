@@ -4,7 +4,7 @@ import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { removeStep } from "../utils/helperFunctions";
+// import { removeStep } from "../utils/helperFunctions";
 import { goalValidation } from "../validation/validationSchemas";
 
 const EditGoal = (props) => {
@@ -62,21 +62,23 @@ const EditGoal = (props) => {
   };
 
   const handleDelete = (e) => {
-    setToDelete(e.target.id);
-    if (e.target.id === "removeStep") {
-      const updatedGoal = removeStep(goal);
-      updatedGoal.stepId ? setIsModalOpen(true) : setGoal(updatedGoal);
-    } else if (e.target.id === "deleteGoal") {
-      setIsModalOpen(true);
-    }
+    e.preventDefault();
+    // setToDelete(e.target.id);
+    // if (e.target.id === "removeStep") {
+    // const updatedGoal = removeStep(goal);
+    // updatedGoal.stepId ? setIsModalOpen(true) : setGoal(updatedGoal);
+    // } else if (e.target.id === "deleteGoal") {
+    setIsModalOpen(true);
+    // }
   };
 
   const handleRemoveStep = (e, index) => {
     e.preventDefault();
     let newGoal = { ...goal };
     newGoal.steps.splice(index, 1);
+    setIsModalOpen(true);
     // setFormErrors("");
-    setGoal(newGoal);
+    // setGoal(newGoal);
   };
 
   return (
