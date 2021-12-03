@@ -75,32 +75,30 @@ const EditGoal = (props) => {
     <div>
       <h2>Edit Goal</h2>
       <form>
-        <div className="edit-goal-inputs-container">
-          <label>
-            Goal Title
-            <input
-              type="text"
-              name="goal_title"
-              value={goal.goal_title}
-              onChange={(e) => handleChange(e)}
-            />
-          </label>
-          <label>
-            Goal Completed
-            <input
-              type="checkbox"
-              name="goal_completed"
-              value={goal.goal_completed}
-              checked={goal.goal_completed}
-              onChange={(e) => handleChange(e)}
-            />
-          </label>
-        </div>
+        <label>
+          Goal Title
+          <input
+            type="text"
+            name="goal_title"
+            value={goal.goal_title}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
+        <label>
+          Goal Completed
+          <input
+            type="checkbox"
+            name="goal_completed"
+            value={goal.goal_completed}
+            checked={goal.goal_completed}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
         {goal.steps.map((step, index) => {
           return (
-            <div className="edit-steps-container" key={`${step}-${index}`}>
-              <div>
-                <label>Step {index + 1}:</label>
+            <div key={`${step}-${index}`}>
+              <label>
+                Step {index + 1}:
                 <input
                   type="text"
                   name="step_title"
@@ -108,7 +106,9 @@ const EditGoal = (props) => {
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
-                {/* <label>Notes:</label> */}
+              </label>
+              <label>
+                Notes:
                 <input
                   type="text"
                   name="step_notes"
@@ -116,17 +116,17 @@ const EditGoal = (props) => {
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
-                <label>
-                  Step Completed
-                  <input
-                    type="checkbox"
-                    name="step_completed"
-                    value={step.step_completed}
-                    checked={step.step_completed}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </label>
-              </div>
+              </label>
+              <label>
+                Step Completed
+                <input
+                  type="checkbox"
+                  name="step_completed"
+                  value={step.step_completed}
+                  checked={step.step_completed}
+                  onChange={(e) => handleChange(e, index)}
+                />
+              </label>
             </div>
           );
         })}
