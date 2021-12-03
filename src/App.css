@@ -69,14 +69,12 @@ h3{
 
 /* Navbar */
 .navbar-header {
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 0;
   width: 100%;
 }
 .links-container {
