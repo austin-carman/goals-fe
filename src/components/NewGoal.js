@@ -125,11 +125,11 @@ const NewGoal = (props) => {
         <button className="goal-form-buttons" onClick={handleAddStep}>
           Add Step
         </button>
-        <button className="goal-form-buttons" onClick={handleSubmit}>
-          Save
-        </button>
         <button className="goal-form-buttons" onClick={handleCancel}>
           Cancel
+        </button>
+        <button className="goal-form-buttons" onClick={handleSubmit}>
+          Save
         </button>
       </div>
     </div>
