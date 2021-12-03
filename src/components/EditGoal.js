@@ -5,6 +5,8 @@ import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const EditGoal = (props) => {
   const history = useHistory();
@@ -109,12 +111,11 @@ const EditGoal = (props) => {
             value={goal.goal_title}
             onChange={(e) => handleChange(e)}
           />
-          <button
+          <FontAwesomeIcon
+            icon={faTrash}
             className="delete-button"
             onClick={(e) => handleDeleteGoal(e, params.goalId)}
-          >
-            Delete
-          </button>
+          />
         </div>
         {goal.steps.map((step, index) => {
           return (
@@ -146,12 +147,11 @@ const EditGoal = (props) => {
                   placeholder="Step Notes"
                 />
               </div>
-              <button
+              <FontAwesomeIcon
+                icon={faTrash}
                 className="delete-button"
                 onClick={(e) => handleDeleteStep(e, index, step.step_id)}
-              >
-                Delete
-              </button>
+              />
             </div>
           );
         })}

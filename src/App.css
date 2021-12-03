@@ -194,6 +194,8 @@ button {
 .delete-button {
   align-self: flex-start;
   width: 5%;
+  color: blue;
+  margin-top: 1%;
 }
 .goal-form-errors {
   color: red;
