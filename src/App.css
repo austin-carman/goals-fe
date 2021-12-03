@@ -53,18 +53,23 @@ table {
 }
 
 /* General Styles */
-html{
+html {
   font-size:62.5%;
+  text-transform: uppercase;
 }
-body{
+body {
   font-size:1.6rem;
   line-height: 2;
 }
-h2{
+h2 {
   font-size:3rem;
 }
-h3{
+h3 {
   font-size:2rem;
+}
+button {
+  padding: 1%;
+  border-radius: 10px;
 }
 
 /* Navbar */
@@ -85,6 +90,7 @@ h3{
 .navlink {
   color: black;
   text-decoration: none;
+  text-transform: capitalize;
 }
 .navlink:hover {
   color: blue;
@@ -94,10 +100,6 @@ h3{
 /* Profile */
 .profile-content {
   text-align: center;
-}
-#new-goal-button {
-  padding: 1%;
-  border-radius: 10px;
 }
 
 /* Goal Card */
@@ -117,8 +119,6 @@ h3{
 /* **** potential universal button style ************ */
 .goal-card-edit-button {
   width: 10%;
-  padding: 1%;
-  border-radius: 10px;
 }
 .goal-card-step-container {
   width: 90%;
@@ -138,100 +138,73 @@ h3{
 .goal-card-step-notes {
   width: 65%;
   margin: auto;
+  text-transform: capitalize;
 }
 
 /* New Goal */
 .goal-container {
-  /* width: 50%; */
-  /* margin: auto; */
   text-align: center;
-  /* border: 1px solid blue; */
+  width: 50%;
+  margin: auto;
 }
 .goal-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  font-size: 1.8rem;
 }
 .goal-title-container {
-
-}
-.goal-title {
-
-}
-.goal-title-input {
-
-}
-.steps-container {
-
-}
-.step-label {
-
-}
-.step-inputs-container {
-
-}
-.step-title-input {
-
-}
-.step-notes-input {
-
-}
-.delete-step-button {
-
-}
-.goal-form-errors {
-
-}
-.goal-buttons-container {
-
-}
-.goal-form-buttons {
-  
-}
-/*  */
-.new-goal-container button {
-  height: 5vh;
-  padding: 1% 2%;
-  border-radius: 10px;
-}
-.goal-title-container {
-  width: 100%;
-  border: 1px solid blue;
   display: flex;
   justify-content: flex-start;
-}
-.new-goal-title-input {
-  padding: 1%;
-  font-size: 1.8rem;
   width: 100%;
-  border: 1px solid red;
+  margin-top: 4%;
 }
-.new-goal-title {
-  margin-right: 1%;
-  border: 1px solid red;
+.goal-title-label {
+  width: 10%;
+  text-align: left;
 }
-.new-steps-container {
-  width: 85%;
+.goal-title-input {
+  width: 90%;
+  margin-left: 1.5%;
+  margin-bottom: 4%;
+}
+.goal-container input {
+  padding: 1.5%;
+}
+.steps-container {
   display: flex;
-  justify-content: center;
-  margin: 2% auto;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 4%;
 }
-.new-step-inputs-container {
+.step-label {
+  width: 10%;
+  text-align: left;
+}
+.step-inputs-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin: 0 1%;
+  width: 80%;
+  margin: 0 2%;
 }
-.new-step-input {
-  padding: 2%;
+.step-title-input {
+  margin-bottom: 2%;
 }
-.remove-step-buttons {
-  align-self: flex-start;
-}
-textarea {
+.step-notes-input {
   height: 15vh;
   resize: none;
 }
-.new-goal-save-button {
-  margin: 0% 1% 10%;
+.delete-step-button {
+  align-self: flex-start;
+}
+.goal-form-errors {
+  color: red;
+}
+.goal-buttons-container {
+  margin-top: 2%;
+  margin-bottom: 15%;
+}
+.goal-form-buttons {
+  width: 15%;
+  margin: 1%;
 }

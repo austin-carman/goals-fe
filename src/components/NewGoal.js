@@ -14,7 +14,7 @@ const NewGoal = (props) => {
   };
 
   const [goal, setGoal] = useState(initialState);
-  const [formErrors, setFormErrors] = useState(null);
+  const [formErrors, setFormErrors] = useState("");
 
   const history = useHistory();
   const { userId } = useParams();
@@ -41,6 +41,7 @@ const NewGoal = (props) => {
     let newGoal = { ...goal };
     newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
     setGoal(newGoal);
+    setFormErrors("");
   };
 
   const handleDeleteStep = (index) => {
@@ -76,7 +77,7 @@ const NewGoal = (props) => {
       <h2>Create Your New Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
         <div className="goal-title-container">
-          <label className="goal-title">Goal:</label>
+          <label className="goal-title-label">Goal:</label>
           <input
             className="goal-title-input"
             type="text"
@@ -98,7 +99,7 @@ const NewGoal = (props) => {
                   name="step_title"
                   value={step.step_title}
                   onChange={(e) => handleChange(e, index)}
-                  placeholder="Step Title"
+                  placeholder={`Step ${index + 1} Title`}
                 />
                 <textarea
                   className="step-notes-input"
@@ -106,7 +107,7 @@ const NewGoal = (props) => {
                   name="step_notes"
                   value={step.step_notes}
                   onChange={(e) => handleChange(e, index)}
-                  placeholder="Step Notes"
+                  placeholder={`Step ${index + 1} Notes`}
                 />
               </div>
               <button
