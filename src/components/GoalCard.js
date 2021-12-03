@@ -27,11 +27,11 @@ const GoalCard = (props) => {
         <h2 className="goal-title">{goal.goal_title}</h2>
         <button onClick={() => handleEdit(index)}>Edit</button>
       </div>
-      {goal.steps.map((step, index) => {
+      {goal.steps.map((step) => {
         stepNumber += 1;
         return (
           <div
-            key={`${step.step_id}-${index}`}
+            key={step.step_id}
             className={
               step.step_completed
                 ? "completed-steps goal-steps"
