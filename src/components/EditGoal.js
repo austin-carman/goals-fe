@@ -21,8 +21,12 @@ const EditGoal = (props) => {
 
   const [goal, setGoal] = useState(initialState);
   const [formErrors, setFormErrors] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [toDelete, setToDelete] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState({
+    open: false,
+    goalToDelete: null,
+    stepToDelete: null,
+  });
+  // const [toDelete, setToDelete] = useState(null);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -61,24 +65,24 @@ const EditGoal = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = (e, id) => {
     e.preventDefault();
     // setToDelete(e.target.id);
     // if (e.target.id === "removeStep") {
     // const updatedGoal = removeStep(goal);
     // updatedGoal.stepId ? setIsModalOpen(true) : setGoal(updatedGoal);
     // } else if (e.target.id === "deleteGoal") {
-    setIsModalOpen(true);
+    setIsModalOpen({ ...isModalOpen, open: true, goalToDelete: id });
     // }
   };
 
-  const handleRemoveStep = (e, index) => {
+  const handleRemoveStep = (e, index, id) => {
     e.preventDefault();
     let newGoal = { ...goal };
     newGoal.steps.splice(index, 1);
-    setIsModalOpen(true);
+    setIsModalOpen({ ...isModalOpen, open: true, stepToDelete: id });
     // setFormErrors("");
-    // setGoal(newGoal);
+    // setGoal(newGoal); // do this in delete modal???
   };
 
   return (
@@ -159,8 +163,6 @@ const EditGoal = (props) => {
           setIsModalOpen={setIsModalOpen}
           goal={goal}
           setGoal={setGoal}
-          toDelete={toDelete}
-          setToDelete={setToDelete}
         />
       ) : null}
     </div>
