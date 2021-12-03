@@ -1,4 +1,6 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* 
+  ****** Reset ******
+  http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -52,7 +54,7 @@ table {
   max-width:100%;
 }
 
-/* General Styles */
+/* ***** General Styles ***** */
 html {
   font-size:62.5%;
   text-transform: uppercase;
@@ -72,7 +74,7 @@ button {
   border-radius: 10px;
 }
 
-/* Navbar */
+/* ***** Navbar *****  */
 .navbar-header {
   margin-bottom: 5%;
 }
@@ -97,12 +99,12 @@ button {
   text-decoration: none;
 }
 
-/* Profile */
+/* ***** Profile *****  */
 .profile-content {
   text-align: center;
 }
 
-/* Goal Card */
+/* ***** Goal Card *****  */
 .goal-card-container {
   border: 1px solid black;
   border-radius: 10px;
@@ -116,7 +118,6 @@ button {
   width: 75%;
   margin: 2% auto;
 }
-/* **** potential universal button style ************ */
 .goal-card-edit-button {
   width: 10%;
 }
@@ -141,7 +142,7 @@ button {
   text-transform: capitalize;
 }
 
-/* New Goal */
+/* ***** New Goal/Edit Goal ***** */
 .goal-container {
   text-align: center;
   width: 50%;
@@ -162,10 +163,11 @@ button {
 .goal-title-label {
   width: 10%;
   text-align: left;
+  border: 1px solid violet;
 }
 .goal-title-input {
-  width: 90%;
-  margin-left: 1.5%;
+  width: 76%;
+  margin-left: 2%;
   margin-bottom: 4%;
 }
 .goal-container input {
@@ -176,15 +178,17 @@ button {
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 4%;
+  border: 1px solid green;
 }
 .step-label {
   width: 10%;
   text-align: left;
+  border: 1px solid violet;
 }
 .step-inputs-container {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 76%;
   margin: 0 2%;
 }
 .step-title-input {
@@ -196,6 +200,8 @@ button {
 }
 .delete-step-button {
   align-self: flex-start;
+  border: 1px solid red;
+  width: 10%;
 }
 .goal-form-errors {
   color: red;
@@ -207,4 +213,22 @@ button {
 .goal-form-buttons {
   width: 15%;
   margin: 1%;
+}
+
+/* ***** Edit Goal ***** */
+.completed-status {
+  text-transform: capitalize;
+}
+#edit-goal-container {
+  width: 55%;
+  border: 1px solid black;
+}
+#edit-goal-title-container {
+  border: 1px solid blue;
+}
+#edit-goal-title-input {
+  border: 1px solid red;
+}
+.step-status-delete-container {
+  border: 1px solid red;
 }
