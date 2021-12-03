@@ -159,12 +159,10 @@ button {
   justify-content: flex-start;
   width: 100%;
   margin-top: 4%;
-  border: 1px solid blue;
 }
 .goal-label {
   width: 10%;
   text-align: left;
-  border: 1px solid red;
   align-self: flex-start;
 }
 .goal-title-input {
@@ -179,14 +177,12 @@ button {
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 4%;
-  border: 1px solid blue;
 }
 .step-inputs-container {
   display: flex;
   flex-direction: column;
   width: 81%;
   margin: 0 2%;
-  border: 1px solid red;
 }
 .step-title-input {
   margin-bottom: 2%;
@@ -198,7 +194,6 @@ button {
 .delete-button {
   align-self: flex-start;
   width: 5%;
-  border: 1px solid red;
 }
 .goal-form-errors {
   color: red;
@@ -211,11 +206,13 @@ button {
 .goal-form-buttons {
   width: 15%;
   margin: 1%;
-  border: 1px solid blue;
 }
 
 /* ***** Form: Edit Goal ***** */
 .completed-checkbox {
   margin-top: 2%;
   margin-right: 2%;
+}
+.edit-goal-text-input {
+  width: 77%;
 }

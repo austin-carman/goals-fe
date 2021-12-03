@@ -103,7 +103,7 @@ const EditGoal = (props) => {
           />
           <label className="goal-label">Goal:</label>
           <input
-            className="goal-title-input"
+            className="goal-title-input edit-goal-text-input"
             type="text"
             name="goal_title"
             value={goal.goal_title}
@@ -128,7 +128,7 @@ const EditGoal = (props) => {
                 onChange={(e) => handleChange(e, index)}
               />
               <label className="goal-label">Step {index + 1}:</label>
-              <div className="step-inputs-container">
+              <div className="step-inputs-container edit-goal-text-input">
                 <input
                   className="step-title-input"
                   type="text"

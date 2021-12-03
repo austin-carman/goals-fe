@@ -111,7 +111,7 @@ const NewGoal = (props) => {
                 />
               </div>
               <button
-                className="delete-step-button"
+                className="delete-button"
                 onClick={() => handleDeleteStep(index)}
               >
                 Delete
