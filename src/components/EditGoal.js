@@ -89,13 +89,14 @@ const EditGoal = (props) => {
   };
 
   return (
-    <div>
+    <div className="goal-container">
       <h2>Edit Goal</h2>
-      <form>
+      <form className="goal-form">
         <div className="goal-title-container">
-          <label>
-            Goal Title
+          <label className="goal-title-label">
+            Goal:
             <input
+              className="goal-title-input"
               type="text"
               name="goal_title"
               value={goal.goal_title}
@@ -115,10 +116,11 @@ const EditGoal = (props) => {
         </div>
         {goal.steps.map((step, index) => {
           return (
-            <div key={`${step}-${index}`}>
-              <label>Step {index + 1}:</label>
-              <div>
+            <div className="steps-container" key={`${step}-${index}`}>
+              <label className="step-label">Step {index + 1}:</label>
+              <div className="step-inputs-container">
                 <input
+                  className="step-title-input"
                   type="text"
                   name="step_title"
                   value={step.step_title}
@@ -126,6 +128,7 @@ const EditGoal = (props) => {
                   placeholder="Step Title"
                 />
                 <textarea
+                  className="step-notes-input"
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
@@ -135,6 +138,7 @@ const EditGoal = (props) => {
                 <label>
                   Step Completed
                   <input
+                    className="step-completed-input"
                     type="checkbox"
                     name="step_completed"
                     value={step.step_completed}
@@ -143,22 +147,34 @@ const EditGoal = (props) => {
                   />
                 </label>
               </div>
-              <button onClick={(e) => handleDeleteStep(e, index, step.step_id)}>
+              <button
+                className="delete-step-button"
+                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
+              >
                 Delete Step
               </button>
             </div>
           );
         })}
       </form>
-      <div>
-        <button onClick={handleAddStep}>Add Step</button>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleCancel}>Cancel</button>
-        <button onClick={(e) => handleDeleteGoal(e, params.goalId)}>
+      <p className="goal-form-errors">{formErrors}</p>
+      <div className="goal-buttons-container">
+        <button className="goal-form-buttons" onClick={handleAddStep}>
+          Add Step
+        </button>
+        <button className="goal-form-buttons" onClick={handleSave}>
+          Save
+        </button>
+        <button className="goal-form-buttons" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button
+          className="goal-form-buttons"
+          onClick={(e) => handleDeleteGoal(e, params.goalId)}
+        >
           Delete
         </button>
       </div>
-      <p>{formErrors}</p>
       {isModalOpen.open ? (
         <DeleteModal
           isModalOpen={isModalOpen}
