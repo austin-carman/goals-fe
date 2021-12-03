@@ -104,14 +104,13 @@ const EditGoal = (props) => {
           <label className="goal-label">Goal:</label>
           <input
             className="goal-title-input"
-            id="edit-goal-title-input"
             type="text"
             name="goal_title"
             value={goal.goal_title}
             onChange={(e) => handleChange(e)}
           />
           <button
-            className="goal-form-buttons edit-goal-delete-goal-button"
+            className="delete-button"
             onClick={(e) => handleDeleteGoal(e, params.goalId)}
           >
             Delete
@@ -129,10 +128,7 @@ const EditGoal = (props) => {
                 onChange={(e) => handleChange(e, index)}
               />
               <label className="goal-label">Step {index + 1}:</label>
-              <div
-                className="step-inputs-container"
-                id="edit-goal-step-inputs-container"
-              >
+              <div className="step-inputs-container">
                 <input
                   className="step-title-input"
                   type="text"
@@ -150,14 +146,12 @@ const EditGoal = (props) => {
                   placeholder="Step Notes"
                 />
               </div>
-              <div className="step-status-delete-container">
-                <button
-                  className="delete-step-button edit-goal-delete-step-button"
-                  onClick={(e) => handleDeleteStep(e, index, step.step_id)}
-                >
-                  Delete
-                </button>
-              </div>
+              <button
+                className="delete-button"
+                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
+              >
+                Delete
+              </button>
             </div>
           );
         })}
