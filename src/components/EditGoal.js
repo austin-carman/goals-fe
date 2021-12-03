@@ -71,6 +71,12 @@ const EditGoal = (props) => {
     }
   };
 
+  const handleRemoveStep = (e, index) => {
+    e.preventDefault();
+    console.log("here");
+    console.log(index);
+  };
+
   return (
     <div>
       <h2>Edit Goal</h2>
@@ -127,6 +133,9 @@ const EditGoal = (props) => {
                   onChange={(e) => handleChange(e, index)}
                 />
               </label>
+              <button onClick={(e) => handleRemoveStep(e, index)}>
+                Remove Step
+              </button>
             </div>
           );
         })}
