@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const EditGoal = (props) => {
   const history = useHistory();
@@ -95,13 +96,18 @@ const EditGoal = (props) => {
       <h2>Edit Goal</h2>
       <form className="goal-form">
         <div className="goal-title-container">
-          <input
+          {/* <input
             className="completed-checkbox"
             type="checkbox"
             name="goal_completed"
             value={goal.goal_completed}
             checked={goal.goal_completed}
             onChange={(e) => handleChange(e)}
+          /> */}
+          <FontAwesomeIcon
+            icon={faMinusCircle}
+            className="delete-button"
+            onClick={(e) => handleDeleteGoal(e, params.goalId)}
           />
           <label className="goal-label">Goal:</label>
           <input
@@ -111,22 +117,24 @@ const EditGoal = (props) => {
             value={goal.goal_title}
             onChange={(e) => handleChange(e)}
           />
-          <FontAwesomeIcon
-            icon={faTrash}
-            className="delete-button"
-            onClick={(e) => handleDeleteGoal(e, params.goalId)}
-          />
         </div>
         {goal.steps.map((step, index) => {
           return (
             <div className="steps-container" key={`${step}-${index}`}>
-              <input
+              {/* <input
                 className="completed-checkbox"
                 type="checkbox"
                 name="step_completed"
                 value={step.step_completed}
                 checked={step.step_completed}
                 onChange={(e) => handleChange(e, index)}
+              /> */}
+              {/* Do Image instead of font Awesome icon */}
+              {/* <img /> */}
+              <FontAwesomeIcon
+                icon={faMinusCircle}
+                className="delete-button"
+                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
               />
               <label className="goal-label">Step {index + 1}:</label>
               <div className="step-inputs-container edit-goal-text-input">
@@ -147,20 +155,18 @@ const EditGoal = (props) => {
                   placeholder="Step Notes"
                 />
               </div>
-              <FontAwesomeIcon
-                icon={faTrash}
-                className="delete-button"
-                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
-              />
             </div>
           );
         })}
       </form>
       <p className="goal-form-errors">{formErrors}</p>
+      {/* Do Image instead of font Awesome icon */}
+      {/* <img /> */}
+      <div className="new-step-button">
+        <FontAwesomeIcon icon={faPlusCircle} onClick={handleAddStep} />
+        <span className="goal-label">New Step</span>
+      </div>
       <div className="goal-buttons-container">
-        <button className="goal-form-buttons" onClick={handleAddStep}>
-          Add Step
-        </button>
         <button className="goal-form-buttons" onClick={handleCancel}>
           Cancel
         </button>

@@ -164,8 +164,13 @@ button {
   width: 10%;
   text-align: left;
   align-self: flex-start;
+  margin-left: 1%;
+}
+.new-goal-label {
+  margin-left: 3.5%;
 }
 .goal-title-input {
+  /* width here */
   width: 81%;
   margin: 0 2% 4%;
 }
@@ -179,6 +184,7 @@ button {
   margin-bottom: 4%;
 }
 .step-inputs-container {
+  /* width here */
   display: flex;
   flex-direction: column;
   width: 81%;
@@ -193,9 +199,14 @@ button {
 }
 .delete-button {
   align-self: flex-start;
-  width: 5%;
-  color: blue;
   margin-top: 1%;
+}
+/* .icon {
+  width: 24px;
+  height: 24px;
+} */
+.new-step-button {
+  text-align: left;
 }
 .goal-form-errors {
   color: red;

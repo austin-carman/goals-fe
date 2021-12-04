@@ -5,7 +5,8 @@ import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const NewGoal = (props) => {
   const { sendNewGoal, error } = props;
@@ -79,7 +80,7 @@ const NewGoal = (props) => {
       <h2>Create Your New Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
         <div className="goal-title-container">
-          <label className="goal-label">Goal:</label>
+          <label className="goal-label new-goal-label">Goal:</label>
           <input
             className="goal-title-input"
             type="text"
@@ -93,6 +94,13 @@ const NewGoal = (props) => {
         {goal.steps.map((step, index) => {
           return (
             <div className="steps-container" key={`${step}-${index}`}>
+              <FontAwesomeIcon
+                icon={faMinusCircle}
+                className="delete-button"
+                onClick={() => handleDeleteStep(index)}
+              />
+              {/* Do Image instead of font Awesome icon */}
+              {/* <img /> */}
               <label className="goal-label">Step {index + 1}:</label>
               <div className="step-inputs-container">
                 <input
@@ -112,20 +120,22 @@ const NewGoal = (props) => {
                   placeholder={`Step ${index + 1} Notes`}
                 />
               </div>
-              <FontAwesomeIcon
-                icon={faTrash}
-                className="delete-button"
-                onClick={() => handleDeleteStep(index)}
-              />
             </div>
           );
         })}
       </form>
       <p className="goal-form-errors">{formErrors}</p>
+      <div className="new-step-button">
+        <FontAwesomeIcon
+          icon={faPlusCircle}
+          className="icon"
+          onClick={handleAddStep}
+        />
+        {/* Do Image instead of font Awesome icon */}
+        {/* <img /> */}
+        <span className="goal-label">New Step</span>
+      </div>
       <div className="goal-buttons-container">
-        <button className="goal-form-buttons" onClick={handleAddStep}>
-          Add Step
-        </button>
         <button className="goal-form-buttons" onClick={handleCancel}>
           Cancel
         </button>
