@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const NewGoal = (props) => {
   const { sendNewGoal, error } = props;
@@ -110,12 +112,11 @@ const NewGoal = (props) => {
                   placeholder={`Step ${index + 1} Notes`}
                 />
               </div>
-              <button
+              <FontAwesomeIcon
+                icon={faTrash}
                 className="delete-button"
                 onClick={() => handleDeleteStep(index)}
-              >
-                Delete
-              </button>
+              />
             </div>
           );
         })}
