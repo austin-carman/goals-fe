@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import addStep from "../images/plus-circle.png";
+import deleteStep from "../images/minus-circle.png";
 
 const NewGoal = (props) => {
   const { sendNewGoal, error } = props;
@@ -94,13 +93,11 @@ const NewGoal = (props) => {
         {goal.steps.map((step, index) => {
           return (
             <div className="steps-container" key={`${step}-${index}`}>
-              <FontAwesomeIcon
-                icon={faMinusCircle}
-                className="delete-button"
+              <img
+                src={deleteStep}
+                className="icon"
                 onClick={() => handleDeleteStep(index)}
               />
-              {/* Do Image instead of font Awesome icon */}
-              {/* <img /> */}
               <label className="goal-label">Step {index + 1}:</label>
               <div className="step-inputs-container">
                 <input
@@ -124,17 +121,11 @@ const NewGoal = (props) => {
           );
         })}
       </form>
-      <p className="goal-form-errors">{formErrors}</p>
       <div className="new-step-button">
-        <FontAwesomeIcon
-          icon={faPlusCircle}
-          className="icon"
-          onClick={handleAddStep}
-        />
-        {/* Do Image instead of font Awesome icon */}
-        {/* <img /> */}
-        <span className="goal-label">New Step</span>
+        <img src={addStep} className="icon" onClick={handleAddStep} />
+        <span className="new-step-label">New Step</span>
       </div>
+      <p className="goal-form-errors">{formErrors}</p>
       <div className="goal-buttons-container">
         <button className="goal-form-buttons" onClick={handleCancel}>
           Cancel

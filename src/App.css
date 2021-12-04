@@ -201,12 +201,18 @@ button {
   align-self: flex-start;
   margin-top: 1%;
 }
-/* .icon {
+.icon {
   width: 24px;
   height: 24px;
-} */
+
+}
+.new-step-label {
+  margin-left: 1%;
+}
 .new-step-button {
   text-align: left;
+  display: flex;
+  align-items: center;
 }
 .goal-form-errors {
   color: red;
