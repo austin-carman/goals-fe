@@ -91,10 +91,14 @@ const EditGoal = (props) => {
     });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <h2 className="form-title">Edit Goal</h2>
-      <form className="goal-form">
+      <form className="goal-form" onSubmit={onSubmit}>
         <div className="top-container">
           {/* <input
             className="completed-checkbox"
