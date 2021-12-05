@@ -5,13 +5,13 @@ import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import addStep from "../images/plus-circle.png";
+import deleteStep from "../images/minus-circle.png";
 
 const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
+  console.log("params: ", params);
 
   const initialGoalState = {
     goal_title: props.goals[params.index].goal_title,
@@ -92,10 +92,10 @@ const EditGoal = (props) => {
   };
 
   return (
-    <div className="goal-container">
-      <h2>Edit Goal</h2>
+    <div>
+      <h2 className="form-title">Edit Goal</h2>
       <form className="goal-form">
-        <div className="goal-title-container">
+        <div className="top-container">
           {/* <input
             className="completed-checkbox"
             type="checkbox"
@@ -104,24 +104,27 @@ const EditGoal = (props) => {
             checked={goal.goal_completed}
             onChange={(e) => handleChange(e)}
           /> */}
-          <FontAwesomeIcon
-            icon={faMinusCircle}
-            className="delete-button"
-            onClick={(e) => handleDeleteGoal(e, params.goalId)}
-          />
-          <label className="goal-label">Goal:</label>
-          <input
-            className="goal-title-input edit-goal-text-input"
-            type="text"
-            name="goal_title"
-            value={goal.goal_title}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        {goal.steps.map((step, index) => {
-          return (
-            <div className="steps-container" key={`${step}-${index}`}>
-              {/* <input
+          <div className="icon-label-container">
+            <img
+              src={deleteStep}
+              className="icon"
+              onClick={(e) => handleDeleteGoal(e, params.goalId)}
+            />
+            <div className="label-input-container">
+              <label className="goal-label">Goal:</label>
+              <input
+                className="text-input"
+                type="text"
+                name="goal_title"
+                value={goal.goal_title}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+          </div>
+          {goal.steps.map((step, index) => {
+            return (
+              <div className="icon-label-container" key={`${step}-${index}`}>
+                {/* <input
                 className="completed-checkbox"
                 type="checkbox"
                 name="step_completed"
@@ -129,51 +132,44 @@ const EditGoal = (props) => {
                 checked={step.step_completed}
                 onChange={(e) => handleChange(e, index)}
               /> */}
-              {/* Do Image instead of font Awesome icon */}
-              {/* <img /> */}
-              <FontAwesomeIcon
-                icon={faMinusCircle}
-                className="delete-button"
-                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
-              />
-              <label className="goal-label">Step {index + 1}:</label>
-              <div className="step-inputs-container edit-goal-text-input">
-                <input
-                  className="step-title-input"
-                  type="text"
-                  name="step_title"
-                  value={step.step_title}
-                  onChange={(e) => handleChange(e, index)}
-                  placeholder="Step Title"
+                <img
+                  src={deleteStep}
+                  className="icon"
+                  onClick={(e) => handleDeleteStep(e, index, step.step_id)}
                 />
-                <textarea
-                  className="step-notes-input"
-                  type="text"
-                  name="step_notes"
-                  value={step.step_notes}
-                  onChange={(e) => handleChange(e, index)}
-                  placeholder="Step Notes"
-                />
+                <div className="label-input-container">
+                  <label className="goal-label">Step {index + 1}:</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    name="step_title"
+                    value={step.step_title}
+                    onChange={(e) => handleChange(e, index)}
+                    placeholder="Step Title"
+                  />
+                  <textarea
+                    className="text-input"
+                    type="text"
+                    name="step_notes"
+                    value={step.step_notes || ""}
+                    onChange={(e) => handleChange(e, index)}
+                    placeholder="Step Notes"
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+          <div className="icon-label-container">
+            <img src={addStep} className="icon" onClick={handleAddStep} />
+            <label className="goal-label">New Step</label>
+          </div>
+        </div>
+        <div className="bottom-container">
+          <p className="form-errors">{formErrors}</p>
+          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleSave}>Save</button>
+        </div>
       </form>
-      <p className="goal-form-errors">{formErrors}</p>
-      {/* Do Image instead of font Awesome icon */}
-      {/* <img /> */}
-      <div className="new-step-button">
-        <FontAwesomeIcon icon={faPlusCircle} onClick={handleAddStep} />
-        <span className="goal-label">New Step</span>
-      </div>
-      <div className="goal-buttons-container">
-        <button className="goal-form-buttons" onClick={handleCancel}>
-          Cancel
-        </button>
-        <button className="goal-form-buttons" onClick={handleSave}>
-          Save
-        </button>
-      </div>
       {isModalOpen.open ? (
         <DeleteModal
           isModalOpen={isModalOpen}

@@ -19,7 +19,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	border: 0;
+	/* border: 0; */
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -143,94 +143,42 @@ button {
 }
 
 /* ***** Forms: New Goal/Edit Goal ***** */
-.goal-container {
+.form-title {
   text-align: center;
+}
+.goal-form {
   width: 50%;
   margin: auto;
 }
-.goal-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 1.8rem;
-}
-.goal-title-container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  margin-top: 4%;
-}
-.goal-label {
-  width: 10%;
-  text-align: left;
-  align-self: flex-start;
-  margin-left: 1%;
-}
-.new-goal-label {
-  margin-left: 3.5%;
-}
-.goal-title-input {
-  /* width here */
-  width: 81%;
-  margin: 0 2% 4%;
-}
-.goal-container input {
-  padding: 1.5%;
-}
-.steps-container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  margin-bottom: 4%;
-}
-.step-inputs-container {
-  /* width here */
-  display: flex;
-  flex-direction: column;
-  width: 81%;
-  margin: 0 2%;
-}
-.step-title-input {
-  margin-bottom: 2%;
-}
-.step-notes-input {
-  height: 15vh;
-  resize: none;
-}
-.delete-button {
-  align-self: flex-start;
-  margin-top: 1%;
-}
 .icon {
   width: 24px;
-  height: 24px;
-
-}
-.new-step-label {
-  margin-left: 1%;
-}
-.new-step-button {
-  text-align: left;
-  display: flex;
-  align-items: center;
-}
-.goal-form-errors {
-  color: red;
-}
-.goal-buttons-container {
-  margin-top: 2%;
-  margin-bottom: 15%;
-}
-.goal-form-buttons {
-  width: 15%;
-  margin: 1%;
-}
-
-/* ***** Form: Edit Goal ***** */
-.completed-checkbox {
-  margin-top: 2%;
+  margin-top: 1%;
   margin-right: 2%;
 }
-.edit-goal-text-input {
-  width: 77%;
+.icon-label-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 3% auto;
+}
+.label-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.text-input {
+  margin-bottom: 1%;
+  padding: 1.5%;
+}
+textarea {
+  height: 15vh;
+}
+.form-errors {
+  color: red;
+  margin-top: 5%;
+}
+.bottom-container {
+  text-align: center;
+}
+.bottom-container button {
+  margin: 5% 1% 10%;
 }

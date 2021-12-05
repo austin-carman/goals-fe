@@ -75,65 +75,62 @@ const NewGoal = (props) => {
   }
 
   return (
-    <div className="goal-container">
-      <h2>Create Your New Goal</h2>
+    <div>
+      <h2 className="form-title">Create Your New Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
-        <div className="goal-title-container">
-          <label className="goal-label new-goal-label">Goal:</label>
-          <input
-            className="goal-title-input"
-            type="text"
-            name="goal_title"
-            value={goal.goal_title}
-            onChange={handleChange}
-            placeholder="Goal Title"
-          />
-        </div>
-
-        {goal.steps.map((step, index) => {
-          return (
-            <div className="steps-container" key={`${step}-${index}`}>
-              <img
-                src={deleteStep}
-                className="icon"
-                onClick={() => handleDeleteStep(index)}
-              />
-              <label className="goal-label">Step {index + 1}:</label>
-              <div className="step-inputs-container">
-                <input
-                  className="step-title-input"
-                  type="text"
-                  name="step_title"
-                  value={step.step_title}
-                  onChange={(e) => handleChange(e, index)}
-                  placeholder={`Step ${index + 1} Title`}
+        <div className="top-container">
+          <div className="goal-title-container">
+            <label className="goal-label goal-title-label">Goal:</label>
+            <input
+              className="text-input"
+              type="text"
+              name="goal_title"
+              value={goal.goal_title}
+              onChange={handleChange}
+              placeholder="Goal Title"
+            />
+          </div>
+          {goal.steps.map((step, index) => {
+            return (
+              <div className="step-container" key={`${step}-${index}`}>
+                <img
+                  src={deleteStep}
+                  className="icon"
+                  onClick={() => handleDeleteStep(index)}
                 />
-                <textarea
-                  className="step-notes-input"
-                  type="text"
-                  name="step_notes"
-                  value={step.step_notes}
-                  onChange={(e) => handleChange(e, index)}
-                  placeholder={`Step ${index + 1} Notes`}
-                />
+                <div className="step-inputs-container">
+                  <label className="goal-label">Step {index + 1}:</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    name="step_title"
+                    value={step.step_title}
+                    onChange={(e) => handleChange(e, index)}
+                    placeholder={`Step ${index + 1} Title`}
+                  />
+                  <textarea
+                    className="text-input"
+                    type="text"
+                    name="step_notes"
+                    value={step.step_notes}
+                    onChange={(e) => handleChange(e, index)}
+                    placeholder={`Step ${index + 1} Notes`}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+          <div className="new-step-container">
+            <img src={addStep} className="icon" onClick={handleAddStep} />
+            <label className="goal-label">New Step</label>
+          </div>
+        </div>
+        <div className="bottom-container">
+          <p className="goal-form-errors">{formErrors}</p>
+          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleSubmit}>Save</button>
+        </div>
       </form>
-      <div className="new-step-button">
-        <img src={addStep} className="icon" onClick={handleAddStep} />
-        <span className="new-step-label">New Step</span>
-      </div>
-      <p className="goal-form-errors">{formErrors}</p>
-      <div className="goal-buttons-container">
-        <button className="goal-form-buttons" onClick={handleCancel}>
-          Cancel
-        </button>
-        <button className="goal-form-buttons" onClick={handleSubmit}>
-          Save
-        </button>
-      </div>
     </div>
   );
 };

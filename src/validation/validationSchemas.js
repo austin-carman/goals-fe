@@ -28,10 +28,10 @@ export const goalValidation = async (goal) => {
   }
   steps.forEach((step, index) => {
     if (step.step_title.trim() === "") {
-      stepTitleErrors[index + 1] = "Step Title is required fool";
+      stepTitleErrors[index + 1] = "Step Title is required";
     }
   });
   for (const stepNumber in stepTitleErrors) {
-    return `Step ${stepNumber} is missing step title. Step title is required for all steps`;
+    return `Step ${stepNumber} title is required`;
   }
 };
