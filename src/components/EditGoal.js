@@ -99,8 +99,7 @@ const EditGoal = (props) => {
     <div>
       <h2 className="form-title">Edit Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
-        <div className="top-container">
-          {/* <input
+        {/* <input
             className="completed-checkbox"
             type="checkbox"
             name="goal_completed"
@@ -108,27 +107,27 @@ const EditGoal = (props) => {
             checked={goal.goal_completed}
             onChange={(e) => handleChange(e)}
           /> */}
-          <div className="icon-label-container">
-            <img
-              src={deleteStep}
-              className="icon"
-              onClick={(e) => handleDeleteGoal(e, params.goalId)}
+        <div className="icon-label-container">
+          <img
+            src={deleteStep}
+            className="icon"
+            onClick={(e) => handleDeleteGoal(e, params.goalId)}
+          />
+          <div className="label-input-container">
+            <label className="goal-label">Goal:</label>
+            <input
+              className="text-input"
+              type="text"
+              name="goal_title"
+              value={goal.goal_title}
+              onChange={(e) => handleChange(e)}
             />
-            <div className="label-input-container">
-              <label className="goal-label">Goal:</label>
-              <input
-                className="text-input"
-                type="text"
-                name="goal_title"
-                value={goal.goal_title}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
           </div>
-          {goal.steps.map((step, index) => {
-            return (
-              <div className="icon-label-container" key={`${step}-${index}`}>
-                {/* <input
+        </div>
+        {goal.steps.map((step, index) => {
+          return (
+            <div className="icon-label-container" key={`${step}-${index}`}>
+              {/* <input
                 className="completed-checkbox"
                 type="checkbox"
                 name="step_completed"
@@ -136,37 +135,36 @@ const EditGoal = (props) => {
                 checked={step.step_completed}
                 onChange={(e) => handleChange(e, index)}
               /> */}
-                <img
-                  src={deleteStep}
-                  className="icon"
-                  onClick={(e) => handleDeleteStep(e, index, step.step_id)}
+              <img
+                src={deleteStep}
+                className="icon"
+                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
+              />
+              <div className="label-input-container">
+                <label className="goal-label">Step {index + 1}:</label>
+                <input
+                  className="text-input"
+                  type="text"
+                  name="step_title"
+                  value={step.step_title}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Step Title"
                 />
-                <div className="label-input-container">
-                  <label className="goal-label">Step {index + 1}:</label>
-                  <input
-                    className="text-input"
-                    type="text"
-                    name="step_title"
-                    value={step.step_title}
-                    onChange={(e) => handleChange(e, index)}
-                    placeholder="Step Title"
-                  />
-                  <textarea
-                    className="text-input"
-                    type="text"
-                    name="step_notes"
-                    value={step.step_notes || ""}
-                    onChange={(e) => handleChange(e, index)}
-                    placeholder="Step Notes"
-                  />
-                </div>
+                <textarea
+                  className="text-input"
+                  type="text"
+                  name="step_notes"
+                  value={step.step_notes || ""}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Step Notes"
+                />
               </div>
-            );
-          })}
-          <div className="icon-label-container">
-            <img src={addStep} className="icon" onClick={handleAddStep} />
-            <label className="goal-label">New Step</label>
-          </div>
+            </div>
+          );
+        })}
+        <div className="icon-label-container">
+          <img src={addStep} className="icon" onClick={handleAddStep} />
+          <label className="goal-label">New Step</label>
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>

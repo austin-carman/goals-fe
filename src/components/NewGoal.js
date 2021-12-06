@@ -78,8 +78,9 @@ const NewGoal = (props) => {
     <div>
       <h2 className="form-title">Create Your New Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
-        <div className="top-container">
-          <div className="label-input-container new-goal-title-container">
+        <div className="icon-label-container">
+          <div className="icon"></div>
+          <div className="label-input-container">
             <label className="goal-label">Goal:</label>
             <input
               className="text-input"
@@ -90,40 +91,40 @@ const NewGoal = (props) => {
               placeholder="Goal Title"
             />
           </div>
-          {goal.steps.map((step, index) => {
-            return (
-              <div className="icon-label-container" key={`${step}-${index}`}>
-                <img
-                  src={deleteStep}
-                  className="icon"
-                  onClick={() => handleDeleteStep(index)}
+        </div>
+        {goal.steps.map((step, index) => {
+          return (
+            <div className="icon-label-container" key={`${step}-${index}`}>
+              <img
+                src={deleteStep}
+                className="icon"
+                onClick={() => handleDeleteStep(index)}
+              />
+              <div className="label-input-container">
+                <label className="goal-label">Step {index + 1}:</label>
+                <input
+                  className="text-input"
+                  type="text"
+                  name="step_title"
+                  value={step.step_title}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder={`Step ${index + 1} Title`}
                 />
-                <div className="label-input-container">
-                  <label className="goal-label">Step {index + 1}:</label>
-                  <input
-                    className="text-input"
-                    type="text"
-                    name="step_title"
-                    value={step.step_title}
-                    onChange={(e) => handleChange(e, index)}
-                    placeholder={`Step ${index + 1} Title`}
-                  />
-                  <textarea
-                    className="text-input"
-                    type="text"
-                    name="step_notes"
-                    value={step.step_notes}
-                    onChange={(e) => handleChange(e, index)}
-                    placeholder={`Step ${index + 1} Notes`}
-                  />
-                </div>
+                <textarea
+                  className="text-input"
+                  type="text"
+                  name="step_notes"
+                  value={step.step_notes}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder={`Step ${index + 1} Notes`}
+                />
               </div>
-            );
-          })}
-          <div className="icon-label-container">
-            <img src={addStep} className="icon" onClick={handleAddStep} />
-            <label className="goal-label">New Step</label>
-          </div>
+            </div>
+          );
+        })}
+        <div className="icon-label-container">
+          <img src={addStep} className="icon" onClick={handleAddStep} />
+          <label className="goal-label">New Step</label>
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>
