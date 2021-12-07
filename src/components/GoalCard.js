@@ -6,7 +6,16 @@ import { sortSteps } from "../utils/helperFunctions";
 const GoalCard = (props) => {
   const { goal, index } = props;
   const { push } = useHistory();
-  let stepNumber = 0;
+  let completedSteps = 0;
+  // let stepNumber = 0;
+
+  goal.steps.map((step) => {
+    if (step.step_completed) {
+      completedSteps += 1;
+    }
+  });
+
+  const nextStep = goal.steps.find((step) => step.step_completed === false);
 
   const handleEdit = (index) => {
     push(`/edit-goal/${goal.goal_id}/${index}`);
@@ -23,16 +32,26 @@ const GoalCard = (props) => {
           : "unfinished-goals goal-card-container"
       }
     >
-      <div className="goal-card-header-container">
-        <h2 className="goal-card-title">{goal.goal_title}</h2>
-        <button
-          className="goal-card-edit-button"
-          onClick={() => handleEdit(index)}
-        >
-          Edit
-        </button>
+      {/* <div className="goal-card-header-container"> */}
+      <h2 className="card-title" onClick={() => handleEdit(index)}>
+        {goal.goal_title}
+      </h2>
+      <div>
+        <p className="next-step">
+          Next Step: {nextStep ? nextStep.step_title : "None"}
+        </p>
+        <p>
+          Steps completed: {completedSteps}/{goal.steps.length}{" "}
+        </p>
       </div>
-      {goal.steps.map((step) => {
+      {/* <button
+        className="goal-card-edit-button"
+        onClick={() => handleEdit(index)}
+      >
+        Edit
+      </button> */}
+      {/* </div> */}
+      {/* {goal.steps.map((step) => {
         stepNumber += 1;
         return (
           <div
@@ -52,7 +71,7 @@ const GoalCard = (props) => {
             ) : null}
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };

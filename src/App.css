@@ -61,7 +61,7 @@ html {
 }
 body {
   font-size:1.6rem;
-  line-height: 2;
+  line-height: 1.5;
 }
 h2 {
   font-size:3rem;
@@ -104,43 +104,85 @@ button {
   text-align: center;
 }
 
+/* Goals List */
+.goals-lists-container {
+  width: 80%;
+  margin: 2% auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* ***** Goal Card *****  */
 .goal-card-container {
   border: 1px solid black;
   border-radius: 10px;
-  width: 50%;
-  margin: 5% auto;
-  padding-bottom: 2%;
+  width: 30%;
+  margin: 1.667%;
+  height: 25vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
-.goal-card-header-container {
+.card-title {
+  display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+  overflow: hidden;
+}
+.card-title {
+  align-self: center;
+}
+.card-title:hover {
+  cursor: pointer;
+}
+.next-step {
+  display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+  overflow: hidden;
+}
+.new-goal-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+.new-goal-card:hover {
+  color: red;
+}
+
+
+/* .goal-card-header-container {
   width: 75%;
   margin: 2% auto;
-}
-.goal-card-edit-button {
+} */
+/* .goal-card-edit-button {
   width: 10%;
-}
-.goal-card-step-container {
+} */
+/* .goal-card-step-container {
   width: 90%;
   margin: auto;
   text-align: left;
-}
-.goal-card-step-title-container {
+} */
+/* .goal-card-step-title-container {
   display: flex;
   justify-content: left;
-}
-.goal-card-step-number {
+} */
+/* .goal-card-step-number {
   width: 12%;
-}
-.goal-card-step-title {
+} */
+/* .goal-card-step-title {
   width: 87%;
-}
-.goal-card-step-notes {
+} */
+/* .goal-card-step-notes {
   width: 65%;
   margin: auto;
   text-transform: capitalize;
-}
+} */
 
 /* ***** Forms: New Goal/Edit Goal ***** */
 .form-title {
