@@ -219,11 +219,50 @@ textarea {
 }
 .form-errors {
   color: red;
-  margin-top: 5%;
+  font-size: 1.4rem;
+  /* margin-top: 5%; */
 }
 .bottom-container {
   text-align: center;
 }
 .bottom-container button {
   margin: 5% 1% 10%;
+}
+
+/* Login Form */
+.login-form-container {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  /* height: 50vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login-form-container h2 {
+  margin: 5%;
+}
+.login-form-container input {
+  width: 50%;
+  margin: 2%;
+  padding: 1.5%;
+}
+.login-form-container button {
+  margin: 2%;
+  cursor: pointer;
+}
+.create-account-link {
+  margin: 2%;
+  font-size: 1.4rem;
+  text-decoration: underline;
+  color: blue;
+}
+.create-account-link:hover {
+  cursor: pointer;
 }

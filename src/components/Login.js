@@ -63,7 +63,7 @@ const Login = (props) => {
   }
 
   return (
-    <div>
+    <div className="login-form-container">
       <h2>Sign In</h2>
       <input
         type="text"
@@ -79,10 +79,11 @@ const Login = (props) => {
         onChange={handleChange}
         placeholder="password"
       />
+      <p className="form-errors">
+        {formErrors ? formErrors : serverValidationMessage}
+      </p>
       <button onClick={handleSubmit}>Sign In</button>
-      <div>
-        <p>{formErrors ? formErrors : serverValidationMessage}</p>
-      </div>
+      <p className="create-account-link">Create Account Here</p>
       {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );
