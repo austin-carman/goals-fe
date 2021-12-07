@@ -230,7 +230,7 @@ textarea {
 }
 
 /* Login Form */
-.login-form-container {
+.sign-in-container {
   text-align: center;
   border: 1px solid black;
   border-radius: 10px;
@@ -245,15 +245,15 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.login-form-container h2 {
+.sign-in-container h2 {
   margin: 5%;
 }
-.login-form-container input {
+.sign-in-container input {
   width: 50%;
   margin: 2%;
   padding: 1.5%;
 }
-.login-form-container button {
+.sign-in-container button {
   margin: 2%;
   cursor: pointer;
 }

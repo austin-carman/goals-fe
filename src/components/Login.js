@@ -63,7 +63,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className="login-form-container">
+    <div className="sign-in-container">
       <h2>Sign In</h2>
       <input
         type="text"
@@ -84,6 +84,7 @@ const Login = (props) => {
       </p>
       <button onClick={handleSubmit}>Sign In</button>
       <p className="create-account-link">Create Account Here</p>
+      {/* put laoding animation to replace or remove line below */}
       {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );
