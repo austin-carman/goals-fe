@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
+import addStep from "../images/plus-circle.png";
+import deleteStep from "../images/minus-circle.png";
 
 const NewGoal = (props) => {
-  const { isFetching, sendNewGoal, error, serverValidateMessage } = props;
+  const { sendNewGoal, error } = props;
 
   const initialState = {
     goal_title: "",
@@ -14,7 +16,7 @@ const NewGoal = (props) => {
   };
 
   const [goal, setGoal] = useState(initialState);
-  const [formErrors, setFormErrors] = useState(null);
+  const [formErrors, setFormErrors] = useState("");
 
   const history = useHistory();
   const { userId } = useParams();
@@ -33,15 +35,21 @@ const NewGoal = (props) => {
     }
   };
 
+  const handleCancel = () => {
+    history.push(`/profile/${userId}`);
+  };
+
   const handleAddStep = () => {
     let newGoal = { ...goal };
     newGoal.steps = [...goal.steps, { step_title: "", step_notes: "" }];
     setGoal(newGoal);
+    setFormErrors("");
   };
 
-  const handleRemoveStep = (index) => {
+  const handleDeleteStep = (index) => {
     let newGoal = { ...goal };
     newGoal.steps.splice(index, 1);
+    setFormErrors("");
     setGoal(newGoal);
   };
 
@@ -58,79 +66,86 @@ const NewGoal = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   if (error) {
     return <h2>We&apos;re currently experiencing an error.</h2>;
   }
 
   return (
     <div>
-      <h2>New Goal</h2>
-      <form>
-        <label>
-          Goal Title:
-          <input
-            type="text"
-            name="goal_title"
-            value={goal.goal_title}
-            onChange={handleChange}
-          />
-        </label>
+      <h2 className="form-title">Create Your New Goal</h2>
+      <form className="goal-form" onSubmit={onSubmit}>
+        <div className="icon-label-container">
+          <div className="icon"></div>
+          <div className="label-input-container">
+            <label className="goal-label">Goal:</label>
+            <input
+              className="text-input"
+              type="text"
+              name="goal_title"
+              value={goal.goal_title}
+              onChange={handleChange}
+              placeholder="Goal Title"
+            />
+          </div>
+        </div>
         {goal.steps.map((step, index) => {
           return (
-            <div key={`${step}-${index}`}>
-              <label>
-                Step {index + 1}:
+            <div className="icon-label-container" key={`${step}-${index}`}>
+              <img
+                src={deleteStep}
+                className="icon"
+                onClick={() => handleDeleteStep(index)}
+              />
+              <div className="label-input-container">
+                <label className="goal-label">Step {index + 1}:</label>
                 <input
+                  className="text-input"
                   type="text"
                   name="step_title"
                   value={step.step_title}
                   onChange={(e) => handleChange(e, index)}
-                  placeholder="Step Title"
+                  placeholder={`Step ${index + 1} Title`}
                 />
-              </label>
-              <label>
-                <input
+                <textarea
+                  className="text-input"
                   type="text"
                   name="step_notes"
                   value={step.step_notes}
                   onChange={(e) => handleChange(e, index)}
-                  placeholder="Step Notes"
+                  placeholder={`Step ${index + 1} Notes`}
                 />
-              </label>
+              </div>
             </div>
           );
         })}
+        <div className="icon-label-container">
+          <img src={addStep} className="icon" onClick={handleAddStep} />
+          <label className="goal-label">New Step</label>
+        </div>
+        <div className="bottom-container">
+          <p className="form-errors">{formErrors}</p>
+          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleSubmit}>Save</button>
+        </div>
       </form>
-      <Link to={`/profile/${userId}`}>
-        <button>Cancel</button>
-      </Link>
-      <button onClick={handleAddStep}>Add Step</button>
-      {goal.steps.length > 0 && (
-        <button onClick={() => handleRemoveStep(goal.steps.length - 1)}>
-          Remove Step
-        </button>
-      )}
-      <button onClick={handleSubmit}>Submit</button>
-      <p>{formErrors}</p>
-      <p>{serverValidateMessage}</p>
-      {isFetching && <p>Loading...</p>}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.goalsReducer.isFetching,
     error: state.goalsReducer.error,
     serverValidateMessage: state.goalsReducer.serverValidateMessage,
   };
 };
 
 NewGoal.propTypes = {
-  isFetching: PropTypes.bool,
   sendNewGoal: PropTypes.func,
   error: PropTypes.any,
-  serverValidateMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);

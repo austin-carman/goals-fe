@@ -18,9 +18,6 @@ const Navbar = (props) => {
           <Link to="/login" className="navlink">
             Sign In
           </Link>
-          <Link to="/register" className="navlink">
-            Create Account
-          </Link>
           <Link onClick={handleSignOut} to="/" className="navlink">
             Logout
           </Link>

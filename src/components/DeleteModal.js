@@ -1,11 +1,10 @@
 import React from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/goalsActions";
 import { deleteStep } from "../actions/goalsActions";
-import { removeStep } from "../utils/helperFunctions";
 
 const customStyles = {
   content: {
@@ -21,70 +20,62 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const DeleteModal = (props) => {
-  const {
-    isModalOpen,
-    setIsModalOpen,
-    deleteGoal,
-    deleteStep,
-    goal,
-    setGoal,
-    toDelete,
-    setToDelete,
-  } = props;
-  const params = useParams();
+  const { isModalOpen, setIsModalOpen, deleteGoal, deleteStep, goal, setGoal } =
+    props;
   const history = useHistory();
+
+  console.log(isModalOpen);
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   const handleDelete = () => {
-    if (toDelete === "deleteGoal") {
-      deleteGoal(params.goalId);
-      setIsModalOpen(false);
+    if (isModalOpen.goalToDelete.goalId) {
+      deleteGoal(isModalOpen.goalToDelete.goalId);
+      setIsModalOpen({
+        ...isModalOpen,
+        open: false,
+        goalToDelete: { goalId: null },
+      });
       history.goBack();
-    } else if (toDelete === "removeStep") {
-      const stepToDelete = removeStep(goal);
-      deleteStep(stepToDelete.stepId);
-      setToDelete(null);
-      setGoal(stepToDelete.userGoal);
-      setIsModalOpen(false);
+      return;
     }
+    if (isModalOpen.stepToDelete.stepId) {
+      deleteStep(isModalOpen.stepToDelete.stepId);
+    }
+    let newGoal = { ...goal };
+    newGoal.steps.splice(isModalOpen.stepToDelete.index, 1);
+    setGoal(newGoal);
+    setIsModalOpen({
+      ...isModalOpen,
+      open: false,
+      stepToDelete: { stepId: null, index: null },
+    });
   };
 
   return (
     <div>
       <Modal
-        isOpen={isModalOpen}
+        isOpen={isModalOpen.open}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        {toDelete === "removeStep" ? (
-          <h2>Are you sure you want to delete your last step?</h2>
-        ) : (
-          <h2>
-            Are you sure you want to delete your goal and all associated steps?
-          </h2>
-        )}
+        <h2>Are you sure you want to delete?</h2>
         <button onClick={closeModal}>Cancel</button>
-        <button id={toDelete} onClick={handleDelete}>
-          {`Delete ${toDelete === "removeStep" ? "step" : "goal"}`}
-        </button>
+        <button onClick={handleDelete}>Delete</button>
       </Modal>
     </div>
   );
 };
 
 DeleteModal.propTypes = {
-  isModalOpen: PropTypes.bool,
+  isModalOpen: PropTypes.object,
   setIsModalOpen: PropTypes.func,
-  setErrMessage: PropTypes.func,
-  deleteGoal: PropTypes.func,
-  deleteStep: PropTypes.func,
   goal: PropTypes.object,
   setGoal: PropTypes.any,
-  toDelete: PropTypes.any,
-  setToDelete: PropTypes.any,
+  deleteGoal: PropTypes.func,
+  deleteStep: PropTypes.func,
 };
 
 export default connect(null, { deleteGoal, deleteStep })(DeleteModal);

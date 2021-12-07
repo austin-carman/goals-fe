@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
@@ -63,7 +63,7 @@ const Login = (props) => {
   }
 
   return (
-    <div>
+    <div className="sign-in-container">
       <h2>Sign In</h2>
       <input
         type="text"
@@ -79,10 +79,14 @@ const Login = (props) => {
         onChange={handleChange}
         placeholder="password"
       />
+      <p className="form-errors">
+        {formErrors ? formErrors : serverValidationMessage}
+      </p>
       <button onClick={handleSubmit}>Sign In</button>
-      <div>
-        <p>{formErrors ? formErrors : serverValidationMessage}</p>
-      </div>
+      <Link to="/register" className="create-account-link">
+        <p>Create Account Here</p>
+      </Link>
+      {/* put laoding animation to replace or remove line below */}
       {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );

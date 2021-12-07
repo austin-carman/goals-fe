@@ -4,14 +4,16 @@ import DeleteModal from "./DeleteModal";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { removeStep } from "../utils/helperFunctions";
 import { goalValidation } from "../validation/validationSchemas";
+import addStep from "../images/plus-circle.png";
+import deleteStep from "../images/minus-circle.png";
 
 const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
+  console.log("params: ", params);
 
-  const initialState = {
+  const initialGoalState = {
     goal_title: props.goals[params.index].goal_title,
     goal_completed: props.goals[params.index].goal_completed,
     user_id: props.goals[params.index].user_id,
@@ -19,10 +21,20 @@ const EditGoal = (props) => {
     steps: props.goals[params.index].steps,
   };
 
-  const [goal, setGoal] = useState(initialState);
+  const initialIsModalOpenState = {
+    open: false,
+    goalToDelete: {
+      goalId: null,
+    },
+    stepToDelete: {
+      stepId: null,
+      index: null,
+    },
+  };
+
+  const [goal, setGoal] = useState(initialGoalState);
   const [formErrors, setFormErrors] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [toDelete, setToDelete] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(initialIsModalOpenState);
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -61,98 +73,111 @@ const EditGoal = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const handleDelete = (e) => {
-    setToDelete(e.target.id);
-    if (e.target.id === "removeStep") {
-      const updatedGoal = removeStep(goal);
-      updatedGoal.stepId ? setIsModalOpen(true) : setGoal(updatedGoal);
-    } else if (e.target.id === "deleteGoal") {
-      setIsModalOpen(true);
-    }
+  const handleDeleteGoal = (e, id) => {
+    e.preventDefault();
+    setIsModalOpen({
+      ...isModalOpen,
+      open: true,
+      goalToDelete: { goalId: id },
+    });
+  };
+
+  const handleDeleteStep = (e, index, id) => {
+    e.preventDefault();
+    setIsModalOpen({
+      ...isModalOpen,
+      open: true,
+      stepToDelete: { stepId: id, index: index },
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
     <div>
-      <h2>Edit Goal</h2>
-      <form>
-        <label>
-          Goal Title
-          <input
-            type="text"
-            name="goal_title"
-            value={goal.goal_title}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label>
-          Goal Completed
-          <input
+      <h2 className="form-title">Edit Goal</h2>
+      <form className="goal-form" onSubmit={onSubmit}>
+        {/* <input
+            className="completed-checkbox"
             type="checkbox"
             name="goal_completed"
             value={goal.goal_completed}
             checked={goal.goal_completed}
             onChange={(e) => handleChange(e)}
+          /> */}
+        <div className="icon-label-container">
+          <img
+            src={deleteStep}
+            className="icon"
+            onClick={(e) => handleDeleteGoal(e, params.goalId)}
           />
-        </label>
+          <div className="label-input-container">
+            <label className="goal-label">Goal:</label>
+            <input
+              className="text-input"
+              type="text"
+              name="goal_title"
+              value={goal.goal_title}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
         {goal.steps.map((step, index) => {
           return (
-            <div key={`${step}-${index}`}>
-              <label>
-                Step {index + 1}:
+            <div className="icon-label-container" key={`${step}-${index}`}>
+              {/* <input
+                className="completed-checkbox"
+                type="checkbox"
+                name="step_completed"
+                value={step.step_completed}
+                checked={step.step_completed}
+                onChange={(e) => handleChange(e, index)}
+              /> */}
+              <img
+                src={deleteStep}
+                className="icon"
+                onClick={(e) => handleDeleteStep(e, index, step.step_id)}
+              />
+              <div className="label-input-container">
+                <label className="goal-label">Step {index + 1}:</label>
                 <input
+                  className="text-input"
                   type="text"
                   name="step_title"
                   value={step.step_title}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Title"
                 />
-              </label>
-              <label>
-                Notes:
-                <input
+                <textarea
+                  className="text-input"
                   type="text"
                   name="step_notes"
-                  value={step.step_notes}
+                  value={step.step_notes || ""}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Step Notes"
                 />
-              </label>
-              <label>
-                Step Completed
-                <input
-                  type="checkbox"
-                  name="step_completed"
-                  value={step.step_completed}
-                  checked={step.step_completed}
-                  onChange={(e) => handleChange(e, index)}
-                />
-              </label>
+              </div>
             </div>
           );
         })}
+        <div className="icon-label-container">
+          <img src={addStep} className="icon" onClick={handleAddStep} />
+          <label className="goal-label">New Step</label>
+        </div>
+        <div className="bottom-container">
+          <p className="form-errors">{formErrors}</p>
+          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleSave}>Save</button>
+        </div>
       </form>
-      <div>
-        <button onClick={handleCancel}>Cancel</button>
-        <button onClick={handleAddStep}>Add Step</button>
-        {goal.steps.length > 0 && (
-          <button id="removeStep" onClick={(e) => handleDelete(e)}>
-            Remove Step
-          </button>
-        )}
-        <button onClick={handleSave}>Save</button>
-        <button id="deleteGoal" onClick={(e) => handleDelete(e)}>
-          Delete
-        </button>
-      </div>
-      <p>{formErrors}</p>
-      {isModalOpen ? (
+      {isModalOpen.open ? (
         <DeleteModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           goal={goal}
           setGoal={setGoal}
-          toDelete={toDelete}
-          setToDelete={setToDelete}
         />
       ) : null}
     </div>
