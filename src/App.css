@@ -75,9 +75,9 @@ button {
 }
 
 /* ***** Navbar *****  */
-.navbar-header {
+/* .navbar-header {
   margin-bottom: 5%;
-}
+} */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -103,11 +103,14 @@ button {
 .profile-content {
   text-align: center;
 }
+.profile-content h2 {
+  margin: 5% auto 3.33%;
+}
 
 /* Goals List */
 .goals-lists-container {
   width: 80%;
-  margin: 2% auto;
+  margin: 0% auto 2%;
   display: flex;
   flex-wrap: wrap;
 }
@@ -123,6 +126,9 @@ button {
   flex-direction: column;
   justify-content: space-between;
 }
+.goal-card-container:hover {
+  cursor: pointer;
+}
 .card-title {
   display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -132,9 +138,6 @@ button {
 }
 .card-title {
   align-self: center;
-}
-.card-title:hover {
-  cursor: pointer;
 }
 .next-step {
   display: -webkit-box;

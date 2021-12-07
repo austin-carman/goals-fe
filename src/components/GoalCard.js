@@ -31,11 +31,10 @@ const GoalCard = (props) => {
           ? "completed-goals goal-card-container"
           : "unfinished-goals goal-card-container"
       }
+      onClick={() => handleEdit(index)}
     >
       {/* <div className="goal-card-header-container"> */}
-      <h2 className="card-title" onClick={() => handleEdit(index)}>
-        {goal.goal_title}
-      </h2>
+      <h2 className="card-title">{goal.goal_title}</h2>
       <div>
         <p className="next-step">
           Next Step: {nextStep ? nextStep.step_title : "None"}
