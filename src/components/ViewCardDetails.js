@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React from "react";
 
@@ -19,7 +20,7 @@ const ViewCardDetails = () => {
           Edit
         </button>
       </div>
-      {goal.steps.map((step) => {
+      {/* {goal.steps.map((step) => {
         stepNumber += 1;
         return (
           <div
@@ -39,7 +40,7 @@ const ViewCardDetails = () => {
             ) : null}
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };

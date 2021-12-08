@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { sortSteps } from "../utils/helperFunctions";
 
 const GoalCard = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const { goal, index } = props;
   const history = useHistory();
   let completedSteps = 0;
@@ -15,9 +15,10 @@ const GoalCard = (props) => {
     }
   });
 
+  console.log(goal);
+
   const handleViewCard = () => {
-    console.log("view Card details");
-    // history.push("/goal-details/:goalId");
+    history.push(`/goal-details/${goal.goal_id}`);
   };
 
   const nextStep = goal.steps.find((step) => step.step_completed === false);
