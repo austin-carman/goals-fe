@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router";
 import { sortSteps } from "../utils/helperFunctions";
 import ViewCardDetails from "./ViewCardDetails";
 
 const GoalCard = (props) => {
   const { goal, index } = props;
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const history = useHistory();
   let completedSteps = 0;
 
   goal.steps.map((step) => {
@@ -48,6 +46,7 @@ const GoalCard = (props) => {
       <ViewCardDetails
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
+        goal={goal}
       />
     </div>
   );
