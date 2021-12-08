@@ -10,7 +10,6 @@ const GoalCard = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { push } = useHistory();
   let completedSteps = 0;
-  // let stepNumber = 0;
 
   goal.steps.map((step) => {
     if (step.step_completed) {
@@ -21,13 +20,8 @@ const GoalCard = (props) => {
   const nextStep = goal.steps.find((step) => step.step_completed === false);
 
   const handleViewCard = () => {
-    console.log("view Card");
     setIsModalOpen(true);
   };
-
-  // const handleEdit = (index) => {
-  //   push(`/edit-goal/${goal.goal_id}/${index}`);
-  // };
 
   const sortedSteps = sortSteps([...goal.steps]);
   goal.steps = sortedSteps;
@@ -41,8 +35,6 @@ const GoalCard = (props) => {
       }
       onClick={handleViewCard}
     >
-      {/* onClick={() => handleEdit(index)} */}
-      {/* <div className="goal-card-header-container"> */}
       <h2 className="card-title">{goal.goal_title}</h2>
       <div>
         <p className="next-step">
@@ -52,34 +44,6 @@ const GoalCard = (props) => {
           Steps completed: {completedSteps}/{goal.steps.length}{" "}
         </p>
       </div>
-      {/* <button
-        className="goal-card-edit-button"
-        onClick={() => handleEdit(index)}
-      >
-        Edit
-      </button> */}
-      {/* </div> */}
-      {/* {goal.steps.map((step) => {
-        stepNumber += 1;
-        return (
-          <div
-            key={step.step_id}
-            className={
-              step.step_completed
-                ? "goal-card-completed-steps goal-card-step-container"
-                : "goal-card-unfinished-steps goal-card-step-container"
-            }
-          >
-            <div className="goal-card-step-title-container">
-              <h3 className="goal-card-step-number">Step {stepNumber}:</h3>
-              <h3 className="goal-card-step-title">{step.step_title}</h3>
-            </div>
-            {step.step_notes ? (
-              <p className="goal-card-step-notes">Notes: {step.step_notes}</p>
-            ) : null}
-          </div>
-        );
-      })} */}
       <ViewCardModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}

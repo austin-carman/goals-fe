@@ -24,8 +24,6 @@ const DeleteModal = (props) => {
     props;
   const history = useHistory();
 
-  console.log(isModalOpen);
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
