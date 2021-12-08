@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 
@@ -20,11 +20,24 @@ Modal.setAppElement("#root");
 
 const ViewCardDetails = (props) => {
   const { modalIsOpen, setModalIsOpen, goal } = props;
+  const [goalDetails, setGoalDetails] = useState(false);
   let stepNumber = 0;
 
   const handleEdit = (index) => {
     console.log("edit");
     // push(`/edit-goal/${goal.goal_id}/${index}`);
+  };
+
+  const handleChange = (e, index) => {
+    const { name, value, type, checked } = e.target;
+    const valueToUse = type === "checkbox" ? checked : value;
+    if (index === undefined) {
+      setGoalDetails({ ...goal, [name]: valueToUse });
+    } else {
+      let stepEdits = [...goal.steps];
+      stepEdits[index][name] = valueToUse;
+      setGoalDetails({ ...goal, steps: stepEdits });
+    }
   };
 
   const closeModal = () => {
@@ -55,7 +68,7 @@ const ViewCardDetails = (props) => {
         >
           Edit
         </button>
-        {goal.steps.map((step) => {
+        {goal.steps.map((step, index) => {
           stepNumber += 1;
           return (
             <div
