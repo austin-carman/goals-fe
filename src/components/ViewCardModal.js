@@ -10,7 +10,6 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    // width: "75%",
   },
 };
 
@@ -18,17 +17,17 @@ Modal.setAppElement("#root");
 
 const ViewCardModal = (props) => {
   const { isModalOpen, setIsModalOpen, goal } = props;
-  let stepNumber = 0;
+  // let stepNumber = 0;
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  const handleEdit = () => {
-    // pass index as prop
-    // push(`/edit-goal/${goal.goal_id}/${index}`);
-    console.log("edit");
-  };
+  // const handleEdit = () => {
+  //   // pass index as prop
+  //   // push(`/edit-goal/${goal.goal_id}/${index}`);
+  //   console.log("edit");
+  // };
 
   return (
     <div>
@@ -38,34 +37,50 @@ const ViewCardModal = (props) => {
         style={customStyles}
       >
         <h2>{goal.goal_title}</h2>
+        {/* <input
+          className="completed-checkbox"
+          type="checkbox"
+          name="goal_completed"
+          value={goal.goal_completed}
+          checked={goal.goal_completed}
+          onChange={(e) => handleChange(e)}
+        />
         <button className="goal-card-edit-button" onClick={() => handleEdit()}>
           Edit
-        </button>
-        {goal.steps.map((step) => {
-          stepNumber += 1;
-          return (
-            <div
-              key={step.step_id}
-              className={
-                step.step_completed
-                  ? "goal-card-completed-steps goal-card-step-container"
-                  : "goal-card-unfinished-steps goal-card-step-container"
-              }
-            >
-              <div className="goal-card-step-title-container">
-                <h3 className="goal-card-step-number">Step {stepNumber}:</h3>
-                <h3 className="goal-card-step-title">{step.step_title}</h3>
-              </div>
-              {step.step_notes ? (
-                <p className="goal-card-step-notes">Notes: {step.step_notes}</p>
-              ) : null}
-            </div>
-          );
-        })}
+        </button> */}
       </Modal>
     </div>
   );
 };
+// {goal.steps.map((step) => {
+//   stepNumber += 1;
+//   return (
+//     <div
+//       key={step.step_id}
+//       className={
+//         step.step_completed
+//           ? "goal-card-completed-steps goal-card-step-container"
+//           : "goal-card-unfinished-steps goal-card-step-container"
+//       }
+//     >
+//       <div className="goal-card-step-title-container">
+//         <h3 className="goal-card-step-number">Step {stepNumber}:</h3>
+//         <h3 className="goal-card-step-title">{step.step_title}</h3>
+//       </div>
+//       {step.step_notes ? (
+//         <p className="goal-card-step-notes">Notes: {step.step_notes}</p>
+//       ) : null}
+//       {/* <input
+//         className="completed-checkbox"
+//         type="checkbox"
+//         name="step_completed"
+//         value={step.step_completed}
+//         checked={step.step_completed}
+//         onChange={(e) => handleChange(e, index)}
+//       /> */}
+//     </div>
+//   );
+// })}
 
 ViewCardModal.propTypes = {
   isModalOpen: PropTypes.bool,

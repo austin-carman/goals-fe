@@ -44,13 +44,11 @@ const GoalCard = (props) => {
           Steps completed: {completedSteps}/{goal.steps.length}{" "}
         </p>
       </div>
-      {isModalOpen ? (
-        <ViewCardModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          goal={goal}
-        />
-      ) : null}
+      <ViewCardModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        goal={goal}
+      />
     </div>
   );
 };

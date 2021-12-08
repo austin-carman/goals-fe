@@ -99,14 +99,6 @@ const EditGoal = (props) => {
     <div>
       <h2 className="form-title">Edit Goal</h2>
       <form className="goal-form" onSubmit={onSubmit}>
-        {/* <input
-            className="completed-checkbox"
-            type="checkbox"
-            name="goal_completed"
-            value={goal.goal_completed}
-            checked={goal.goal_completed}
-            onChange={(e) => handleChange(e)}
-          /> */}
         <div className="icon-label-container">
           <img
             src={deleteStep}
@@ -127,14 +119,6 @@ const EditGoal = (props) => {
         {goal.steps.map((step, index) => {
           return (
             <div className="icon-label-container" key={`${step}-${index}`}>
-              {/* <input
-                className="completed-checkbox"
-                type="checkbox"
-                name="step_completed"
-                value={step.step_completed}
-                checked={step.step_completed}
-                onChange={(e) => handleChange(e, index)}
-              /> */}
               <img
                 src={deleteStep}
                 className="icon"
@@ -172,14 +156,14 @@ const EditGoal = (props) => {
           <button onClick={handleSave}>Save</button>
         </div>
       </form>
-      {isModalOpen.open ? (
-        <DeleteModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          goal={goal}
-          setGoal={setGoal}
-        />
-      ) : null}
+      {/* {isModalOpen.open ? ( */}
+      <DeleteModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        goal={goal}
+        setGoal={setGoal}
+      />
+      {/* ) : null} */}
     </div>
   );
 };
