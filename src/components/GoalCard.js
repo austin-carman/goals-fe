@@ -83,6 +83,7 @@ const GoalCard = (props) => {
       <ViewCardModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        goal={goal}
       ></ViewCardModal>
     </div>
   );

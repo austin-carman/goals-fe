@@ -16,11 +16,21 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const ViewCardModal = (props) => {
+  const { isModalOpen, setIsModalOpen, goal } = props;
   console.log("modal here");
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
-      <Modal isOpen={props.isModalOpen} style={customStyles}>
-        <h2>Title</h2>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <h2>{goal.goal_title}</h2>
       </Modal>
     </div>
   );
@@ -29,6 +39,7 @@ const ViewCardModal = (props) => {
 ViewCardModal.propTypes = {
   isModalOpen: PropTypes.bool,
   setIsModalOpen: PropTypes.func,
+  goal: PropTypes.object,
 };
 
 export default ViewCardModal;
