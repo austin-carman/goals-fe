@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import React, { useState } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 
 const customStyles = {
   content: {
@@ -19,13 +18,15 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const ViewCardDetails = (props) => {
-  const { modalIsOpen, setModalIsOpen, goal } = props;
+  const { modalIsOpen, setModalIsOpen, goal, goalIndex } = props;
   const [goalDetails, setGoalDetails] = useState(false);
+  const history = useHistory();
   let stepNumber = 0;
 
+  console.log(goalDetails);
+
   const handleEdit = (index) => {
-    console.log("edit");
-    // push(`/edit-goal/${goal.goal_id}/${index}`);
+    history.push(`/edit-goal/${goal.goal_id}/${index}`);
   };
 
   const handleChange = (e, index) => {
@@ -64,7 +65,7 @@ const ViewCardDetails = (props) => {
         <div className="goal-card-header-container"></div>
         <button
           className="goal-card-edit-button"
-          onClick={() => handleEdit(index)}
+          onClick={() => handleEdit(goalIndex)}
         >
           Edit
         </button>
@@ -106,6 +107,7 @@ ViewCardDetails.propTypes = {
   modalIsOpen: PropTypes.bool,
   setModalIsOpen: PropTypes.func,
   goal: PropTypes.object,
+  goalIndex: PropTypes.number,
 };
 
 export default ViewCardDetails;

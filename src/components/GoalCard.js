@@ -47,6 +47,7 @@ const GoalCard = (props) => {
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         goal={goal}
+        goalIndex={index}
       />
     </div>
   );
