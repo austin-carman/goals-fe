@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
@@ -17,9 +18,13 @@ const GoalCard = (props) => {
 
   const nextStep = goal.steps.find((step) => step.step_completed === false);
 
-  const handleEdit = (index) => {
-    push(`/edit-goal/${goal.goal_id}/${index}`);
+  const handleViewCard = () => {
+    console.log("view Card");
   };
+
+  // const handleEdit = (index) => {
+  //   push(`/edit-goal/${goal.goal_id}/${index}`);
+  // };
 
   const sortedSteps = sortSteps([...goal.steps]);
   goal.steps = sortedSteps;
@@ -31,8 +36,9 @@ const GoalCard = (props) => {
           ? "completed-goals goal-card-container"
           : "unfinished-goals goal-card-container"
       }
-      onClick={() => handleEdit(index)}
+      onClick={handleViewCard}
     >
+      {/* onClick={() => handleEdit(index)} */}
       {/* <div className="goal-card-header-container"> */}
       <h2 className="card-title">{goal.goal_title}</h2>
       <div>
