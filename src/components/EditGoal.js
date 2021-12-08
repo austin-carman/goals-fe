@@ -172,14 +172,12 @@ const EditGoal = (props) => {
           <button onClick={handleSave}>Save</button>
         </div>
       </form>
-      {isModalOpen.open ? (
-        <DeleteModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          goal={goal}
-          setGoal={setGoal}
-        />
-      ) : null}
+      <DeleteModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        goal={goal}
+        setGoal={setGoal}
+      />
     </div>
   );
 };
