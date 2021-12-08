@@ -7,7 +7,6 @@ import Profile from "./components/Profile";
 import Register from "./components/Register";
 import NewGoal from "./components/NewGoal";
 import EditGoal from "./components/EditGoal";
-import ViewCardDetails from "./components/ViewCardDetails";
 import "./App.css";
 
 function App() {
@@ -22,9 +21,6 @@ function App() {
       </Route>
       <Route path="/profile/:userId">
         <Profile />
-      </Route>
-      <Route path="/goal-details/:goalId">
-        <ViewCardDetails />
       </Route>
       <Route path="/new-goal/:userId">
         <NewGoal />

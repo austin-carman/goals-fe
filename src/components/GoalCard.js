@@ -19,7 +19,6 @@ const GoalCard = (props) => {
 
   const openModal = () => {
     setModalIsOpen(true);
-    // history.push(`/goal-details/${goal.goal_id}`);
   };
 
   const nextStep = goal.steps.find((step) => step.step_completed === false);
