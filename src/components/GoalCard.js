@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { sortSteps } from "../utils/helperFunctions";
+import ViewCardModal from "./ViewCardModal";
 
 const GoalCard = (props) => {
   const { goal, index } = props;
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { push } = useHistory();
   let completedSteps = 0;
   // let stepNumber = 0;
@@ -20,6 +22,7 @@ const GoalCard = (props) => {
 
   const handleViewCard = () => {
     console.log("view Card");
+    setIsModalOpen(true);
   };
 
   // const handleEdit = (index) => {
@@ -77,6 +80,10 @@ const GoalCard = (props) => {
           </div>
         );
       })} */}
+      <ViewCardModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      ></ViewCardModal>
     </div>
   );
 };
