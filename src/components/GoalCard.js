@@ -1,11 +1,13 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { sortSteps } from "../utils/helperFunctions";
+import ViewCardDetails from "./ViewCardDetails";
 
 const GoalCard = (props) => {
-  // eslint-disable-next-line no-unused-vars
   const { goal, index } = props;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const history = useHistory();
   let completedSteps = 0;
 
@@ -15,10 +17,9 @@ const GoalCard = (props) => {
     }
   });
 
-  console.log(goal);
-
-  const handleViewCard = () => {
-    history.push(`/goal-details/${goal.goal_id}`);
+  const openModal = () => {
+    setModalIsOpen(true);
+    // history.push(`/goal-details/${goal.goal_id}`);
   };
 
   const nextStep = goal.steps.find((step) => step.step_completed === false);
@@ -33,17 +34,22 @@ const GoalCard = (props) => {
           ? "completed-goals goal-card-container"
           : "unfinished-goals goal-card-container"
       }
-      onClick={handleViewCard}
     >
-      <h2 className="card-title">{goal.goal_title}</h2>
-      <div>
-        <p className="next-step">
-          Next Step: {nextStep ? nextStep.step_title : "None"}
-        </p>
-        <p>
-          Steps completed: {completedSteps}/{goal.steps.length}{" "}
-        </p>
+      <div onClick={openModal}>
+        <h2 className="card-title">{goal.goal_title}</h2>
+        <div>
+          <p className="next-step">
+            Next Step: {nextStep ? nextStep.step_title : "None"}
+          </p>
+          <p>
+            Steps completed: {completedSteps}/{goal.steps.length}{" "}
+          </p>
+        </div>
       </div>
+      <ViewCardDetails
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+      />
     </div>
   );
 };

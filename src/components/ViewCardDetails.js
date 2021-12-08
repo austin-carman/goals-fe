@@ -1,25 +1,52 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React from "react";
+import Modal from "react-modal";
+import PropTypes from "prop-types";
 
-const ViewCardDetails = () => {
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
+Modal.setAppElement("#root");
+
+const ViewCardDetails = (props) => {
+  const { modalIsOpen, setModalIsOpen } = props;
   let stepNumber = 0;
 
-  const handleEdit = (index) => {
-    push(`/edit-goal/${goal.goal_id}/${index}`);
+  // const handleEdit = (index) => {
+  //   push(`/edit-goal/${goal.goal_id}/${index}`);
+  // };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
     <div>
-      <div className="goal-card-header-container">
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        onRequestClose={closeModal}
+      >
         <h2>Goal Title</h2>
-        <button
+        <button onClick={closeModal}>Close Modal</button>
+      </Modal>
+      {/* <div className="goal-card-header-container"> */}
+      {/* </div> */}
+      {/* <button
           className="goal-card-edit-button"
           onClick={() => handleEdit(index)}
         >
           Edit
-        </button>
-      </div>
+        </button> */}
       {/* {goal.steps.map((step) => {
         stepNumber += 1;
         return (
@@ -43,6 +70,11 @@ const ViewCardDetails = () => {
       })} */}
     </div>
   );
+};
+
+ViewCardDetails.propTypes = {
+  modalIsOpen: PropTypes.bool,
+  setModalIsOpen: PropTypes.func,
 };
 
 export default ViewCardDetails;
