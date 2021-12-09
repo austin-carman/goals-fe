@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
-import closeIcon from "../images/close-icon.png";
 
 const customStyles = {
   content: {
@@ -58,13 +57,15 @@ const ViewCardDetails = (props) => {
         style={customStyles}
       >
         <div className="modal-actions-container">
-          <img src={closeIcon} className="close-details" onClick={closeModal} />
-          <button
+          <h6 className="close-details" onClick={closeModal}>
+            Close
+          </h6>
+          <h6
             className="goal-card-edit-button"
             onClick={() => handleEdit(goalIndex)}
           >
             Edit
-          </button>
+          </h6>
         </div>
         <div className="details-container">
           <input
