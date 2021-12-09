@@ -11,7 +11,6 @@ import deleteStep from "../images/minus-circle.png";
 const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
-  console.log("params: ", params);
 
   const initialGoalState = {
     goal_title: props.goals[params.index].goal_title,
