@@ -1,13 +1,13 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router";
 import { sortSteps } from "../utils/helperFunctions";
+import ViewCardDetails from "./ViewCardDetails";
 
 const GoalCard = (props) => {
   const { goal, index } = props;
-  const { push } = useHistory();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   let completedSteps = 0;
-  // let stepNumber = 0;
 
   goal.steps.map((step) => {
     if (step.step_completed) {
@@ -15,11 +15,11 @@ const GoalCard = (props) => {
     }
   });
 
-  const nextStep = goal.steps.find((step) => step.step_completed === false);
-
-  const handleEdit = (index) => {
-    push(`/edit-goal/${goal.goal_id}/${index}`);
+  const openModal = () => {
+    setModalIsOpen(true);
   };
+
+  const nextStep = goal.steps.find((step) => step.step_completed === false);
 
   const sortedSteps = sortSteps([...goal.steps]);
   goal.steps = sortedSteps;
@@ -31,46 +31,24 @@ const GoalCard = (props) => {
           ? "completed-goals goal-card-container"
           : "unfinished-goals goal-card-container"
       }
-      onClick={() => handleEdit(index)}
     >
-      {/* <div className="goal-card-header-container"> */}
-      <h2 className="card-title">{goal.goal_title}</h2>
-      <div>
-        <p className="next-step">
-          Next Step: {nextStep ? nextStep.step_title : "None"}
-        </p>
-        <p>
-          Steps completed: {completedSteps}/{goal.steps.length}{" "}
-        </p>
+      <div onClick={openModal}>
+        <h2 className="card-title">{goal.goal_title}</h2>
+        <div>
+          <p className="next-step">
+            Next Step: {nextStep ? nextStep.step_title : "None"}
+          </p>
+          <p>
+            Steps completed: {completedSteps}/{goal.steps.length}{" "}
+          </p>
+        </div>
       </div>
-      {/* <button
-        className="goal-card-edit-button"
-        onClick={() => handleEdit(index)}
-      >
-        Edit
-      </button> */}
-      {/* </div> */}
-      {/* {goal.steps.map((step) => {
-        stepNumber += 1;
-        return (
-          <div
-            key={step.step_id}
-            className={
-              step.step_completed
-                ? "goal-card-completed-steps goal-card-step-container"
-                : "goal-card-unfinished-steps goal-card-step-container"
-            }
-          >
-            <div className="goal-card-step-title-container">
-              <h3 className="goal-card-step-number">Step {stepNumber}:</h3>
-              <h3 className="goal-card-step-title">{step.step_title}</h3>
-            </div>
-            {step.step_notes ? (
-              <p className="goal-card-step-notes">Notes: {step.step_notes}</p>
-            ) : null}
-          </div>
-        );
-      })} */}
+      <ViewCardDetails
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        goal={goal}
+        goalIndex={index}
+      />
     </div>
   );
 };

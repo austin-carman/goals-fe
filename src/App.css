@@ -158,34 +158,38 @@ button {
   color: red;
 }
 
-
-/* .goal-card-header-container {
-  width: 75%;
-  margin: 2% auto;
-} */
-/* .goal-card-edit-button {
-  width: 10%;
-} */
-/* .goal-card-step-container {
-  width: 90%;
-  margin: auto;
-  text-align: left;
-} */
-/* .goal-card-step-title-container {
+/* Card View Details */
+.details-container {
   display: flex;
-  justify-content: left;
-} */
-/* .goal-card-step-number {
-  width: 12%;
-} */
-/* .goal-card-step-title {
-  width: 87%;
-} */
-/* .goal-card-step-notes {
-  width: 65%;
-  margin: auto;
-  text-transform: capitalize;
-} */
+  margin: 2% auto;
+  align-items: baseline;
+}
+.view-goal-step-title {
+  margin: 1% auto;
+}
+.completed-checkbox {
+  margin: 2%;
+}
+.completed-checkbox:hover {
+  cursor: pointer;
+}
+.view-goal-step-notes {
+  text-transform: none;
+}
+.modal-actions-container {
+  display: flex;
+  justify-content: space-between;
+}
+.close-details {
+  width: 24px;
+  height: 24px;
+}
+.close-details:hover {
+  cursor: pointer;
+}
+.goal-card-edit-button:hover {
+  cursor: pointer;
+}
 
 /* ***** Forms: New Goal/Edit Goal ***** */
 .form-title {
