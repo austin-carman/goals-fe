@@ -120,13 +120,11 @@ button {
   width: 30%;
   margin: 1.667%;
   height: 25vh;
-  border: 1px solid blue;
 }
 .card-content-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid red;
   height: 100%;
 }
 .goal-card-container:hover {
