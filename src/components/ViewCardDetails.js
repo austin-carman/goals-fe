@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router";
+import { editUserGoal } from "../actions/goalsActions";
+import { connect } from "react-redux";
 
 const customStyles = {
   content: {
@@ -18,12 +21,11 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const ViewCardDetails = (props) => {
-  const { modalIsOpen, setModalIsOpen, goal, goalIndex } = props;
-  const [goalDetails, setGoalDetails] = useState(false);
+  const { modalIsOpen, setModalIsOpen, goal, goalIndex, editUserGoal } = props;
+  const [goalDetails, setGoalDetails] = useState(goal);
+  const [changedStatus, setChangedStatus] = useState(false);
   const history = useHistory();
   let stepNumber = 0;
-
-  console.log(goalDetails);
 
   const handleEdit = (index) => {
     history.push(`/edit-goal/${goal.goal_id}/${index}`);
@@ -33,35 +35,37 @@ const ViewCardDetails = (props) => {
     const { name, value, type, checked } = e.target;
     const valueToUse = type === "checkbox" ? checked : value;
     if (index === undefined) {
-      setGoalDetails({ ...goal, [name]: valueToUse });
+      setGoalDetails({ ...goalDetails, [name]: valueToUse });
     } else {
-      let stepEdits = [...goal.steps];
+      let stepEdits = [...goalDetails.steps];
       stepEdits[index][name] = valueToUse;
-      setGoalDetails({ ...goal, steps: stepEdits });
+      setGoalDetails({ ...goalDetails, steps: stepEdits });
     }
+    setChangedStatus(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
+    changedStatus && editUserGoal(goal.goal_id, goalDetails);
   };
 
   return (
     <div>
       <Modal
         isOpen={modalIsOpen}
-        style={customStyles}
         onRequestClose={closeModal}
+        style={customStyles}
       >
         <button onClick={closeModal}>Close Modal</button>
         <input
           className="completed-checkbox"
           type="checkbox"
           name="goal_completed"
-          value={goal.goal_completed}
-          checked={goal.goal_completed}
+          value={goalDetails.goal_completed}
+          checked={goalDetails.goal_completed}
           onChange={(e) => handleChange(e)}
         />
-        <h2>{goal.goal_title}</h2>
+        <h2>{goalDetails.goal_title}</h2>
         <div className="goal-card-header-container"></div>
         <button
           className="goal-card-edit-button"
@@ -69,7 +73,7 @@ const ViewCardDetails = (props) => {
         >
           Edit
         </button>
-        {goal.steps.map((step, index) => {
+        {goalDetails.steps.map((step, index) => {
           stepNumber += 1;
           return (
             <div
@@ -108,6 +112,7 @@ ViewCardDetails.propTypes = {
   setModalIsOpen: PropTypes.func,
   goal: PropTypes.object,
   goalIndex: PropTypes.number,
+  editUserGoal: PropTypes.func,
 };
 
-export default ViewCardDetails;
+export default connect(null, { editUserGoal })(ViewCardDetails);
