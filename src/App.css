@@ -109,7 +109,6 @@ button {
 /* ***** Profile *****  */
 .profile-content {
   text-align: center;
-  /* background-image: url("./images/ocean-sunset.jpg"); */
   background-size: cover;
   background-position: center;
 }
@@ -120,6 +119,8 @@ button {
   border: 1px solid black;
   display: flex;
   justify-content: space-around;
+  width: 76.7%;
+  margin: auto;
 }
 
 /* Goals List */

@@ -45,22 +45,34 @@ const Profile = (props) => {
     >
       <h2>My Goals</h2>
       <div className="dashboard-stats">
-        <h3>Total goals: {totalGoals}</h3>
-        <h3>Goals Completed: {completedGoals}</h3>
-        <h3>Goals in Progress: {uncompletedGoals}</h3>
-        <select
-          placeholder="Select a Background"
-          value={selectedBackground}
-          onChange={handleBackground}
-        >
-          <option value={null}>None</option>
-          <option value={oceanSunset}>Shoreline Sunset</option>
-          <option value={oceanMountains}>Tropical Mountains and Ocean</option>
-          <option value={guitar}>Guitar</option>
-          <option value={library}>Library</option>
-          <option value={plants}>Plants</option>
-          <option value={wood}>Wood</option>
-        </select>
+        <div>
+          <h3>Total goals:</h3>
+          <h3>{totalGoals}</h3>
+        </div>
+        <div>
+          <h3>Goals Completed:</h3>
+          <h3>{completedGoals}</h3>
+        </div>
+        <div>
+          <h3>Goals in Progress:</h3>
+          <h3>{uncompletedGoals}</h3>
+        </div>
+        <div>
+          <h3>Background:</h3>
+          <select
+            placeholder="Select a Background"
+            value={selectedBackground}
+            onChange={handleBackground}
+          >
+            <option value={null}>None</option>
+            <option value={oceanSunset}>Shoreline Sunset</option>
+            <option value={oceanMountains}>Tropical Mountains and Ocean</option>
+            <option value={guitar}>Guitar</option>
+            <option value={library}>Library</option>
+            <option value={plants}>Plants</option>
+            <option value={wood}>Wood</option>
+          </select>
+        </div>
       </div>
       <GoalList />
     </div>
