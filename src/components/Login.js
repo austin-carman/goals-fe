@@ -86,7 +86,6 @@ const Login = (props) => {
       <Link to="/register" className="create-account-link">
         <p>Create Account Here</p>
       </Link>
-      {/* put laoding animation to replace or remove line below */}
       {isFetching && !formErrors && <h3> Loading...</h3>}
     </div>
   );

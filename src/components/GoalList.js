@@ -11,7 +11,6 @@ const GoalList = (props) => {
   const params = useParams();
   const userId = params.userId;
 
-  // only run this if goals do not exist in state already
   useEffect(() => {
     props.fetchUserGoals(userId);
   }, [userId]);
