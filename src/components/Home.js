@@ -18,7 +18,9 @@ const Home = () => {
       </section>
       <section className="top-info-section">
         <div>
-          <h2>&quot;A goal properly set is halfway reached.&quot;</h2>
+          <h2 className="quote">
+            &quot;A goal properly set is halfway reached.&quot;
+          </h2>
           <h4>— Zig Ziglar</h4>
         </div>
       </section>
@@ -54,7 +56,7 @@ const Home = () => {
           <img src={tempImage} />
           <div>
             <h3 className="thirds-title">Become</h3>
-            <p>
+            <p className="quote">
               &quot;What you get by achieving your goals is not as important as
               what you become by achieving your goals.&quot;
             </p>
