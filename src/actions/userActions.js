@@ -8,6 +8,7 @@ export const VERIFY_USER_SUCCESS = "VERIFY_USER_SUCCESS";
 export const VERIFY_USER_FAIL = "VERIFY_USER_FAIL";
 export const VERIFY_USER_ERR = "VERIFY_USER_ERR";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const PROFILE_BACKGROUND = "PROFILE_BACKGROUND";
 
 export const userRegister = (registerForm) => {
   return (dispatch) => {
@@ -40,5 +41,11 @@ export const userLogin = (login) => {
 export const userLogout = () => {
   return (dispatch) => {
     dispatch({ type: USER_LOGOUT });
+  };
+};
+
+export const profileBackground = (backgroundImage) => {
+  return (dispatch) => {
+    dispatch({ type: PROFILE_BACKGROUND, payload: backgroundImage });
   };
 };

@@ -6,7 +6,9 @@ import {
   VERIFY_USER_SUCCESS,
   VERIFY_USER_ERR,
   USER_LOGOUT,
+  PROFILE_BACKGROUND,
 } from "../actions/userActions";
+import oceanMountains from "../images/ocean-mountains.jpg";
 
 const initialState = {
   isFetching: false,
@@ -14,6 +16,7 @@ const initialState = {
   userId: null,
   errors: "",
   serverValidationMessage: "",
+  backgroundImage: oceanMountains,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -85,6 +88,12 @@ const userReducer = (state = initialState, action) => {
         token: null,
         userId: null,
         errors: initialState.errors,
+      };
+    case PROFILE_BACKGROUND:
+      localStorage.setItem("goals background", `${action.payload}`);
+      return {
+        ...state,
+        backgroundImage: action.payload,
       };
     default:
       return state;

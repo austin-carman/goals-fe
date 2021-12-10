@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUserGoals } from "../actions/goalsActions";
@@ -10,11 +10,12 @@ import guitar from "../images/guitar.jpg";
 import library from "../images/library.jpg";
 import plants from "../images/plants.jpg";
 import wood from "../images/wood.jpg";
+import { profileBackground } from "../actions/userActions";
 
 const Profile = (props) => {
-  const [selectedBackground, setSelectedBackground] = useState(null);
   const params = useParams();
   const userId = params.userId;
+  const savedBackground = localStorage.getItem("goals background");
 
   useEffect(() => {
     props.fetchUserGoals(userId);
@@ -34,14 +35,15 @@ const Profile = (props) => {
 
   const handleBackground = (e) => {
     const { value } = e.target;
-    console.log("background: ", selectedBackground);
-    setSelectedBackground(value);
+    props.profileBackground(value);
   };
 
   return (
     <div
       className="profile-content"
-      style={{ backgroundImage: `url(${selectedBackground})` }}
+      style={{
+        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
+      }}
     >
       <div className="dashboard">
         <h2>My Goals</h2>
@@ -62,10 +64,9 @@ const Profile = (props) => {
             <h3>Background:</h3>
             <select
               placeholder="Select a Background"
-              value={selectedBackground}
+              value={props.backgroundImage}
               onChange={handleBackground}
             >
-              <option value={null}>None</option>
               <option value={oceanSunset}>Shoreline Sunset</option>
               <option value={oceanMountains}>
                 Tropical Mountains and Ocean
@@ -88,6 +89,7 @@ const mapStateToProps = (state) => {
     goals: state.goalsReducer.goals,
     isFetching: state.goalsReducer.isFetching,
     error: state.goalsReducer.error,
+    backgroundImage: state.userReducer.backgroundImage,
   };
 };
 
@@ -95,6 +97,10 @@ Profile.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.bool,
   fetchUserGoals: PropTypes.func,
+  profileBackground: PropTypes.func,
+  backgroundImage: PropTypes.any,
 };
 
-export default connect(mapStateToProps, { fetchUserGoals })(Profile);
+export default connect(mapStateToProps, { fetchUserGoals, profileBackground })(
+  Profile
+);
