@@ -302,6 +302,17 @@ textarea {
   margin: 5% auto;
   text-align: center;
 }
+.thirds-section {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2% 5%;
+}
+.third-container {
+  width: 28%;
+}
+.thirds-title {
+  text-align: center;
+}
 .top-info-section p {
   text-align: left;
   margin-top: 5%;

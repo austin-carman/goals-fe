@@ -21,50 +21,47 @@ const Home = () => {
           <h2>&quot;A goal properly set is halfway reached.&quot;</h2>
           <h4>— Zig Ziglar</h4>
         </div>
-        <p>
+        {/* <p>
           We&apos;ve all made a goal that we end up forgetting about. With
           GoalTracker all your goals are grouped together in one convenient
           location so you can easily review them.
-        </p>
+        </p> */}
       </section>
-      <section className="info-section">
-        <img src={tempImage} className="info-img" />
-        <div className="info-container">
-          <div className="quote-container">
-            <h2>
-              &quot;Goals are pure fantasy unless you have a specific plan to
-              achieve them.&quot;
-            </h2>
-            <h4>— Stephen Covey</h4>
+      <section className="thirds-section">
+        <div className="third-container">
+          <img src={tempImage} />
+          <div>
+            <h3 className="thirds-title">Organize</h3>
+            <p>
+              We&apos;ve all made a goal that we end up forgetting about or
+              write it down only to lose it or throw it out by accident.
+              GoalTracker makes it easy to quickly record your goals and group
+              them together in one convenient location so you can easily review
+              them.
+            </p>
           </div>
-          <p>
-            GoalTracker allows you to create a goal with steps, or smaller
-            landmark goals, to help you stay organized and make achieving your
-            goal more manageable.
-          </p>
         </div>
-      </section>
-      <section className="button-section">
-        <h2>Start making your own goals!</h2>
-        <button onClick={handleClick}>Start now</button>
-      </section>
-      <section className="info-section">
-        <div className="info-container">
-          <div className="quote-container">
-            <h2>
-              &quot;What you get by achieving your goals is not as important as
-              what you become by achieving your goals.&quot;
-            </h2>
-            <h4>— Zig Ziglar</h4>
+        <div className="third-container">
+          <img src={tempImage} />
+          <div>
+            <h3 className="thirds-title">Plan</h3>
+            <p>
+              It&apos;s nearly impossible to achieve a goal without a well
+              developed plan. GoalTracker helps you in creating a plan by
+              allowing you to add steps, or smaller, checkpoint goals, record
+              notes for each step, and completion checkboxes. This helps you
+              stay on track, record your progress and make achieving your goal
+              more manageable.
+            </p>
           </div>
-          <p>
-            With each step you can record notes to record your progress or leave
-            reminders for your future self. Once you achieve a step, mark it as
-            completed to stay organized and allow you to see how far you&apos;ve
-            come in completing your goal.
-          </p>
         </div>
-        <img src={tempImage} className="info-img" />
+        <div className="third-container">
+          <img src={tempImage} />
+          <div>
+            <h3 className="thirds-title">Become</h3>
+            <p></p>
+          </div>
+        </div>
       </section>
     </div>
   );
