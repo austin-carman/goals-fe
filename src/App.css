@@ -19,7 +19,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	border: 0;
+	/* border: 0; */
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -188,11 +188,25 @@ button {
   color: red;
 }
 
-/* Card View Details */
+/* View Card Details Modal */
+.details-modal {
+  margin: 3% 10%;
+}
+.goal-edit-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
 .details-container {
   display: flex;
-  margin: 2% auto;
+  margin: 3% 0;
   align-items: baseline;
+}
+.view-goal-title-container {
+  width: 70%;
+}
+.goal-card-edit-button {
+  display: inline-block;
 }
 .view-goal-step-title {
   margin: 1% auto;
@@ -206,13 +220,9 @@ button {
 .view-goal-step-notes {
   text-transform: none;
 }
-.modal-actions-container {
-  display: flex;
-  justify-content: space-between;
-}
 .close-details {
-  width: 24px;
-  height: 24px;
+  text-align: right;
+  margin-left: 90%;
 }
 .close-details:hover {
   cursor: pointer;
