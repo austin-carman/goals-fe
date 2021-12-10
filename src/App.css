@@ -152,6 +152,9 @@ button {
   background: rgba(255,255,255,0.3);
   border-radius: 10px;
 }
+.loading {
+  text-align: center;
+}
 
 /* ***** Goal Card *****  */
 .goal-card-container {

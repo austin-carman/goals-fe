@@ -16,7 +16,7 @@ const initialState = {
   userId: null,
   errors: "",
   serverValidationMessage: "",
-  backgroundImage: oceanMountains,
+  backgroundImage: localStorage.getItem("goals background") || oceanMountains,
 };
 
 const userReducer = (state = initialState, action) => {
