@@ -28,9 +28,11 @@ const Profile = (props) => {
   return (
     <div className="profile-content">
       <h2>My Goals</h2>
-      <h3>Total goals: {totalGoals}</h3>
-      <h3>Completed goals: {completedGoals}</h3>
-      <h3>Goals in progress: {uncompletedGoals}</h3>
+      <div className="dashboard-stats">
+        <h3>Total goals: {totalGoals}</h3>
+        <h3>Goals Completed: {completedGoals}</h3>
+        <h3>Goals in Progress: {uncompletedGoals}</h3>
+      </div>
       <GoalList />
     </div>
   );

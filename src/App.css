@@ -108,6 +108,11 @@ button {
 .profile-content h2 {
   margin: 5% auto 3.33%;
 }
+.dashboard-stats {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+}
 
 /* Goals List */
 .goals-lists-container {
