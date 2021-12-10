@@ -13,7 +13,9 @@ const Navbar = (props) => {
   return (
     <header className="navbar-header">
       <nav className="navbar">
-        <h2>Goal Tracker</h2>
+        <Link to="/" className="home-link">
+          <h2>Goal Tracker</h2>
+        </Link>
         <div className="links-container">
           <Link to="/login" className="navlink">
             Sign In

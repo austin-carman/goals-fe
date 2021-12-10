@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
 import GoalCard from "./GoalCard";
 import { connect } from "react-redux";
@@ -10,10 +10,6 @@ import addStep from "../images/plus-circle.png";
 const GoalList = (props) => {
   const params = useParams();
   const userId = params.userId;
-
-  useEffect(() => {
-    props.fetchUserGoals(userId);
-  }, [userId]);
 
   const sortedGoals = sortGoals(props.goals);
 
@@ -50,7 +46,6 @@ const mapStateToProps = (state) => {
 GoalList.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.bool,
-  fetchUserGoals: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { fetchUserGoals })(GoalList);
