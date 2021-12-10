@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <section className="hero">
-        <h1>Where will goals take you?</h1>
+        <h1>Choose where your journey takes you</h1>
         <button onClick={handleClick}>Start now</button>
       </section>
       <section className="top-info-section">
@@ -21,11 +21,6 @@ const Home = () => {
           <h2>&quot;A goal properly set is halfway reached.&quot;</h2>
           <h4>— Zig Ziglar</h4>
         </div>
-        {/* <p>
-          We&apos;ve all made a goal that we end up forgetting about. With
-          GoalTracker all your goals are grouped together in one convenient
-          location so you can easily review them.
-        </p> */}
       </section>
       <section className="thirds-section">
         <div className="third-container">

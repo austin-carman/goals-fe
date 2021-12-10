@@ -19,7 +19,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	/* border: 0; */
+	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -57,7 +57,7 @@ table {
 /* ***** General Styles ***** */
 html {
   font-size:62.5%;
-  text-transform: uppercase;
+  font-family: 'Source Sans 3', sans-serif;
 }
 body {
   font-size:1.6rem;
