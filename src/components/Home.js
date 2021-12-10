@@ -59,7 +59,11 @@ const Home = () => {
           <img src={tempImage} />
           <div>
             <h3 className="thirds-title">Become</h3>
-            <p></p>
+            <p>
+              &quot;What you get by achieving your goals is not as important as
+              what you become by achieving your goals.&quot;
+            </p>
+            <h4>— Zig Ziglar</h4>
           </div>
         </div>
       </section>

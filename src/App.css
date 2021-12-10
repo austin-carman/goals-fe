@@ -312,6 +312,7 @@ textarea {
 }
 .thirds-title {
   text-align: center;
+  text-decoration: underline;
 }
 .top-info-section p {
   text-align: left;
