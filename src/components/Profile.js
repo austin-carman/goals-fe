@@ -53,6 +53,7 @@ const Profile = (props) => {
           value={selectedBackground}
           onChange={handleBackground}
         >
+          <option value={null}>None</option>
           <option value={oceanSunset}>Shoreline Sunset</option>
           <option value={oceanMountains}>Tropical Mountains and Ocean</option>
           <option value={guitar}>Guitar</option>
