@@ -4,13 +4,6 @@ import { connect } from "react-redux";
 import { fetchUserGoals } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import GoalList from "./GoalList";
-import oceanSunset from "../images/ocean-sunset.jpg";
-import oceanMountains from "../images/ocean-mountains.jpg";
-import guitar from "../images/guitar.jpg";
-import library from "../images/library.jpg";
-import plants from "../images/plants.jpg";
-import wood from "../images/wood.jpg";
-import { profileBackground } from "../actions/userActions";
 
 const Profile = (props) => {
   const params = useParams();
@@ -32,11 +25,6 @@ const Profile = (props) => {
       uncompletedGoals += 1;
     }
   });
-
-  const handleBackground = (e) => {
-    const { value } = e.target;
-    props.profileBackground(value);
-  };
 
   return (
     <div
@@ -60,23 +48,6 @@ const Profile = (props) => {
             <h3>Goals in Progress:</h3>
             <h3>{uncompletedGoals}</h3>
           </div>
-          <div>
-            <h3>Background:</h3>
-            <select
-              placeholder="Select a Background"
-              value={props.backgroundImage}
-              onChange={handleBackground}
-            >
-              <option value={oceanSunset}>Shoreline Sunset</option>
-              <option value={oceanMountains}>
-                Tropical Mountains and Ocean
-              </option>
-              <option value={guitar}>Guitar</option>
-              <option value={library}>Library</option>
-              <option value={plants}>Plants</option>
-              <option value={wood}>Wood</option>
-            </select>
-          </div>
         </div>
       </div>
       <GoalList />
@@ -97,10 +68,7 @@ Profile.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.bool,
   fetchUserGoals: PropTypes.func,
-  profileBackground: PropTypes.func,
   backgroundImage: PropTypes.any,
 };
 
-export default connect(mapStateToProps, { fetchUserGoals, profileBackground })(
-  Profile
-);
+export default connect(mapStateToProps, { fetchUserGoals })(Profile);
