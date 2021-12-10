@@ -109,6 +109,9 @@ button {
 /* ***** Profile *****  */
 .profile-content {
   text-align: center;
+  /* background-image: url("./images/ocean-sunset.jpg"); */
+  background-size: cover;
+  background-position: center;
 }
 .profile-content h2 {
   margin: 5% auto 3.33%;
@@ -134,6 +137,7 @@ button {
   width: 30%;
   margin: 1.667%;
   height: 25vh;
+  background: rgba(255,255,255,0.3)
 }
 .card-content-container {
   display: flex;

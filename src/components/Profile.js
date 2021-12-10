@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUserGoals } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import GoalList from "./GoalList";
+import oceanSunset from "../images/ocean-sunset.jpg";
+import oceanMountains from "../images/ocean-mountains.jpg";
+import guitar from "../images/guitar.jpg";
+import library from "../images/library.jpg";
+import plants from "../images/plants.jpg";
+import wood from "../images/wood.jpg";
 
 const Profile = (props) => {
+  const [selectedBackground, setSelectedBackground] = useState(null);
   const params = useParams();
   const userId = params.userId;
 
@@ -25,13 +32,34 @@ const Profile = (props) => {
     }
   });
 
+  const handleBackground = (e) => {
+    const { value } = e.target;
+    console.log("background: ", selectedBackground);
+    setSelectedBackground(value);
+  };
+
   return (
-    <div className="profile-content">
+    <div
+      className="profile-content"
+      style={{ backgroundImage: `url(${selectedBackground})` }}
+    >
       <h2>My Goals</h2>
       <div className="dashboard-stats">
         <h3>Total goals: {totalGoals}</h3>
         <h3>Goals Completed: {completedGoals}</h3>
         <h3>Goals in Progress: {uncompletedGoals}</h3>
+        <select
+          placeholder="Select a Background"
+          value={selectedBackground}
+          onChange={handleBackground}
+        >
+          <option value={oceanSunset}>Shoreline Sunset</option>
+          <option value={oceanMountains}>Tropical Mountains and Ocean</option>
+          <option value={guitar}>Guitar</option>
+          <option value={library}>Library</option>
+          <option value={plants}>Plants</option>
+          <option value={wood}>Wood</option>
+        </select>
       </div>
       <GoalList />
     </div>
