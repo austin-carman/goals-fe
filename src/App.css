@@ -74,7 +74,9 @@ h3 {
 }
 button {
   padding: 1%;
-  border-radius: 10px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid black;
 }
 
 /* ***** Navbar *****  */
@@ -246,9 +248,14 @@ textarea {
 }
 
 /* Login Form */
+.login-page {
+  background: url("./images/rock-climber.jpg");
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+}
 .sign-in-container {
   text-align: center;
-  border: 1px solid black;
   border-radius: 10px;
   width: 50%;
   margin: auto;
@@ -259,6 +266,7 @@ textarea {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.5)
 }
 .sign-in-container h2 {
   margin: 5%;
@@ -273,7 +281,7 @@ textarea {
   cursor: pointer;
 }
 .create-account-link {
-  margin: 2%;
+  margin-bottom: 2%;
   font-size: 1.4rem;
   text-decoration: underline;
   color: blue;

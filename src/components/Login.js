@@ -63,30 +63,33 @@ const Login = (props) => {
   }
 
   return (
-    <div className="sign-in-container">
-      <h2>Sign In</h2>
-      <input
-        type="text"
-        name="username"
-        value={loginForm.username}
-        onChange={handleChange}
-        placeholder="username"
-      />
-      <input
-        type="password"
-        name="password"
-        value={loginForm.password}
-        onChange={handleChange}
-        placeholder="password"
-      />
-      <p className="form-errors">
-        {formErrors ? formErrors : serverValidationMessage}
-      </p>
-      <button onClick={handleSubmit}>Sign In</button>
-      <Link to="/register" className="create-account-link">
-        <p>Create Account Here</p>
-      </Link>
-      {isFetching && !formErrors && <h3> Loading...</h3>}
+    <div className="login-page">
+      <div className="sign-in-container">
+        <h2>Sign In</h2>
+        <input
+          type="text"
+          name="username"
+          value={loginForm.username}
+          onChange={handleChange}
+          placeholder="username"
+        />
+        <input
+          type="password"
+          name="password"
+          value={loginForm.password}
+          onChange={handleChange}
+          placeholder="password"
+        />
+        <p className="form-errors">
+          {formErrors ? formErrors : serverValidationMessage}
+        </p>
+        <button onClick={handleSubmit}>Sign In</button>
+        <p>Don&apos; have an account?</p>
+        <Link to="/register" className="create-account-link">
+          <p>Sign up</p>
+        </Link>
+        {isFetching && !formErrors && <h3> Loading...</h3>}
+      </div>
     </div>
   );
 };
