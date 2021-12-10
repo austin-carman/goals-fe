@@ -16,14 +16,25 @@ const Navbar = (props) => {
         <Link to="/" className="home-link">
           <h2>Goal Tracker</h2>
         </Link>
-        <div className="links-container">
-          <Link to="/login" className="navlink">
-            Sign In
-          </Link>
-          <Link onClick={handleSignOut} to="/" className="navlink">
-            Logout
-          </Link>
-        </div>
+        {localStorage.getItem("token") ? (
+          <div className="links-container">
+            <Link to={`/profile/${props.userId}`} className="navlink">
+              Profile
+            </Link>
+            <Link onClick={handleSignOut} to="/" className="navlink">
+              Logout
+            </Link>
+          </div>
+        ) : (
+          <div className="links-container">
+            <Link to="/login" className="navlink">
+              Sign In
+            </Link>
+            <Link to="/register" className="navlink">
+              Sign Up
+            </Link>
+          </div>
+        )}
       </nav>
     </header>
   );

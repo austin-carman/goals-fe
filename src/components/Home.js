@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <section className="hero">
-        <h1>Choose where your journey takes you</h1>
+        <h1>Be intentional in who you become</h1>
         <button onClick={handleClick}>Start now</button>
       </section>
       <section className="top-info-section">
