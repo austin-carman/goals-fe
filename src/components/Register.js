@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
@@ -97,6 +97,10 @@ const Register = (props) => {
           {formErrors ? formErrors : serverValidationMessage}
         </p>
         <button onClick={handleSubmit}>Register</button>
+        <p>Already have an account?</p>
+        <Link to="/register" className="create-account-link">
+          <p>Sign in</p>
+        </Link>
         {isFetching && !formErrors && <h3> Loading...</h3>}
       </div>
     </div>

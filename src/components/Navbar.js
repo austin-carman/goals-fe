@@ -18,8 +18,11 @@ const Navbar = (props) => {
         </Link>
         {localStorage.getItem("token") ? (
           <div className="links-container">
-            <Link to={`/profile/${props.userId}`} className="navlink">
-              Profile
+            <Link
+              to={`/profile/${props.userId}`}
+              className="navlink profile-avatar-container"
+            >
+              <h3 className="avatar-text">AC</h3>
             </Link>
             <Link onClick={handleSignOut} to="/" className="navlink">
               Logout
