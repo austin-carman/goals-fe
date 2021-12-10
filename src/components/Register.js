@@ -62,41 +62,43 @@ const Register = (props) => {
   }
 
   return (
-    <div className="sign-in-container">
-      <h2>Create Account</h2>
-      <input
-        type="text"
-        name="first_name"
-        value={registerForm.first_name}
-        onChange={handleChange}
-        placeholder="First name"
-      />
-      <input
-        type="text"
-        name="last_name"
-        value={registerForm.last_name}
-        onChange={handleChange}
-        placeholder="Last name"
-      />
-      <input
-        type="text"
-        name="username"
-        value={registerForm.username}
-        onChange={handleChange}
-        placeholder="username"
-      />
-      <input
-        type="text"
-        name="password"
-        value={registerForm.password}
-        onChange={handleChange}
-        placeholder="password"
-      />
-      <p className="form-errors">
-        {formErrors ? formErrors : serverValidationMessage}
-      </p>
-      <button onClick={handleSubmit}>Register</button>
-      {isFetching && !formErrors && <h3> Loading...</h3>}
+    <div className="login-register-page">
+      <div className="sign-in-container">
+        <h2>Create Account</h2>
+        <input
+          type="text"
+          name="first_name"
+          value={registerForm.first_name}
+          onChange={handleChange}
+          placeholder="First name"
+        />
+        <input
+          type="text"
+          name="last_name"
+          value={registerForm.last_name}
+          onChange={handleChange}
+          placeholder="Last name"
+        />
+        <input
+          type="text"
+          name="username"
+          value={registerForm.username}
+          onChange={handleChange}
+          placeholder="username"
+        />
+        <input
+          type="text"
+          name="password"
+          value={registerForm.password}
+          onChange={handleChange}
+          placeholder="password"
+        />
+        <p className="form-errors">
+          {formErrors ? formErrors : serverValidationMessage}
+        </p>
+        <button onClick={handleSubmit}>Register</button>
+        {isFetching && !formErrors && <h3> Loading...</h3>}
+      </div>
     </div>
   );
 };

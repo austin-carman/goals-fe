@@ -251,8 +251,8 @@ textarea {
   margin: 5% 1% 10%;
 }
 
-/* Login Form */
-.login-page {
+/* Forms: Login/Register */
+.login-register-page {
   background: url("./images/rock-climber.jpg");
   height: 90vh;
   background-size: cover;
@@ -277,7 +277,7 @@ textarea {
 }
 .sign-in-container input {
   width: 50%;
-  margin: 2%;
+  margin: 1%;
   padding: 1.5%;
 }
 .sign-in-container button {

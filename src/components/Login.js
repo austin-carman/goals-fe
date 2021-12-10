@@ -63,7 +63,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className="login-page">
+    <div className="login-register-page">
       <div className="sign-in-container">
         <h2>Sign In</h2>
         <input
