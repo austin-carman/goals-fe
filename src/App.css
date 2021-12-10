@@ -111,16 +111,23 @@ button {
   text-align: center;
   background-size: cover;
   background-position: center;
+  border: 1px solid black;
+
 }
 .profile-content h2 {
-  margin: 5% auto 3.33%;
+  margin-bottom: 2%;
+}
+.dashboard {
+  background: rgba(255,255,255,0.5);
+  width: 76.7%;
+  margin: 3% auto 1.33%;
+  padding: 2%;
+  border-radius: 10px;
 }
 .dashboard-stats {
-  border: 1px solid black;
   display: flex;
   justify-content: space-around;
-  width: 76.7%;
-  margin: auto;
+  
 }
 
 /* Goals List */
@@ -133,12 +140,11 @@ button {
 
 /* ***** Goal Card *****  */
 .goal-card-container {
-  border: 1px solid black;
   border-radius: 10px;
   width: 30%;
   margin: 1.667%;
   height: 25vh;
-  background: rgba(255,255,255,0.3)
+  background: rgba(255,255,255,0.5)
 }
 .card-content-container {
   display: flex;
