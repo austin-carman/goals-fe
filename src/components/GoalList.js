@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
 import GoalCard from "./GoalCard";
 import { connect } from "react-redux";
@@ -10,11 +10,6 @@ import addStep from "../images/plus-circle.png";
 const GoalList = (props) => {
   const params = useParams();
   const userId = params.userId;
-
-  // only run this if goals do not exist in state already
-  useEffect(() => {
-    props.fetchUserGoals(userId);
-  }, [userId]);
 
   const sortedGoals = sortGoals(props.goals);
 
@@ -30,7 +25,7 @@ const GoalList = (props) => {
         </Link>
       )}
       {props.isFetching ? (
-        <h2>Loading...</h2>
+        <h2 className="loading">Loading...</h2>
       ) : (
         sortedGoals.map((goal, index) => {
           return <GoalCard key={goal.goal_id} goal={goal} index={index} />;
@@ -51,7 +46,6 @@ const mapStateToProps = (state) => {
 GoalList.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.bool,
-  fetchUserGoals: PropTypes.func,
 };
 
 export default connect(mapStateToProps, { fetchUserGoals })(GoalList);

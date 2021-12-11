@@ -63,31 +63,33 @@ const Login = (props) => {
   }
 
   return (
-    <div className="sign-in-container">
-      <h2>Sign In</h2>
-      <input
-        type="text"
-        name="username"
-        value={loginForm.username}
-        onChange={handleChange}
-        placeholder="username"
-      />
-      <input
-        type="password"
-        name="password"
-        value={loginForm.password}
-        onChange={handleChange}
-        placeholder="password"
-      />
-      <p className="form-errors">
-        {formErrors ? formErrors : serverValidationMessage}
-      </p>
-      <button onClick={handleSubmit}>Sign In</button>
-      <Link to="/register" className="create-account-link">
-        <p>Create Account Here</p>
-      </Link>
-      {/* put laoding animation to replace or remove line below */}
-      {isFetching && !formErrors && <h3> Loading...</h3>}
+    <div className="login-register-page">
+      <div className="sign-in-container">
+        <h2>Sign In</h2>
+        <input
+          type="text"
+          name="username"
+          value={loginForm.username}
+          onChange={handleChange}
+          placeholder="username"
+        />
+        <input
+          type="password"
+          name="password"
+          value={loginForm.password}
+          onChange={handleChange}
+          placeholder="password"
+        />
+        <p className="form-errors">
+          {formErrors ? formErrors : serverValidationMessage}
+        </p>
+        <button onClick={handleSubmit}>Sign In</button>
+        <p>Don&apos; have an account?</p>
+        <Link to="/register" className="create-account-link">
+          <p>Sign up</p>
+        </Link>
+        {isFetching && !formErrors && <h3> Loading...</h3>}
+      </div>
     </div>
   );
 };
@@ -103,12 +105,12 @@ const mapStateToProps = (state) => {
 };
 
 Login.propTypes = {
-  isFetching: PropTypes.any,
-  userId: PropTypes.any,
-  token: PropTypes.any,
+  isFetching: PropTypes.bool,
+  token: PropTypes.bool,
   userLogin: PropTypes.func,
   errors: PropTypes.string,
   serverValidationMessage: PropTypes.string,
+  userId: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userLogin })(Login);

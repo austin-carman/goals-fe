@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom"; //Link
+import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userRegister } from "../actions/userActions";
 import PropTypes from "prop-types";
@@ -18,13 +18,12 @@ const Register = (props) => {
 
   const [registerForm, setRegisterForm] = useState(initialState);
   const [formErrors, setFormErrors] = useState("");
-
   const history = useHistory();
 
   useEffect(() => {
     if (userId) {
       formErrors("");
-      history.push(`/login`);
+      history.push(`/profile`);
     }
   }, [userId]);
 
@@ -62,51 +61,55 @@ const Register = (props) => {
   }
 
   return (
-    <div className="sign-in-container">
-      <h2>Create Account</h2>
-      <input
-        type="text"
-        name="first_name"
-        value={registerForm.first_name}
-        onChange={handleChange}
-        placeholder="First name"
-      />
-      <input
-        type="text"
-        name="last_name"
-        value={registerForm.last_name}
-        onChange={handleChange}
-        placeholder="Last name"
-      />
-      <input
-        type="text"
-        name="username"
-        value={registerForm.username}
-        onChange={handleChange}
-        placeholder="username"
-      />
-      <input
-        type="text"
-        name="password"
-        value={registerForm.password}
-        onChange={handleChange}
-        placeholder="password"
-      />
-      <p className="form-errors">
-        {formErrors ? formErrors : serverValidationMessage}
-      </p>
-      <button onClick={handleSubmit}>Register</button>
-      {/* <Link to="/login">Sign In</Link> */}
-      {/* put laoding animation to replace or remove line below */}
-      {isFetching && !formErrors && <h3> Loading...</h3>}
+    <div className="login-register-page">
+      <div className="sign-in-container">
+        <h2>Create Account</h2>
+        <input
+          type="text"
+          name="first_name"
+          value={registerForm.first_name}
+          onChange={handleChange}
+          placeholder="First name"
+        />
+        <input
+          type="text"
+          name="last_name"
+          value={registerForm.last_name}
+          onChange={handleChange}
+          placeholder="Last name"
+        />
+        <input
+          type="text"
+          name="username"
+          value={registerForm.username}
+          onChange={handleChange}
+          placeholder="username"
+        />
+        <input
+          type="text"
+          name="password"
+          value={registerForm.password}
+          onChange={handleChange}
+          placeholder="password"
+        />
+        <p className="form-errors">
+          {formErrors ? formErrors : serverValidationMessage}
+        </p>
+        <button onClick={handleSubmit}>Register</button>
+        <p>Already have an account?</p>
+        <Link to="/login" className="create-account-link">
+          <p>Sign in</p>
+        </Link>
+        {isFetching && !formErrors && <h3> Loading...</h3>}
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
+    userId: state.userReducer.userId,
     errors: state.userReducer.errors,
     serverValidationMessage: state.userReducer.serverValidationMessage,
   };
@@ -114,9 +117,9 @@ const mapStateToProps = (state) => {
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  userId: PropTypes.number,
   isFetching: PropTypes.bool,
   errors: PropTypes.string,
+  userId: PropTypes.number,
   serverValidationMessage: PropTypes.string,
 };
 

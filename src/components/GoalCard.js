@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { sortSteps } from "../utils/helperFunctions";
@@ -25,22 +24,25 @@ const GoalCard = (props) => {
   goal.steps = sortedSteps;
 
   return (
-    <div
-      className={
-        goal.goal_completed
-          ? "completed-goals goal-card-container"
-          : "unfinished-goals goal-card-container"
-      }
-    >
-      <div onClick={openModal}>
+    <div className="goal-card-container">
+      <div
+        className={
+          goal.goal_completed
+            ? "completed-goals card-content-container"
+            : "unfinished-goals card-content-container"
+        }
+        onClick={openModal}
+      >
         <h2 className="card-title">{goal.goal_title}</h2>
         <div>
-          <p className="next-step">
-            Next Step: {nextStep ? nextStep.step_title : "None"}
-          </p>
-          <p>
-            Steps completed: {completedSteps}/{goal.steps.length}{" "}
-          </p>
+          <div>
+            <p className="next-step">
+              Next: {nextStep ? nextStep.step_title : "None"}
+            </p>
+            <p>
+              Steps completed: {completedSteps}/{goal.steps.length}{" "}
+            </p>
+          </div>
         </div>
       </div>
       <ViewCardDetails
