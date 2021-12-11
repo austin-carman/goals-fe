@@ -105,12 +105,12 @@ const mapStateToProps = (state) => {
 };
 
 Login.propTypes = {
-  isFetching: PropTypes.any,
-  userId: PropTypes.any,
-  token: PropTypes.any,
+  isFetching: PropTypes.bool,
+  token: PropTypes.string,
   userLogin: PropTypes.func,
   errors: PropTypes.string,
   serverValidationMessage: PropTypes.string,
+  userId: PropTypes.number,
 };
 
 export default connect(mapStateToProps, { userLogin })(Login);

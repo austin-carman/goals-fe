@@ -14,7 +14,6 @@ import { profileBackground } from "../actions/userActions";
 const Navbar = (props) => {
   const handleSignOut = () => {
     props.userLogout();
-    localStorage.removeItem("token");
   };
 
   const handleBackground = (e) => {
@@ -28,15 +27,18 @@ const Navbar = (props) => {
         <Link to="/" className="home-link">
           <h2>Goal Tracker</h2>
         </Link>
-        {localStorage.getItem("token") ? (
+        {props.userId ? (
           <div className="links-container">
-            <div
-              to={`/profile/${props.userId}`}
-              className="navlink profile-avatar-container"
-            >
+            <div className="navlink profile-avatar-container">
               <h3 className="avatar-text">AC</h3>
             </div>
             <div className="profile-menu-options">
+              <Link
+                to={`/profile/${props.userId}`}
+                className="navlink logout-navlink"
+              >
+                Profile
+              </Link>
               <Link
                 onClick={handleSignOut}
                 to="/"
@@ -79,18 +81,16 @@ const Navbar = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userReducer.userId,
-    token: state.userReducer.token,
     backgroundImage: state.userReducer.backgroundImage,
+    userId: state.userReducer.userId,
   };
 };
 
 Navbar.propTypes = {
   userLogout: PropTypes.func,
-  userId: PropTypes.number,
-  token: PropTypes.any,
   profileBackground: PropTypes.func,
   backgroundImage: PropTypes.any,
+  userId: PropTypes.number,
 };
 
 export default connect(mapStateToProps, { userLogout, profileBackground })(

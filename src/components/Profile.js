@@ -12,7 +12,7 @@ const Profile = (props) => {
 
   useEffect(() => {
     props.fetchUserGoals(userId);
-  }, [userId]);
+  }, []);
 
   const totalGoals = props.goals.length;
   let completedGoals = 0;

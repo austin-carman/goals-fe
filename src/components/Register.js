@@ -18,13 +18,12 @@ const Register = (props) => {
 
   const [registerForm, setRegisterForm] = useState(initialState);
   const [formErrors, setFormErrors] = useState("");
-
   const history = useHistory();
 
   useEffect(() => {
     if (userId) {
       formErrors("");
-      history.push(`/login`);
+      history.push(`/profile`);
     }
   }, [userId]);
 
@@ -109,8 +108,8 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userReducer.userId,
     isFetching: state.userReducer.isFetching,
+    userId: state.userReducer.userId,
     errors: state.userReducer.errors,
     serverValidationMessage: state.userReducer.serverValidationMessage,
   };
@@ -118,9 +117,9 @@ const mapStateToProps = (state) => {
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  userId: PropTypes.number,
   isFetching: PropTypes.bool,
   errors: PropTypes.string,
+  userId: PropTypes.number,
   serverValidationMessage: PropTypes.string,
 };
 

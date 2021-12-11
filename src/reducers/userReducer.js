@@ -13,7 +13,7 @@ import oceanMountains from "../images/ocean-mountains.jpg";
 const initialState = {
   isFetching: false,
   token: false,
-  userId: null,
+  userId: sessionStorage.getItem("user"),
   errors: "",
   serverValidationMessage: "",
   backgroundImage: localStorage.getItem("goals background") || oceanMountains,
@@ -28,6 +28,7 @@ const userReducer = (state = initialState, action) => {
       };
     case SEND_REGISTRATION_SUCCESSFUL: {
       if (action.payload.user_id) {
+        sessionStorage.setItem("user", action.payload.user_id);
         return {
           ...state,
           isFetching: false,
@@ -58,11 +59,12 @@ const userReducer = (state = initialState, action) => {
     case VERIFY_USER_SUCCESS: {
       if (action.payload.token) {
         localStorage.setItem("token", action.payload.token);
+        sessionStorage.setItem("user", action.payload.userId);
         return {
           ...state,
           isFetching: false,
+          userId: sessionStorage.getItem("user"),
           token: true,
-          userId: action.payload.userId,
           errors: "",
           serverValidationMessage: "",
         };
@@ -82,11 +84,13 @@ const userReducer = (state = initialState, action) => {
         errors: action.payload,
       };
     case USER_LOGOUT:
+      sessionStorage.removeItem("user");
+      localStorage.removeItem("token");
       return {
         ...state,
         isFetching: false,
-        token: null,
         userId: null,
+        token: null,
         errors: initialState.errors,
       };
     case PROFILE_BACKGROUND:
