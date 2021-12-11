@@ -90,7 +90,7 @@ Navbar.propTypes = {
   userLogout: PropTypes.func,
   profileBackground: PropTypes.func,
   backgroundImage: PropTypes.any,
-  userId: PropTypes.number,
+  userId: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userLogout, profileBackground })(
