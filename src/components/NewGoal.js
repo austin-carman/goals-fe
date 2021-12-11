@@ -17,6 +17,7 @@ const NewGoal = (props) => {
 
   const [goal, setGoal] = useState(initialState);
   const [formErrors, setFormErrors] = useState("");
+  const savedBackground = localStorage.getItem("goals background");
 
   const history = useHistory();
   const { userId } = useParams();
@@ -75,9 +76,14 @@ const NewGoal = (props) => {
   }
 
   return (
-    <div>
-      <h2 className="form-title">Create Your New Goal</h2>
+    <div
+      className="new-edit-goal-form-container"
+      style={{
+        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
+      }}
+    >
       <form className="goal-form" onSubmit={onSubmit}>
+        <h2 className="form-title">Create Your New Goal</h2>
         <div className="icon-label-container">
           <div className="icon"></div>
           <div className="label-input-container">
@@ -140,12 +146,14 @@ const mapStateToProps = (state) => {
   return {
     error: state.goalsReducer.error,
     serverValidateMessage: state.goalsReducer.serverValidateMessage,
+    backgroundImage: state.userReducer.backgroundImage,
   };
 };
 
 NewGoal.propTypes = {
   sendNewGoal: PropTypes.func,
   error: PropTypes.any,
+  backgroundImage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);
