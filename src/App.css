@@ -296,7 +296,7 @@ button {
   transform: translate(0, 12%);
   background: rgba(255,255,255,0.5);
   backdrop-filter: blur(5px);
-  max-height: 75vh;
+  height: 75vh;
   overflow: scroll;
   border-radius: 10px;
 }
