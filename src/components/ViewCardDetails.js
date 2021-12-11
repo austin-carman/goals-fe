@@ -13,8 +13,11 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75vh",
+    maxHeight: "75vh",
     width: "50%",
+    borderRadius: "10px",
+    border: "none",
+    backdropFilter: "blur(10px)",
   },
 };
 
@@ -58,7 +61,7 @@ const ViewCardDetails = (props) => {
       >
         <div className="details-modal">
           <h6 className="close-details" onClick={closeModal}>
-            Close
+            &times;
           </h6>
           <div className="goal-edit-container">
             <div className="details-container view-goal-title-container">
