@@ -6,23 +6,26 @@ import { connect } from "react-redux";
 import { deleteGoal } from "../actions/goalsActions";
 import { deleteStep } from "../actions/goalsActions";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
-  },
-};
-
 Modal.setAppElement("#root");
 
 const DeleteModal = (props) => {
   const { isModalOpen, setIsModalOpen, deleteGoal, deleteStep, goal, setGoal } =
     props;
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      borderRadius: "10px",
+      border: "none",
+    },
+    overlay: {
+      backdropFilter: "blur(2px) brightness(30%)",
+    },
+  };
   const history = useHistory();
 
   const closeModal = () => {
