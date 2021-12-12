@@ -109,6 +109,13 @@ button {
   color: blue;
   text-decoration: none;
 }
+#signed-out-links-container {
+  width: 40%;
+  justify-content: flex-end;
+}
+#sign-up-link {
+  margin-left: 2%;
+}
 .profile-avatar-container {
   width: 50px;
   height: 50px;
@@ -332,6 +339,18 @@ textarea {
 .bottom-container button {
   margin-top: 5%;
 }
+.delete-modal-title {
+  text-align: center;
+}
+.delete-modal-btn-container {
+  display: flex;
+  justify-content: center;
+}
+.delete-modal-btn {
+  margin: 3% 2%;
+  padding: 2%;
+}
+
 
 /* Forms: Login/Register */
 .login-register-page {

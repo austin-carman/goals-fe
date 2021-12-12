@@ -47,7 +47,7 @@ const Navbar = (props) => {
                 Logout
               </Link>
               <div>
-                <p>Select a background</p>
+                <p>Profile Background:</p>
                 <select
                   value={props.backgroundImage}
                   onChange={handleBackground}
@@ -65,11 +65,11 @@ const Navbar = (props) => {
             </div>
           </div>
         ) : (
-          <div className="links-container">
+          <div className="links-container" id="signed-out-links-container">
             <Link to="/login" className="navlink">
               Sign In
             </Link>
-            <Link to="/register" className="navlink">
+            <Link to="/register" className="navlink" id="sign-up-link">
               Sign Up
             </Link>
           </div>

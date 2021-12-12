@@ -4,22 +4,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    maxHeight: "75vh",
-    width: "50%",
-    borderRadius: "10px",
-    border: "none",
-    backdropFilter: "blur(10px)",
-  },
-};
+import { modalStyles } from "../styling/modalStyles";
 
 Modal.setAppElement("#root");
 
@@ -57,7 +42,7 @@ const ViewCardDetails = (props) => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
+        style={modalStyles}
       >
         <div className="details-modal">
           <h6 className="close-details" onClick={closeModal}>
