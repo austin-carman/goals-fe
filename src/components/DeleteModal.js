@@ -54,7 +54,6 @@ const DeleteModal = (props) => {
   };
 
   return (
-    // <div>
     <Modal
       isOpen={isModalOpen.open}
       onRequestClose={closeModal}
@@ -70,7 +69,6 @@ const DeleteModal = (props) => {
         </button>
       </div>
     </Modal>
-    // </div>
   );
 };
 
