@@ -47,7 +47,7 @@ const Navbar = (props) => {
                 Logout
               </Link>
               <div>
-                <p>Select a background</p>
+                <p>Profile Background:</p>
                 <select
                   value={props.backgroundImage}
                   onChange={handleBackground}
