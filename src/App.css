@@ -339,6 +339,15 @@ textarea {
 .bottom-container button {
   margin-top: 5%;
 }
+.delete-modal-btn-container {
+  display: flex;
+  justify-content: center;
+}
+.delete-modal-btn {
+  margin: 3% 2%;
+  padding: 2%;
+}
+
 
 /* Forms: Login/Register */
 .login-register-page {

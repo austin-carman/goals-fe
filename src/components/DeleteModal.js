@@ -14,6 +14,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    borderRadius: "10px",
   },
 };
 
@@ -53,17 +54,23 @@ const DeleteModal = (props) => {
   };
 
   return (
-    <div>
-      <Modal
-        isOpen={isModalOpen.open}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <h2>Are you sure you want to delete?</h2>
-        <button onClick={closeModal}>Cancel</button>
-        <button onClick={handleDelete}>Delete</button>
-      </Modal>
-    </div>
+    // <div>
+    <Modal
+      isOpen={isModalOpen.open}
+      onRequestClose={closeModal}
+      style={customStyles}
+    >
+      <h2>Are you sure you want to delete?</h2>
+      <div className="delete-modal-btn-container">
+        <button className="delete-modal-btn" onClick={closeModal}>
+          Cancel
+        </button>
+        <button className="delete-modal-btn" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
+    </Modal>
+    // </div>
   );
 };
 

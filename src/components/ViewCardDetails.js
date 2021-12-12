@@ -17,7 +17,6 @@ const customStyles = {
     width: "50%",
     borderRadius: "10px",
     border: "none",
-    backdropFilter: "blur(10px)",
   },
 };
 
