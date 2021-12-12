@@ -18,6 +18,9 @@ const customStyles = {
     borderRadius: "10px",
     border: "none",
   },
+  overlay: {
+    backdropFilter: "blur(3px) brightness(40%)",
+  },
 };
 
 Modal.setAppElement("#root");

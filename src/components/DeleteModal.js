@@ -23,7 +23,7 @@ const DeleteModal = (props) => {
       border: "none",
     },
     overlay: {
-      backdropFilter: "blur(2px) brightness(30%)",
+      backdropFilter: "blur(3px) brightness(40%)",
     },
   };
   const history = useHistory();
