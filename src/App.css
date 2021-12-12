@@ -339,6 +339,9 @@ textarea {
 .bottom-container button {
   margin-top: 5%;
 }
+.delete-modal-title {
+  text-align: center;
+}
 .delete-modal-btn-container {
   display: flex;
   justify-content: center;

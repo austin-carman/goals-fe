@@ -5,27 +5,28 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/goalsActions";
 import { deleteStep } from "../actions/goalsActions";
+import { modalStyles } from "../styling/modalStyles";
 
 Modal.setAppElement("#root");
 
 const DeleteModal = (props) => {
   const { isModalOpen, setIsModalOpen, deleteGoal, deleteStep, goal, setGoal } =
     props;
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      borderRadius: "10px",
-      border: "none",
-    },
-    overlay: {
-      backdropFilter: "blur(3px) brightness(40%)",
-    },
-  };
+  // const customStyles = {
+  //   content: {
+  //     top: "50%",
+  //     left: "50%",
+  //     right: "auto",
+  //     bottom: "auto",
+  //     marginRight: "-50%",
+  //     transform: "translate(-50%, -50%)",
+  //     borderRadius: "10px",
+  //     border: "none",
+  //   },
+  //   overlay: {
+  //     backdropFilter: "blur(3px) brightness(40%)",
+  //   },
+  // };
   const history = useHistory();
 
   const closeModal = () => {
@@ -60,9 +61,9 @@ const DeleteModal = (props) => {
     <Modal
       isOpen={isModalOpen.open}
       onRequestClose={closeModal}
-      style={customStyles}
+      style={modalStyles}
     >
-      <h2>Are you sure you want to delete?</h2>
+      <h2 className="delete-modal-title">Are you sure you want to delete?</h2>
       <div className="delete-modal-btn-container">
         <button className="delete-modal-btn" onClick={closeModal}>
           Cancel
