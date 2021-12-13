@@ -156,7 +156,6 @@ const EditGoal = (props) => {
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>
-          {/* <button onClick={handleCancel}>Close</button> */}
           <button onClick={handleSave}>Save</button>
         </div>
       </form>
