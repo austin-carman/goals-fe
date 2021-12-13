@@ -12,7 +12,7 @@ const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
 
-  const editingGoal = props.goals.find(
+  const initialGoalState = props.goals.find(
     (goal) => goal.goal_id === parseInt(params.goalId)
   );
 
@@ -27,7 +27,7 @@ const EditGoal = (props) => {
     },
   };
 
-  const [goal, setGoal] = useState(editingGoal);
+  const [goal, setGoal] = useState(initialGoalState);
   const [formErrors, setFormErrors] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(initialIsModalOpenState);
   const savedBackground = localStorage.getItem("goals background");
