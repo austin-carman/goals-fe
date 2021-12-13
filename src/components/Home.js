@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <section className="hero">
-        <h1>Be intentional in who you become</h1>
+        <h1>Title</h1>
         <button onClick={handleClick}>Start now</button>
       </section>
       <section className="top-info-section">
@@ -30,11 +30,10 @@ const Home = () => {
           <div>
             <h3 className="thirds-title">Organize</h3>
             <p>
-              We&apos;ve all made a goal that we end up forgetting about or
-              write it down only to lose it or throw it out by accident.
-              GoalTracker makes it easy to quickly record your goals and group
-              them together in one convenient location so you can easily review
-              them.
+              We&apos;ve all made a goal, determined to see it through, only to
+              let it fade from memory in our busy lives. GoalTracker makes it
+              easy to quickly record your goals and group them together in one
+              convenient location so you can review them frequently.
             </p>
           </div>
         </div>

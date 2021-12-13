@@ -12,13 +12,11 @@ const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
 
-  const initialGoalState = {
-    goal_title: props.goals[params.index].goal_title,
-    goal_completed: props.goals[params.index].goal_completed,
-    user_id: props.goals[params.index].user_id,
-    goal_id: props.goals[params.index].goal_id,
-    steps: props.goals[params.index].steps,
-  };
+  const editingGoal = props.goals.find(
+    (goal) => goal.goal_id === parseInt(params.goalId)
+  );
+
+  console.log("goals: ", props.goals);
 
   const initialIsModalOpenState = {
     open: false,
@@ -31,7 +29,7 @@ const EditGoal = (props) => {
     },
   };
 
-  const [goal, setGoal] = useState(initialGoalState);
+  const [goal, setGoal] = useState(editingGoal);
   const [formErrors, setFormErrors] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(initialIsModalOpenState);
   const savedBackground = localStorage.getItem("goals background");
@@ -103,6 +101,9 @@ const EditGoal = (props) => {
       }}
     >
       <form className="goal-form" onSubmit={onSubmit}>
+        <h6 className="close-details" onClick={handleCancel}>
+          &times;
+        </h6>
         <h2 className="form-title">Edit Goal</h2>
         <div className="icon-label-container">
           <img
@@ -157,7 +158,7 @@ const EditGoal = (props) => {
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>
-          <button onClick={handleCancel}>Cancel</button>
+          {/* <button onClick={handleCancel}>Close</button> */}
           <button onClick={handleSave}>Save</button>
         </div>
       </form>

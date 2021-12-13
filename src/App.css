@@ -413,9 +413,9 @@ textarea {
   padding: 2%;
   width: 25%;
   text-align: center;
-  background: rgba(255,255,255,0.3);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
+  /* background: rgba(255,255,255,0.3); */
+  /* backdrop-filter: blur(5px); */
+  /* border-radius: 10px; */
   text-transform: capitalize;
 }
 .top-info-section {
