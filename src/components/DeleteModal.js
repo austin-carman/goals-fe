@@ -28,7 +28,6 @@ const DeleteModal = (props) => {
   //   },
   // };
 
-  console.log(isModalOpen);
   const history = useHistory();
 
   const closeModal = () => {
@@ -80,7 +79,6 @@ const DeleteModal = (props) => {
             ${isModalOpen.stepToDelete.index + 1}?`}
         </h2>
       )}
-      {/* <h2 className="delete-modal-title">Are you sure you want to delete?</h2> */}
       <div className="delete-modal-btn-container">
         <button className="delete-modal-btn" onClick={closeModal}>
           Cancel
