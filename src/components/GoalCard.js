@@ -24,15 +24,11 @@ const GoalCard = (props) => {
   goal.steps = sortedSteps;
 
   return (
-    <div className="goal-card-container">
-      <div
-        className={
-          goal.goal_completed
-            ? "completed-goals card-content-container"
-            : "unfinished-goals card-content-container"
-        }
-        onClick={openModal}
-      >
+    <div
+      className="goal-card-container"
+      id={goal.goal_completed ? "completed-goals" : "unfinished-goals"}
+    >
+      <div className="card-content-container" onClick={openModal}>
         <h2 className="card-title">{goal.goal_title}</h2>
         <div>
           <div>

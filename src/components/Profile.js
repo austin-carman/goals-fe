@@ -26,6 +26,16 @@ const Profile = (props) => {
     }
   });
 
+  const handleShowAllGoals = () => {
+    console.log("1");
+  };
+  const handleShowCompletedGoals = () => {
+    console.log("1");
+  };
+  const handleShowUnfinishedGoals = () => {
+    console.log("1");
+  };
+
   return (
     <div
       className="profile-content"
@@ -36,15 +46,21 @@ const Profile = (props) => {
       <div className="dashboard">
         <h2>My Goals</h2>
         <div className="dashboard-stats">
-          <div>
+          <div className="dashboard-view-options" onClick={handleShowAllGoals}>
             <h3>Total goals:</h3>
             <h3>{totalGoals}</h3>
           </div>
-          <div>
+          <div
+            className="dashboard-view-options"
+            onClick={handleShowCompletedGoals}
+          >
             <h3>Goals Completed:</h3>
             <h3>{completedGoals}</h3>
           </div>
-          <div>
+          <div
+            className="dashboard-view-options"
+            onClick={handleShowUnfinishedGoals}
+          >
             <h3>Goals in Progress:</h3>
             <h3>{uncompletedGoals}</h3>
           </div>

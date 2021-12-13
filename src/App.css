@@ -177,6 +177,10 @@ button {
   display: flex;
   justify-content: space-around;
 }
+.dashboard-view-options:hover {
+  cursor: pointer;
+}
+
 
 /* Goals List */
 .goals-lists-container {
