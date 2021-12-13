@@ -16,8 +16,6 @@ const EditGoal = (props) => {
     (goal) => goal.goal_id === parseInt(params.goalId)
   );
 
-  console.log("goals: ", props.goals);
-
   const initialIsModalOpenState = {
     open: false,
     goalToDelete: {
