@@ -9,14 +9,14 @@ import { modalStyles } from "../styling/modalStyles";
 Modal.setAppElement("#root");
 
 const ViewCardDetails = (props) => {
-  const { modalIsOpen, setModalIsOpen, goal, goalIndex, editUserGoal } = props;
+  const { modalIsOpen, setModalIsOpen, goal, editUserGoal } = props;
   const [goalDetails, setGoalDetails] = useState(goal);
   const [changedStatus, setChangedStatus] = useState(false);
   const history = useHistory();
   let stepNumber = 0;
 
-  const handleEdit = (index) => {
-    history.push(`/edit-goal/${goal.goal_id}/${index}`);
+  const handleEdit = () => {
+    history.push(`/edit-goal/${goal.goal_id}`);
   };
 
   const handleChange = (e, index) => {
@@ -60,10 +60,7 @@ const ViewCardDetails = (props) => {
               />
               <h2>{goalDetails.goal_title}</h2>
             </div>
-            <h6
-              className="goal-card-edit-button"
-              onClick={() => handleEdit(goalIndex)}
-            >
+            <h6 className="goal-card-edit-button" onClick={handleEdit}>
               Edit
             </h6>
           </div>
@@ -110,7 +107,6 @@ ViewCardDetails.propTypes = {
   modalIsOpen: PropTypes.bool,
   setModalIsOpen: PropTypes.func,
   goal: PropTypes.object,
-  goalIndex: PropTypes.number,
   editUserGoal: PropTypes.func,
 };
 
