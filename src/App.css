@@ -200,9 +200,9 @@ button {
   flex-wrap: wrap;
   overflow: scroll;
   height: 62vh;
-  /* background: rgba(255,255,255,0.2); */
-  /* backdrop-filter: blur(5px); */
-  /* border-radius: 10px; */
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
 }
 .loading {
   text-align: center;
