@@ -25,6 +25,35 @@ const Profile = (props) => {
       uncompletedGoals += 1;
     }
   });
+  const unfinished = document.getElementsByClassName("unfinished-goals");
+  const completed = document.getElementsByClassName("completed-goals");
+
+  const showGoals = (viewGoals) => {
+    for (let i = 0; i < viewGoals.length; i++) {
+      viewGoals[i].style.display = "block";
+    }
+  };
+
+  const hideGoals = (viewGoals) => {
+    for (let i = 0; i < viewGoals.length; i++) {
+      viewGoals[i].style.display = "none";
+    }
+  };
+
+  const handleShowAllGoals = () => {
+    showGoals(completed);
+    showGoals(unfinished);
+  };
+
+  const handleShowCompleted = () => {
+    showGoals(completed);
+    hideGoals(unfinished);
+  };
+
+  const handleShowUnfinished = () => {
+    showGoals(unfinished);
+    hideGoals(completed);
+  };
 
   return (
     <div
@@ -36,17 +65,20 @@ const Profile = (props) => {
       <div className="dashboard">
         <h2>My Goals</h2>
         <div className="dashboard-stats">
-          <div>
-            <h3>Total goals:</h3>
+          <div className="dashboard-view-options" onClick={handleShowAllGoals}>
+            <h3>All goals:</h3>
             <h3>{totalGoals}</h3>
           </div>
-          <div>
-            <h3>Goals Completed:</h3>
-            <h3>{completedGoals}</h3>
-          </div>
-          <div>
-            <h3>Goals in Progress:</h3>
+          <div
+            className="dashboard-view-options"
+            onClick={handleShowUnfinished}
+          >
+            <h3>In Progress:</h3>
             <h3>{uncompletedGoals}</h3>
+          </div>
+          <div className="dashboard-view-options" onClick={handleShowCompleted}>
+            <h3>Completed:</h3>
+            <h3>{completedGoals}</h3>
           </div>
         </div>
       </div>

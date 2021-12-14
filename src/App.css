@@ -164,7 +164,7 @@ button {
   margin-bottom: 2%;
 }
 .dashboard {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.2);
   backdrop-filter: blur(5px);
   width: 80%;
   margin: 0 auto 2%;
@@ -177,6 +177,20 @@ button {
   display: flex;
   justify-content: space-around;
 }
+.dashboard-view-options {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(5px);
+  padding: 1%;
+  border-radius: 10px;
+  width: 15%;
+}
+.dashboard-view-options:hover {
+  cursor: pointer;
+  background: rgba(255,255,255,0.7);
+}
+.dashboard h2 {
+  font-size: 3.5rem;
+}
 
 /* Goals List */
 .goals-lists-container {
@@ -186,9 +200,9 @@ button {
   flex-wrap: wrap;
   overflow: scroll;
   height: 62vh;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
+  /* background: rgba(255,255,255,0.2); */
+  /* backdrop-filter: blur(5px); */
+  /* border-radius: 10px; */
 }
 .loading {
   text-align: center;
