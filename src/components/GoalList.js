@@ -27,8 +27,8 @@ const GoalList = (props) => {
       {props.isFetching ? (
         <h2 className="loading">Loading...</h2>
       ) : (
-        sortedGoals.map((goal, index) => {
-          return <GoalCard key={goal.goal_id} goal={goal} index={index} />;
+        sortedGoals.map((goal) => {
+          return <GoalCard key={goal.goal_id} goal={goal} />;
         })
       )}
     </div>
