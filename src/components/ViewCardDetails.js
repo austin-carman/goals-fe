@@ -10,14 +10,14 @@ import editIcon from "../images/edit-icon.png";
 Modal.setAppElement("#root");
 
 const ViewCardDetails = (props) => {
-  const { modalIsOpen, setModalIsOpen, goal, goalIndex, editUserGoal } = props;
+  const { modalIsOpen, setModalIsOpen, goal, editUserGoal } = props;
   const [goalDetails, setGoalDetails] = useState(goal);
   const [changedStatus, setChangedStatus] = useState(false);
   const history = useHistory();
   let stepNumber = 0;
 
-  const handleEdit = (index) => {
-    history.push(`/edit-goal/${goal.goal_id}/${index}`);
+  const handleEdit = () => {
+    history.push(`/edit-goal/${goal.goal_id}`);
   };
 
   const handleChange = (e, index) => {
@@ -64,14 +64,8 @@ const ViewCardDetails = (props) => {
             <img
               src={editIcon}
               className="goal-card-edit-button"
-              onClick={() => handleEdit(goalIndex)}
+              onClick={handleEdit}
             />
-            {/* <h6
-              className="goal-card-edit-button"
-              onClick={() => handleEdit(goalIndex)}
-            >
-              Edit
-            </h6> */}
           </div>
           {goalDetails.steps.map((step, index) => {
             stepNumber += 1;
@@ -116,7 +110,6 @@ ViewCardDetails.propTypes = {
   modalIsOpen: PropTypes.bool,
   setModalIsOpen: PropTypes.func,
   goal: PropTypes.object,
-  goalIndex: PropTypes.number,
   editUserGoal: PropTypes.func,
 };
 
