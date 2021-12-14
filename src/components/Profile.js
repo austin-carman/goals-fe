@@ -70,16 +70,16 @@ const Profile = (props) => {
             <h3>All Goals:</h3>
             <h3>{totalGoals}</h3>
           </div>
-          <div className="dashboard-view-options" onClick={handleShowCompleted}>
-            <h3>Goals Completed:</h3>
-            <h3>{completedGoals}</h3>
-          </div>
           <div
             className="dashboard-view-options"
             onClick={handleShowUnfinished}
           >
-            <h3>Goals in Progress:</h3>
+            <h3>In Progress:</h3>
             <h3>{uncompletedGoals}</h3>
+          </div>
+          <div className="dashboard-view-options" onClick={handleShowCompleted}>
+            <h3>Completed:</h3>
+            <h3>{completedGoals}</h3>
           </div>
         </div>
       </div>
