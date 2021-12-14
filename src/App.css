@@ -108,14 +108,13 @@ button {
   z-index: 1;
 }
 .navlink {
-  color: black;
   text-decoration: none;
   text-transform: capitalize;
   align-self: center;
   color: white;
 }
 .navlink:hover {
-  color: blue;
+  color: rgba(255,255,255,0.5);
   text-decoration: none;
 }
 #signed-out-links-container {
@@ -125,39 +124,40 @@ button {
 #sign-up-link {
   margin-left: 2%;
 }
-.profile-avatar-container {
+.links-container {
   width: 50px;
   height: 50px;
+  transition: width 1s;
+  background-color: #93CAED;
+  border-radius: 10px;
+}
+.links-container:hover {
+  width: 500px;
+}
+.profile-avatar-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #93CAED;
-  border-radius: 10px;
-  margin: 2% 0;
+  margin: 2% 0; 
 }
 .profile-menu-options {
-  display: none;
-  position: absolute;
-  width: 5%;
-  right: 2%;
-  top: 0;
-  border-radius: 10px;
-  text-align: center;
-  padding: 2%;
-  color: white;
+  visibility: hidden;
+  width: 0px;
+  opacity: 0;
+  transition: width .2s;
+  transition: opacity 1s;
+  transition-delay: 0.3s;
 }
 .links-container:hover .profile-avatar-container {
   display: none;
 }
 .links-container:hover .profile-menu-options {
+  visibility: visible;
   display: flex;
   justify-content: space-evenly;
   width: 500px;
-  height: 10vh;
-  background-color: #93CAED;
-  border-radius: 10px;
+  opacity: 1;
 }
-
 
 /* ***** Profile *****  */
 .profile-content {
