@@ -123,7 +123,7 @@ button {
   align-items: center;
   justify-content: center;
   background-color: pink;
-  border-radius: 50%;
+  border-radius: 10px;
   margin: 2% 0;
 }
 .profile-menu-options {
@@ -136,20 +136,16 @@ button {
   text-align: center;
   padding: 2%;
 }
-.logout-navlink {
-  margin-bottom: 10%;
-}
 .links-container:hover .profile-avatar-container {
   display: none;
 }
 .links-container:hover .profile-menu-options {
   display: flex;
-  flex-direction: column;
   justify-content: space-evenly;
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 10vh;
   background-color: pink;
-  border-radius: 50%;
+  border-radius: 10px;
 }
 
 

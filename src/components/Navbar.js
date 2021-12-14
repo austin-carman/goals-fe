@@ -39,13 +39,6 @@ const Navbar = (props) => {
               >
                 Profile
               </Link>
-              <Link
-                onClick={handleSignOut}
-                to="/"
-                className="navlink logout-navlink"
-              >
-                Logout
-              </Link>
               <div>
                 <p>Profile Background:</p>
                 <select
@@ -62,6 +55,13 @@ const Navbar = (props) => {
                   <option value={wood}>Wood</option>
                 </select>
               </div>
+              <Link
+                onClick={handleSignOut}
+                to="/"
+                className="navlink logout-navlink"
+              >
+                Logout
+              </Link>
             </div>
           </div>
         ) : (
