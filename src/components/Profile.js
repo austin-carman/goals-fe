@@ -26,6 +26,13 @@ const Profile = (props) => {
     }
   });
 
+  const handleShowAllGoals = () => {
+    const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
+    for (let i = 0; i < unfinishedGoals.length; i++) {
+      unfinishedGoals[i].style.display = "block";
+    }
+  };
+
   const handleShowCompleted = () => {
     const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
     for (let i = 0; i < unfinishedGoals.length; i++) {
@@ -43,7 +50,7 @@ const Profile = (props) => {
       <div className="dashboard">
         <h2>My Goals</h2>
         <div className="dashboard-stats">
-          <div className="dashboard-view-options">
+          <div className="dashboard-view-options" onClick={handleShowAllGoals}>
             <h3>All Goals:</h3>
             <h3>{totalGoals}</h3>
           </div>
