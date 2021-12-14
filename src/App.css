@@ -276,6 +276,7 @@ button {
 }
 .goal-card-edit-button {
   display: inline-block;
+  width: 5%;
 }
 .view-goal-step-title {
   margin: 1% auto;
@@ -291,9 +292,9 @@ button {
 }
 .close-details {
   text-align: right;
-  margin-left: 90%;
+  margin-left: 80%;
   font-size: 3rem;
-  margin-bottom: -2%;
+  margin-top: -2%;
 }
 .close-details:hover {
   cursor: pointer;

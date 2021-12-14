@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import { modalStyles } from "../styling/modalStyles";
+import editIcon from "../images/edit-icon.png";
 
 Modal.setAppElement("#root");
 
@@ -44,10 +45,10 @@ const ViewCardDetails = (props) => {
         onRequestClose={closeModal}
         style={modalStyles}
       >
+        <h6 className="close-details" onClick={closeModal}>
+          &times;
+        </h6>
         <div className="details-modal">
-          <h6 className="close-details" onClick={closeModal}>
-            &times;
-          </h6>
           <div className="goal-edit-container">
             <div className="details-container view-goal-title-container">
               <input
@@ -60,9 +61,11 @@ const ViewCardDetails = (props) => {
               />
               <h2>{goalDetails.goal_title}</h2>
             </div>
-            <h6 className="goal-card-edit-button" onClick={handleEdit}>
-              Edit
-            </h6>
+            <img
+              src={editIcon}
+              className="goal-card-edit-button"
+              onClick={() => handleEdit(goalIndex)}
+            />
           </div>
           {goalDetails.steps.map((step, index) => {
             stepNumber += 1;
