@@ -28,15 +28,34 @@ const Profile = (props) => {
 
   const handleShowAllGoals = () => {
     const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
+    const completedGoals = document.getElementsByClassName("completed-goals");
     for (let i = 0; i < unfinishedGoals.length; i++) {
       unfinishedGoals[i].style.display = "block";
+    }
+    for (let i = 0; i < completedGoals.length; i++) {
+      completedGoals[i].style.display = "block";
     }
   };
 
   const handleShowCompleted = () => {
     const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
+    const completedGoals = document.getElementsByClassName("completed-goals");
     for (let i = 0; i < unfinishedGoals.length; i++) {
       unfinishedGoals[i].style.display = "none";
+    }
+    for (let i = 0; i < completedGoals.length; i++) {
+      completedGoals[i].style.display = "block";
+    }
+  };
+
+  const handleShowUnfinished = () => {
+    const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
+    const completedGoals = document.getElementsByClassName("completed-goals");
+    for (let i = 0; i < unfinishedGoals.length; i++) {
+      unfinishedGoals[i].style.display = "block";
+    }
+    for (let i = 0; i < completedGoals.length; i++) {
+      completedGoals[i].style.display = "none";
     }
   };
 
@@ -58,7 +77,10 @@ const Profile = (props) => {
             <h3>Goals Completed:</h3>
             <h3>{completedGoals}</h3>
           </div>
-          <div className="dashboard-view-options">
+          <div
+            className="dashboard-view-options"
+            onClick={handleShowUnfinished}
+          >
             <h3>Goals in Progress:</h3>
             <h3>{uncompletedGoals}</h3>
           </div>
