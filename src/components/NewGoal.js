@@ -36,7 +36,8 @@ const NewGoal = (props) => {
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e.preventDefault();
     history.push(`/profile/${userId}`);
   };
 
