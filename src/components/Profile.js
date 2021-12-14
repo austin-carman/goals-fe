@@ -26,37 +26,34 @@ const Profile = (props) => {
     }
   });
 
+  const unfinished = document.getElementsByClassName("unfinished-goals");
+  const completed = document.getElementsByClassName("completed-goals");
+
+  const showGoals = (viewGoals) => {
+    for (let i = 0; i < viewGoals.length; i++) {
+      viewGoals[i].style.display = "block";
+    }
+  };
+
+  const hideGoals = (viewGoals) => {
+    for (let i = 0; i < viewGoals.length; i++) {
+      viewGoals[i].style.display = "none";
+    }
+  };
+
   const handleShowAllGoals = () => {
-    const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
-    const completedGoals = document.getElementsByClassName("completed-goals");
-    for (let i = 0; i < unfinishedGoals.length; i++) {
-      unfinishedGoals[i].style.display = "block";
-    }
-    for (let i = 0; i < completedGoals.length; i++) {
-      completedGoals[i].style.display = "block";
-    }
+    showGoals(completed);
+    showGoals(unfinished);
   };
 
   const handleShowCompleted = () => {
-    const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
-    const completedGoals = document.getElementsByClassName("completed-goals");
-    for (let i = 0; i < unfinishedGoals.length; i++) {
-      unfinishedGoals[i].style.display = "none";
-    }
-    for (let i = 0; i < completedGoals.length; i++) {
-      completedGoals[i].style.display = "block";
-    }
+    showGoals(completed);
+    hideGoals(unfinished);
   };
 
   const handleShowUnfinished = () => {
-    const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
-    const completedGoals = document.getElementsByClassName("completed-goals");
-    for (let i = 0; i < unfinishedGoals.length; i++) {
-      unfinishedGoals[i].style.display = "block";
-    }
-    for (let i = 0; i < completedGoals.length; i++) {
-      completedGoals[i].style.display = "none";
-    }
+    showGoals(unfinished);
+    hideGoals(completed);
   };
 
   return (
