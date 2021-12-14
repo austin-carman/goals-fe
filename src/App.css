@@ -130,6 +130,7 @@ button {
   transition: width 1s;
   background-color: #93CAED;
   border-radius: 10px;
+  color: white;
 }
 .links-container:hover {
   width: 500px;
