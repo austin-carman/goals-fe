@@ -291,6 +291,9 @@ button {
   font-size: 3rem;
   margin-top: -2%;
 }
+.goal-form h6 {
+  margin-right: -6%;
+}
 .close-details:hover {
   cursor: pointer;
 }
@@ -309,7 +312,7 @@ button {
 }
 .goal-form {
   width: 60%;
-  padding: 5%;
+  padding: 2% 5%;
   margin: auto;
   transform: translate(0, 12%);
   background: rgba(255,255,255,0.5);

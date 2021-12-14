@@ -84,6 +84,9 @@ const NewGoal = (props) => {
       }}
     >
       <form className="goal-form" onSubmit={onSubmit}>
+        <h6 className="close-details" onClick={handleCancel}>
+          &times;
+        </h6>
         <h2 className="form-title">Create Your New Goal</h2>
         <div className="icon-label-container">
           <div className="icon"></div>
@@ -135,7 +138,6 @@ const NewGoal = (props) => {
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>
-          <button onClick={handleCancel}>Cancel</button>
           <button onClick={handleSubmit}>Save</button>
         </div>
       </form>
