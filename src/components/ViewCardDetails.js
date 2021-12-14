@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import { modalStyles } from "../styling/modalStyles";
-import editIcon from "../images/edit-icon.png";
+import editIcon from "../images/edit-icon2.png";
 
 Modal.setAppElement("#root");
 
