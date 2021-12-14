@@ -167,7 +167,7 @@ button {
   padding: 1%;
   border-radius: 10px;
   z-index: -1;
-  transform: translate(0, 10%);
+  transform: translate(0, 7%);
 }
 .dashboard-stats {
   display: flex;
@@ -191,7 +191,7 @@ button {
 /* Goals List */
 .goals-lists-container {
   width: 80%;
-  margin: 0% auto 2%;
+  margin: 1% auto 2%;
   display: flex;
   flex-wrap: wrap;
   overflow: scroll;
