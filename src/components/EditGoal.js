@@ -12,13 +12,9 @@ const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
 
-  const initialGoalState = {
-    goal_title: props.goals[params.index].goal_title,
-    goal_completed: props.goals[params.index].goal_completed,
-    user_id: props.goals[params.index].user_id,
-    goal_id: props.goals[params.index].goal_id,
-    steps: props.goals[params.index].steps,
-  };
+  const initialGoalState = props.goals.find(
+    (goal) => goal.goal_id === parseInt(params.goalId)
+  );
 
   const initialIsModalOpenState = {
     open: false,

@@ -4,7 +4,7 @@ import { sortSteps } from "../utils/helperFunctions";
 import ViewCardDetails from "./ViewCardDetails";
 
 const GoalCard = (props) => {
-  const { goal, index } = props;
+  const { goal } = props;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   let completedSteps = 0;
 
@@ -24,15 +24,14 @@ const GoalCard = (props) => {
   goal.steps = sortedSteps;
 
   return (
-    <div className="goal-card-container">
-      <div
-        className={
-          goal.goal_completed
-            ? "completed-goals card-content-container"
-            : "unfinished-goals card-content-container"
-        }
-        onClick={openModal}
-      >
+    <div
+      className={
+        goal.goal_completed
+          ? "completed-goals goal-card-container"
+          : "unfinished-goals goal-card-container"
+      }
+    >
+      <div className="card-content-container" onClick={openModal}>
         <h2 className="card-title">{goal.goal_title}</h2>
         <div>
           <div>
@@ -49,7 +48,6 @@ const GoalCard = (props) => {
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         goal={goal}
-        goalIndex={index}
       />
     </div>
   );
@@ -57,7 +55,6 @@ const GoalCard = (props) => {
 
 GoalCard.propTypes = {
   goal: PropTypes.object,
-  index: PropTypes.number,
 };
 
 export default GoalCard;

@@ -15,7 +15,12 @@ const DeleteModal = (props) => {
   const history = useHistory();
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen({
+      ...isModalOpen,
+      open: false,
+      goalToDelete: { goalId: null },
+      stepToDelete: { stepId: null, index: null },
+    });
   };
 
   const handleDelete = () => {
@@ -48,7 +53,16 @@ const DeleteModal = (props) => {
       onRequestClose={closeModal}
       style={modalStyles}
     >
-      <h2 className="delete-modal-title">Are you sure you want to delete?</h2>
+      {isModalOpen.goalToDelete.goalId ? (
+        <h2 className="delete-modal-title">
+          Are you sure you want to delete your goal?
+        </h2>
+      ) : (
+        <h2 className="delete-modal-title">
+          {`Are you sure you want to delete step 
+            ${isModalOpen.stepToDelete.index + 1}?`}
+        </h2>
+      )}
       <div className="delete-modal-btn-container">
         <button className="delete-modal-btn" onClick={closeModal}>
           Cancel
