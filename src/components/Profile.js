@@ -26,6 +26,13 @@ const Profile = (props) => {
     }
   });
 
+  const handleShowCompleted = () => {
+    const unfinishedGoals = document.getElementsByClassName("unfinished-goals");
+    for (let i = 0; i < unfinishedGoals.length; i++) {
+      unfinishedGoals[i].style.display = "none";
+    }
+  };
+
   return (
     <div
       className="profile-content"
@@ -40,7 +47,7 @@ const Profile = (props) => {
             <h3>All Goals:</h3>
             <h3>{totalGoals}</h3>
           </div>
-          <div className="dashboard-view-options">
+          <div className="dashboard-view-options" onClick={handleShowCompleted}>
             <h3>Goals Completed:</h3>
             <h3>{completedGoals}</h3>
           </div>
