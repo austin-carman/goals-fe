@@ -99,6 +99,9 @@ const EditGoal = (props) => {
       }}
     >
       <form className="goal-form" onSubmit={onSubmit}>
+        <h6 className="close-details" onClick={handleCancel}>
+          &times;
+        </h6>
         <h2 className="form-title">Edit Goal</h2>
         <div className="icon-label-container">
           <img
@@ -153,7 +156,6 @@ const EditGoal = (props) => {
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>
-          <button onClick={handleCancel}>Cancel</button>
           <button onClick={handleSave}>Save</button>
         </div>
       </form>
