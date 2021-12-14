@@ -15,7 +15,12 @@ const DeleteModal = (props) => {
   const history = useHistory();
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen({
+      ...isModalOpen,
+      open: false,
+      goalToDelete: { goalId: null },
+      stepToDelete: { stepId: null, index: null },
+    });
   };
 
   const handleDelete = () => {
