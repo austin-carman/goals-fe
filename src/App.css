@@ -79,7 +79,15 @@ button {
   border: 1px solid black;
 }
 
+/* App */
+.app {
+  background-size: cover;
+}
+
 /* ***** Navbar *****  */
+.navbar-header {
+  border-bottom: 1px solid black;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -91,7 +99,7 @@ button {
   text-decoration: none;
   padding: 1%;
   margin-left: 5%;
-  color: black;
+  color: white;
 }
 .links-container {
   display: flex;
@@ -104,6 +112,7 @@ button {
   text-decoration: none;
   text-transform: capitalize;
   align-self: center;
+  color: white;
 }
 .navlink:hover {
   color: blue;
@@ -135,6 +144,7 @@ button {
   border-radius: 10px;
   text-align: center;
   padding: 2%;
+  color: white;
 }
 .links-container:hover .profile-avatar-container {
   display: none;

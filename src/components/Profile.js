@@ -9,7 +9,6 @@ const Profile = (props) => {
   const [title, setTitle] = useState("All Goals");
   const params = useParams();
   const userId = params.userId;
-  const savedBackground = localStorage.getItem("goals background");
 
   useEffect(() => {
     props.fetchUserGoals(userId);
@@ -60,12 +59,7 @@ const Profile = (props) => {
   };
 
   return (
-    <div
-      className="profile-content"
-      style={{
-        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
-      }}
-    >
+    <div className="profile-content">
       <div className="dashboard">
         <h2>{title}</h2>
         <div className="dashboard-stats">
@@ -96,7 +90,6 @@ const mapStateToProps = (state) => {
     goals: state.goalsReducer.goals,
     isFetching: state.goalsReducer.isFetching,
     error: state.goalsReducer.error,
-    backgroundImage: state.userReducer.backgroundImage,
   };
 };
 
@@ -104,7 +97,6 @@ Profile.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.bool,
   fetchUserGoals: PropTypes.func,
-  backgroundImage: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { fetchUserGoals })(Profile);

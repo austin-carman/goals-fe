@@ -30,7 +30,6 @@ const EditGoal = (props) => {
   const [goal, setGoal] = useState(initialGoalState);
   const [formErrors, setFormErrors] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(initialIsModalOpenState);
-  const savedBackground = localStorage.getItem("goals background");
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -92,12 +91,7 @@ const EditGoal = (props) => {
   };
 
   return (
-    <div
-      className="new-edit-goal-form-container"
-      style={{
-        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
-      }}
-    >
+    <div className="new-edit-goal-form-container">
       <form className="goal-form" onSubmit={onSubmit}>
         <h6 className="close-details" onClick={handleCancel}>
           &times;
@@ -172,7 +166,6 @@ const EditGoal = (props) => {
 const mapStateToProps = (state) => {
   return {
     goals: state.goalsReducer.goals,
-    backgroundImage: state.userReducer.backgroundImage,
   };
 };
 
@@ -180,7 +173,6 @@ EditGoal.propTypes = {
   editUserGoal: PropTypes.func,
   deleteStep: PropTypes.func,
   goals: PropTypes.array,
-  backgroundImage: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { editUserGoal })(EditGoal);

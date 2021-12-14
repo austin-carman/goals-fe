@@ -7,11 +7,20 @@ import Profile from "./components/Profile";
 import Register from "./components/Register";
 import NewGoal from "./components/NewGoal";
 import EditGoal from "./components/EditGoal";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import "./App.css";
 
-function App() {
+function App(props) {
+  const savedBackground = localStorage.getItem("goals background");
+
   return (
-    <div className="App">
+    <div
+      className="app"
+      style={{
+        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
+      }}
+    >
       <Navbar />
       <Route path="/login">
         <Login />
@@ -35,4 +44,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    backgroundImage: state.userReducer.backgroundImage,
+  };
+};
+
+App.propTypes = {
+  backgroundImage: PropTypes.any,
+};
+
+export default connect(mapStateToProps)(App);
