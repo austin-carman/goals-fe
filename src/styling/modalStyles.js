@@ -10,8 +10,10 @@ export const modalStyles = {
     width: "50%",
     borderRadius: "10px",
     border: "none",
+    background: "rgba(255,255,255, 0.8)",
   },
   overlay: {
     backdropFilter: "blur(3px) brightness(40%)",
+    background: "rgba(255,255,255, 0.01)",
   },
 };
