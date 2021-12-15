@@ -9,7 +9,9 @@ import deleteStep from "../icons/minus-circle.png";
 
 const NewGoal = (props) => {
   const { sendNewGoal, error } = props;
-
+  const savedBackground = localStorage.getItem("goals background");
+  const history = useHistory();
+  const { userId } = useParams();
   const initialState = {
     goal_title: "",
     steps: [],
@@ -17,9 +19,6 @@ const NewGoal = (props) => {
 
   const [goal, setGoal] = useState(initialState);
   const [formErrors, setFormErrors] = useState("");
-
-  const history = useHistory();
-  const { userId } = useParams();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -76,7 +75,12 @@ const NewGoal = (props) => {
   }
 
   return (
-    <div className="new-edit-goal-form-container">
+    <div
+      className="new-edit-goal-form-container"
+      style={{
+        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
+      }}
+    >
       <form className="goal-form" onSubmit={onSubmit}>
         <h6 className="close-details" onClick={handleCancel}>
           &times;
@@ -142,13 +146,14 @@ const NewGoal = (props) => {
 const mapStateToProps = (state) => {
   return {
     error: state.goalsReducer.error,
-    serverValidateMessage: state.goalsReducer.serverValidateMessage,
+    backgroundImage: state.userReducer.backgroundImage,
   };
 };
 
 NewGoal.propTypes = {
   sendNewGoal: PropTypes.func,
   error: PropTypes.any,
+  backgroundImage: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);
