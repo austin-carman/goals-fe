@@ -330,6 +330,7 @@ button {
 	-webkit-box-orient: vertical;
 	text-overflow: ellipsis;
   overflow: hidden;
+  width: 95%;
 }
 .card-title {
   align-self: center;
