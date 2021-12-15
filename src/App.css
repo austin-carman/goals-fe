@@ -81,12 +81,15 @@ button {
 
 /* App */
 .app {
-  background-size: cover;
+  /* background-size: cover; */
+  /* background-size: 125%; */
+  /* margin-bottom: -10%; */
 }
 
 /* ***** Navbar *****  */
 .navbar-header {
   border-bottom: 1px solid rgba(255,255,255,0.2);
+  background-color: grey;
 }
 .navbar {
   display: flex;
@@ -118,11 +121,16 @@ button {
   text-decoration: none;
 }
 #signed-out-links-container {
-  width: 40%;
-  justify-content: flex-end;
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 5%;
+  background-color: #93CAED;
+  height: 50px;
+  border-radius: 10px;
 }
 #sign-up-link {
-  margin-left: 2%;
+  margin-left: 5%;
 }
 .links-container {
   width: 50px;
@@ -380,8 +388,9 @@ textarea {
 
 /* Forms: Login/Register */
 .login-register-page {
-  background: url("./images/rock-climber.jpg");
-  height: 90vh;
+  /* background: url("./images/rock-climber.jpg"); */
+  /* height: 100vh; */
+  /* margin-top: -10vh; */
   background-size: cover;
   background-position: center;
 }
@@ -424,28 +433,20 @@ textarea {
 
 /* Home Page */
 .hero {
-  background-image: url("./images/path.png");
-  height: 65vh;
-  background-position: 50% 70%;
+  background-image: url("./images/sunset-climber.jpg");
+  height: 90vh;
   background-size: cover;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-position-y: 25%;
 }
-.hero h1 {
-  margin: 2%;
-  padding: 2%;
-  width: 25%;
+.hero-content {
+  width: 50%;
+  transform: translate(75%, 100%);
   text-align: center;
-  background: rgba(255,255,255,0.3);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  text-transform: capitalize;
 }
-.top-info-section {
-  width: 75%;
+.hero-button {
+  margin:3%;
+}
+.middle-section {
   margin: 7% auto;
   text-align: center;
 }
@@ -455,42 +456,12 @@ textarea {
 .thirds-section {
   display: flex;
   justify-content: space-evenly;
-  margin: 2% 5%;
+  margin-bottom: 7%;
 }
 .third-container {
-  width: 28%;
-  margin-bottom: 5%;
+  width: 25%;
 }
 .thirds-title {
   text-align: center;
   text-decoration: underline;
-}
-.top-info-section p {
-  text-align: left;
-  margin-top: 5%;
-}
-.info-section {
-  display: flex;
-  margin: 10% 0;
-  justify-content: space-evenly;
-}
-.info-img {
-  width: 45%;
-}
-.info-container {
-  width: 45%;
-  align-self: center;
-}
-.quote-container {
-  text-align: center;
-  margin-bottom: 5%;
-}
-.button-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: url("./images/path.png");
-  background-position: 50% 65%;
-  height: 40vh;
 }

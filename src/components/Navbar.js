@@ -65,7 +65,7 @@ const Navbar = (props) => {
             </div>
           </div>
         ) : (
-          <div className="links-container" id="signed-out-links-container">
+          <div id="signed-out-links-container">
             <Link to="/login" className="navlink">
               Sign In
             </Link>

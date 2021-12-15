@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import tempImage from "../images/path.png";
+import tempImage from "../images/path.png"; // replace this image
 
 const Home = () => {
   const { push } = useHistory();
@@ -11,12 +11,19 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="home-page">
       <section className="hero">
-        <h1>Title goes here</h1>
-        <button onClick={handleClick}>Start now</button>
+        <div className="hero-content">
+          <h1 className="quote">
+            &quot;A goal properly set is halfway reached.&quot;
+          </h1>
+          <h3>— Zig Ziglar</h3>
+          <button className="hero-button" onClick={handleClick}>
+            Start now
+          </button>
+        </div>
       </section>
-      <section className="top-info-section">
+      <section className="middle-section">
         <div>
           <h2 className="quote">
             &quot;A goal properly set is halfway reached.&quot;
@@ -26,7 +33,7 @@ const Home = () => {
       </section>
       <section className="thirds-section">
         <div className="third-container">
-          <img src={tempImage} />
+          <img src={tempImage} /> {/* replace this image */}
           <div>
             <h3 className="thirds-title">Organize</h3>
             <p>
@@ -38,7 +45,7 @@ const Home = () => {
           </div>
         </div>
         <div className="third-container">
-          <img src={tempImage} />
+          <img src={tempImage} /> {/* replace this image */}
           <div>
             <h3 className="thirds-title">Plan</h3>
             <p>
