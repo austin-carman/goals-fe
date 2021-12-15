@@ -162,6 +162,88 @@ button {
   opacity: 1;
 }
 
+/* Home Page */
+.hero {
+  background-image: url("./images/sunset-climber.jpg");
+  height: 90vh;
+  background-size: cover;
+  background-position-y: 25%;
+}
+.hero-content {
+  width: 50%;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-25%, -50%);
+}
+.hero-button {
+  margin:3%;
+}
+.middle-section {
+  margin: 7% auto;
+  text-align: center;
+}
+.quote {
+  font-style: italic;
+}
+.thirds-section {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 7%;
+}
+.third-container {
+  width: 25%;
+}
+.thirds-title {
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Forms: Login/Register */
+.login-register-page {
+  background: url("./images/path.png");
+  height: 90vh;
+  background-size: cover;
+  background-position: 50% 75%;
+}
+.sign-in-container {
+  text-align: center;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(5px);
+}
+.sign-in-container h2 {
+  margin: 5%;
+}
+.sign-in-container input {
+  width: 50%;
+  margin: 1%;
+  padding: 1.5%;
+}
+.sign-in-container button {
+  margin: 2%;
+  cursor: pointer;
+}
+.create-account-link {
+  margin-bottom: 5%;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: blue;
+}
+.create-account-link:hover {
+  cursor: pointer;
+}
+
 /* ***** Profile *****  */
 .profile-content {
   text-align: center;
@@ -171,6 +253,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overflow-y: hidden;
 }
 .dashboard {
   background: rgba(255,255,255,0.2);
@@ -180,12 +263,13 @@ button {
   padding: 1%;
   border-radius: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .dashboard h2 {
   color: white;
   font-size: 3.5rem;
+  margin-left: 5%;
 }
 .dashboard-options-container {
   display: flex;
@@ -198,6 +282,7 @@ button {
   padding: 1%;
   border-radius: 10px;
   width: 25%;
+  margin: 0 2%;
 }
 .dashboard-view-options:hover {
   cursor: pointer;
@@ -207,11 +292,11 @@ button {
 /* Goals List */
 .goals-lists-container {
   width: 80%;
-  margin: 1% auto 2%;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   overflow: scroll;
-  height: 62vh;
+  height: 65vh;
   background: rgba(255,255,255,0.2);
   backdrop-filter: blur(5px);
   border-radius: 10px;
@@ -381,85 +466,3 @@ textarea {
   padding: 2%;
 }
 
-
-/* Forms: Login/Register */
-.login-register-page {
-  background: url("./images/path.png");
-  height: 90vh;
-  background-size: cover;
-  background-position: 50% 75%;
-}
-.sign-in-container {
-  text-align: center;
-  border-radius: 10px;
-  width: 50%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(5px);
-}
-.sign-in-container h2 {
-  margin: 5%;
-}
-.sign-in-container input {
-  width: 50%;
-  margin: 1%;
-  padding: 1.5%;
-}
-.sign-in-container button {
-  margin: 2%;
-  cursor: pointer;
-}
-.create-account-link {
-  margin-bottom: 5%;
-  font-size: 1.4rem;
-  text-decoration: none;
-  color: blue;
-}
-.create-account-link:hover {
-  cursor: pointer;
-}
-
-/* Home Page */
-.hero {
-  background-image: url("./images/sunset-climber.jpg");
-  height: 90vh;
-  background-size: cover;
-  background-position-y: 25%;
-}
-.hero-content {
-  width: 50%;
-  text-align: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-25%, -50%);
-}
-.hero-button {
-  margin:3%;
-}
-.middle-section {
-  margin: 7% auto;
-  text-align: center;
-}
-.quote {
-  font-style: italic;
-}
-.thirds-section {
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 7%;
-}
-.third-container {
-  width: 25%;
-}
-.thirds-title {
-  text-align: center;
-  text-decoration: underline;
-}
