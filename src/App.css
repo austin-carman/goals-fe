@@ -75,6 +75,7 @@ h3 {
 button {
   padding: 1%;
   border-radius: 15px;
+  width: 125px;
   background-color: white;
   border: 1px solid black;
 }
@@ -82,7 +83,6 @@ button {
 /* ***** Navbar *****  */
 .navbar {
   background-size: cover;
-  border-bottom: rgba(255,255,255,0.7);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,15 +111,21 @@ button {
   color: black;
 }
 .navlink:hover {
-  color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.5);
   text-decoration: none;
+}
+select:hover {
+  cursor: pointer;
+}
+.background-selection-container:hover {
+  color: rgba(0,0,0,0.5);
 }
 #signed-out-links-container {
   width: 200px;
   display: flex;
   justify-content: space-evenly;
   margin-right: 5%;
-  background-color: #93CAED;
+  border: 5px solid black;
   height: 50px;
   border-radius: 10px;
 }
@@ -127,10 +133,10 @@ button {
   margin-left: 5%;
 }
 .links-container {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   transition: width 1s;
-  background-color: #93CAED;
+  border: 5px solid black;
   border-radius: 10px;
   color: black;
 }
@@ -195,6 +201,27 @@ button {
 }
 .third-container {
   width: 25%;
+}
+.home-image-container1 {
+  background-image: url("./images/organize.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 5%;
+  height: 35vh;
+}
+.home-image-container2 {
+  background-image: url("./images/plan.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 5%;
+  height: 35vh;
+}
+.home-image-container3 {
+  background-image: url("./images/become.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 5%;
+  height: 35vh;
 }
 .thirds-title {
   text-align: center;
@@ -268,7 +295,6 @@ button {
   align-items: center;
 }
 .dashboard h2 {
-  color: white;
   font-size: 3.5rem;
   margin-left: 5%;
 }
@@ -463,6 +489,5 @@ textarea {
 }
 .delete-modal-btn {
   margin: 3% 2%;
-  padding: 2%;
 }
 

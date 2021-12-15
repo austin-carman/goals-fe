@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import tempImage from "../images/path.png"; // replace this image
 
 const Home = () => {
   const { push } = useHistory();
@@ -25,17 +24,14 @@ const Home = () => {
       </section>
       <section className="middle-section">
         <div>
-          <h2 className="quote">
-            &quot;A goal properly set is halfway reached.&quot;
-          </h2>
-          <h4>— Zig Ziglar</h4>
+          <h2 className="quote">Goal Tracker helps you achieve your goals</h2>
         </div>
       </section>
       <section className="thirds-section">
         <div className="third-container">
-          <img src={tempImage} /> {/* replace this image */}
+          <div className="home-image-container1"></div>
           <div>
-            <h3 className="thirds-title">Organize</h3>
+            <h3 className="thirds-title">Organize Your Life</h3>
             <p>
               We&apos;ve all made a goal, determined to see it through, only to
               let it fade from memory in our busy lives. GoalTracker makes it
@@ -45,9 +41,9 @@ const Home = () => {
           </div>
         </div>
         <div className="third-container">
-          <img src={tempImage} /> {/* replace this image */}
+          <div className="home-image-container2"></div>
           <div>
-            <h3 className="thirds-title">Plan</h3>
+            <h3 className="thirds-title">Make a Plan</h3>
             <p>
               It&apos;s nearly impossible to achieve a goal without a well
               developed plan. GoalTracker helps you in creating a plan by
@@ -59,9 +55,9 @@ const Home = () => {
           </div>
         </div>
         <div className="third-container">
-          <img src={tempImage} />
+          <div className="home-image-container3"></div>
           <div>
-            <h3 className="thirds-title">Become</h3>
+            <h3 className="thirds-title">Reach Your Potential</h3>
             <p className="quote">
               &quot;What you get by achieving your goals is not as important as
               what you become by achieving your goals.&quot;

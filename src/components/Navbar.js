@@ -46,7 +46,7 @@ const Navbar = (props) => {
               >
                 Logout
               </Link>
-              <div>
+              <div className="background-selection-container">
                 <p>Profile Background:</p>
                 <select
                   value={props.backgroundImage}
