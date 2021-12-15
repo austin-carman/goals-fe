@@ -79,13 +79,6 @@ button {
   border: 1px solid black;
 }
 
-/* App */
-.app {
-  /* background-size: cover; */
-  /* background-size: 125%; */
-  /* margin-bottom: -10%; */
-}
-
 /* ***** Navbar *****  */
 .navbar-header {
   border-bottom: 1px solid rgba(255,255,255,0.2);
@@ -388,11 +381,10 @@ textarea {
 
 /* Forms: Login/Register */
 .login-register-page {
-  /* background: url("./images/rock-climber.jpg"); */
-  /* height: 100vh; */
-  /* margin-top: -10vh; */
+  background: url("./images/path.png");
+  height: 90vh;
   background-size: cover;
-  background-position: center;
+  background-position: 50% 75%;
 }
 .sign-in-container {
   text-align: center;
@@ -422,9 +414,9 @@ textarea {
   cursor: pointer;
 }
 .create-account-link {
-  margin-bottom: 2%;
+  margin-bottom: 5%;
   font-size: 1.4rem;
-  text-decoration: underline;
+  text-decoration: none;
   color: blue;
 }
 .create-account-link:hover {
@@ -440,8 +432,11 @@ textarea {
 }
 .hero-content {
   width: 50%;
-  transform: translate(75%, 100%);
   text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-25%, -50%);
 }
 .hero-button {
   margin:3%;

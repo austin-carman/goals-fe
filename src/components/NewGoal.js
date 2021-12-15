@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
-import addStep from "../images/plus-circle.png";
-import deleteStep from "../images/minus-circle.png";
+import addStep from "../icons/plus-circle.png";
+import deleteStep from "../icons/minus-circle.png";
 
 const NewGoal = (props) => {
   const { sendNewGoal, error } = props;
