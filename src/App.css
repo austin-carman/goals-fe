@@ -19,7 +19,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	/* border: 0; */
+	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -96,7 +96,7 @@ button {
   text-decoration: none;
   padding: 1%;
   margin-left: 5%;
-  color: white;
+  color: black;
   font-size: 3rem;
 }
 .links-container {
@@ -108,7 +108,7 @@ button {
   text-decoration: none;
   text-transform: capitalize;
   align-self: center;
-  color: white;
+  color: black;
 }
 .navlink:hover {
   color: rgba(255,255,255,0.5);
@@ -132,7 +132,7 @@ button {
   transition: width 1s;
   background-color: #93CAED;
   border-radius: 10px;
-  color: white;
+  color: black;
 }
 .links-container:hover {
   width: 500px;

@@ -22,7 +22,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <header className="navbar-header" style={{ backgroundColor: "blue" }}>
+    <header className="navbar-header">
       <nav className="navbar">
         <Link to="/" className="home-link">
           <h2>Goal Tracker</h2>
