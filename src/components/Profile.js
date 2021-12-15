@@ -9,14 +9,17 @@ const Profile = (props) => {
   const [title, setTitle] = useState("All Goals");
   const params = useParams();
   const userId = params.userId;
+  const savedBackground = localStorage.getItem("goals background");
+  const totalGoals = props.goals.length;
+  let completedGoals = 0;
+  let uncompletedGoals = 0;
+  const unfinished = document.getElementsByClassName("unfinished-goals");
+  const completed = document.getElementsByClassName("completed-goals");
 
   useEffect(() => {
     props.fetchUserGoals(userId);
   }, []);
 
-  const totalGoals = props.goals.length;
-  let completedGoals = 0;
-  let uncompletedGoals = 0;
   props.goals.map((goal) => {
     if (goal.goal_completed) {
       completedGoals += 1;
@@ -25,8 +28,6 @@ const Profile = (props) => {
       uncompletedGoals += 1;
     }
   });
-  const unfinished = document.getElementsByClassName("unfinished-goals");
-  const completed = document.getElementsByClassName("completed-goals");
 
   const showGoals = (viewGoals) => {
     for (let i = 0; i < viewGoals.length; i++) {
@@ -59,7 +60,12 @@ const Profile = (props) => {
   };
 
   return (
-    <div className="profile-content">
+    <div
+      className="profile-content"
+      style={{
+        backgroundImage: `url(${savedBackground || props.backgroundImage})`,
+      }}
+    >
       <div className="dashboard">
         <h2>{title}</h2>
         <div className="dashboard-stats">
@@ -90,6 +96,7 @@ const mapStateToProps = (state) => {
     goals: state.goalsReducer.goals,
     isFetching: state.goalsReducer.isFetching,
     error: state.goalsReducer.error,
+    backgroundImage: state.userReducer.backgroundImage,
   };
 };
 
@@ -97,6 +104,7 @@ Profile.propTypes = {
   goals: PropTypes.array,
   isFetching: PropTypes.bool,
   fetchUserGoals: PropTypes.func,
+  backgroundImage: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { fetchUserGoals })(Profile);
