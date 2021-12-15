@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
@@ -7,6 +8,7 @@ import GoalList from "./GoalList";
 
 const Profile = (props) => {
   const [title, setTitle] = useState("All Goals");
+
   const params = useParams();
   const userId = params.userId;
   const savedBackground = localStorage.getItem("goals background");
@@ -68,7 +70,7 @@ const Profile = (props) => {
     >
       <div className="dashboard">
         <h2>{title}</h2>
-        <div className="dashboard-stats">
+        <div className="dashboard-options-container">
           <div className="dashboard-view-options" onClick={handleShowAllGoals}>
             <h3>All goals:</h3>
             <h3>{totalGoals}</h3>
