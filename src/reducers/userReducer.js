@@ -13,6 +13,8 @@ import oceanMountains from "../images/ocean-mountains.jpg";
 const initialState = {
   isFetching: false,
   token: false,
+  firstName: "",
+  lastName: "",
   userId: sessionStorage.getItem("user"),
   errors: "",
   serverValidationMessage: "",
@@ -63,6 +65,8 @@ const userReducer = (state = initialState, action) => {
         return {
           ...state,
           isFetching: false,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
           userId: sessionStorage.getItem("user"),
           token: true,
           errors: "",

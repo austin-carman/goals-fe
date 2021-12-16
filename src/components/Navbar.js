@@ -17,6 +17,8 @@ import rockClimber from "../images/rock-climber.jpg";
 import { profileBackground } from "../actions/userActions";
 
 const Navbar = (props) => {
+  const initials = props.firstName.slice(0, 1) + props.lastName.slice(0, 1);
+
   const handleSignOut = () => {
     props.userLogout();
   };
@@ -35,7 +37,7 @@ const Navbar = (props) => {
         {props.userId ? (
           <div className="links-container">
             <div className="navlink profile-avatar-container">
-              <h3 className="avatar-text">AC</h3>
+              <h3 className="avatar-text">{initials}</h3>
             </div>
             <div className="profile-menu-options">
               <Link
@@ -91,6 +93,8 @@ const mapStateToProps = (state) => {
   return {
     backgroundImage: state.userReducer.backgroundImage,
     userId: state.userReducer.userId,
+    firstName: state.userReducer.firstName,
+    lastName: state.userReducer.lastName,
   };
 };
 
@@ -99,6 +103,8 @@ Navbar.propTypes = {
   profileBackground: PropTypes.func,
   backgroundImage: PropTypes.any,
   userId: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
 };
 
 export default connect(mapStateToProps, { userLogout, profileBackground })(
