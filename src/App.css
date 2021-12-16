@@ -73,11 +73,20 @@ h3 {
   font-size:2rem;
 }
 button {
-  padding: 1%;
-  border-radius: 15px;
-  width: 125px;
-  background-color: white;
+  padding: 2%;
+  border-radius: 25px;
+  width: 200px;
+  text-transform: uppercase;
+  background-color: black;
   border: 1px solid black;
+  color: white;
+  letter-spacing: 2px;
+}
+button:hover {
+  background-color: white;
+  border: 1px solid white;
+  color: black;
+  cursor: pointer;
 }
 
 /* ***** Navbar *****  */

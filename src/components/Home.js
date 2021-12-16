@@ -18,7 +18,7 @@ const Home = () => {
           </h1>
           <h3>— Zig Ziglar</h3>
           <button className="hero-button" onClick={handleClick}>
-            Start now
+            Create Goal
           </button>
         </div>
       </section>
