@@ -12,6 +12,8 @@ import mountains1 from "../images/mountains1.jpg";
 import ocean1 from "../images/ocean1.jpg";
 import ocean2 from "../images/ocean2.jpg";
 import snow from "../images/snow.jpg";
+import mountainHaze from "../images/mountain-haze.jpg";
+import rockClimber from "../images/rock-climber.jpg";
 import { profileBackground } from "../actions/userActions";
 
 const Navbar = (props) => {
@@ -59,11 +61,13 @@ const Navbar = (props) => {
                   <option value={ocean2}>Tropical Shoreline</option>
                   <option value={oceanMountains}>Tropical Mountains</option>
                   <option value={mountains1}>Mountain Sunset</option>
+                  <option value={mountainHaze}>Mountain Haze</option>
                   <option value={desert}>Desert</option>
                   <option value={fall}>Fall</option>
-                  <option value={snow}>snow</option>
+                  <option value={snow}>Snow</option>
                   <option value={plants}>Plants</option>
                   <option value={balloons}>Balloons</option>
+                  <option value={rockClimber}>Rock Climber</option>
                 </select>
               </div>
             </div>
