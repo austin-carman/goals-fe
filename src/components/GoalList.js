@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { fetchUserGoals } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { sortGoals } from "../utils/helperFunctions";
-import addStep from "../images/plus-circle.png";
+import addStep from "../icons/plus-circle.png";
 
 const GoalList = (props) => {
   const params = useParams();
@@ -24,13 +24,9 @@ const GoalList = (props) => {
           <p>New Goal</p>
         </Link>
       )}
-      {props.isFetching ? (
-        <h2 className="loading">Loading...</h2>
-      ) : (
-        sortedGoals.map((goal) => {
-          return <GoalCard key={goal.goal_id} goal={goal} />;
-        })
-      )}
+      {sortedGoals.map((goal) => {
+        return <GoalCard key={goal.goal_id} goal={goal} />;
+      })}
     </div>
   );
 };

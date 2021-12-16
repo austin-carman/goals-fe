@@ -6,14 +6,7 @@ import { userLogin } from "../actions/userActions";
 import { loginSchema } from "../validation/validationSchemas";
 
 const Login = (props) => {
-  const {
-    isFetching,
-    userId,
-    token,
-    errors,
-    userLogin,
-    serverValidationMessage,
-  } = props;
+  const { userId, token, errors, userLogin, serverValidationMessage } = props;
 
   const initialState = {
     username: "",
@@ -88,7 +81,6 @@ const Login = (props) => {
         <Link to="/register" className="create-account-link">
           <p>Sign up</p>
         </Link>
-        {isFetching && !formErrors && <h3> Loading...</h3>}
       </div>
     </div>
   );
@@ -96,7 +88,6 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.userReducer.isFetching,
     userId: state.userReducer.userId,
     token: state.userReducer.token,
     errors: state.userReducer.errors,
@@ -105,7 +96,6 @@ const mapStateToProps = (state) => {
 };
 
 Login.propTypes = {
-  isFetching: PropTypes.bool,
   token: PropTypes.bool,
   userLogin: PropTypes.func,
   errors: PropTypes.string,

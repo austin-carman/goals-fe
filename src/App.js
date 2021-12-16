@@ -11,7 +11,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Navbar />
       <Route path="/login">
         <Login />
@@ -25,7 +25,7 @@ function App() {
       <Route path="/new-goal/:userId">
         <NewGoal />
       </Route>
-      <Route path="/edit-goal/:goalId/">
+      <Route path="/edit-goal/:goalId">
         <EditGoal />
       </Route>
       <Route exact path="/">

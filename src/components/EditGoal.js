@@ -5,17 +5,16 @@ import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
-import addStep from "../images/plus-circle.png";
-import deleteStep from "../images/minus-circle.png";
+import addStep from "../icons/plus-circle.png";
+import deleteStep from "../icons/minus-circle.png";
 
 const EditGoal = (props) => {
   const history = useHistory();
   const params = useParams();
-
+  const savedBackground = localStorage.getItem("goals background");
   const initialGoalState = props.goals.find(
     (goal) => goal.goal_id === parseInt(params.goalId)
   );
-
   const initialIsModalOpenState = {
     open: false,
     goalToDelete: {
@@ -30,7 +29,6 @@ const EditGoal = (props) => {
   const [goal, setGoal] = useState(initialGoalState);
   const [formErrors, setFormErrors] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(initialIsModalOpenState);
-  const savedBackground = localStorage.getItem("goals background");
 
   const handleChange = (e, index) => {
     const { name, value, type, checked } = e.target;
@@ -180,7 +178,7 @@ EditGoal.propTypes = {
   editUserGoal: PropTypes.func,
   deleteStep: PropTypes.func,
   goals: PropTypes.array,
-  backgroundImage: PropTypes.string,
+  backgroundImage: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { editUserGoal })(EditGoal);

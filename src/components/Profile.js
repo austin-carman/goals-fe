@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUserGoals } from "../actions/goalsActions";
@@ -6,17 +6,21 @@ import PropTypes from "prop-types";
 import GoalList from "./GoalList";
 
 const Profile = (props) => {
+  const [title, setTitle] = useState("All Goals");
+
   const params = useParams();
   const userId = params.userId;
   const savedBackground = localStorage.getItem("goals background");
+  const totalGoals = props.goals.length;
+  let completedGoals = 0;
+  let uncompletedGoals = 0;
+  const unfinished = document.getElementsByClassName("unfinished-goals");
+  const completed = document.getElementsByClassName("completed-goals");
 
   useEffect(() => {
     props.fetchUserGoals(userId);
   }, []);
 
-  const totalGoals = props.goals.length;
-  let completedGoals = 0;
-  let uncompletedGoals = 0;
   props.goals.map((goal) => {
     if (goal.goal_completed) {
       completedGoals += 1;
@@ -25,8 +29,6 @@ const Profile = (props) => {
       uncompletedGoals += 1;
     }
   });
-  const unfinished = document.getElementsByClassName("unfinished-goals");
-  const completed = document.getElementsByClassName("completed-goals");
 
   const showGoals = (viewGoals) => {
     for (let i = 0; i < viewGoals.length; i++) {
@@ -43,16 +45,19 @@ const Profile = (props) => {
   const handleShowAllGoals = () => {
     showGoals(completed);
     showGoals(unfinished);
+    setTitle("All Goals");
   };
 
   const handleShowCompleted = () => {
     showGoals(completed);
     hideGoals(unfinished);
+    setTitle("Completed Goals");
   };
 
   const handleShowUnfinished = () => {
     showGoals(unfinished);
     hideGoals(completed);
+    setTitle("Goals in Progress");
   };
 
   return (
@@ -63,8 +68,8 @@ const Profile = (props) => {
       }}
     >
       <div className="dashboard">
-        <h2>My Goals</h2>
-        <div className="dashboard-stats">
+        <h2>{title}</h2>
+        <div className="dashboard-options-container">
           <div className="dashboard-view-options" onClick={handleShowAllGoals}>
             <h3>All goals:</h3>
             <h3>{totalGoals}</h3>

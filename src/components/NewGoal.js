@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { sendNewGoal } from "../actions/goalsActions";
 import PropTypes from "prop-types";
 import { goalValidation } from "../validation/validationSchemas";
-import addStep from "../images/plus-circle.png";
-import deleteStep from "../images/minus-circle.png";
+import addStep from "../icons/plus-circle.png";
+import deleteStep from "../icons/minus-circle.png";
 
 const NewGoal = (props) => {
   const { sendNewGoal, error } = props;
-
+  const savedBackground = localStorage.getItem("goals background");
+  const history = useHistory();
+  const { userId } = useParams();
   const initialState = {
     goal_title: "",
     steps: [],
@@ -17,10 +19,6 @@ const NewGoal = (props) => {
 
   const [goal, setGoal] = useState(initialState);
   const [formErrors, setFormErrors] = useState("");
-  const savedBackground = localStorage.getItem("goals background");
-
-  const history = useHistory();
-  const { userId } = useParams();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -84,6 +82,9 @@ const NewGoal = (props) => {
       }}
     >
       <form className="goal-form" onSubmit={onSubmit}>
+        <h6 className="close-details" onClick={handleCancel}>
+          &times;
+        </h6>
         <h2 className="form-title">Create Your New Goal</h2>
         <div className="icon-label-container">
           <div className="icon"></div>
@@ -135,7 +136,6 @@ const NewGoal = (props) => {
         </div>
         <div className="bottom-container">
           <p className="form-errors">{formErrors}</p>
-          <button onClick={handleCancel}>Cancel</button>
           <button onClick={handleSubmit}>Save</button>
         </div>
       </form>
@@ -146,7 +146,6 @@ const NewGoal = (props) => {
 const mapStateToProps = (state) => {
   return {
     error: state.goalsReducer.error,
-    serverValidateMessage: state.goalsReducer.serverValidateMessage,
     backgroundImage: state.userReducer.backgroundImage,
   };
 };
@@ -154,7 +153,7 @@ const mapStateToProps = (state) => {
 NewGoal.propTypes = {
   sendNewGoal: PropTypes.func,
   error: PropTypes.any,
-  backgroundImage: PropTypes.string,
+  backgroundImage: PropTypes.any,
 };
 
 export default connect(mapStateToProps, { sendNewGoal })(NewGoal);

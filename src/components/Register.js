@@ -6,8 +6,7 @@ import PropTypes from "prop-types";
 import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
-  const { userRegister, userId, isFetching, errors, serverValidationMessage } =
-    props;
+  const { userRegister, userId, errors, serverValidationMessage } = props;
 
   const initialState = {
     first_name: "",
@@ -100,7 +99,6 @@ const Register = (props) => {
         <Link to="/login" className="create-account-link">
           <p>Sign in</p>
         </Link>
-        {isFetching && !formErrors && <h3> Loading...</h3>}
       </div>
     </div>
   );
@@ -108,7 +106,6 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.userReducer.isFetching,
     userId: state.userReducer.userId,
     errors: state.userReducer.errors,
     serverValidationMessage: state.userReducer.serverValidationMessage,
@@ -117,7 +114,6 @@ const mapStateToProps = (state) => {
 
 Register.propTypes = {
   userRegister: PropTypes.func,
-  isFetching: PropTypes.bool,
   errors: PropTypes.string,
   userId: PropTypes.number,
   serverValidationMessage: PropTypes.string,

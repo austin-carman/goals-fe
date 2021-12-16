@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userLogout } from "../actions/userActions";
 import PropTypes from "prop-types";
-import oceanSunset from "../images/ocean-sunset.jpg";
 import oceanMountains from "../images/ocean-mountains.jpg";
-import guitar from "../images/guitar.jpg";
-import library from "../images/library.jpg";
 import plants from "../images/plants.jpg";
-import wood from "../images/wood.jpg";
+import balloons from "../images/balloons.jpg";
+import desert from "../images/desert.jpg";
+import fall from "../images/fall.jpg";
+import mountains1 from "../images/mountains1.jpg";
+import ocean1 from "../images/ocean1.jpg";
+import ocean2 from "../images/ocean2.jpg";
+import snow from "../images/snow.jpg";
+import mountainHaze from "../images/mountain-haze.jpg";
+import rockClimber from "../images/rock-climber.jpg";
 import { profileBackground } from "../actions/userActions";
 
 const Navbar = (props) => {
@@ -46,26 +51,29 @@ const Navbar = (props) => {
               >
                 Logout
               </Link>
-              <div>
+              <div className="background-selection-container">
                 <p>Profile Background:</p>
                 <select
                   value={props.backgroundImage}
                   onChange={handleBackground}
                 >
-                  <option value={oceanSunset}>Shoreline Sunset</option>
-                  <option value={oceanMountains}>
-                    Tropical Mountains and Ocean
-                  </option>
-                  <option value={guitar}>Guitar</option>
-                  <option value={library}>Library</option>
+                  <option value={ocean1}>Ocean Sunrise</option>
+                  <option value={ocean2}>Tropical Shoreline</option>
+                  <option value={oceanMountains}>Tropical Mountains</option>
+                  <option value={mountains1}>Mountain Sunset</option>
+                  <option value={mountainHaze}>Mountain Haze</option>
+                  <option value={desert}>Desert</option>
+                  <option value={fall}>Fall</option>
+                  <option value={snow}>Snow</option>
                   <option value={plants}>Plants</option>
-                  <option value={wood}>Wood</option>
+                  <option value={balloons}>Balloons</option>
+                  <option value={rockClimber}>Rock Climber</option>
                 </select>
               </div>
             </div>
           </div>
         ) : (
-          <div className="links-container" id="signed-out-links-container">
+          <div id="signed-out-links-container">
             <Link to="/login" className="navlink">
               Sign In
             </Link>
