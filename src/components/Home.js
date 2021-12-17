@@ -13,7 +13,7 @@ const Home = () => {
     <div className="home-page">
       <section className="hero">
         <div className="hero-content">
-          <h1 className="quote">
+          <h1 className="quote hero-quote">
             &quot;A goal properly set is halfway reached.&quot;
           </h1>
           <h3>— Zig Ziglar</h3>
@@ -23,14 +23,14 @@ const Home = () => {
         </div>
       </section>
       <section className="middle-section">
-        <div>
-          <h2 className="quote">Goal Tracker helps you achieve your goals</h2>
-        </div>
+        <h2 className="quote middle-section-quote">
+          Goal Tracker helps you achieve your goals
+        </h2>
       </section>
       <section className="thirds-section">
         <div className="third-container">
-          <div className="home-image-container1"></div>
-          <div>
+          <div className="info-img home-image-container1"></div>
+          <div className="info-content-container">
             <h3 className="thirds-title">Organize Your Life</h3>
             <p>
               We&apos;ve all made a goal, determined to see it through, only to
@@ -40,9 +40,9 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <div className="third-container">
-          <div className="home-image-container2"></div>
-          <div>
+        <div className="third-container third-container-middle">
+          <div className="info-img home-image-container2"></div>
+          <div className="info-content-container">
             <h3 className="thirds-title">Make a Plan</h3>
             <p>
               It&apos;s nearly impossible to achieve a goal without a well
@@ -55,8 +55,8 @@ const Home = () => {
           </div>
         </div>
         <div className="third-container">
-          <div className="home-image-container3"></div>
-          <div>
+          <div className="info-img home-image-container3"></div>
+          <div className="info-content-container">
             <h3 className="thirds-title">Reach Your Potential</h3>
             <p className="quote">
               &quot;What you get by achieving your goals is not as important as
