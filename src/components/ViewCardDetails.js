@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
-// import { modalStyles } from "../styling/modalStyles";
 import editIcon from "../icons/edit-icon2.png";
 
 Modal.setAppElement("#root");
@@ -45,7 +44,6 @@ const ViewCardDetails = (props) => {
       className="Modal"
       overlayClassName="Overlay"
     >
-      {/* style={modalStyles} */}
       <h6 className="close-details" onClick={closeModal}>
         &times;
       </h6>
