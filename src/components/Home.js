@@ -40,7 +40,7 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <div className="third-container">
+        <div className="third-container third-container-middle">
           <div className="info-img home-image-container2"></div>
           <div className="info-content-container">
             <h3 className="thirds-title">Make a Plan</h3>
