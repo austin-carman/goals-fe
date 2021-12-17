@@ -50,7 +50,7 @@ const DeleteModal = (props) => {
     <Modal
       isOpen={isModalOpen.open}
       onRequestClose={closeModal}
-      className="Modal"
+      className="Modal delete-modal"
       overlayClassName="Overlay"
     >
       {isModalOpen.goalToDelete.goalId ? (
