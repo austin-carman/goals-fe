@@ -627,6 +627,10 @@ textarea {
   .sign-in-container input {
     padding: 2%;
   }
+  /* Forms: New, Edit */
+  .goal-form {
+    width: 90%;
+  }
 }
 @media (max-width: 445px) {
   /* Home */
@@ -649,6 +653,10 @@ textarea {
   /* Forms: Sign-in, Sign-up */
   .sign-in-button {
     width: 50%;
+  }
+  /* Forms: New, Edit */
+  .goal-form input {
+    padding: 2%;
   }
 }
 @media (max-width: 400px) {
