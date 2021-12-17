@@ -94,7 +94,9 @@ const Register = (props) => {
         <p className="form-errors">
           {formErrors ? formErrors : serverValidationMessage}
         </p>
-        <button onClick={handleSubmit}>Register</button>
+        <button className="sign-in-button" onClick={handleSubmit}>
+          Register
+        </button>
         <p>Already have an account?</p>
         <Link to="/login" className="create-account-link">
           <p>Sign in</p>

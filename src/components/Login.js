@@ -76,7 +76,9 @@ const Login = (props) => {
         <p className="form-errors">
           {formErrors ? formErrors : serverValidationMessage}
         </p>
-        <button onClick={handleSubmit}>Sign In</button>
+        <button className="sign-in-button" onClick={handleSubmit}>
+          Sign In
+        </button>
         <p>Don&apos; have an account?</p>
         <Link to="/register" className="create-account-link">
           <p>Sign up</p>

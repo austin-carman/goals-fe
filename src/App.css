@@ -511,6 +511,9 @@ textarea {
   .third-container {
     width: 30%;
   }
+  .sign-in-container {
+    width: 75%;
+  }
 }
 @media (max-width: 875px) {
   .thirds-section {
@@ -542,6 +545,13 @@ textarea {
   }
   .links-container:hover .profile-menu-options {
     width: 400px;
+  }
+  .sign-in-container {
+    height: 50vh;
+    justify-content: space-evenly;
+  }
+  .sign-in-container input {
+    width: 75%;
   }
 } 
 @media (max-width: 700px) {
@@ -600,6 +610,9 @@ textarea {
   .info-content-container {
     width: 75%;
   }
+  .sign-in-container input {
+    padding: 2%;
+  }
 }
 @media (max-width: 445px) {
   .hero-quote {
@@ -617,6 +630,9 @@ textarea {
   }
   .info-content-container {
     width: 90%;
+  }
+  .sign-in-button {
+    width: 50%;
   }
 }
 @media (max-width: 400px) {
