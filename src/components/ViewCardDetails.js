@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router";
 import { editUserGoal } from "../actions/goalsActions";
 import { connect } from "react-redux";
-import { modalStyles } from "../styling/modalStyles";
+// import { modalStyles } from "../styling/modalStyles";
 import editIcon from "../icons/edit-icon2.png";
 
 Modal.setAppElement("#root");
@@ -39,70 +39,70 @@ const ViewCardDetails = (props) => {
   };
 
   return (
-    <div className="view-details-modal">
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={modalStyles}
-      >
-        <h6 className="close-details" onClick={closeModal}>
-          &times;
-        </h6>
-        <div className="details-modal">
-          <div className="goal-edit-container">
-            <div className="details-container view-goal-title-container">
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      className="Modal"
+      overlayClassName="Overlay"
+    >
+      {/* style={modalStyles} */}
+      <h6 className="close-details" onClick={closeModal}>
+        &times;
+      </h6>
+      <div className="details-modal">
+        <div className="goal-edit-container">
+          <div className="details-container view-goal-title-container">
+            <input
+              className="completed-checkbox"
+              type="checkbox"
+              name="goal_completed"
+              value={goalDetails.goal_completed}
+              checked={goalDetails.goal_completed}
+              onChange={(e) => handleChange(e)}
+            />
+            <h2>{goalDetails.goal_title}</h2>
+          </div>
+          <img
+            src={editIcon}
+            className="goal-card-edit-button"
+            onClick={handleEdit}
+          />
+        </div>
+        {goalDetails.steps.map((step, index) => {
+          stepNumber += 1;
+          return (
+            <div
+              className={
+                step.step_completed
+                  ? "completed-steps details-container"
+                  : "unfinished-steps details-container"
+              }
+              key={step.step_id}
+            >
               <input
                 className="completed-checkbox"
                 type="checkbox"
-                name="goal_completed"
-                value={goalDetails.goal_completed}
-                checked={goalDetails.goal_completed}
-                onChange={(e) => handleChange(e)}
+                name="step_completed"
+                value={step.step_completed}
+                checked={step.step_completed}
+                onChange={(e) => handleChange(e, index)}
               />
-              <h2>{goalDetails.goal_title}</h2>
-            </div>
-            <img
-              src={editIcon}
-              className="goal-card-edit-button"
-              onClick={handleEdit}
-            />
-          </div>
-          {goalDetails.steps.map((step, index) => {
-            stepNumber += 1;
-            return (
-              <div
-                className={
-                  step.step_completed
-                    ? "completed-steps details-container"
-                    : "unfinished-steps details-container"
-                }
-                key={step.step_id}
-              >
-                <input
-                  className="completed-checkbox"
-                  type="checkbox"
-                  name="step_completed"
-                  value={step.step_completed}
-                  checked={step.step_completed}
-                  onChange={(e) => handleChange(e, index)}
-                />
-                <div className="checkbox-title-container">
-                  <h3 className="view-goal-step-number">Step {stepNumber}: </h3>
-                  <h3 className="view-goal-step-title">{step.step_title}</h3>
-                  {step.step_notes && (
-                    <div className="step-info-container">
-                      <p className="view-goal-step-notes">
-                        Notes: {step.step_notes}
-                      </p>
-                    </div>
-                  )}
-                </div>
+              <div className="checkbox-title-container">
+                <h3 className="view-goal-step-number">Step {stepNumber}: </h3>
+                <h3 className="view-goal-step-title">{step.step_title}</h3>
+                {step.step_notes && (
+                  <div className="step-info-container">
+                    <p className="view-goal-step-notes">
+                      Notes: {step.step_notes}
+                    </p>
+                  </div>
+                )}
               </div>
-            );
-          })}
-        </div>
-      </Modal>
-    </div>
+            </div>
+          );
+        })}
+      </div>
+    </Modal>
   );
 };
 
