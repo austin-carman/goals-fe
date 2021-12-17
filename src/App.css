@@ -508,14 +508,17 @@ textarea {
 
 /* ***** Media Queries ***** */
 @media (max-width: 1050px) {
+  /* Home */
   .third-container {
     width: 30%;
   }
+  /* Forms: Sign-in, Sign-up */
   .sign-in-container {
     width: 75%;
   }
 }
 @media (max-width: 875px) {
+  /* Home */
   .thirds-section {
     display: flex;
     flex-direction: column;
@@ -538,14 +541,20 @@ textarea {
   .third-container-middle {
     flex-direction: row-reverse;
   }
+  /* Forms: New, Edit */
+  .goal-form {
+    width: 75%;
+  }
 }
 @media (max-width: 750px) {
+  /* Navbar */
   .links-container:hover {
     width: 400px;
   }
   .links-container:hover .profile-menu-options {
     width: 400px;
   }
+  /* Forms: Sign-in, Sign-up */
   .sign-in-container {
     height: 50vh;
     justify-content: space-evenly;
@@ -555,11 +564,13 @@ textarea {
   }
 } 
 @media (max-width: 700px) {
+  /* Home */
   .hero-quote {
     font-size: 3.5rem;
   }
 }
 @media (max-width: 640px) {
+  /* Navbar */
   .links-container:hover {
     width: 125px;
     height: 25vh;
@@ -587,11 +598,13 @@ textarea {
   }
 }
 @media (max-width: 600px) {
+  /* Home */
   .middle-section-quote {
     width: 60%;
   }
 }
 @media (max-width: 532px) {
+  /* Home */
   .hero-content {
     width: 60%;
     transform: translate(-25%, -60%);
@@ -610,11 +623,13 @@ textarea {
   .info-content-container {
     width: 75%;
   }
+  /* Forms: Sign-in, Sign-up */
   .sign-in-container input {
     padding: 2%;
   }
 }
 @media (max-width: 445px) {
+  /* Home */
   .hero-quote {
     font-size: 3rem;
   }
@@ -631,11 +646,13 @@ textarea {
   .info-content-container {
     width: 90%;
   }
+  /* Forms: Sign-in, Sign-up */
   .sign-in-button {
     width: 50%;
   }
 }
 @media (max-width: 400px) {
+  /* Navbar */
   #signed-out-links-container {
     display: flex;
     flex-direction: column;
@@ -649,6 +666,7 @@ textarea {
   #sign-up-link {
     margin: 0;
   }
+  /* Home */
   .hero-quote {
     font-size: 2.4rem;
   }
@@ -661,6 +679,7 @@ textarea {
   }
 }
 @media (max-width: 375px) {
+  /* Home */
   .hero-content {
     width: 50%;
     transform: translate(-20%, -115%);
