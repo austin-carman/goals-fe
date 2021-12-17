@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteGoal } from "../actions/goalsActions";
 import { deleteStep } from "../actions/goalsActions";
-import { modalStyles } from "../styling/modalStyles";
 
 Modal.setAppElement("#root");
 
@@ -51,7 +50,8 @@ const DeleteModal = (props) => {
     <Modal
       isOpen={isModalOpen.open}
       onRequestClose={closeModal}
-      style={modalStyles}
+      className="Modal"
+      overlayClassName="Overlay"
     >
       {isModalOpen.goalToDelete.goalId ? (
         <h2 className="delete-modal-title">
