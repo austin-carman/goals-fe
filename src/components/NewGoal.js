@@ -82,7 +82,7 @@ const NewGoal = (props) => {
       }}
     >
       <form className="goal-form" onSubmit={onSubmit}>
-        <h6 className="close-details" onClick={handleCancel}>
+        <h6 className="close-details close-form" onClick={handleCancel}>
           &times;
         </h6>
         <h2 className="form-title">Create Your New Goal</h2>

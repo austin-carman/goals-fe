@@ -534,6 +534,9 @@ textarea {
 .delete-modal-btn {
   margin: 3% 2%;
 }
+.close-form {
+  margin-top: -2%;
+}
 
 /* ***** Media Queries ***** */
 @media (max-width: 1050px) {
