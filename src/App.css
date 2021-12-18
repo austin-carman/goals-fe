@@ -312,6 +312,10 @@ select:hover {
 .dashboard h2 {
   font-size: 3.5rem;
   margin-left: 5%;
+  width: 29%;
+}
+.dashboard-options-mobile {
+  visibility: hidden;
 }
 .dashboard-options-container {
   display: flex;
@@ -539,6 +543,12 @@ textarea {
 }
 
 /* ***** Media Queries ***** */
+@media (max-width: 1088px) {
+  /* Profile */
+  .dashboard-options-container {
+    width: 70%;
+  }
+}
 @media (max-width: 1050px) {
   /* Home */
   .third-container {
@@ -551,6 +561,16 @@ textarea {
   /* Modals */
   .Modal {
     width: 75%;
+  }
+}
+@media (max-width: 975px) {
+  /* Profile */
+  .dashboard {
+    width: 90%;
+  }
+  /* Goal List */
+  .goals-lists-container {
+    width: 90%;
   }
 }
 @media (max-width: 875px) {
@@ -603,6 +623,15 @@ textarea {
   .sign-in-container input {
     width: 75%;
   }
+  /* Goal Card */
+  .goal-card-container {
+    width: 46%;
+    margin: 2%;
+  }
+  /* Profile */
+  .dashboard-view-options {
+    width: 30%;
+  }
 } 
 @media (max-width: 700px) {
   /* Home */
@@ -636,6 +665,21 @@ textarea {
   }
   #signed-out-links-container {
     width: 35%;
+  }
+  /* Profile */
+  .dashboard {
+    flex-direction: column;
+  }
+  .dashboard h2 {
+    width: 100%;
+  }
+  .dashboard-options-container {
+    width: 100%;
+    margin: auto;
+    justify-content: space-evenly;
+  }
+  .dashboard-view-options {
+    margin: 1%;
   }
 }
 @media (max-width: 600px) {
@@ -703,6 +747,11 @@ textarea {
   .goal-form input {
     padding: 2%;
   }
+  /* Goal Card */
+  .goal-card-container {
+    width: 96%;
+    margin: 2%;
+  }
 }
 @media (max-width: 400px) {
   /* Navbar */
@@ -729,6 +778,22 @@ textarea {
   }
   .middle-section-quote {
     width: 90%;
+  }
+  /* Profile */
+  .dashboard {
+    justify-content: space-evenly;
+  }
+  .dashboard-options-container {
+    visibility: hidden;
+    height: 0;
+  }
+  .dashboard-options-mobile {
+    visibility: visible;
+    margin: 5%;
+    border: none;
+    background-color: rgba(255,255,255, 0.5);
+    padding: 2%;
+    border-radius: 4px;
   }
 }
 @media (max-width: 375px) {

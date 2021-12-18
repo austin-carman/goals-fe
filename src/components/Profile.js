@@ -60,6 +60,13 @@ const Profile = (props) => {
     setTitle("Goals in Progress");
   };
 
+  const handleSelectOption = (e) => {
+    const { value } = e.target;
+    value === "all" && handleShowAllGoals();
+    value === "progress" && handleShowUnfinished();
+    value === "completed" && handleShowCompleted();
+  };
+
   return (
     <div
       className="profile-content"
@@ -69,6 +76,14 @@ const Profile = (props) => {
     >
       <div className="dashboard">
         <h2>{title}</h2>
+        <select
+          className="dashboard-options-mobile"
+          onChange={handleSelectOption}
+        >
+          <option value="all">All Goals: {totalGoals}</option>
+          <option value="progress">In Progress: {uncompletedGoals}</option>
+          <option value="completed">Completed: {completedGoals}</option>
+        </select>
         <div className="dashboard-options-container">
           <div className="dashboard-view-options" onClick={handleShowAllGoals}>
             <h3>All goals:</h3>
