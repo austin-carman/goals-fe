@@ -311,11 +311,11 @@ select:hover {
 }
 .dashboard h2 {
   font-size: 3.5rem;
-  margin-left: 5%;
   width: 29%;
 }
 .dashboard-options-mobile {
   visibility: hidden;
+  width: 0;
 }
 .dashboard-options-container {
   display: flex;
@@ -605,7 +605,19 @@ textarea {
   #sample-modal {
     width: 100%;
   }
-
+  /* Profile */
+  .dashboard-view-options {
+    width: 35%;
+  }
+  .dashboard-options-container {
+    width: 70%;
+  }
+  .dashboard {
+    justify-content: space-between;
+  }
+  .dashboard h2 {
+    margin-left: 0;
+  }
 }
 @media (max-width: 750px) {
   /* Navbar */
@@ -789,6 +801,7 @@ textarea {
   }
   .dashboard-options-mobile {
     visibility: visible;
+    width: 50%;
     margin: 5%;
     border: none;
     background-color: rgba(255,255,255, 0.5);
