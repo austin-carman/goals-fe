@@ -63,6 +63,7 @@ html {
 body {
   font-size:1.6rem;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 h1 {
   font-size: 4rem;
@@ -540,6 +541,11 @@ textarea {
 }
 .close-form {
   margin-top: -2%;
+}
+
+/* App Error Message */
+.app-error-message {
+  text-align: center;
 }
 
 /* ***** Media Queries ***** */

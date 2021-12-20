@@ -49,7 +49,7 @@ const Login = (props) => {
 
   if (errors) {
     return (
-      <h2>
+      <h2 className="app-error-message">
         We&apos;re currently experiencing an error. Sorry for the inconvenience.
       </h2>
     );
