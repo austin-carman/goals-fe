@@ -66,7 +66,7 @@ const ViewCardDetails = (props) => {
             onClick={handleEdit}
           />
         </div>
-        {goalDetails.steps.map((step, index) => {
+        {goal.steps.map((step, index) => {
           stepNumber += 1;
           return (
             <div
