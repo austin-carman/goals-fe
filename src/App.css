@@ -542,6 +542,11 @@ textarea {
   margin-top: -2%;
 }
 
+/* App Error Message */
+.app-error-message {
+  text-align: center;
+}
+
 /* ***** Media Queries ***** */
 @media (max-width: 1088px) {
   /* Profile */

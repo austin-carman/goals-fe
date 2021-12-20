@@ -71,7 +71,11 @@ const NewGoal = (props) => {
   };
 
   if (error) {
-    return <h2>We&apos;re currently experiencing an error.</h2>;
+    return (
+      <h2 className="app-error-message">
+        We&apos;re currently experiencing an error.
+      </h2>
+    );
   }
 
   return (
