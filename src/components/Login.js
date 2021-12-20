@@ -79,7 +79,7 @@ const Login = (props) => {
         <button className="sign-in-button" onClick={handleSubmit}>
           Sign In
         </button>
-        <p>Don&apos; have an account?</p>
+        <p>Don&apos;t have an account?</p>
         <Link to="/register" className="create-account-link">
           <p>Sign up</p>
         </Link>
