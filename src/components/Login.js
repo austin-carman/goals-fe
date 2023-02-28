@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+// import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userLogin } from "../actions/userActions";
@@ -10,8 +11,8 @@ const Login = (props) => {
   const { userId, token, errors, userLogin, serverValidationMessage } = props;
 
   const initialState = {
-    username: "",
-    password: "",
+    username: "test-user@test.com",
+    password: "1234",
   };
 
   const [loginForm, setLoginForm] = useState(initialState);
@@ -60,6 +61,13 @@ const Login = (props) => {
     <div className="login-register-page">
       <div className="sign-in-container">
         <h2>Sign In</h2>
+        <p>
+          Try using the test user login below:
+          <br></br>
+          username = test-user@test.com
+          <br></br>
+          password = 1234
+        </p>
         <input
           type="text"
           name="username"
@@ -80,10 +88,10 @@ const Login = (props) => {
         <button className="sign-in-button" onClick={handleSubmit}>
           Sign In
         </button>
-        <p>Don&apos;t have an account?</p>
+        {/* <p>Don&apos;t have an account?</p>
         <Link to="/register" className="create-account-link">
           <p>Sign up</p>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
