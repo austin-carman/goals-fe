@@ -6,6 +6,7 @@ import { userLogin } from "../actions/userActions";
 import { loginSchema } from "../validation/validationSchemas";
 
 const Login = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const { userId, token, errors, userLogin, serverValidationMessage } = props;
 
   const initialState = {
@@ -47,13 +48,13 @@ const Login = (props) => {
     userLogin(loginForm);
   };
 
-  if (errors) {
-    return (
-      <h2 className="app-error-message">
-        We&apos;re currently experiencing an error. Sorry for the inconvenience.
-      </h2>
-    );
-  }
+  // if (errors) {
+  //   return (
+  //     <h2 className="app-error-message">
+  //       We&apos;re currently experiencing an error. Sorry for the inconvenience.
+  //     </h2>
+  //   );
+  // }
 
   return (
     <div className="login-register-page">
