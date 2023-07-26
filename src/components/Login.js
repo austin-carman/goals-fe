@@ -61,13 +61,13 @@ const Login = (props) => {
     <div className="login-register-page">
       <div className="sign-in-container">
         <h2>Sign In</h2>
-        <p>
+        {/* <p>
           Try using the test user login below:
           <br></br>
           username = test-user@test.com
           <br></br>
           password = 1234
-        </p>
+        </p> */}
         <input
           type="text"
           name="username"
