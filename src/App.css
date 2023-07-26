@@ -97,8 +97,11 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 98%;
+  /* width: 100%; */
   height: 10vh;
+  margin: auto;
+  /* border: 1px solid red; */
 }
 .navbar:hover {
   height: 10vh;
@@ -106,7 +109,7 @@ button:hover {
 .home-link {
   text-decoration: none;
   padding: 1%;
-  margin-left: 5%;
+  /* margin-left: 5%; */
   color: black;
   font-size: 3rem;
 }
@@ -131,16 +134,17 @@ select:hover {
   align-self: center;
 }
 #signed-out-links-container {
-  width: 25%;
-  display: flex;
-  justify-content: space-evenly;
-  margin-right: 5%;
-  border: 3px solid black;
-  height: 8vh;
-  border-radius: 10px;
+  /* width: 25%; */
+  /* display: flex; */
+  /* justify-content: space-evenly; */
+  /* margin-right: 5%; */
+  /* border: 3px solid black; */
+  /* height: 8vh; */
+  /* border-radius: 10px; */
+  /* border: 1px solid red; */
 }
 #sign-up-link {
-  margin-left: 5%;
+  /* margin-left: 5%; */
 }
 .links-container {
   width: 8vh;
@@ -151,7 +155,7 @@ select:hover {
   color: black;
   display: flex;
   justify-content: center;
-  margin-right: 5%;
+  /* margin-right: 5%; */
 }
 .links-container:hover {
   width: 500px;
@@ -160,7 +164,8 @@ select:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2% 0; 
+  /* margin: 2% 0;  */
+  /* border: 1px solid red; */
 }
 .profile-menu-options {
   visibility: hidden;
@@ -682,7 +687,7 @@ textarea {
     margin: 5% auto;
   }
   #signed-out-links-container {
-    width: 35%;
+    /* width: 35%; */
   }
   /* Profile */
   .dashboard {
@@ -776,8 +781,8 @@ textarea {
   #signed-out-links-container {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 9vh;
+    /* width: 30%; */
+    /* height: 9vh; */
   }
   .signed-out-links {
     align-self: center;
