@@ -75,13 +75,13 @@ const Navbar = (props) => {
           <Link to="/login" className="navlink signed-out-links">
             Sign In
           </Link>
-          {/* <Link
+          <Link
             to="/register"
             className="navlink signed-out-links"
             id="sign-up-link"
           >
             Sign Up
-          </Link> */}
+          </Link>
         </div>
       )}
     </nav>
