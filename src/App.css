@@ -164,7 +164,8 @@ select:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2% 0; 
+  /* margin: 2% 0;  */
+  /* border: 1px solid red; */
 }
 .profile-menu-options {
   visibility: hidden;

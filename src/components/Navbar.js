@@ -17,7 +17,7 @@ import rockClimber from "../images/rock-climber.jpg";
 import { profileBackground } from "../actions/userActions";
 
 const Navbar = (props) => {
-  const initials = props.firstName.slice(0, 1) + props.lastName.slice(0, 1);
+  // const initials = props.firstName.slice(0, 1) + props.lastName.slice(0, 1);
 
   const handleSignOut = () => {
     props.userLogout();
@@ -36,7 +36,8 @@ const Navbar = (props) => {
       {props.userId ? (
         <div className="links-container">
           <div className="profile-avatar-container">
-            <h3 className="avatar-text">{initials}</h3>
+            <h3 className="avatar-text">Menu</h3>
+            {/* <h3 className="avatar-text">{initials}</h3> */}
           </div>
           <div className="profile-menu-options">
             <Link
