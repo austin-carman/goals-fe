@@ -18,8 +18,8 @@ This responsive application allows users to store their goals and easily track p
 View the live [site](https://goals-fe.vercel.app/).
 
 You can sign up to create your own login information or use the test user login:
-username: test-user@test.com
-password: 1234
+username: _test-user@test.com_
+password: _1234_
 
 View the backend [repo](https://github.com/austin-carman/goals-be) on Github.
 
