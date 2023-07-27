@@ -81,8 +81,8 @@ const ViewCardDetails = (props) => {
                 className="completed-checkbox"
                 type="checkbox"
                 name="step_completed"
-                value={step.step_completed}
-                checked={step.step_completed}
+                value={goalDetails["steps"][index]["step_completed"]}
+                checked={goalDetails["steps"][index]["step_completed"]}
                 onChange={(e) => handleChange(e, index)}
               />
               <div className="checkbox-title-container">
