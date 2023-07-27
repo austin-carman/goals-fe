@@ -13,7 +13,7 @@ Feel free to checkout other repos pinned on my [Github profile](https://github.c
 
 ## Overview
 
-This application allows users to store their goals and easily track progress with each goal. After creating an account, users can login and view all their goals which are organized into 3 categories: all, completed, and in progress. Users can create, edit, or delete a goal with steps, notes, and completion status.
+This responsive application allows users to store their goals and easily track progress with each goal. After creating an account, users can login and view all their goals which are organized into 3 categories: all, completed, and in progress. Users can create, edit, or delete a goal with steps, notes, and completion status.
 
 View the live [site](https://goals-fe.vercel.app/).
 
