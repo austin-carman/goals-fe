@@ -5,6 +5,7 @@ The motivation behind this project is 3 fold:
 2. Seek `advice` to improve my coding skills and meeting best coding practices. I want to learn from you!
 4. Learn about possible `job opportunities`. I am actively seeking job opportunities and if you are aware of any I would love to hear from you!
 
+How you can contact me or leave feedback:
   - Connect with and/or message me via [LinkedIn](https://www.linkedin.com/in/austin-carman/).
   - [Github](https://github.com/austin-carman/sunset-woods): You can submit an issue, pull request, or leave a comment in the discussion.
   
@@ -14,7 +15,11 @@ Feel free to checkout other repos pinned on my [Github profile](https://github.c
 
 This application allows users to store their goals and easily track progress with each goal. After creating an account, users can login and view all their goals which are organized into 3 categories: all, completed, and in progress. Users can create, edit, or delete a goal with steps, notes, and completion status.
 
-View the live [site](https://goals-fe.vercel.app/)
+View the live [site](https://goals-fe.vercel.app/).
+
+You can sign up to create your own login information or use the test user login:
+username: test-user@test.com
+password: 1234
 
 View the backend [repo](https://github.com/austin-carman/goals-be) on Github.
 
