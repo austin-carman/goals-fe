@@ -7,7 +7,7 @@ The motivation behind this project is 3 fold:
 
 How you can contact me or leave feedback:
   - Connect with and/or message me via [LinkedIn](https://www.linkedin.com/in/austin-carman/).
-  - [Github](https://github.com/austin-carman/sunset-woods): You can submit an issue, pull request, or leave a comment in the discussion.
+  - [Github](https://github.com/austin-carman/goals-fe): You can submit an issue, pull request, or leave a comment in the discussion.
   
 Feel free to checkout other repos pinned on my [Github profile](https://github.com/austin-carman/)!
 
