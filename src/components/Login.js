@@ -77,7 +77,11 @@ const Login = (props) => {
         <p className="form-errors">
           {formErrors ? formErrors : serverValidationMessage}
         </p>
-        <button className="sign-in-button" onClick={handleSubmit}>
+        <button
+          className="sign-in-button"
+          onClick={handleSubmit}
+          disabled={isFetching}
+        >
           {isFetching ? "Loading..." : "Sign In"}
         </button>
         <p>Don&apos;t have an account?</p>
