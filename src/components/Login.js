@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
 import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -7,8 +6,16 @@ import { userLogin } from "../actions/userActions";
 import { loginSchema } from "../validation/validationSchemas";
 
 const Login = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const { userId, token, errors, userLogin, serverValidationMessage } = props;
+  const {
+    userId,
+    token,
+    // eslint-disable-next-line no-unused-vars
+    errors,
+    userLogin,
+    serverValidationMessage,
+    isFetching,
+  } = props;
+  // TODO: handle "errors" from props
 
   const initialState = {
     username: "test-user@test.com",
@@ -49,25 +56,10 @@ const Login = (props) => {
     userLogin(loginForm);
   };
 
-  // if (errors) {
-  //   return (
-  //     <h2 className="app-error-message">
-  //       We&apos;re currently experiencing an error. Sorry for the inconvenience.
-  //     </h2>
-  //   );
-  // }
-
   return (
     <div className="login-register-page">
       <div className="sign-in-container">
         <h2>Sign In</h2>
-        {/* <p>
-          Try using the test user login below:
-          <br></br>
-          username = test-user@test.com
-          <br></br>
-          password = 1234
-        </p> */}
         <input
           type="text"
           name="username"
@@ -85,8 +77,12 @@ const Login = (props) => {
         <p className="form-errors">
           {formErrors ? formErrors : serverValidationMessage}
         </p>
-        <button className="sign-in-button" onClick={handleSubmit}>
-          Sign In
+        <button
+          className="sign-in-button"
+          onClick={handleSubmit}
+          disabled={isFetching}
+        >
+          {isFetching ? "Loading..." : "Sign In"}
         </button>
         <p>Don&apos;t have an account?</p>
         <Link to="/register" className="create-account-link">
@@ -103,6 +99,7 @@ const mapStateToProps = (state) => {
     token: state.userReducer.token,
     errors: state.userReducer.errors,
     serverValidationMessage: state.userReducer.serverValidationMessage,
+    isFetching: state.userReducer.isFetching,
   };
 };
 
@@ -112,6 +109,7 @@ Login.propTypes = {
   errors: PropTypes.string,
   serverValidationMessage: PropTypes.string,
   userId: PropTypes.string,
+  isFetching: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, { userLogin })(Login);

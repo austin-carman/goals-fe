@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import { signUpSchema } from "../validation/validationSchemas";
 
 const Register = (props) => {
-  const { userRegister, userId, errors, serverValidationMessage } = props;
+  const { userRegister, userId, errors, serverValidationMessage, isFetching } =
+    props;
 
   const initialState = {
     first_name: "",
@@ -94,8 +95,12 @@ const Register = (props) => {
         <p className="form-errors">
           {formErrors ? formErrors : serverValidationMessage}
         </p>
-        <button className="sign-in-button" onClick={handleSubmit}>
-          Register
+        <button
+          className="sign-in-button"
+          onClick={handleSubmit}
+          disabled={isFetching}
+        >
+          {isFetching ? "Loading..." : "Sign up"}
         </button>
         <p>Already have an account?</p>
         <Link to="/login" className="create-account-link">
@@ -111,6 +116,7 @@ const mapStateToProps = (state) => {
     userId: state.userReducer.userId,
     errors: state.userReducer.errors,
     serverValidationMessage: state.userReducer.serverValidationMessage,
+    isFetching: state.userReducer.isFetching,
   };
 };
 
@@ -119,6 +125,7 @@ Register.propTypes = {
   errors: PropTypes.string,
   userId: PropTypes.number,
   serverValidationMessage: PropTypes.string,
+  isFetching: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, { userRegister })(Register);
